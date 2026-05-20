@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MSO & Payer Operations Support | Hired Billing Support</title>
+<meta name="description" content="Centralized claims QA, prior auth, risk adjustment, and provider enablement for MSOs, payers, and value-based care organizations." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0A1628;--ink-soft:#1B2942;--ink-mute:#475569;--paper:#FAF7F2;--paper-warm:#F2EDE3;--paper-line:#E8E2D5;--white:#FFFFFF;--signal:#00C896;--signal-deep:#00876B;--danger:#D64545;--amber:#D4A574;--radius:4px;--radius-lg:12px;--max:1240px;--gutter:clamp(20px,4vw,48px);--serif:'Fraunces','Times New Roman',serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;--ease:cubic-bezier(0.22,1,0.36,1)}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;font-size:16px;overflow-x:hidden}::selection{background:var(--ink);color:var(--paper)}.container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+  .display{font-family:var(--serif);font-weight:400;letter-spacing:-0.025em;line-height:1.02;font-variation-settings:"opsz" 144}.display em{font-style:italic;font-weight:300;color:var(--ink-mute)}.eyebrow{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-mute);display:inline-flex;align-items:center;gap:10px}.eyebrow::before{content:'';width:24px;height:1px;background:currentColor}
+
+  /* NAV */
+  nav.top{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) saturate(180%);background:rgba(250,247,242,0.78);border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}nav.top.scrolled{border-bottom-color:var(--paper-line)}.nav-inner{max-width:var(--max);margin:0 auto;padding:18px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:32px}.logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:20px;font-weight:500;letter-spacing:-0.02em;color:var(--ink);text-decoration:none}.logo-mark{width:28px;height:28px;background:var(--ink);border-radius:50%;position:relative;flex-shrink:0}.logo-mark::after{content:'';position:absolute;inset:7px;border-radius:50%;background:var(--signal)}.nav-links{display:flex;gap:32px;list-style:none}.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:14px;font-weight:500;position:relative;padding:4px 0}.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--ink);transition:width .3s var(--ease)}.nav-links a:hover::after{width:100%}
+  .nav-dropdown{position:relative;display:inline-block}
+  .dropdown-toggle{color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;padding:10px 16px;border-radius:6px;cursor:pointer;border:1px solid var(--ink);background:transparent;transition:all .3s var(--ease);display:flex;align-items:center;gap:6px}
+  .dropdown-toggle:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px);box-shadow:0 6px 16px rgba(10,22,40,0.15)}
+  .dropdown-toggle::after{content:'▼';font-size:10px;transition:transform .3s var(--ease)}
+  .nav-dropdown:hover .dropdown-toggle::after{transform:rotate(180deg)}
+  .dropdown-menu{position:absolute;top:100%;left:0;background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);box-shadow:0 20px 40px rgba(10,22,40,0.12);min-width:200px;opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s var(--ease),visibility .3s var(--ease),transform .3s var(--ease);margin-top:12px;overflow:hidden}
+  .nav-dropdown:hover .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+  .dropdown-menu a{display:block;padding:14px 20px;color:var(--ink-soft);text-decoration:none;font-size:14px;font-weight:500;transition:all .2s var(--ease);border-bottom:1px solid var(--paper-line)}
+  .dropdown-menu a:last-child{border-bottom:none}
+  .dropdown-menu a:hover{background:var(--paper-warm);color:var(--ink);padding-left:24px}
+  @media(max-width:900px){.nav-links{display:none}.dropdown-menu{position:fixed;top:70px;left:0;right:0;min-width:100%;border-radius:0;box-shadow:0 8px 16px rgba(10,22,40,0.1)}}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:var(--radius);font-family:var(--sans);font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all .25s var(--ease);white-space:nowrap}.btn-primary{background:var(--ink);color:var(--paper)}.btn-primary:hover{background:var(--ink-soft);transform:translateY(-1px);box-shadow:0 12px 28px -12px rgba(10,22,40,0.4)}.btn-primary .arrow{transition:transform .25s var(--ease)}.btn-primary:hover .arrow{transform:translateX(3px)}.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}.btn-ghost:hover{background:var(--ink);color:var(--paper)}.btn-text{background:transparent;color:var(--ink);padding:12px 0;border-bottom:1px solid var(--ink);border-radius:0}.btn-light{background:var(--paper);color:var(--ink)}.btn-light:hover{background:var(--white);transform:translateY(-1px)}
+
+  /* HERO */
+  .hero{position:relative;padding:160px var(--gutter) 100px;min-height:92vh;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
+  .hero-bg svg{position:absolute;width:100%;height:100%;opacity:.35}
+  .hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:multiply;pointer-events:none}
+  .hero-inner{max-width:var(--max);margin:0 auto;width:100%;position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
+  @media(max-width:1000px){.hero-inner{grid-template-columns:1fr;gap:56px}}
+  .hero h1{font-size:clamp(40px,6vw,76px);margin:28px 0 32px}.hero h1 .ul{display:inline-block;position:relative}.hero h1 .ul::after{content:'';position:absolute;left:0;right:0;bottom:4px;height:8px;background:var(--signal);opacity:.35;z-index:-1;border-radius:2px}
+  .hero p.sub{font-size:clamp(17px,1.45vw,19px);line-height:1.55;color:var(--ink-soft);max-width:600px;margin-bottom:24px}
+  .hero p.lede{font-size:16px;line-height:1.6;color:var(--ink-mute);max-width:600px;margin-bottom:36px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+
+  /* Hero card — quality dashboard */
+  .hero-card{background:var(--ink);color:var(--paper);border-radius:var(--radius-lg);padding:24px;box-shadow:0 60px 80px -40px rgba(10,22,40,.35);transform:rotate(-1deg);transition:transform .6s var(--ease)}.hero-card:hover{transform:rotate(0) translateY(-4px)}
+  .hero-card h4{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:rgba(250,247,242,.5);margin-bottom:16px}
+  .quality-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;color:rgba(250,247,242,.75)}.quality-row:last-child{border-bottom:none}
+  .quality-row .val{font-family:var(--mono);font-size:12px;font-weight:500}
+  .val.good{color:var(--signal)}.val.warn{color:var(--amber)}.val.bad{color:#FF8585}
+  .card-footer{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;font-size:11px}
+  .card-footer .lbl{color:rgba(250,247,242,.45)}.card-footer .val{font-family:var(--mono);font-size:11px;color:var(--signal);font-weight:500}
+
+  /* Animations */
+  .reveal{opacity:0;transform:translateY(20px);animation:reveal .9s var(--ease) forwards}@keyframes reveal{to{opacity:1;transform:translateY(0)}}.reveal-1{animation-delay:.05s}.reveal-2{animation-delay:.15s}.reveal-3{animation-delay:.3s}.reveal-4{animation-delay:.45s}.reveal-5{animation-delay:.6s}
+
+  /* Sections */
+  section.block{padding:110px 0;position:relative}section.block.warm{background:var(--paper-warm)}section.block.dark{background:var(--ink);color:var(--paper)}.block.dark .display em{color:rgba(250,247,242,.55)}.block.dark .eyebrow{color:rgba(250,247,242,.55)}.block-head{max-width:760px;margin-bottom:64px}.block-head h2{font-size:clamp(34px,4.5vw,56px);margin-top:20px}.block-head p{font-size:17px;line-height:1.6;color:var(--ink-mute);margin-top:22px;max-width:640px}.block.dark .block-head p{color:rgba(250,247,242,.75)}
+
+  /* Pain ledger */
+  .pain-ledger{border-top:1px solid var(--paper-line);margin-top:56px}
+  .pain-row{display:grid;grid-template-columns:60px 1.2fr 1.4fr;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--paper-line);transition:padding .3s var(--ease)}.pain-row:hover{padding-left:12px}.pain-row .pn{font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.1em}.pain-row .ptitle{font-family:var(--serif);font-size:clamp(19px,1.8vw,24px);letter-spacing:-0.02em;line-height:1.2}.pain-row .pdesc{color:var(--ink-mute);font-size:14.5px;line-height:1.55}
+  @media(max-width:800px){.pain-row{grid-template-columns:40px 1fr;gap:8px 16px}.pain-row .pdesc{grid-column:2}}
+
+  /* Insight callout */
+  .insight{margin-top:28px;padding:24px 28px;background:var(--paper-warm);border-left:3px solid var(--signal);border-radius:4px;font-family:var(--serif);font-size:clamp(17px,1.5vw,19px);line-height:1.5;letter-spacing:-0.01em}.insight em{font-style:italic;color:var(--ink-mute)}
+
+  /* Service cards */
+  .svc-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:700px){.svc-grid-2{grid-template-columns:1fr}}
+  .svc-card{background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:28px;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}.svc-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(10,22,40,.15)}.svc-card h4{font-family:var(--serif);font-size:20px;font-weight:500;letter-spacing:-0.015em;margin-bottom:10px;line-height:1.2}.svc-card p{font-size:14px;line-height:1.55;color:var(--ink-mute)}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}@media(max-width:600px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:28px;position:relative;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}.step:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(10,22,40,.18)}.step .num{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--ink-mute);margin-bottom:20px;display:block}.step h4{font-family:var(--serif);font-size:21px;font-weight:500;letter-spacing:-0.015em;margin-bottom:10px;line-height:1.2}.step p{font-size:14px;line-height:1.55;color:var(--ink-mute)}
+
+  /* Results */
+  .results-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--paper-line)}@media(max-width:700px){.results-row{grid-template-columns:1fr}}.result-block{padding:40px 28px;border-right:1px solid var(--paper-line);border-bottom:1px solid var(--paper-line)}.result-block:last-child{border-right:none}.result-block .v{font-family:var(--serif);font-size:clamp(38px,4.5vw,58px);font-weight:400;line-height:1;letter-spacing:-0.03em}.result-block .v .unit{color:var(--signal)}.result-block .d{margin-top:14px;color:var(--ink-mute);font-size:13.5px;line-height:1.5}
+
+  /* Testimonial */
+  .testi{background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:56px;position:relative;max-width:880px;margin:64px auto 0}.testi::before{content:'"';position:absolute;top:-14px;left:36px;font-family:var(--serif);font-size:130px;line-height:1;color:var(--signal);opacity:.6}.testi .q{font-family:var(--serif);font-size:clamp(20px,2vw,26px);line-height:1.4;letter-spacing:-0.01em;margin-top:24px;margin-bottom:28px;position:relative;z-index:1}.testi .attr{display:flex;align-items:center;gap:14px}.testi .av{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:500}.testi .nm{font-size:14px;font-weight:600}.testi .role{font-size:13px;color:var(--ink-mute);margin-top:2px}
+
+  /* Comparison */
+  .compare{border:1px solid var(--paper-line);border-radius:var(--radius-lg);overflow:hidden;background:var(--white)}.compare-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--paper-line)}.compare-row:last-child{border-bottom:none}.compare-row .col{padding:20px 28px;font-size:15px;line-height:1.55}.compare-row .col.left{color:var(--ink-mute);border-right:1px solid var(--paper-line);background:var(--paper-warm)}.compare-row .col.right{color:var(--ink);font-weight:500}.compare-row.head .col{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--ink-mute);padding-top:24px;padding-bottom:24px}.compare-row.head .col.right{color:var(--signal-deep)}@media(max-width:700px){.compare-row .col{padding:16px 20px;font-size:14px}}
+
+  /* Final CTA */
+  .final-cta{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}.final-cta .cta-inner{max-width:var(--max);margin:0 auto;padding:120px var(--gutter);text-align:center;position:relative;z-index:2}.final-cta h2{font-size:clamp(36px,5.5vw,68px);max-width:880px;margin:24px auto 28px}.final-cta p{font-size:17px;color:rgba(250,247,242,.75);max-width:640px;margin:0 auto 40px;line-height:1.6}.final-cta .actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}.final-cta-glow{position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,200,150,.25),transparent 70%);pointer-events:none}.trust-line{margin-top:32px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.45)}
+
+  /* Footer */
+  footer{background:var(--ink);color:rgba(250,247,242,.6);padding:60px 0 32px;border-top:1px solid rgba(255,255,255,.06)}.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;font-size:13px}.footer-inner a{color:rgba(250,247,242,.6);text-decoration:none}.footer-inner a:hover{color:var(--signal)}.footer-legal{display:flex;gap:24px}
+
+  /* Scroll reveal */
+  .fade-in{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.fade-in.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><span class="logo-mark"></span><span>Hired<em style="font-style:italic;"> Billing </em>Support</span></a>
+    <ul class="nav-links">
+      <li><a href="#pain">The problem</a></li>
+      <li><a href="#solution">Our model</a></li>
+      <li><a href="#services">Capabilities</a></li>
+      <li><a href="#results">Results</a></li>
+    </ul>
+    <div class="nav-dropdown">
+      <button class="dropdown-toggle">Hire Talent</button>
+      <div class="dropdown-menu">
+        <a href="index.html">Home</a>
+        <a href="dental.html">Dental</a>
+        <a href="medical.html">Medical</a>
+        <a href="enterprise.html">Enterprise</a>
+        <a href="mso.html">MSO/Payer</a>
+      </div>
+    </div>
+    <a href="#cta" class="btn btn-primary">Book a strategy call <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    <div class="hero-grain"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow reveal reveal-1">For MSOs, payers &amp; value-based care operators</div>
+      <h1 class="display reveal reveal-2">Your model depends on clean data. <em>But your operations are built on <span class="ul">noise</span>.</em></h1>
+      <p class="sub reveal reveal-3">When claims aren't clean, quality metrics slip. When prior auths lag, patient access suffers. When denials climb, margins drop. Your model doesn't break because of strategy — it breaks because of ops.</p>
+      <p class="lede reveal reveal-3">Hired Billing Support is the operational layer behind MSOs and payers: centralized claims QA, prior auth, risk adjustment support, provider enablement, and network ops — built to run across large networks and value-based contracts.</p>
+      <div class="hero-actions reveal reveal-4">
+        <a href="#cta" class="btn btn-primary">Book a strategy call <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#cta" class="btn btn-text">Request a network ops assessment →</a>
+      </div>
+    </div>
+
+    <!-- Quality dashboard card -->
+    <div class="reveal reveal-5">
+      <div class="hero-card">
+        <h4>— Network quality monitor · Live</h4>
+        <div class="quality-row"><span>Claim clean rate</span><span class="val bad">86%</span></div>
+        <div class="quality-row"><span>Denial rate</span><span class="val bad">14.2%</span></div>
+        <div class="quality-row"><span>Prior auth SLA</span><span class="val warn">62%</span></div>
+        <div class="quality-row"><span>Risk score recapture</span><span class="val warn">71%</span></div>
+        <div class="quality-row"><span>HCC documentation gaps</span><span class="val bad">1,482</span></div>
+        <div class="quality-row"><span>Provider compliance audits</span><span class="val good">95%</span></div>
+        <div class="card-footer"><span class="lbl">Network margin impact</span><span class="val">-$1.2M / quarter</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PAIN ═══════════ -->
+<section class="block" id="pain">
+  <div class="container">
+    <div class="block-head fade-in">
+      <div class="eyebrow">The operational drag</div>
+      <h2 class="display">Value-based contracts are <em>won in operations.</em></h2>
+    </div>
+
+    <div class="monologue fade-in" style="max-width:760px;">
+      <p style="font-family:var(--serif);font-size:clamp(19px,1.8vw,23px);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px;color:var(--ink);font-weight:400;">Your MSO can negotiate strong contracts. Your payer can design beautiful incentives. None of it matters if the operational layer is leaking.</p>
+      <p style="font-family:var(--serif);font-size:clamp(19px,1.8vw,23px);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px;color:var(--ink);font-weight:400;">If coding is inconsistent, risk adjustment collapses. If claims are dirty, the revenue cycle stalls. If prior auths are delayed, care gets postponed. If providers aren't trained, compliance fails quietly.</p>
+      <p style="font-family:var(--serif);font-size:clamp(19px,1.8vw,23px);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px;color:var(--ink);font-weight:400;"><em>The model doesn't break at the strategy layer — it breaks at the operations layer.</em></p>
+    </div>
+
+    <div class="pain-ledger fade-in">
+      <div class="pain-row">
+        <div class="pn">01</div>
+        <div class="ptitle">Claims are inconsistent across sites.</div>
+        <div class="pdesc">Multi-site networks submit claims with varying accuracy. The payer sees it as risk. You see it as denials, delays, and leakage.</div>
+      </div>
+      <div class="pain-row">
+        <div class="pn">02</div>
+        <div class="ptitle">Risk adjustment is leaving dollars on the table.</div>
+        <div class="pdesc">HCCs are missed. Documentation gaps linger. Recapture doesn't happen systematically. The risk score is lower than reality.</div>
+      </div>
+      <div class="pain-row">
+        <div class="pn">03</div>
+        <div class="ptitle">Prior auth bottlenecks delay care.</div>
+        <div class="pdesc">Slow or inconsistent prior auths lead to delayed procedures and patient dissatisfaction — which shows up in both outcomes and quality scores.</div>
+      </div>
+      <div class="pain-row">
+        <div class="pn">04</div>
+        <div class="ptitle">Provider enablement is too slow.</div>
+        <div class="pdesc">Policies, SOPs, and contract changes take months to roll out. By the time training reaches the field, the contract is already changing again.</div>
+      </div>
+      <div class="pain-row">
+        <div class="pn">05</div>
+        <div class="ptitle">Data is noisy, not actionable.</div>
+        <div class="pdesc">You have dashboards. You don't have clarity. The data isn't standardized, so the insights aren't real. Decisions are based on noise.</div>
+      </div>
+      <div class="pain-row">
+        <div class="pn">06</div>
+        <div class="ptitle">Network ops scale breaks down.</div>
+        <div class="pdesc">The bigger the network grows, the more operations break. Inconsistency compounds. The model can't scale without a centralized ops layer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SOLUTION ═══════════ -->
+<section class="block" id="solution">
+  <div class="container">
+    <div class="solution-card fade-in">
+      <div class="solution-glow"></div>
+      <div class="eyebrow" style="color:var(--signal);">— Our model</div>
+      <h2 class="display" style="margin-top:20px;">We build the centralized ops layer <em>MSOs and payers need.</em></h2>
+      <p>Hired Billing Support becomes your operational backbone. A centralized team that ensures claims quality, speeds prior auths, closes risk adjustment gaps, and standardizes provider enablement across your network.</p>
+      <p>We're not a vendor. We're your operations department — in your systems, following your contracts, reporting to your leadership, and moving metrics you care about.</p>
+      <p style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--paper);margin-top:32px;max-width:700px;">You can have the best value-based contract in the market. If your ops are messy, you'll still lose.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="block warm" id="services">
+  <div class="container">
+    <div class="block-head fade-in">
+      <div class="eyebrow">What we run for MSOs & payers</div>
+      <h2 class="display">Operations that make value-based care <em>actually work.</em></h2>
+      <p>Pick the layers you need. We can run a single function or become the centralized operational team behind the entire network.</p>
+    </div>
+
+    <div class="svc-grid-2 fade-in">
+      <div class="svc-card"><h4>Centralized Claims QA</h4><p>Pre-submission edits, documentation audits, and payer-specific rules enforced across the entire network. Clean claims = better cash flow.</p></div>
+      <div class="svc-card"><h4>Risk Adjustment Support</h4><p>HCC validation, documentation review, and recapture workflows that improve risk score accuracy and revenue.</p></div>
+      <div class="svc-card"><h4>Prior Authorization Management</h4><p>Automated workflows + human specialists to ensure auths are submitted, tracked, and approved on time.</p></div>
+      <div class="svc-card"><h4>Provider Enablement</h4><p>Training, SOP rollout, and contract updates deployed at scale — with audit trails and compliance reporting.</p></div>
+      <div class="svc-card"><h4>Claims Clean-up Projects</h4><p>Backlog purge, AR recovery, denial cleanup, and workflow resets to stabilize operations quickly.</p></div>
+      <div class="svc-card"><h4>Network Operations Management</h4><p>Centralized ops leadership, KPI ownership, cross-site standardization, and reporting tied to contract performance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW WE WORK ═══════════ -->
+<section class="block">
+  <div class="container">
+    <div class="block-head fade-in">
+      <div class="eyebrow">How we work</div>
+      <h2 class="display">We sit between the contract and the clinics. <em>And we make them match.</em></h2>
+    </div>
+
+    <div class="steps fade-in">
+      <div class="step"><span class="num">— 01</span><h4>We embed into your systems.</h4><p>Your EHRs, your payer portals, your data warehouse. We run inside your stack, not outside of it.</p></div>
+      <div class="step"><span class="num">— 02</span><h4>We enforce contract rules.</h4><p>Claims edits, documentation requirements, prior auth rules — standardized across every site so the contract actually works.</p></div>
+      <div class="step"><span class="num">— 03</span><h4>We report to leadership.</h4><p>Weekly KPIs, monthly scorecard, quarterly strategy. You always know where leakage is occurring.</p></div>
+      <div class="step"><span class="num">— 04</span><h4>We scale with the network.</h4><p>New locations, new contracts, new providers. The ops layer expands without breaking the system.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RESULTS ═══════════ -->
+<section class="block" id="results">
+  <div class="container">
+    <div class="block-head fade-in">
+      <div class="eyebrow">By the numbers</div>
+      <h2 class="display">What MSOs and payers see <em>in 90 days.</em></h2>
+      <p>Drawn from MSO and payer partners across value-based, risk, and fee-for-service models.</p>
+    </div>
+
+    <div class="results-row fade-in">
+      <div class="result-block"><div class="v">+18<span class="unit">%</span></div><div class="d">Lift in risk score capture and recapture accuracy.</div></div>
+      <div class="result-block"><div class="v">-34<span class="unit">%</span></div><div class="d">Reduction in denial rate from standardized QA.</div></div>
+      <div class="result-block"><div class="v">3.2<span class="unit">x</span></div><div class="d">Faster prior auth turnaround and fewer delayed procedures.</div></div>
+    </div>
+
+    <div class="testi fade-in">
+      <div class="q">Our value-based contracts were strong on paper, but the ops layer was inconsistent. HBS standardized claims and prior auth across 48 clinics. We saw risk scores rise and denials fall in a single quarter.</div>
+      <div class="attr">
+        <div class="av">L</div>
+        <div><div class="nm">VP of Operations</div><div class="role">Regional MSO · 48 clinics</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COMPARE ═══════════ -->
+<section class="block warm">
+  <div class="container">
+    <div class="block-head fade-in">
+      <div class="eyebrow">The honest comparison</div>
+      <h2 class="display">Why not build this ops layer <em>internally?</em></h2>
+      <p>Because it's expensive, slow, and hard to scale across a network. Here's the trade-off.</p>
+    </div>
+
+    <div class="compare fade-in">
+      <div class="compare-row head">
+        <div class="col left">Build in-house</div>
+        <div class="col right">Embed HBS</div>
+      </div>
+      <div class="compare-row"><div class="col left">12–18 months to design + hire</div><div class="col right">30–45 days to live</div></div>
+      <div class="compare-row"><div class="col left">Multiple departments to manage</div><div class="col right">Single accountable ops team</div></div>
+      <div class="compare-row"><div class="col left">Hiring risk + turnover</div><div class="col right">We staff, train, and retain</div></div>
+      <div class="compare-row"><div class="col left">SOP drift across locations</div><div class="col right">Standardized workflows enforced</div></div>
+      <div class="compare-row"><div class="col left">Fixed cost structure</div><div class="col right">Variable cost aligned to network size</div></div>
+      <div class="compare-row"><div class="col left">Leadership time spent managing ops</div><div class="col right">Leadership time spent on strategy</div></div>
+    </div>
+
+    <div class="insight fade-in">If your contract economics depend on operational precision, then operational execution can't be a secondary project. <em>It has to be a core function.</em></div>
+  </div>
+</section>
+
+<!-- ═══════════ FINAL CTA ═══════════ -->
+<section class="final-cta" id="cta">
+  <div class="final-cta-glow"></div>
+  <div class="cta-inner">
+    <div class="eyebrow" style="justify-content:center;color:rgba(250,247,242,.55);">Let's look at your network</div>
+    <h2 class="display">Send us a claims sample. <em>We'll show you the leakage.</em></h2>
+    <p>Share a recent claims export and a list of active contracts. We'll return an operational audit within 10 business days that highlights the biggest gaps in claims quality, risk adjustment, and auth workflow — and a plan to close them.</p>
+    <div class="actions">
+      <a href="#" class="btn btn-light">Book a strategy call <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#" class="btn btn-ghost" style="color:var(--paper);border-color:rgba(250,247,242,.3);">Request a network ops assessment</a>
+    </div>
+    <div class="trust-line">NDA available · HIPAA compliant · BAA on every engagement</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Security</a>
+      <a href="#">HIPAA</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
