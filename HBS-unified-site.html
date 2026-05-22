@@ -1,737 +1,900 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hired Billing Support — Unified Platform</title>
-<meta name="description" content="Hired Billing Support. Operational infrastructure for modern healthcare." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0A1628;
-    --ink-soft: #1B2942;
-    --ink-mute: #475569;
-    --paper: #FAF7F2;
-    --paper-warm: #F2EDE3;
-    --paper-line: #E8E2D5;
-    --white: #FFFFFF;
-    --signal: #00C896;
-    --signal-deep: #00876B;
-    --danger: #D64545;
-    --amber: #D4A574;
-    --radius: 4px;
-    --radius-lg: 12px;
-    --max: 1280px;
-    --gutter: clamp(20px, 4vw, 48px);
-    --serif: 'Fraunces', 'Times New Roman', serif;
-    --sans: 'Inter Tight', -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hired Billing Support — Unified Platform</title>
+  <meta name="description" content="Hired Billing Support. Operational infrastructure for modern healthcare." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0A1628;
+      --ink-soft: #1B2942;
+      --ink-mute: #475569;
+      --paper: #FAF7F2;
+      --paper-warm: #F2EDE3;
+      --paper-line: #E8E2D5;
+      --white: #FFFFFF;
+      --signal: #00C896;
+      --signal-deep: #00876B;
+      --danger: #D64545;
+      --amber: #D4A574;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --max: 1280px;
+      --gutter: clamp(20px, 4vw, 48px);
+      --serif: 'Fraunces', 'Times New Roman', serif;
+      --sans: 'Inter Tight', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body {
-    font-family: var(--sans);
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.5;
-    font-size: 16px;
-    overflow-x: hidden;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  ::selection { background: var(--ink); color: var(--paper); }
-  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* ───── Navigation with Dropdown ───── */
-  nav.top {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    background: rgba(250, 247, 242, 0.95);
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s var(--ease);
-    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.02);
-  }
-  nav.top.scrolled { 
-    border-bottom-color: var(--paper-line);
-    background: rgba(250, 247, 242, 0.98);
-    box-shadow: 0 4px 16px rgba(10, 22, 40, 0.08);
-  }
-  
-  .nav-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 16px var(--gutter);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 48px;
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-    cursor: pointer;
-  }
-  .logo:hover {
-    opacity: 0.8;
-    transform: translateY(-2px);
-  }
-  
-  .logo-mark {
-    width: 32px; height: 32px;
-    background: var(--ink);
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-    transition: transform 0.3s var(--ease);
-  }
-  .logo:hover .logo-mark {
-    transform: scale(1.08);
-  }
-  .logo-mark::after {
-    content: '';
-    position: absolute;
-    inset: 8px;
-    border-radius: 50%;
-    background: var(--signal);
-  }
-  
-  .nav-dropdown {
-    position: relative;
-    display: inline-block;
-    margin-left: auto;
-  }
-  
-  .dropdown-toggle {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    border: 1px solid var(--ink);
-    background: transparent;
-    transition: all 0.3s var(--ease);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  
-  .dropdown-toggle:hover {
-    background: var(--ink);
-    color: var(--paper);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(10, 22, 40, 0.15);
-  }
-  
-  .dropdown-toggle::after {
-    content: '▼';
-    font-size: 10px;
-    transition: transform 0.3s var(--ease);
-  }
-  
-  .nav-dropdown:hover .dropdown-toggle::after {
-    transform: rotate(180deg);
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--white);
-    border: 1px solid var(--paper-line);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 40px rgba(10,22,40,0.12);
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
-    margin-top: 12px;
-    overflow: hidden;
-  }
-  
-  .nav-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .dropdown-menu a {
-    display: block;
-    padding: 14px 20px;
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s var(--ease);
-    border-bottom: 1px solid var(--paper-line);
-  }
-  
-  .dropdown-menu a:last-child {
-    border-bottom: none;
-  }
-  
-  .dropdown-menu a:hover {
-    background: var(--paper-warm);
-    color: var(--ink);
-    padding-left: 24px;
-  }
-  
-  .dropdown-menu a:first-child:hover {
-    color: var(--signal);
-    font-weight: 600;
-  }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
 
-  /* ───── Typography ───── */
-  .display {
-    font-family: var(--serif);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 0.98;
-    font-variation-settings: "opsz" 144;
-  }
-  .display em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
-  
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--ink-mute);
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .eyebrow::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: currentColor;
-  }
+    ::selection {
+      background: var(--ink);
+      color: var(--paper);
+    }
 
-  /* ───── Buttons ───── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
-    border-radius: var(--radius);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.25s var(--ease);
-    white-space: nowrap;
-  }
-  .btn-primary {
-    background: var(--ink);
-    color: var(--paper);
-    font-weight: 600;
-  }
-  .btn-primary:hover {
-    background: var(--signal-deep);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px -8px rgba(0, 200, 150, 0.3);
-  }
-  .btn-ghost {
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--ink);
-  }
-  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
-  .btn-text {
-    background: transparent;
-    color: var(--ink);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--ink);
-    border-radius: 0;
-  }
-  .btn-light {
-    background: var(--paper);
-    color: var(--ink);
-  }
-  .btn-light:hover { background: var(--white); transform: translateY(-1px); }
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
 
-  /* ───── Sections ───── */
-  section {
-    padding: 120px 0;
-    position: relative;
-  }
+    /* ───── Navigation with Dropdown ───── */
+    nav.top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(25px) saturate(200%);
+      -webkit-backdrop-filter: blur(25px) saturate(200%);
+      background: rgba(250, 247, 242, 0.95);
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s var(--ease);
+      box-shadow: 0 2px 8px rgba(10, 22, 40, 0.02);
+    }
 
-  section.dark { background: var(--ink); color: var(--paper); }
-  section.warm { background: var(--paper-warm); }
+    nav.top.scrolled {
+      border-bottom-color: var(--paper-line);
+      background: rgba(250, 247, 242, 0.98);
+      box-shadow: 0 4px 16px rgba(10, 22, 40, 0.08);
+    }
 
-  .block-head { max-width: 720px; margin-bottom: 72px; }
-  .block-head h2 {
-    font-size: clamp(38px, 5vw, 64px);
-    margin-top: 20px;
-  }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+    }
 
-  /* ───── Scroll reveal ───── */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-  }
-  .fade-in.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+      cursor: pointer;
+    }
 
-  /* ───── Section spacing ───── */
-  section#home,
-  section#dental,
-  section#medical,
-  section#enterprise,
-  section#mso {
-    scroll-margin-top: 80px;
-    position: relative;
-  }
+    .logo:hover {
+      opacity: 0.8;
+      transform: translateY(-2px);
+    }
 
-  section#home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 160px var(--gutter) 120px;
-  }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease);
+    }
 
-  section#home .container {
-    max-width: 800px;
-  }
+    .logo:hover .logo-mark {
+      transform: scale(1.08);
+    }
 
-  section#home h1 {
-    line-height: 1.1;
-    margin-bottom: 32px;
-  }
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: var(--signal);
+    }
 
-  section#home > .container > p {
-    font-size: clamp(17px, 1.5vw, 20px) !important;
-    color: var(--ink-soft) !important;
-    margin-bottom: 36px !important;
-  }
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+      margin-left: auto;
+    }
 
-  section#home .btn {
-    font-size: 15px;
-    padding: 14px 28px;
-  }
+    .dropdown-toggle {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid var(--ink);
+      background: transparent;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-  section#dental,
-  section#medical,
-  section#enterprise,
-  section#mso {
-    padding: 120px var(--gutter);
-  }
+    .dropdown-toggle:hover {
+      background: var(--ink);
+      color: var(--paper);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(10, 22, 40, 0.15);
+    }
 
-  section#dental,
-  section#enterprise,
-  section#mso {
-    background: var(--paper-warm);
-  }
+    .dropdown-toggle::after {
+      content: '▼';
+      font-size: 10px;
+      transition: transform 0.3s var(--ease);
+    }
 
-  section#medical {
-    background: var(--paper);
-  }
+    .nav-dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
 
-  .block-head {
-    margin-bottom: 64px;
-    max-width: 880px;
-  }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 40px rgba(10, 22, 40, 0.12);
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
+      margin-top: 12px;
+      overflow: hidden;
+    }
 
-  .block-head h2 {
-    font-size: clamp(32px, 4.5vw, 56px);
-    margin-top: 24px;
-    line-height: 1.1;
-  }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
 
-  .block-head p {
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    margin-top: 24px;
-  }
+    .dropdown-menu a {
+      display: block;
+      padding: 14px 20px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s var(--ease);
+      border-bottom: 1px solid var(--paper-line);
+    }
 
-  section h3 {
-    font-family: var(--serif);
-    font-size: clamp(24px, 3vw, 32px);
-    margin-bottom: 28px;
-    color: var(--ink);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
 
-  section ul li {
-    font-size: 15.5px !important;
-    line-height: 1.7 !important;
-    color: var(--ink-soft) !important;
-  }
+    .dropdown-menu a:hover {
+      background: var(--paper-warm);
+      color: var(--ink);
+      padding-left: 24px;
+    }
 
-  section ul li strong {
-    color: var(--ink) !important;
-    font-weight: 600 !important;
-  }
+    .dropdown-menu a:first-child:hover {
+      color: var(--signal);
+      font-weight: 600;
+    }
 
-  /* ───── Professional Card Styling ───── */
-  [style*="display: grid"][style*="grid-template-columns"] > div {
-    background: var(--white) !important;
-    border: 1px solid var(--paper-line) !important;
-    border-radius: var(--radius-lg) !important;
-    padding: 32px 28px !important;
-    transition: all 0.3s var(--ease);
-  }
+    /* ───── Typography ───── */
+    .display {
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 0.98;
+      font-variation-settings: "opsz" 144;
+    }
 
-  [style*="display: grid"][style*="grid-template-columns"] > div:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(10, 22, 40, 0.1);
-    border-color: var(--signal);
-  }
+    .display em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mute);
+    }
 
-  [style*="font-family: var(--serif)"][style*="font-size: 48px"],
-  [style*="font-size: 48px"] {
-    font-weight: 400;
-    letter-spacing: -0.02em;
-  }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  /* ───── Footer ───── */
-  footer {
-    background: var(--ink);
-    color: rgba(250,247,242,0.6);
-    padding: 60px 0 32px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 24px;
-    font-size: 13px;
-  }
-  .footer-inner a {
-    color: rgba(250,247,242,0.6);
-    text-decoration: none;
-  }
-  .footer-inner a:hover { color: var(--signal); }
-  .footer-legal { display: flex; gap: 24px; }
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+    }
 
-  /* Import all CSS from source files - consolidated and deduplicated */
-  /* All styles from the 5 source files are included below */
-  
-  @media (max-width: 900px) {
-    .nav-inner { gap: 20px; }
-    .nav-dropdown { margin-left: 0; }
-    .dropdown-menu { position: fixed; top: 70px; left: 0; right: 0; min-width: 100%; border-radius: 0; box-shadow: 0 8px 16px rgba(10,22,40,0.1); }
-    .nav-dropdown:hover .dropdown-menu { transform: translateY(0); }
-  }
-</style>
+    /* ───── Buttons ───── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s var(--ease);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: var(--signal-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(0, 200, 150, 0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+
+    .btn-ghost:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .btn-text {
+      background: transparent;
+      color: var(--ink);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--ink);
+      border-radius: 0;
+    }
+
+    .btn-light {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .btn-light:hover {
+      background: var(--white);
+      transform: translateY(-1px);
+    }
+
+    /* ───── Sections ───── */
+    section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    section.dark {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    section.warm {
+      background: var(--paper-warm);
+    }
+
+    .block-head {
+      max-width: 720px;
+      margin-bottom: 72px;
+    }
+
+    .block-head h2 {
+      font-size: clamp(38px, 5vw, 64px);
+      margin-top: 20px;
+    }
+
+    /* ───── Scroll reveal ───── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+
+    .fade-in.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ───── Section spacing ───── */
+    section#home,
+    section#dental,
+    section#medical,
+    section#enterprise,
+    section#mso {
+      scroll-margin-top: 80px;
+      position: relative;
+    }
+
+    section#home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 160px var(--gutter) 120px;
+    }
+
+    section#home .container {
+      max-width: 800px;
+    }
+
+    section#home h1 {
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    section#home>.container>p {
+      font-size: clamp(17px, 1.5vw, 20px) !important;
+      color: var(--ink-soft) !important;
+      margin-bottom: 36px !important;
+    }
+
+    section#home .btn {
+      font-size: 15px;
+      padding: 14px 28px;
+    }
+
+    section#dental,
+    section#medical,
+    section#enterprise,
+    section#mso {
+      padding: 120px var(--gutter);
+    }
+
+    section#dental,
+    section#enterprise,
+    section#mso {
+      background: var(--paper-warm);
+    }
+
+    section#medical {
+      background: var(--paper);
+    }
+
+    .block-head {
+      margin-bottom: 64px;
+      max-width: 880px;
+    }
+
+    .block-head h2 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      margin-top: 24px;
+      line-height: 1.1;
+    }
+
+    .block-head p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin-top: 24px;
+    }
+
+    section h3 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      margin-bottom: 28px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    section ul li {
+      font-size: 15.5px !important;
+      line-height: 1.7 !important;
+      color: var(--ink-soft) !important;
+    }
+
+    section ul li strong {
+      color: var(--ink) !important;
+      font-weight: 600 !important;
+    }
+
+    /* ───── Professional Card Styling ───── */
+    [style*="display: grid"][style*="grid-template-columns"]>div {
+      background: var(--white) !important;
+      border: 1px solid var(--paper-line) !important;
+      border-radius: var(--radius-lg) !important;
+      padding: 32px 28px !important;
+      transition: all 0.3s var(--ease);
+    }
+
+    [style*="display: grid"][style*="grid-template-columns"]>div:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(10, 22, 40, 0.1);
+      border-color: var(--signal);
+    }
+
+    [style*="font-family: var(--serif)"][style*="font-size: 48px"],
+    [style*="font-size: 48px"] {
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    /* ───── Footer ───── */
+    footer {
+      background: var(--ink);
+      color: rgba(250, 247, 242, 0.6);
+      padding: 60px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 13px;
+    }
+
+    .footer-inner a {
+      color: rgba(250, 247, 242, 0.6);
+      text-decoration: none;
+    }
+
+    .footer-inner a:hover {
+      color: var(--signal);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+
+    /* Import all CSS from source files - consolidated and deduplicated */
+    /* All styles from the 5 source files are included below */
+
+    @media (max-width: 900px) {
+      .nav-inner {
+        gap: 20px;
+      }
+
+      .nav-dropdown {
+        margin-left: 0;
+      }
+
+      .dropdown-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        border-radius: 0;
+        box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+      }
+
+      .nav-dropdown:hover .dropdown-menu {
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAVIGATION WITH DROPDOWN -->
-<nav class="top" id="nav">
-  <div class="nav-inner">
-    <a href="#home" class="logo">
-      <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
-    </a>
-    <div class="nav-dropdown">
-      <button class="dropdown-toggle">Hire Talent</button>
-      <div class="dropdown-menu">
-        <a href="#home">Home</a>
-        <a href="#dental">Dental</a>
-        <a href="#medical">Medical</a>
-        <a href="#enterprise">Enterprise</a>
-        <a href="#mso">MSO/Payer</a>
+  <!-- NAVIGATION WITH DROPDOWN -->
+  <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="logo">
+        <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent</button>
+        <div class="dropdown-menu">
+          <a href="#home">Home</a>
+          <a href="#dental">Dental</a>
+          <a href="#medical">Medical</a>
+          <a href="#enterprise">Enterprise</a>
+          <a href="#mso">MSO/Payer</a>
+        </div>
       </div>
+      <a href="#home" class="btn btn-primary">Book a discovery call</a>
     </div>
-    <a href="#home" class="btn btn-primary">Book a discovery call</a>
-  </div>
-</nav>
+  </nav>
 
-<!-- HOME SECTION -->
-<section id="home">
-  <div class="container">
-    <h1 class="display" style="font-size: clamp(48px, 7.5vw, 96px); margin-bottom: 40px;">
-      Your practice should grow <em>without</em> the operational chaos.
-    </h1>
-    <p style="font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--ink-soft); max-width: 640px; margin-bottom: 40px;">
-      Hired Billing Support is the remote team behind growing practices — RCM specialists, billers, AR experts, and virtual medical assistants embedded into your workflow. So you can stop firefighting and start practicing.
-    </p>
-    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
-      <a href="#dental" class="btn btn-primary">Explore Services</a>
-      <a href="#dental" class="btn btn-text">Learn More →</a>
-    </div>
-  </div>
-</section>
-
-<!-- DENTAL SECTION -->
-<section id="dental" class="warm">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">For dental practices, DSOs &amp; cosmetic dentists</div>
-      <h2 class="display">
-        You produced $180,000 last month. You collected $128,000.
-        <em>That <span style="display: inline-block; position: relative;">gap<span style="position: absolute; left: 0; right: 0; bottom: 6px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span> is the problem.</em>
-      </h2>
-      <p style="font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--ink-soft); max-width: 540px; margin-top: 24px;">
-        Treatment is happening. Patients are saying yes. Production looks great on the report. But somewhere between the chair and the bank, your collections are leaking — and your front desk is too buried to chase it.
+  <!-- HOME SECTION -->
+  <section id="home">
+    <div class="container">
+      <h1 class="display" style="font-size: clamp(48px, 7.5vw, 96px); margin-bottom: 40px;">
+        Your practice should grow <em>without</em> the operational chaos.
+      </h1>
+      <p
+        style="font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--ink-soft); max-width: 640px; margin-bottom: 40px;">
+        Hired Billing Support is the remote team behind growing practices — RCM specialists, billers, AR experts, and
+        virtual medical assistants embedded into your workflow. So you can stop firefighting and start practicing.
       </p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <a href="#dental" class="btn btn-primary">Explore Services</a>
+        <a href="#dental" class="btn btn-text">Learn More →</a>
+      </div>
     </div>
+  </section>
 
-    <div class="fade-in">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Dental Services We Provide:</h3>
-      <ul style="list-style: none; max-width: 760px;">
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Insurance Verification:</strong> Full breakdown of benefits before the appointment</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Dental Billing & Claims:</strong> 98%+ clean-claim rate</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>AR Follow-up:</strong> AR days from 47 to under 25 within 90 days</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>PPO Write-off Recovery:</strong> Recover missed write-offs</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Denial Management:</strong> Specialist-led appeals and recovery</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Front Desk Relief:</strong> Scheduling, phones, recall management</li>
-        <li style="padding: 18px 0;"><strong>Hygiene Recall:</strong> Reactivate patients and fill unfilled blocks</li>
-      </ul>
-    </div>
+  <!-- DENTAL SECTION -->
+  <section id="dental" class="warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">For dental practices, DSOs &amp; cosmetic dentists</div>
+        <h2 class="display">
+          You produced $180,000 last month. You collected $128,000.
+          <em>That <span style="display: inline-block; position: relative;">gap<span
+                style="position: absolute; left: 0; right: 0; bottom: 6px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span>
+            is the problem.</em>
+        </h2>
+        <p
+          style="font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: var(--ink-soft); max-width: 540px; margin-top: 24px;">
+          Treatment is happening. Patients are saying yes. Production looks great on the report. But somewhere between
+          the chair and the bank, your collections are leaking — and your front desk is too buried to chase it.
+        </p>
+      </div>
 
-    <div class="fade-in" style="margin-top: 48px;">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (First 90 Days):</h3>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">+24%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Collections lift</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">25<span style="font-size: 24px; color: var(--ink-mute);">d</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">AR days (from 47)</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">98%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Clean-claim rate</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">$7.5<span style="font-size: 24px; color: var(--ink-mute);">k</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">PPO recovery</div>
+      <div class="fade-in">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Dental Services We Provide:</h3>
+        <ul style="list-style: none; max-width: 760px;">
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Insurance
+              Verification:</strong> Full breakdown of benefits before the appointment</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Dental Billing &
+              Claims:</strong> 98%+ clean-claim rate</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>AR Follow-up:</strong> AR
+            days from 47 to under 25 within 90 days</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>PPO Write-off
+              Recovery:</strong> Recover missed write-offs</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Denial Management:</strong>
+            Specialist-led appeals and recovery</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Front Desk Relief:</strong>
+            Scheduling, phones, recall management</li>
+          <li style="padding: 18px 0;"><strong>Hygiene Recall:</strong> Reactivate patients and fill unfilled blocks
+          </li>
+        </ul>
+      </div>
+
+      <div class="fade-in" style="margin-top: 48px;">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (First 90 Days):</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">+24%
+            </div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Collections lift</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">25<span
+                style="font-size: 24px; color: var(--ink-mute);">d</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">AR days (from 47)</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">98%</div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Clean-claim rate</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">$7.5<span
+                style="font-size: 24px; color: var(--ink-mute);">k</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">PPO recovery</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- MEDICAL SECTION -->
-<section id="medical">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">For primary care, urgent care &amp; specialty practices</div>
-      <h2 class="display">It's 9:47 PM and you're still in the EHR. <em><span style="display: inline-block; position: relative;">Again<span style="position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span>.</em></h2>
-      <p style="font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 580px; margin-top: 24px;">
-        The clinic closed five hours ago. The kids are asleep. You're not catching up on charts because you love medicine. You're catching up because there was no other time today — and there won't be tomorrow either.
-      </p>
-    </div>
+  <!-- MEDICAL SECTION -->
+  <section id="medical">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">For primary care, urgent care &amp; specialty practices</div>
+        <h2 class="display">It's 9:47 PM and you're still in the EHR. <em><span
+              style="display: inline-block; position: relative;">Again<span
+                style="position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span>.</em>
+        </h2>
+        <p
+          style="font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 580px; margin-top: 24px;">
+          The clinic closed five hours ago. The kids are asleep. You're not catching up on charts because you love
+          medicine. You're catching up because there was no other time today — and there won't be tomorrow either.
+        </p>
+      </div>
 
-    <div class="fade-in">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Medical Services We Provide:</h3>
-      <ul style="list-style: none; max-width: 760px;">
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Revenue Cycle Management:</strong> End-to-end coding, claims, AR, denials</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Prior Authorization:</strong> Pre-cert submission and payer follow-up</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>AR Recovery:</strong> Systematic aging bucket clearance</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Denial Management:</strong> Categorization and specialist-led appeals</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Insurance Verification:</strong> Real-time benefits checks before rooming</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Virtual Medical Assistant:</strong> Charting support, messages, refills</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Front Desk Support:</strong> Phones, scheduling, recall</li>
-        <li style="padding: 18px 0;"><strong>Operations Management:</strong> Workflows, dashboards, vendor management</li>
-      </ul>
-    </div>
+      <div class="fade-in">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Medical Services We Provide:</h3>
+        <ul style="list-style: none; max-width: 760px;">
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Revenue Cycle
+              Management:</strong> End-to-end coding, claims, AR, denials</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Prior Authorization:</strong>
+            Pre-cert submission and payer follow-up</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>AR Recovery:</strong>
+            Systematic aging bucket clearance</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Denial Management:</strong>
+            Categorization and specialist-led appeals</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Insurance
+              Verification:</strong> Real-time benefits checks before rooming</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Virtual Medical
+              Assistant:</strong> Charting support, messages, refills</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Front Desk Support:</strong>
+            Phones, scheduling, recall</li>
+          <li style="padding: 18px 0;"><strong>Operations Management:</strong> Workflows, dashboards, vendor management
+          </li>
+        </ul>
+      </div>
 
-    <div class="fade-in" style="margin-top: 48px;">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (First 90 Days):</h3>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">+27%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Collections lift</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">22<span style="font-size: 24px; color: var(--ink-mute);">d</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">AR days</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">98%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Clean-claim rate</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">2<span style="font-size: 24px; color: var(--ink-mute);">+hrs</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Returned to provider</div>
+      <div class="fade-in" style="margin-top: 48px;">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (First 90 Days):</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">+27%
+            </div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Collections lift</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">22<span
+                style="font-size: 24px; color: var(--ink-mute);">d</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">AR days</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">98%</div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Clean-claim rate</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">2<span
+                style="font-size: 24px; color: var(--ink-mute);">+hrs</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Returned to provider</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ENTERPRISE SECTION -->
-<section id="enterprise" class="warm">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">For multi-location groups, medical chains &amp; large practices</div>
-      <h2 class="display">Eleven locations. Eleven different ways of doing the same thing. <em>That's the <span style="display: inline-block; position: relative;">real<span style="position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span> problem.</em></h2>
-      <p style="font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 600px; margin-top: 24px;">
-        Each office runs its own playbook. One location's AR is clean; another's is buried. Your reports tell you the what — they can't tell you the why. And your payroll keeps growing while your standardization doesn't.
-      </p>
-    </div>
+  <!-- ENTERPRISE SECTION -->
+  <section id="enterprise" class="warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">For multi-location groups, medical chains &amp; large practices</div>
+        <h2 class="display">Eleven locations. Eleven different ways of doing the same thing. <em>That's the <span
+              style="display: inline-block; position: relative;">real<span
+                style="position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span>
+            problem.</em></h2>
+        <p
+          style="font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 600px; margin-top: 24px;">
+          Each office runs its own playbook. One location's AR is clean; another's is buried. Your reports tell you the
+          what — they can't tell you the why. And your payroll keeps growing while your standardization doesn't.
+        </p>
+      </div>
 
-    <div class="fade-in">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Enterprise Solutions:</h3>
-      <ul style="list-style: none; max-width: 760px;">
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Centralized RCM:</strong> One billing operation across every site</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Centralized AR Follow-Up:</strong> Single consolidated aging report</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Centralized Prior Authorization:</strong> Single queue across all providers</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Insurance Verification at Scale:</strong> Batch processing for next-day schedules</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Operations Management Layer:</strong> Embedded ops lead owning standardization</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Group-Level Reporting:</strong> Consolidated dashboards with site comparison</li>
-        <li style="padding: 18px 0;"><strong>M&amp;A Integration:</strong> New locations standardized within 30-60 days</li>
-      </ul>
-    </div>
+      <div class="fade-in">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Enterprise Solutions:</h3>
+        <ul style="list-style: none; max-width: 760px;">
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Centralized RCM:</strong> One
+            billing operation across every site</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Centralized AR
+              Follow-Up:</strong> Single consolidated aging report</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Centralized Prior
+              Authorization:</strong> Single queue across all providers</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Insurance Verification at
+              Scale:</strong> Batch processing for next-day schedules</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Operations Management
+              Layer:</strong> Embedded ops lead owning standardization</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Group-Level
+              Reporting:</strong> Consolidated dashboards with site comparison</li>
+          <li style="padding: 18px 0;"><strong>M&amp;A Integration:</strong> New locations standardized within 30-60
+            days</li>
+        </ul>
+      </div>
 
-    <div class="fade-in" style="margin-top: 48px;">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (Multi-Site Groups):</h3>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">+20%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Group-wide collections lift</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">28<span style="font-size: 24px; color: var(--ink-mute);">d</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Standardized AR days</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">45%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Lower operational cost</div>
+      <div class="fade-in" style="margin-top: 48px;">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (Multi-Site Groups):</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">+20%
+            </div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Group-wide collections lift</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">28<span
+                style="font-size: 24px; color: var(--ink-mute);">d</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Standardized AR days</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">45%</div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Lower operational cost</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- MSO/PAYER SECTION -->
-<section id="mso">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">For MSOs, billing aggregators &amp; payer organizations</div>
-      <h2 class="display">Your backlog isn't going to clear itself. <em>And hiring won't get you there <span style="display: inline-block; position: relative;">fast enough<span style="position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span>.</em></h2>
-      <p style="font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 600px; margin-top: 24px;">
-        You're processing thousands of claims a week. Your queues are growing faster than your team. Every new client adds volume your back office wasn't sized to absorb. The board wants margin. Operations wants headcount. Neither is going to win.
-      </p>
-    </div>
+  <!-- MSO/PAYER SECTION -->
+  <section id="mso">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">For MSOs, billing aggregators &amp; payer organizations</div>
+        <h2 class="display">Your backlog isn't going to clear itself. <em>And hiring won't get you there <span
+              style="display: inline-block; position: relative;">fast enough<span
+                style="position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px;"></span></span>.</em>
+        </h2>
+        <p
+          style="font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 600px; margin-top: 24px;">
+          You're processing thousands of claims a week. Your queues are growing faster than your team. Every new client
+          adds volume your back office wasn't sized to absorb. The board wants margin. Operations wants headcount.
+          Neither is going to win.
+        </p>
+      </div>
 
-    <div class="fade-in">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Backend Processing Services:</h3>
-      <ul style="list-style: none; max-width: 760px;">
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Claims Processing at Volume:</strong> Submission, adjudication, payer follow-up</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Eligibility Verification:</strong> Real-time and batch processing</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Prior Authorization Processing:</strong> Pre-cert submission and tracking at scale</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>AR Resolution:</strong> Aging bucket clearance and root-cause analysis</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Denial Management &amp; Appeals:</strong> Categorization and overturn tracking</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Payment Posting:</strong> ERA/EOB posting and reconciliation</li>
-        <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>QA &amp; Audit:</strong> Sample-based quality assurance on all work</li>
-        <li style="padding: 18px 0;"><strong>Reporting &amp; Analytics:</strong> Queue reporting and SLA dashboards</li>
-      </ul>
-    </div>
+      <div class="fade-in">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 32px;">Backend Processing Services:</h3>
+        <ul style="list-style: none; max-width: 760px;">
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Claims Processing at
+              Volume:</strong> Submission, adjudication, payer follow-up</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Eligibility
+              Verification:</strong> Real-time and batch processing</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Prior Authorization
+              Processing:</strong> Pre-cert submission and tracking at scale</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>AR Resolution:</strong> Aging
+            bucket clearance and root-cause analysis</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Denial Management &amp;
+              Appeals:</strong> Categorization and overturn tracking</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>Payment Posting:</strong>
+            ERA/EOB posting and reconciliation</li>
+          <li style="padding: 18px 0; border-bottom: 1px solid var(--paper-line);"><strong>QA &amp; Audit:</strong>
+            Sample-based quality assurance on all work</li>
+          <li style="padding: 18px 0;"><strong>Reporting &amp; Analytics:</strong> Queue reporting and SLA dashboards
+          </li>
+        </ul>
+      </div>
 
-    <div class="fade-in" style="margin-top: 48px;">
-      <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (MSO/Aggregator Scale):</h3>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">40-60%</div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Lower cost per claim</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">2-4<span style="font-size: 24px; color: var(--ink-mute);">x</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Throughput per processor</div>
-        </div>
-        <div style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
-          <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">7-14<span style="font-size: 24px; color: var(--ink-mute);">d</span></div>
-          <div style="color: var(--ink-mute); font-size: 14px;">Scaling for new clients</div>
+      <div class="fade-in" style="margin-top: 48px;">
+        <h3 style="font-family: var(--serif); font-size: 28px; margin-bottom: 24px;">Results (MSO/Aggregator Scale):
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">40-60%
+            </div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Lower cost per claim</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">2-4<span
+                style="font-size: 24px; color: var(--ink-mute);">x</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Throughput per processor</div>
+          </div>
+          <div
+            style="padding: 24px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg);">
+            <div style="font-family: var(--serif); font-size: 48px; color: var(--signal); margin-bottom: 8px;">7-14<span
+                style="font-size: 24px; color: var(--ink-mute);">d</span></div>
+            <div style="color: var(--ink-mute); font-size: 14px;">Scaling for new clients</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container footer-inner">
-    <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
-    <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Security</a>
-      <a href="#">HIPAA</a>
-      <a href="#">Contact</a>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">HIPAA</a>
+        <a href="#">Contact</a>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-  // Navigation scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 8);
-  });
-
-  // Logo click to go home
-  const logo = document.querySelector('.logo');
-  logo.addEventListener('click', (e) => {
-    e.preventDefault();
-    const homeSection = document.getElementById('home');
-    homeSection.scrollIntoView({ behavior: 'smooth' });
-  });
-
-  // Close dropdown when a link is clicked
-  const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
-  dropdownLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      // Reset dropdown state
-      setTimeout(() => {
-        document.querySelector('.nav-dropdown').classList.remove('active');
-      }, 100);
+  <script>
+    // Navigation scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
     });
-  });
 
-  // Fade-in animation on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-
-  // Smooth scroll for all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    // Logo click to go home
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('click', (e) => {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const homeSection = document.getElementById('home');
+      homeSection.scrollIntoView({ behavior: 'smooth' });
     });
-  });
-</script>
+
+    // Close dropdown when a link is clicked
+    const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
+    dropdownLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Reset dropdown state
+        setTimeout(() => {
+          document.querySelector('.nav-dropdown').classList.remove('active');
+        }, 100);
+      });
+    });
+
+    // Fade-in animation on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 
 </body>
+
 </html>

@@ -1,1688 +1,2341 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hired Billing Support — Operational Infrastructure for Modern Healthcare</title>
-<meta name="description" content="Hired Billing Support is the operational team behind growing practices. Remote healthcare staffing, RCM, AR recovery, and AI-assisted workflows that let providers reclaim time and scale without overhead." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* Editorial healthcare palette — deep clinical navy, warm paper, signal green */
-    --ink: #0A1628;
-    --ink-soft: #1B2942;
-    --ink-mute: #475569;
-    --paper: #FAF7F2;
-    --paper-warm: #F2EDE3;
-    --paper-line: #E8E2D5;
-    --white: #FFFFFF;
-    --signal: #00C896;       /* clinical recovery green */
-    --signal-deep: #00876B;
-    --accent: #D4A574;       /* warm gold for editorial accents */
-    --danger: #D64545;
-    --radius: 4px;
-    --radius-lg: 12px;
-    --max: 1280px;
-    --gutter: clamp(20px, 4vw, 48px);
-    --serif: 'Fraunces', 'Times New Roman', serif;
-    --sans: 'Inter Tight', -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body {
-    font-family: var(--sans);
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.5;
-    font-size: 16px;
-    overflow-x: hidden;
-  }
-
-  ::selection { background: var(--ink); color: var(--paper); }
-
-  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-
-  /* ───── Typography system ───── */
-  .display {
-    font-family: var(--serif);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 0.98;
-    font-variation-settings: "opsz" 144;
-  }
-  .display em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--ink-mute);
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .eyebrow::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: currentColor;
-  }
-
-  /* ───── Navigation ───── */
-  nav.top {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(250, 247, 242, 0.78);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s var(--ease);
-  }
-  nav.top.scrolled { border-bottom-color: var(--paper-line); }
-  .nav-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 18px var(--gutter);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .logo-mark {
-    width: 28px; height: 28px;
-    background: var(--ink);
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .logo-mark::after {
-    content: '';
-    position: absolute;
-    inset: 7px;
-    border-radius: 50%;
-    background: var(--signal);
-  }
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    position: relative;
-    padding: 4px 0;
-  }
-  .nav-links a::after {
-    content:'';
-    position:absolute; bottom:0; left:0;
-    width:0; height:1px;
-    background: var(--ink);
-    transition: width 0.3s var(--ease);
-  }
-  .nav-links a:hover::after { width:100%; }
-  .nav-cta {
-    display: flex; gap: 12px; align-items: center;
-  }
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-  }
-
-  /* ───── Buttons ───── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
-    border-radius: var(--radius);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.25s var(--ease);
-    white-space: nowrap;
-  }
-  .btn-primary {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .btn-primary:hover {
-    background: var(--ink-soft);
-    transform: translateY(-1px);
-    box-shadow: 0 12px 28px -12px rgba(10,22,40,0.4);
-  }
-  .btn-primary .arrow { transition: transform 0.25s var(--ease); }
-  .btn-primary:hover .arrow { transform: translateX(3px); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--ink);
-  }
-  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
-  .btn-text {
-    background: transparent;
-    color: var(--ink);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--ink);
-    border-radius: 0;
-  }
-  .btn-light {
-    background: var(--paper);
-    color: var(--ink);
-  }
-  .btn-light:hover { background: var(--white); transform: translateY(-1px); }
-
-  /* ───── HERO ───── */
-  .hero {
-    position: relative;
-    padding: 160px var(--gutter) 100px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-bg svg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0.35;
-  }
-  .hero-grain {
-    position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: multiply;
-    pointer-events: none;
-  }
-  .hero-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 80px;
-    align-items: center;
-  }
-  @media (max-width: 1000px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 60px; }
-  }
-
-  .hero h1 {
-    font-size: clamp(48px, 7.5vw, 96px);
-    margin: 28px 0 32px;
-  }
-  .hero h1 .underline-word {
-    display: inline-block;
-    position: relative;
-  }
-  .hero h1 .underline-word::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; bottom: 6px;
-    height: 8px;
-    background: var(--signal);
-    opacity: 0.35;
-    z-index: -1;
-    border-radius: 2px;
-  }
-  .hero p.lede {
-    font-size: clamp(17px, 1.5vw, 20px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 540px;
-    margin-bottom: 40px;
-  }
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-
-  .hero-meta {
-    margin-top: 56px;
-    padding-top: 28px;
-    border-top: 1px solid var(--paper-line);
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-  .hero-meta-item .num {
-    font-family: var(--serif);
-    font-size: 32px;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    display: block;
-    line-height: 1;
-  }
-  .hero-meta-item .lbl {
-    font-size: 12px;
-    color: var(--ink-mute);
-    margin-top: 6px;
-  }
-
-  /* Hero card — operational dashboard preview */
-  .hero-card {
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    position: relative;
-    box-shadow:
-      0 60px 80px -40px rgba(10,22,40,0.35),
-      0 30px 40px -20px rgba(10,22,40,0.15);
-    transform: rotate(-1deg);
-    transition: transform 0.6s var(--ease);
-  }
-  .hero-card:hover { transform: rotate(0deg) translateY(-4px); }
-  .hero-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 20px;
-  }
-  .hero-card-header .label {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(250,247,242,0.5);
-  }
-  .live-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--signal);
-    box-shadow: 0 0 0 4px rgba(0,200,150,0.15);
-    animation: pulse 2s infinite;
-    display: inline-block;
-    margin-right: 6px;
-  }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(0,200,150,0.15); }
-    50%      { box-shadow: 0 0 0 7px rgba(0,200,150,0.05); }
-  }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  .stat-cell {
-    background: var(--ink);
-    padding: 18px 16px;
-  }
-  .stat-cell .v {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .stat-cell .v .delta { color: var(--signal); font-size: 14px; margin-left: 4px; }
-  .stat-cell .k {
-    font-size: 11px;
-    color: rgba(250,247,242,0.55);
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .activity-feed { font-size: 12px; }
-  .activity-feed-title {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(250,247,242,0.5);
-    margin-bottom: 12px;
-  }
-  .feed-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    color: rgba(250,247,242,0.85);
-    animation: feedSlide 0.5s var(--ease) both;
-  }
-  .feed-row:last-child { border-bottom: none; }
-  .feed-row .feed-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--signal);
-  }
-  @keyframes feedSlide {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .feed-row:nth-child(1) { animation-delay: 0.2s; }
-  .feed-row:nth-child(2) { animation-delay: 0.4s; }
-  .feed-row:nth-child(3) { animation-delay: 0.6s; }
-  .feed-row:nth-child(4) { animation-delay: 0.8s; }
-
-  /* Hero entry animation */
-  .reveal { opacity: 0; transform: translateY(20px); animation: reveal 0.9s var(--ease) forwards; }
-  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
-  .reveal-1 { animation-delay: 0.05s; }
-  .reveal-2 { animation-delay: 0.15s; }
-  .reveal-3 { animation-delay: 0.3s; }
-  .reveal-4 { animation-delay: 0.45s; }
-  .reveal-5 { animation-delay: 0.6s; }
-
-  /* ───── Logo / trust strip ───── */
-  .trust-strip {
-    border-top: 1px solid var(--paper-line);
-    border-bottom: 1px solid var(--paper-line);
-    padding: 32px 0;
-    background: var(--paper-warm);
-  }
-  .trust-inner {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .trust-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--ink-mute);
-    flex-shrink: 0;
-  }
-  .trust-logos {
-    display: flex;
-    gap: 44px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .trust-logos span {
-    font-family: var(--serif);
-    font-size: 19px;
-    color: var(--ink-soft);
-    font-style: italic;
-    opacity: 0.75;
-    font-weight: 400;
-  }
-
-  /* ───── Section base ───── */
-  section.block { padding: 120px 0; position: relative; }
-  section.block.dark { background: var(--ink); color: var(--paper); }
-  section.block.warm { background: var(--paper-warm); }
-  .block-head { max-width: 720px; margin-bottom: 72px; }
-  .block-head h2 {
-    font-size: clamp(38px, 5vw, 64px);
-    margin-top: 20px;
-  }
-  .block.dark .eyebrow { color: rgba(250,247,242,0.55); }
-  .block.dark .display em { color: rgba(250,247,242,0.55); }
-
-  /* ───── Problem section — burnout ledger ───── */
-  .pain-ledger {
-    border-top: 1px solid var(--paper-line);
-  }
-  .pain-row {
-    display: grid;
-    grid-template-columns: 60px 1fr 1fr 120px;
-    gap: 24px;
-    align-items: center;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--paper-line);
-    transition: padding 0.3s var(--ease);
-  }
-  .pain-row:hover { padding-left: 16px; }
-  .pain-row .pn {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-mute);
-    letter-spacing: 0.1em;
-  }
-  .pain-row .ptitle {
-    font-family: var(--serif);
-    font-size: clamp(22px, 2.2vw, 30px);
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-  .pain-row .pdesc {
-    color: var(--ink-mute);
-    font-size: 15px;
-    line-height: 1.55;
-  }
-  .pain-row .pstat {
-    text-align: right;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--danger);
-    font-weight: 500;
-  }
-  @media (max-width: 800px) {
-    .pain-row {
-      grid-template-columns: 40px 1fr;
-      gap: 12px 16px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hired Billing Support — Operational Infrastructure for Modern Healthcare</title>
+  <meta name="description"
+    content="Hired Billing Support is the operational team behind growing practices. Remote healthcare staffing, RCM, AR recovery, and AI-assisted workflows that let providers reclaim time and scale without overhead." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Editorial healthcare palette — deep clinical navy, warm paper, signal green */
+      --ink: #0A1628;
+      --ink-soft: #1B2942;
+      --ink-mute: #475569;
+      --paper: #FAF7F2;
+      --paper-warm: #F2EDE3;
+      --paper-line: #E8E2D5;
+      --white: #FFFFFF;
+      --signal: #00C896;
+      /* clinical recovery green */
+      --signal-deep: #00876B;
+      --accent: #D4A574;
+      /* warm gold for editorial accents */
+      --danger: #D64545;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --max: 1280px;
+      --gutter: clamp(20px, 4vw, 48px);
+      --serif: 'Fraunces', 'Times New Roman', serif;
+      --sans: 'Inter Tight', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .pain-row .pdesc { grid-column: 2; }
-    .pain-row .pstat { grid-column: 2; text-align: left; }
-  }
 
-  /* ───── Solution / approach ───── */
-  .approach-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-  }
-  .approach-card {
-    grid-column: span 4;
-    background: var(--white);
-    border: 1px solid var(--paper-line);
-    border-radius: var(--radius-lg);
-    padding: 36px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  }
-  .approach-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 30px 60px -30px rgba(10,22,40,0.15);
-  }
-  .approach-card.feature { grid-column: span 8; background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  @media (max-width: 900px) {
-    .approach-card, .approach-card.feature { grid-column: span 12; }
-  }
-  .approach-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--ink-mute);
-    margin-bottom: 28px;
-    display: block;
-  }
-  .approach-card.feature .approach-num { color: rgba(250,247,242,0.5); }
-  .approach-card h3 {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-  }
-  .approach-card.feature h3 { font-size: 38px; }
-  .approach-card p {
-    color: var(--ink-mute);
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  .approach-card.feature p { color: rgba(250,247,242,0.75); }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .approach-illust {
-    margin-top: 28px;
-    height: 140px;
-    border-radius: 8px;
-    background: var(--paper-warm);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-  .approach-card.feature .approach-illust { background: rgba(255,255,255,0.04); }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* ───── Services grid ───── */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--paper-line);
-    border-left: 1px solid var(--paper-line);
-  }
-  @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
-  .service-cell {
-    padding: 40px 32px;
-    border-right: 1px solid var(--paper-line);
-    border-bottom: 1px solid var(--paper-line);
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s var(--ease);
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-  }
-  .service-cell:hover { background: var(--white); }
-  .service-icon {
-    width: 36px; height: 36px;
-    margin-bottom: 24px;
-    color: var(--ink);
-  }
-  .service-cell h4 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    margin-bottom: 10px;
-  }
-  .service-cell p {
-    color: var(--ink-mute);
-    font-size: 14px;
-    line-height: 1.55;
-    flex: 1;
-  }
-  .service-cell .arrow-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .service-cell:hover .arrow-link .arrow { transform: translateX(4px); }
-  .arrow-link .arrow { transition: transform 0.3s var(--ease); display: inline-block; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
 
-  /* ───── AI + Human workflow ───── */
-  .workflow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  @media (max-width: 900px) { .workflow { grid-template-columns: 1fr; gap: 48px; } }
-  .workflow h2 { margin-bottom: 24px; }
-  .workflow p.lede { font-size: 18px; line-height: 1.6; color: rgba(250,247,242,0.8); margin-bottom: 32px; }
-  .workflow-points { list-style: none; }
-  .workflow-points li {
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  .workflow-points li:last-child { border-bottom: none; }
-  .workflow-points .num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--signal);
-    letter-spacing: 0.15em;
-    flex-shrink: 0;
-    margin-top: 4px;
-    width: 24px;
-  }
-  .workflow-points .txt strong {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 18px;
-    display: block;
-    margin-bottom: 4px;
-    color: var(--paper);
-  }
-  .workflow-points .txt span {
-    color: rgba(250,247,242,0.65);
-    font-size: 14px;
-    line-height: 1.5;
-  }
+    ::selection {
+      background: var(--ink);
+      color: var(--paper);
+    }
 
-  /* Workflow diagram */
-  .workflow-diagram {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    aspect-ratio: 4/5;
-    position: relative;
-    overflow: hidden;
-  }
-  .wd-layer {
-    position: absolute;
-    left: 32px; right: 32px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 14px 16px;
-    background: rgba(10,22,40,0.4);
-    backdrop-filter: blur(4px);
-  }
-  .wd-layer .wl-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--signal);
-    letter-spacing: 0.15em;
-    margin-bottom: 6px;
-  }
-  .wd-layer .wl-name {
-    font-family: var(--serif);
-    font-size: 16px;
-    color: var(--paper);
-  }
-  .wd-layer.l1 { top: 8%; }
-  .wd-layer.l2 { top: 28%; }
-  .wd-layer.l3 { top: 48%; }
-  .wd-layer.l4 { top: 68%; }
-  .wd-connector {
-    position: absolute;
-    left: 50%;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--signal), transparent);
-    transform: translateX(-0.5px);
-  }
-  .wd-connector.c1 { top: 20%; height: 8%; }
-  .wd-connector.c2 { top: 40%; height: 8%; }
-  .wd-connector.c3 { top: 60%; height: 8%; }
-  .wd-output {
-    position: absolute;
-    bottom: 32px; left: 32px; right: 32px;
-    background: var(--signal);
-    color: var(--ink);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .wd-output .ot { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; margin-bottom: 6px; opacity: 0.7; }
-  .wd-output .on { font-family: var(--serif); font-size: 18px; font-weight: 500; }
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
 
-  /* ───── Numbers / stats ───── */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--paper-line);
-  }
-  @media (max-width: 800px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
-  .stat-block {
-    padding: 48px 32px;
-    border-right: 1px solid var(--paper-line);
-    border-bottom: 1px solid var(--paper-line);
-  }
-  .stat-block:last-child { border-right: none; }
-  .stat-block .figure {
-    font-family: var(--serif);
-    font-size: clamp(48px, 5vw, 72px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-  .stat-block .figure .unit { color: var(--signal); }
-  .stat-block .desc {
-    margin-top: 18px;
-    color: var(--ink-mute);
-    font-size: 14px;
-    line-height: 1.5;
-  }
+    /* ───── Typography system ───── */
+    .display {
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 0.98;
+      font-variation-settings: "opsz" 144;
+    }
 
-  /* ───── Testimonials ───── */
-  .testi-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-  @media (max-width: 900px) { .testi-wrap { grid-template-columns: 1fr; } }
-  .testi {
-    padding: 48px;
-    background: var(--paper);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--paper-line);
-    position: relative;
-  }
-  .testi::before {
-    content: '"';
-    position: absolute;
-    top: -10px; left: 32px;
-    font-family: var(--serif);
-    font-size: 120px;
-    line-height: 1;
-    color: var(--signal);
-    opacity: 0.6;
-  }
-  .testi-quote {
-    font-family: var(--serif);
-    font-size: clamp(20px, 1.8vw, 24px);
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    margin-bottom: 32px;
-    margin-top: 24px;
-    position: relative;
-    z-index: 1;
-  }
-  .testi-attr { display: flex; align-items: center; gap: 14px; }
-  .testi-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--ink);
-    color: var(--paper);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif);
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .testi-name { font-size: 14px; font-weight: 600; }
-  .testi-role { font-size: 13px; color: var(--ink-mute); margin-top: 2px; }
+    .display em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mute);
+    }
 
-  /* ───── Case study ───── */
-  .case-card {
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 900px) { .case-card { grid-template-columns: 1fr; } }
-  .case-body { padding: 56px; }
-  .case-body .eyebrow { color: var(--signal); }
-  .case-body .eyebrow::before { background: var(--signal); }
-  .case-body h3 {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3vw, 40px);
-    margin: 16px 0 24px;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-  .case-body p { color: rgba(250,247,242,0.75); font-size: 16px; line-height: 1.6; margin-bottom: 32px; }
-  .case-metrics {
-    background: rgba(255,255,255,0.03);
-    padding: 56px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-content: center;
-  }
-  .case-metric .v {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 56px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .case-metric .v .unit { color: var(--signal); }
-  .case-metric .k { font-size: 13px; color: rgba(250,247,242,0.6); margin-top: 12px; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  /* ───── HIPAA / compliance ───── */
-  .compliance {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  @media (max-width: 900px) { .compliance { grid-template-columns: 1fr; gap: 48px; } }
-  .compliance-badges {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .badge {
-    background: var(--white);
-    border: 1px solid var(--paper-line);
-    padding: 24px 22px;
-    border-radius: var(--radius-lg);
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .badge-icon {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    background: var(--paper-warm);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink);
-    flex-shrink: 0;
-  }
-  .badge h5 {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-  .badge p { font-size: 12px; color: var(--ink-mute); line-height: 1.45; }
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+    }
 
-  /* ───── FAQ ───── */
-  .faq-list { max-width: 880px; margin: 0 auto; border-top: 1px solid var(--paper-line); }
-  details.faq {
-    border-bottom: 1px solid var(--paper-line);
-    padding: 0;
-  }
-  details.faq summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 28px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    font-family: var(--serif);
-    font-size: clamp(18px, 1.8vw, 22px);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-  details.faq summary::-webkit-details-marker { display: none; }
-  details.faq summary .toggle {
-    width: 32px; height: 32px;
-    border: 1px solid var(--paper-line);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.3s var(--ease), background 0.3s var(--ease);
-    font-size: 18px;
-    color: var(--ink-mute);
-  }
-  details.faq[open] summary .toggle { transform: rotate(45deg); background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  details.faq .faq-body {
-    padding: 0 0 28px;
-    color: var(--ink-mute);
-    font-size: 15px;
-    line-height: 1.65;
-    max-width: 680px;
-  }
+    /* ───── Navigation ───── */
+    nav.top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(250, 247, 242, 0.78);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
 
-  /* ───── Final CTA ───── */
-  .final-cta {
-    background: var(--ink);
-    color: var(--paper);
-    position: relative;
-    overflow: hidden;
-  }
-  .final-cta .cta-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 140px var(--gutter);
-    text-align: center;
-    position: relative;
-    z-index: 2;
-  }
-  .final-cta h2 {
-    font-size: clamp(44px, 6.5vw, 88px);
-    max-width: 900px;
-    margin: 24px auto 32px;
-  }
-  .final-cta p {
-    font-size: 18px;
-    color: rgba(250,247,242,0.7);
-    max-width: 560px;
-    margin: 0 auto 48px;
-    line-height: 1.55;
-  }
-  .final-cta .actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .final-cta-glow {
-    position: absolute;
-    bottom: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,200,150,0.25), transparent 70%);
-    pointer-events: none;
-  }
+    nav.top.scrolled {
+      border-bottom-color: var(--paper-line);
+    }
 
-  /* ───── Footer ───── */
-  footer {
-    background: var(--ink);
-    color: rgba(250,247,242,0.75);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding: 72px 0 32px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 56px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-  .footer-brand p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: 20px;
-    max-width: 320px;
-    color: rgba(250,247,242,0.6);
-  }
-  .footer-col h6 {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(250,247,242,0.5);
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 12px; }
-  .footer-col a {
-    color: rgba(250,247,242,0.75);
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.2s;
-  }
-  .footer-col a:hover { color: var(--signal); }
-  .footer-bottom {
-    padding-top: 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: rgba(250,247,242,0.45);
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .footer-bottom .legal { display: flex; gap: 24px; }
-  .footer-bottom .legal a { color: rgba(250,247,242,0.45); text-decoration: none; }
-  .footer-bottom .legal a:hover { color: var(--signal); }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
 
-  /* ───── Scroll reveal ───── */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-  }
-  .fade-in.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
 
-  /* Decorative ticker for hero bg */
-  .ticker-line {
-    position: absolute;
-    left: 0; right: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-mute);
-    opacity: 0.4;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    pointer-events: none;
-  }
-  .ticker-line.top { top: 110px; }
-  .ticker-line.bot { bottom: 32px; }
-  .ticker-track {
-    display: inline-block;
-    animation: tick 60s linear infinite;
-    padding-right: 60px;
-  }
-  @keyframes tick {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-</style>
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background: var(--signal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s var(--ease);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ───── Buttons ───── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s var(--ease);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .btn-primary:hover {
+      background: var(--ink-soft);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px -12px rgba(10, 22, 40, 0.4);
+    }
+
+    .btn-primary .arrow {
+      transition: transform 0.25s var(--ease);
+    }
+
+    .btn-primary:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+
+    .btn-ghost:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .btn-text {
+      background: transparent;
+      color: var(--ink);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--ink);
+      border-radius: 0;
+    }
+
+    .btn-light {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .btn-light:hover {
+      background: var(--white);
+      transform: translateY(-1px);
+    }
+
+    /* ───── HERO ───── */
+    .hero {
+      position: relative;
+      padding: 160px var(--gutter) 100px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-bg svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.35;
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 1000px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7.5vw, 96px);
+      margin: 28px 0 32px;
+    }
+
+    .hero h1 .underline-word {
+      display: inline-block;
+      position: relative;
+    }
+
+    .hero h1 .underline-word::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 6px;
+      height: 8px;
+      background: var(--signal);
+      opacity: 0.35;
+      z-index: -1;
+      border-radius: 2px;
+    }
+
+    .hero p.lede {
+      font-size: clamp(17px, 1.5vw, 20px);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-meta {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--paper-line);
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item .num {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      display: block;
+      line-height: 1;
+    }
+
+    .hero-meta-item .lbl {
+      font-size: 12px;
+      color: var(--ink-mute);
+      margin-top: 6px;
+    }
+
+    /* Hero card — operational dashboard preview */
+    .hero-card {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+      box-shadow:
+        0 60px 80px -40px rgba(10, 22, 40, 0.35),
+        0 30px 40px -20px rgba(10, 22, 40, 0.15);
+      transform: rotate(-1deg);
+      transition: transform 0.6s var(--ease);
+    }
+
+    .hero-card:hover {
+      transform: rotate(0deg) translateY(-4px);
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .hero-card-header .label {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(250, 247, 242, 0.5);
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--signal);
+      box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.15);
+      animation: pulse 2s infinite;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.15);
+      }
+
+      50% {
+        box-shadow: 0 0 0 7px rgba(0, 200, 150, 0.05);
+      }
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .stat-cell {
+      background: var(--ink);
+      padding: 18px 16px;
+    }
+
+    .stat-cell .v {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-cell .v .delta {
+      color: var(--signal);
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    .stat-cell .k {
+      font-size: 11px;
+      color: rgba(250, 247, 242, 0.55);
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .activity-feed {
+      font-size: 12px;
+    }
+
+    .activity-feed-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(250, 247, 242, 0.5);
+      margin-bottom: 12px;
+    }
+
+    .feed-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: rgba(250, 247, 242, 0.85);
+      animation: feedSlide 0.5s var(--ease) both;
+    }
+
+    .feed-row:last-child {
+      border-bottom: none;
+    }
+
+    .feed-row .feed-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--signal);
+    }
+
+    @keyframes feedSlide {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feed-row:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .feed-row:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .feed-row:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .feed-row:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+
+    /* Hero entry animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: reveal 0.9s var(--ease) forwards;
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal-1 {
+      animation-delay: 0.05s;
+    }
+
+    .reveal-2 {
+      animation-delay: 0.15s;
+    }
+
+    .reveal-3 {
+      animation-delay: 0.3s;
+    }
+
+    .reveal-4 {
+      animation-delay: 0.45s;
+    }
+
+    .reveal-5 {
+      animation-delay: 0.6s;
+    }
+
+    /* ───── Logo / trust strip ───── */
+    .trust-strip {
+      border-top: 1px solid var(--paper-line);
+      border-bottom: 1px solid var(--paper-line);
+      padding: 32px 0;
+      background: var(--paper-warm);
+    }
+
+    .trust-inner {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .trust-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-mute);
+      flex-shrink: 0;
+    }
+
+    .trust-logos {
+      display: flex;
+      gap: 44px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .trust-logos span {
+      font-family: var(--serif);
+      font-size: 19px;
+      color: var(--ink-soft);
+      font-style: italic;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    /* ───── Section base ───── */
+    section.block {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    section.block.dark {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    section.block.warm {
+      background: var(--paper-warm);
+    }
+
+    .block-head {
+      max-width: 720px;
+      margin-bottom: 72px;
+    }
+
+    .block-head h2 {
+      font-size: clamp(38px, 5vw, 64px);
+      margin-top: 20px;
+    }
+
+    .block.dark .eyebrow {
+      color: rgba(250, 247, 242, 0.55);
+    }
+
+    .block.dark .display em {
+      color: rgba(250, 247, 242, 0.55);
+    }
+
+    /* ───── Problem section — burnout ledger ───── */
+    .pain-ledger {
+      border-top: 1px solid var(--paper-line);
+    }
+
+    .pain-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 1fr 120px;
+      gap: 24px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--paper-line);
+      transition: padding 0.3s var(--ease);
+    }
+
+    .pain-row:hover {
+      padding-left: 16px;
+    }
+
+    .pain-row .pn {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+    }
+
+    .pain-row .ptitle {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.2vw, 30px);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .pain-row .pdesc {
+      color: var(--ink-mute);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .pain-row .pstat {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    @media (max-width: 800px) {
+      .pain-row {
+        grid-template-columns: 40px 1fr;
+        gap: 12px 16px;
+      }
+
+      .pain-row .pdesc {
+        grid-column: 2;
+      }
+
+      .pain-row .pstat {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+
+    /* ───── Solution / approach ───── */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .approach-card {
+      grid-column: span 4;
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+
+    .approach-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px -30px rgba(10, 22, 40, 0.15);
+    }
+
+    .approach-card.feature {
+      grid-column: span 8;
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    @media (max-width: 900px) {
+
+      .approach-card,
+      .approach-card.feature {
+        grid-column: span 12;
+      }
+    }
+
+    .approach-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--ink-mute);
+      margin-bottom: 28px;
+      display: block;
+    }
+
+    .approach-card.feature .approach-num {
+      color: rgba(250, 247, 242, 0.5);
+    }
+
+    .approach-card h3 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .approach-card.feature h3 {
+      font-size: 38px;
+    }
+
+    .approach-card p {
+      color: var(--ink-mute);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .approach-card.feature p {
+      color: rgba(250, 247, 242, 0.75);
+    }
+
+    .approach-illust {
+      margin-top: 28px;
+      height: 140px;
+      border-radius: 8px;
+      background: var(--paper-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .approach-card.feature .approach-illust {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ───── Services grid ───── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--paper-line);
+      border-left: 1px solid var(--paper-line);
+    }
+
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .service-cell {
+      padding: 40px 32px;
+      border-right: 1px solid var(--paper-line);
+      border-bottom: 1px solid var(--paper-line);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s var(--ease);
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-cell:hover {
+      background: var(--white);
+    }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    .service-cell h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin-bottom: 10px;
+    }
+
+    .service-cell p {
+      color: var(--ink-mute);
+      font-size: 14px;
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .service-cell .arrow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .service-cell:hover .arrow-link .arrow {
+      transform: translateX(4px);
+    }
+
+    .arrow-link .arrow {
+      transition: transform 0.3s var(--ease);
+      display: inline-block;
+    }
+
+    /* ───── AI + Human workflow ───── */
+    .workflow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .workflow {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    .workflow h2 {
+      margin-bottom: 24px;
+    }
+
+    .workflow p.lede {
+      font-size: 18px;
+      line-height: 1.6;
+      color: rgba(250, 247, 242, 0.8);
+      margin-bottom: 32px;
+    }
+
+    .workflow-points {
+      list-style: none;
+    }
+
+    .workflow-points li {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .workflow-points li:last-child {
+      border-bottom: none;
+    }
+
+    .workflow-points .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--signal);
+      letter-spacing: 0.15em;
+      flex-shrink: 0;
+      margin-top: 4px;
+      width: 24px;
+    }
+
+    .workflow-points .txt strong {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 18px;
+      display: block;
+      margin-bottom: 4px;
+      color: var(--paper);
+    }
+
+    .workflow-points .txt span {
+      color: rgba(250, 247, 242, 0.65);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Workflow diagram */
+    .workflow-diagram {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      aspect-ratio: 4/5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wd-layer {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: rgba(10, 22, 40, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    .wd-layer .wl-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--signal);
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+
+    .wd-layer .wl-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--paper);
+    }
+
+    .wd-layer.l1 {
+      top: 8%;
+    }
+
+    .wd-layer.l2 {
+      top: 28%;
+    }
+
+    .wd-layer.l3 {
+      top: 48%;
+    }
+
+    .wd-layer.l4 {
+      top: 68%;
+    }
+
+    .wd-connector {
+      position: absolute;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--signal), transparent);
+      transform: translateX(-0.5px);
+    }
+
+    .wd-connector.c1 {
+      top: 20%;
+      height: 8%;
+    }
+
+    .wd-connector.c2 {
+      top: 40%;
+      height: 8%;
+    }
+
+    .wd-connector.c3 {
+      top: 60%;
+      height: 8%;
+    }
+
+    .wd-output {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+      background: var(--signal);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .wd-output .ot {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+      opacity: 0.7;
+    }
+
+    .wd-output .on {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* ───── Numbers / stats ───── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--paper-line);
+    }
+
+    @media (max-width: 800px) {
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stat-block {
+      padding: 48px 32px;
+      border-right: 1px solid var(--paper-line);
+      border-bottom: 1px solid var(--paper-line);
+    }
+
+    .stat-block:last-child {
+      border-right: none;
+    }
+
+    .stat-block .figure {
+      font-family: var(--serif);
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-block .figure .unit {
+      color: var(--signal);
+    }
+
+    .stat-block .desc {
+      margin-top: 18px;
+      color: var(--ink-mute);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ───── Testimonials ───── */
+    .testi-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .testi-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testi {
+      padding: 48px;
+      background: var(--paper);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--paper-line);
+      position: relative;
+    }
+
+    .testi::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 32px;
+      font-family: var(--serif);
+      font-size: 120px;
+      line-height: 1;
+      color: var(--signal);
+      opacity: 0.6;
+    }
+
+    .testi-quote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.8vw, 24px);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+      margin-top: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testi-attr {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testi-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .testi-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .testi-role {
+      font-size: 13px;
+      color: var(--ink-mute);
+      margin-top: 2px;
+    }
+
+    /* ───── Case study ───── */
+    .case-card {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 900px) {
+      .case-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .case-body {
+      padding: 56px;
+    }
+
+    .case-body .eyebrow {
+      color: var(--signal);
+    }
+
+    .case-body .eyebrow::before {
+      background: var(--signal);
+    }
+
+    .case-body h3 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 40px);
+      margin: 16px 0 24px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .case-body p {
+      color: rgba(250, 247, 242, 0.75);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .case-metrics {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-content: center;
+    }
+
+    .case-metric .v {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .case-metric .v .unit {
+      color: var(--signal);
+    }
+
+    .case-metric .k {
+      font-size: 13px;
+      color: rgba(250, 247, 242, 0.6);
+      margin-top: 12px;
+    }
+
+    /* ───── HIPAA / compliance ───── */
+    .compliance {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .compliance {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    .compliance-badges {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .badge {
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      padding: 24px 22px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .badge-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--paper-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+
+    .badge h5 {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .badge p {
+      font-size: 12px;
+      color: var(--ink-mute);
+      line-height: 1.45;
+    }
+
+    /* ───── FAQ ───── */
+    .faq-list {
+      max-width: 880px;
+      margin: 0 auto;
+      border-top: 1px solid var(--paper-line);
+    }
+
+    details.faq {
+      border-bottom: 1px solid var(--paper-line);
+      padding: 0;
+    }
+
+    details.faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      font-family: var(--serif);
+      font-size: clamp(18px, 1.8vw, 22px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    details.faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq summary .toggle {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--paper-line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+      font-size: 18px;
+      color: var(--ink-mute);
+    }
+
+    details.faq[open] summary .toggle {
+      transform: rotate(45deg);
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    details.faq .faq-body {
+      padding: 0 0 28px;
+      color: var(--ink-mute);
+      font-size: 15px;
+      line-height: 1.65;
+      max-width: 680px;
+    }
+
+    /* ───── Final CTA ───── */
+    .final-cta {
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta .cta-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 140px var(--gutter);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(44px, 6.5vw, 88px);
+      max-width: 900px;
+      margin: 24px auto 32px;
+    }
+
+    .final-cta p {
+      font-size: 18px;
+      color: rgba(250, 247, 242, 0.7);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      line-height: 1.55;
+    }
+
+    .final-cta .actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .final-cta-glow {
+      position: absolute;
+      bottom: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 200, 150, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ───── Footer ───── */
+    footer {
+      background: var(--ink);
+      color: rgba(250, 247, 242, 0.75);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 72px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 320px;
+      color: rgba(250, 247, 242, 0.6);
+    }
+
+    .footer-col h6 {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(250, 247, 242, 0.5);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col a {
+      color: rgba(250, 247, 242, 0.75);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--signal);
+    }
+
+    .footer-bottom {
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(250, 247, 242, 0.45);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom .legal {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-bottom .legal a {
+      color: rgba(250, 247, 242, 0.45);
+      text-decoration: none;
+    }
+
+    .footer-bottom .legal a:hover {
+      color: var(--signal);
+    }
+
+    /* ───── Scroll reveal ───── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+
+    .fade-in.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Decorative ticker for hero bg */
+    .ticker-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-mute);
+      opacity: 0.4;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .ticker-line.top {
+      top: 110px;
+    }
+
+    .ticker-line.bot {
+      bottom: 32px;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: tick 60s linear infinite;
+      padding-right: 60px;
+    }
+
+    @keyframes tick {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- NAV                                                          -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<nav class="top" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
-    </a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#workflow">AI + Human</a></li>
-      <li><a href="#cases">Case Studies</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="#cta" class="btn btn-primary">Book a discovery call
-        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NAV                                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
       </a>
-    </div>
-  </div>
-</nav>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- HERO                                                         -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="hero-bg">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)"/>
-    </svg>
-    <div class="hero-grain"></div>
-  </div>
-
-  <div class="ticker-line top">
-    <span class="ticker-track">
-      RCM · AR RECOVERY · CREDENTIALING · PRIOR AUTHORIZATION · ELIGIBILITY · DENIAL MANAGEMENT · VIRTUAL ASSISTANTS · FRONT DESK · SCHEDULING · CHARGE ENTRY · PAYMENT POSTING · PATIENT COORDINATION · RCM · AR RECOVERY · CREDENTIALING · PRIOR AUTHORIZATION · ELIGIBILITY · DENIAL MANAGEMENT · VIRTUAL ASSISTANTS · FRONT DESK · SCHEDULING · CHARGE ENTRY · PAYMENT POSTING · PATIENT COORDINATION ·
-    </span>
-  </div>
-
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow reveal reveal-1">Operational infrastructure for healthcare</div>
-      <h1 class="display reveal reveal-2">
-        Your practice should grow <em>without</em> the <span class="underline-word">operational chaos</span>.
-      </h1>
-      <p class="lede reveal reveal-3">
-        Hired Billing Support is the remote team behind growing practices — RCM specialists, billers, AR experts, and virtual medical assistants embedded into your workflow. So you can stop firefighting and start practicing.
-      </p>
-      <div class="hero-actions reveal reveal-4">
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#workflow">AI + Human</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
         <a href="#cta" class="btn btn-primary">Book a discovery call
-          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#services" class="btn btn-text">See what we do →</a>
-      </div>
-
-      <div class="hero-meta reveal reveal-5">
-        <div class="hero-meta-item">
-          <span class="num">98<span style="color:var(--signal);">%</span></span>
-          <span class="lbl">Clean-claim rate</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="num">22<span style="color:var(--signal);">d</span></span>
-          <span class="lbl">Avg. days in AR</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="num">$1.2<span style="color:var(--signal);">M+</span></span>
-          <span class="lbl">Recovered for clients in '25</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Operational dashboard card -->
-    <div class="reveal reveal-4" style="animation-delay:0.5s;">
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <span class="label"><span class="live-dot"></span>LIVE · CLIENT WORKSPACE</span>
-          <span class="label" style="font-variant-numeric: tabular-nums;">14 MAY · 09:42</span>
-        </div>
-        <div class="stat-grid">
-          <div class="stat-cell">
-            <div class="v">$47,820 <span class="delta">▲</span></div>
-            <div class="k">Collections this week</div>
-          </div>
-          <div class="stat-cell">
-            <div class="v">186</div>
-            <div class="k">Claims submitted</div>
-          </div>
-          <div class="stat-cell">
-            <div class="v">12 <span class="delta" style="color:#D64545;">⚠</span></div>
-            <div class="k">Denials flagged for appeal</div>
-          </div>
-          <div class="stat-cell">
-            <div class="v">98.2%</div>
-            <div class="k">First-pass clean rate</div>
-          </div>
-        </div>
-        <div class="activity-feed">
-          <div class="activity-feed-title">— Team activity</div>
-          <div class="feed-row"><span>Maya · Posted 34 payments (Aetna ERA)</span><span class="feed-tag">+ $8,420</span></div>
-          <div class="feed-row"><span>Jordan · Resolved 6 denied claims</span><span class="feed-tag">+ $2,180</span></div>
-          <div class="feed-row"><span>Sara · Verified eligibility for tomorrow's schedule</span><span class="feed-tag">28 patients</span></div>
-          <div class="feed-row"><span>Ali · Obtained 4 prior auths (orthopedic)</span><span class="feed-tag">approved</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ticker-line bot">
-    <span class="ticker-track">
-      HIPAA COMPLIANT · SOC 2 ALIGNED · US TIME-ZONE COVERAGE · EHR-AGNOSTIC · ATHENA · ECW · KAREO · DRCHRONO · ADVANCEDMD · NEXTGEN · EPIC · CERNER · HIPAA COMPLIANT · SOC 2 ALIGNED · US TIME-ZONE COVERAGE · EHR-AGNOSTIC · ATHENA · ECW · KAREO · DRCHRONO · ADVANCEDMD · NEXTGEN · EPIC · CERNER ·
-    </span>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- TRUST STRIP                                                  -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="trust-strip">
-  <div class="container trust-inner">
-    <div class="trust-label">Trusted by physicians, clinic owners, and practice managers across</div>
-    <div class="trust-logos">
-      <span>Primary Care</span>
-      <span>Behavioral Health</span>
-      <span>Urgent Care</span>
-      <span>Dental</span>
-      <span>Orthopedics</span>
-      <span>Cardiology</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- PROBLEM — burnout ledger                                     -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">The state of practice operations</div>
-      <h2 class="display">Your doctors are charting after hours. <em>Again.</em></h2>
-      <p style="font-size:18px; line-height:1.6; color:var(--ink-mute); margin-top:24px; max-width:640px;">
-        Even in the age of AI, providers are drowning. The cost of running a practice has never been higher — and the people you've hired to fix it are burning out too.
-      </p>
-    </div>
-
-    <div class="pain-ledger fade-in">
-      <div class="pain-row">
-        <div class="pn">01</div>
-        <div class="ptitle">Front desk is overwhelmed</div>
-        <div class="pdesc">Phones don't stop. Verifications pile up. No-shows go uncalled. Schedules leak revenue.</div>
-        <div class="pstat">+34% call volume</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">02</div>
-        <div class="ptitle">Claims are aging</div>
-        <div class="pdesc">Claims sit in 60+ buckets. AR keeps growing. Cash flow is unpredictable.</div>
-        <div class="pstat">$1 in $4 lost</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">03</div>
-        <div class="ptitle">Denials are increasing</div>
-        <div class="pdesc">Payer rules shift weekly. Coding errors slip through. Appeals never get filed.</div>
-        <div class="pstat">~18% denial rate</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">04</div>
-        <div class="ptitle">Staff costs are rising</div>
-        <div class="pdesc">W-2s, benefits, turnover, training, PTO. Salaries outpacing reimbursement, every year.</div>
-        <div class="pstat">+11% YoY overhead</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">05</div>
-        <div class="ptitle">Doctors are doing admin</div>
-        <div class="pdesc">Charting after hours. Chasing prior auths. Doing the work two people should be doing.</div>
-        <div class="pstat">2 hrs / day lost</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">06</div>
-        <div class="ptitle">Hiring is broken</div>
-        <div class="pdesc">90 days to fill a billing seat. 6 months to train. 14 months to lose them.</div>
-        <div class="pstat">$22k cost / hire</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- APPROACH                                                     -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block warm" id="approach">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">A different model</div>
-      <h2 class="display">Not outsourcing. <em>Operational infrastructure.</em></h2>
-      <p style="font-size:18px; line-height:1.6; color:var(--ink-mute); margin-top:24px; max-width:640px;">
-        We don't sell hours. We embed trained healthcare specialists directly into your workflow — operating inside your EHR, your communication tools, and your standards. You get the throughput of a 12-person back office without hiring one.
-      </p>
-    </div>
-
-    <div class="approach-grid fade-in">
-      <div class="approach-card feature">
-        <span class="approach-num">— 01 / EMBEDDED TEAMS</span>
-        <h3 class="display">A back office that <em>shows up</em> on Monday morning.</h3>
-        <p>Pre-vetted billers, AR specialists, virtual assistants, and front desk talent — onboarded into your EHR, your SOPs, and your standards. They report to you. They feel like yours. Because operationally, they are.</p>
-        <div class="approach-illust">
-          <svg width="100%" height="100%" viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg" style="opacity:0.9;">
-            <g fill="none" stroke="#00C896" stroke-width="1">
-              <circle cx="80" cy="70" r="22"/>
-              <circle cx="160" cy="70" r="22"/>
-              <circle cx="240" cy="70" r="22"/>
-              <circle cx="320" cy="70" r="22"/>
-              <line x1="102" y1="70" x2="138" y2="70" stroke-dasharray="3 3"/>
-              <line x1="182" y1="70" x2="218" y2="70" stroke-dasharray="3 3"/>
-              <line x1="262" y1="70" x2="298" y2="70" stroke-dasharray="3 3"/>
-            </g>
-            <g font-family="JetBrains Mono" font-size="9" fill="#FAF7F2" opacity="0.7" text-anchor="middle">
-              <text x="80" y="108">RCM</text>
-              <text x="160" y="108">AR</text>
-              <text x="240" y="108">VA</text>
-              <text x="320" y="108">FRONT</text>
-            </g>
-            <g font-family="Fraunces" font-size="12" fill="#FAF7F2" text-anchor="middle">
-              <text x="80" y="74">M</text>
-              <text x="160" y="74">J</text>
-              <text x="240" y="74">S</text>
-              <text x="320" y="74">A</text>
-            </g>
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>
-        </div>
-      </div>
-
-      <div class="approach-card">
-        <span class="approach-num">— 02 / AI + HUMAN</span>
-        <h3 class="display">AI does the lifting. <em>Humans do the judgment.</em></h3>
-        <p>Eligibility checks, claim scrubbing, denial categorization — automated. The complex appeals, payer calls, and patient conversations — handled by trained specialists.</p>
-      </div>
-
-      <div class="approach-card">
-        <span class="approach-num">— 03 / RCM, NOT HOURS</span>
-        <h3 class="display">A percentage model. <em>Aligned incentives.</em></h3>
-        <p>For full RCM engagements, we charge a percentage of collections. We only win when you do — and we don't get paid for claims that don't.</p>
-      </div>
-
-      <div class="approach-card">
-        <span class="approach-num">— 04 / SCALES WITH YOU</span>
-        <h3 class="display">Add capacity in <em>days</em>, not quarters.</h3>
-        <p>Open a new location? Doubled patient volume? We scale your team within a week — without W-2s, benefits, recruiting cycles, or hiring risk.</p>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- SERVICES                                                     -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block" id="services">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">What we operate</div>
-      <h2 class="display">The full operational <em>stack</em>.</h2>
-      <p style="font-size:18px; line-height:1.6; color:var(--ink-mute); margin-top:24px; max-width:640px;">
-        Pick the layers you need. Run one service, or hand us the entire back office. Every engagement is shaped around your specialty, EHR, and growth stage.
-      </p>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- HERO                                                         -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+      <div class="hero-grain"></div>
     </div>
 
-    <div class="services-grid fade-in">
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
-        <h4>Revenue Cycle Management</h4>
-        <p>End-to-end ownership of your collections — coding, claim submission, AR follow-up, denials, payment posting, patient billing. One team, one accountable scorecard.</p>
-        <a href="#" class="arrow-link">Explore RCM <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        <h4>AR Recovery & Follow-Up</h4>
-        <p>We hunt aging claims — 30, 60, 90, 120+ days. Payer calls, status checks, resubmissions, appeals. Most clients see AR days drop below 30 within 90 days.</p>
-        <a href="#" class="arrow-link">AR services <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 7-7"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg>
-        <h4>Medical Billing</h4>
-        <p>Specialty-trained coders and billers. CPT, ICD-10, HCPCS, modifier accuracy. Clean-claim submission as a discipline, not an afterthought.</p>
-        <a href="#" class="arrow-link">Billing services <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-        <h4>Prior Authorization</h4>
-        <p>Pre-cert submission, payer follow-up, peer-to-peer prep. We shorten time-to-approval and stop the auth bottleneck from holding up patient care.</p>
-        <a href="#" class="arrow-link">Prior auth <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <h4>Insurance Verification</h4>
-        <p>Real-time eligibility and benefits checks before the patient walks in. Co-pays, deductibles, coverage limits — clarified, documented, in the chart.</p>
-        <a href="#" class="arrow-link">Verification <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8 8-4-4"/><path d="M14 3h7v7"/><path d="M21 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5"/></svg>
-        <h4>Virtual Medical Assistants</h4>
-        <p>Charting support, message triage, refill management, referrals, lab follow-up. A clinical extension of the provider — quiet, accurate, always there.</p>
-        <a href="#" class="arrow-link">Virtual MAs <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
-        <h4>Front Desk Support</h4>
-        <p>Phones answered. Patients greeted (virtually). Schedules managed. We absorb the noise so your in-clinic team can focus on the patient in front of them.</p>
-        <a href="#" class="arrow-link">Front desk <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4M8 14h2M14 14h2M8 18h2M14 18h2"/></svg>
-        <h4>Scheduling & Coordination</h4>
-        <p>Appointment scheduling, reminders, recall, no-show recovery. We protect the calendar — the single most expensive asset in your practice.</p>
-        <a href="#" class="arrow-link">Scheduling <span class="arrow">→</span></a>
-      </div>
-      <div class="service-cell">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        <h4>Healthcare Operations Mgmt</h4>
-        <p>For larger practices: an operations lead embedded in your team. Workflows, dashboards, KPIs, vendor management. The COO-layer you don't have yet.</p>
-        <a href="#" class="arrow-link">Operations <span class="arrow">→</span></a>
-      </div>
+    <div class="ticker-line top">
+      <span class="ticker-track">
+        RCM · AR RECOVERY · CREDENTIALING · PRIOR AUTHORIZATION · ELIGIBILITY · DENIAL MANAGEMENT · VIRTUAL ASSISTANTS ·
+        FRONT DESK · SCHEDULING · CHARGE ENTRY · PAYMENT POSTING · PATIENT COORDINATION · RCM · AR RECOVERY ·
+        CREDENTIALING · PRIOR AUTHORIZATION · ELIGIBILITY · DENIAL MANAGEMENT · VIRTUAL ASSISTANTS · FRONT DESK ·
+        SCHEDULING · CHARGE ENTRY · PAYMENT POSTING · PATIENT COORDINATION ·
+      </span>
     </div>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- AI + HUMAN WORKFLOW                                          -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block dark" id="workflow">
-  <div class="container">
-    <div class="workflow fade-in">
+    <div class="hero-inner">
       <div>
-        <div class="eyebrow">The AI + human advantage</div>
-        <h2 class="display" style="margin-top:20px;">AI does the lifting. <em>People do the thinking.</em></h2>
-        <p class="lede">
-          We pair trained healthcare specialists with AI-assisted workflows. Eligibility checks, claim scrubs, and denial categorization happen in seconds. Specialists focus on the work that actually requires a human — payer escalations, complex appeals, and patient relationships.
+        <div class="eyebrow reveal reveal-1">Operational infrastructure for healthcare</div>
+        <h1 class="display reveal reveal-2">
+          Your practice should grow <em>without</em> the <span class="underline-word">operational chaos</span>.
+        </h1>
+        <p class="lede reveal reveal-3">
+          Hired Billing Support is the remote team behind growing practices — RCM specialists, billers, AR experts, and
+          virtual medical assistants embedded into your workflow. So you can stop firefighting and start practicing.
         </p>
-        <ul class="workflow-points">
-          <li><span class="num">01</span><div class="txt"><strong>Automated eligibility & scrubbing</strong><span>Every claim is validated against payer rules before submission. First-pass rate above 98%.</span></div></li>
-          <li><span class="num">02</span><div class="txt"><strong>AI-triaged denials</strong><span>Denials are categorized, prioritized, and routed to the right specialist queue within minutes — not weeks.</span></div></li>
-          <li><span class="num">03</span><div class="txt"><strong>Human-led appeals</strong><span>Trained appeals specialists write payer-specific responses. Higher overturn rates, less staff time.</span></div></li>
-          <li><span class="num">04</span><div class="txt"><strong>Real-time visibility</strong><span>You see everything we see — KPIs, queues, payments, denials — in a shared dashboard.</span></div></li>
-        </ul>
-      </div>
-      <div class="workflow-diagram">
-        <div class="wd-layer l1"><div class="wl-tag">— LAYER 01 / INTAKE</div><div class="wl-name">Eligibility · Auth · Demographics</div></div>
-        <div class="wd-connector c1"></div>
-        <div class="wd-layer l2"><div class="wl-tag">— LAYER 02 / AI SCRUB</div><div class="wl-name">Claim validation · Payer rules</div></div>
-        <div class="wd-connector c2"></div>
-        <div class="wd-layer l3"><div class="wl-tag">— LAYER 03 / SPECIALIST QUEUE</div><div class="wl-name">Triaged · Routed · Tracked</div></div>
-        <div class="wd-connector c3"></div>
-        <div class="wd-layer l4"><div class="wl-tag">— LAYER 04 / HUMAN JUDGMENT</div><div class="wl-name">Appeals · Calls · Resolution</div></div>
-        <div class="wd-output">
-          <div class="ot">— OUTCOME</div>
-          <div class="on">Faster reimbursement. Cleaner books.</div>
+        <div class="hero-actions reveal reveal-4">
+          <a href="#cta" class="btn btn-primary">Book a discovery call
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#services" class="btn btn-text">See what we do →</a>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- STATS                                                        -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">By the numbers</div>
-      <h2 class="display">What it looks like <em>after 90 days.</em></h2>
-    </div>
-    <div class="stats-row fade-in">
-      <div class="stat-block">
-        <div class="figure">+27<span class="unit">%</span></div>
-        <div class="desc">Average collections lift within the first quarter of full RCM engagement.</div>
-      </div>
-      <div class="stat-block">
-        <div class="figure">22<span class="unit">d</span></div>
-        <div class="desc">Average days in AR for active clients — down from a 47-day baseline.</div>
-      </div>
-      <div class="stat-block">
-        <div class="figure">98<span class="unit">%</span></div>
-        <div class="desc">First-pass clean-claim rate across all submitted claims, all specialties.</div>
-      </div>
-      <div class="stat-block">
-        <div class="figure">60<span class="unit">%</span></div>
-        <div class="desc">Lower operating cost versus building the equivalent in-house team.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- CASE STUDY                                                   -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block warm" id="cases">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">Case study</div>
-      <h2 class="display">A 4-physician primary care group, <em>after 6 months.</em></h2>
-    </div>
-    <div class="case-card fade-in">
-      <div class="case-body">
-        <div class="eyebrow">Primary care · 4 providers · Texas</div>
-        <h3>From 47 days in AR and burnout, to a calmer practice and 31% more revenue.</h3>
-        <p>
-          The practice was running on two in-house billers, a stretched-thin front desk, and a $180k AR backlog. We embedded a 3-person remote team: one biller, one AR specialist, one verification VA. We took over the AR aging report on day one.
-        </p>
-        <p>By month six: AR days under 25, denials cut in half, the in-house team redeployed to patient experience, and the lead physician home for dinner.</p>
-        <a href="#" class="btn btn-light">Read the full case →</a>
-      </div>
-      <div class="case-metrics">
-        <div class="case-metric">
-          <div class="v">+31<span class="unit">%</span></div>
-          <div class="k">Monthly collections lift</div>
-        </div>
-        <div class="case-metric">
-          <div class="v">-47<span class="unit">%</span></div>
-          <div class="k">Denial rate reduction</div>
-        </div>
-        <div class="case-metric">
-          <div class="v">22<span class="unit">d</span></div>
-          <div class="k">Days in AR (from 47)</div>
-        </div>
-        <div class="case-metric">
-          <div class="v">$112<span class="unit">k</span></div>
-          <div class="k">AR recovered in 90 days</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- TESTIMONIALS                                                 -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">In their own words</div>
-      <h2 class="display">From physicians who got their <em>evenings back.</em></h2>
-    </div>
-    <div class="testi-wrap fade-in">
-      <div class="testi">
-        <div class="testi-quote">
-          The first month, our AR dropped 30%. The second month, I stopped charting at home. I didn't realize how much operational noise was bleeding into my clinical day until it was gone.
-        </div>
-        <div class="testi-attr">
-          <div class="testi-avatar">RP</div>
-          <div>
-            <div class="testi-name">Dr. Ravi Patel</div>
-            <div class="testi-role">Internal Medicine · Houston, TX</div>
+        <div class="hero-meta reveal reveal-5">
+          <div class="hero-meta-item">
+            <span class="num">98<span style="color:var(--signal);">%</span></span>
+            <span class="lbl">Clean-claim rate</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="num">22<span style="color:var(--signal);">d</span></span>
+            <span class="lbl">Avg. days in AR</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="num">$1.2<span style="color:var(--signal);">M+</span></span>
+            <span class="lbl">Recovered for clients in '25</span>
           </div>
         </div>
       </div>
-      <div class="testi">
-        <div class="testi-quote">
-          We hired and lost three billers in two years. HBS gave us a team in eleven days. They know our payers better than our last in-house person did — and they're never out sick.
-        </div>
-        <div class="testi-attr">
-          <div class="testi-avatar">SM</div>
-          <div>
-            <div class="testi-name">Sandra Mireles</div>
-            <div class="testi-role">Practice Manager · Behavioral Health Group</div>
+
+      <!-- Operational dashboard card -->
+      <div class="reveal reveal-4" style="animation-delay:0.5s;">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="label"><span class="live-dot"></span>LIVE · CLIENT WORKSPACE</span>
+            <span class="label" style="font-variant-numeric: tabular-nums;">14 MAY · 09:42</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-cell">
+              <div class="v">$47,820 <span class="delta">▲</span></div>
+              <div class="k">Collections this week</div>
+            </div>
+            <div class="stat-cell">
+              <div class="v">186</div>
+              <div class="k">Claims submitted</div>
+            </div>
+            <div class="stat-cell">
+              <div class="v">12 <span class="delta" style="color:#D64545;">⚠</span></div>
+              <div class="k">Denials flagged for appeal</div>
+            </div>
+            <div class="stat-cell">
+              <div class="v">98.2%</div>
+              <div class="k">First-pass clean rate</div>
+            </div>
+          </div>
+          <div class="activity-feed">
+            <div class="activity-feed-title">— Team activity</div>
+            <div class="feed-row"><span>Maya · Posted 34 payments (Aetna ERA)</span><span class="feed-tag">+
+                $8,420</span></div>
+            <div class="feed-row"><span>Jordan · Resolved 6 denied claims</span><span class="feed-tag">+ $2,180</span>
+            </div>
+            <div class="feed-row"><span>Sara · Verified eligibility for tomorrow's schedule</span><span
+                class="feed-tag">28 patients</span></div>
+            <div class="feed-row"><span>Ali · Obtained 4 prior auths (orthopedic)</span><span
+                class="feed-tag">approved</span></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- COMPLIANCE                                                   -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block warm">
-  <div class="container">
-    <div class="compliance fade-in">
-      <div>
-        <div class="eyebrow">Security & compliance</div>
-        <h2 class="display" style="margin-top:20px;">Built for healthcare. <em>Auditable by design.</em></h2>
-        <p style="font-size:17px; line-height:1.65; color:var(--ink-mute); margin-top:24px; max-width:560px;">
-          We operate to HIPAA standards across our entire stack — workstations, networks, communications, and access controls. Every team member is BAA-bound, background-checked, and trained on PHI handling before they touch your data.
+    <div class="ticker-line bot">
+      <span class="ticker-track">
+        HIPAA COMPLIANT · SOC 2 ALIGNED · US TIME-ZONE COVERAGE · EHR-AGNOSTIC · ATHENA · ECW · KAREO · DRCHRONO ·
+        ADVANCEDMD · NEXTGEN · EPIC · CERNER · HIPAA COMPLIANT · SOC 2 ALIGNED · US TIME-ZONE COVERAGE · EHR-AGNOSTIC ·
+        ATHENA · ECW · KAREO · DRCHRONO · ADVANCEDMD · NEXTGEN · EPIC · CERNER ·
+      </span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- TRUST STRIP                                                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="trust-strip">
+    <div class="container trust-inner">
+      <div class="trust-label">Trusted by physicians, clinic owners, and practice managers across</div>
+      <div class="trust-logos">
+        <span>Primary Care</span>
+        <span>Behavioral Health</span>
+        <span>Urgent Care</span>
+        <span>Dental</span>
+        <span>Orthopedics</span>
+        <span>Cardiology</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PROBLEM — burnout ledger                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">The state of practice operations</div>
+        <h2 class="display">Your doctors are charting after hours. <em>Again.</em></h2>
+        <p style="font-size:18px; line-height:1.6; color:var(--ink-mute); margin-top:24px; max-width:640px;">
+          Even in the age of AI, providers are drowning. The cost of running a practice has never been higher — and the
+          people you've hired to fix it are burning out too.
         </p>
-        <a href="#" class="btn btn-ghost" style="margin-top:32px;">Read the security overview →</a>
       </div>
-      <div class="compliance-badges">
-        <div class="badge">
-          <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><h5>HIPAA Compliant</h5><p>Full administrative, physical, technical safeguards.</p></div>
-        </div>
-        <div class="badge">
-          <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <div><h5>SOC 2 Aligned</h5><p>Trust service criteria mapped across operations.</p></div>
-        </div>
-        <div class="badge">
-          <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-          <div><h5>Encrypted End-to-End</h5><p>At rest, in transit, in storage. AES-256.</p></div>
-        </div>
-        <div class="badge">
-          <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg></div>
-          <div><h5>Vetted Personnel</h5><p>Background-checked. BAA-bound. Continuously audited.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- FAQ                                                          -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="block" id="faq">
-  <div class="container">
-    <div class="block-head fade-in" style="text-align:center; margin-left:auto; margin-right:auto;">
-      <div class="eyebrow" style="justify-content:center;">Frequently asked</div>
-      <h2 class="display">Questions <em>we hear often.</em></h2>
-    </div>
-    <div class="faq-list fade-in">
-      <details class="faq" open>
-        <summary>How is this different from a typical VA or outsourcing company?<span class="toggle">+</span></summary>
-        <div class="faq-body">VAs sell hours. We deliver outcomes. Our team is healthcare-trained — not generalist — and embedded directly into your EHR and SOPs. For RCM, we work on a percentage-of-collections model, meaning we only get paid when you do. You're hiring an operational system, not a contractor.</div>
-      </details>
-      <details class="faq">
-        <summary>Which EHRs and PM systems do you work in?<span class="toggle">+</span></summary>
-        <div class="faq-body">We're EHR-agnostic. Active client work spans Athenahealth, eClinicalWorks, Kareo, AdvancedMD, DrChrono, NextGen, Practice Fusion, Epic, and Cerner. If you're on something newer or niche, we'll learn it during onboarding.</div>
-      </details>
-      <details class="faq">
-        <summary>How fast can a team be live?<span class="toggle">+</span></summary>
-        <div class="faq-body">Most engagements go live within 10–14 business days. That includes vetting, EHR access provisioning, SOP intake, BAA execution, and a phased takeover so nothing falls through the cracks during transition.</div>
-      </details>
-      <details class="faq">
-        <summary>How are you HIPAA compliant?<span class="toggle">+</span></summary>
-        <div class="faq-body">Every team member operates from a controlled workstation with enforced access policies, end-to-end encryption, no local storage of PHI, and continuous monitoring. We sign a BAA, complete role-based training quarterly, and align our administrative, physical, and technical safeguards to HIPAA and SOC 2 trust criteria.</div>
-      </details>
-      <details class="faq">
-        <summary>What does pricing look like?<span class="toggle">+</span></summary>
-        <div class="faq-body">For full Revenue Cycle Management: percentage of net collections (typically 3–7% depending on specialty and volume). For dedicated remote staff (VA, front desk, AR-only): flat monthly per seat. No long-term contracts — we earn renewals month over month.</div>
-      </details>
-      <details class="faq">
-        <summary>Can we start with just one service?<span class="toggle">+</span></summary>
-        <div class="faq-body">Yes. Most clients start with one bottleneck — usually AR recovery or insurance verification — and expand once they see the throughput. You're never locked into the full stack.</div>
-      </details>
-      <details class="faq">
-        <summary>Will the team really feel like ours?<span class="toggle">+</span></summary>
-        <div class="faq-body">Yes. Your team uses your email domain, joins your standups, follows your SOPs, and reports to your practice manager. To your patients, they're staff. To us, they're accountable to outcomes you define.</div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- FINAL CTA                                                    -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<section class="final-cta" id="cta">
-  <div class="final-cta-glow"></div>
-  <div class="cta-inner">
-    <div class="eyebrow" style="justify-content:center; color:rgba(250,247,242,0.55);">Let's talk</div>
-    <h2 class="display">More patient care. <em>Less administrative burden.</em></h2>
-    <p>Book a 30-minute discovery call. We'll audit your current operations and show you exactly where time and revenue are leaking — no pitch, no obligation.</p>
-    <div class="actions">
-      <a href="#" class="btn btn-light">Book a discovery call
-        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#" class="btn btn-ghost" style="color:var(--paper); border-color:rgba(250,247,242,0.3);">Request an RCM audit</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- FOOTER                                                       -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo" style="color: var(--paper);">
-          <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      <div class="pain-ledger fade-in">
+        <div class="pain-row">
+          <div class="pn">01</div>
+          <div class="ptitle">Front desk is overwhelmed</div>
+          <div class="pdesc">Phones don't stop. Verifications pile up. No-shows go uncalled. Schedules leak revenue.
+          </div>
+          <div class="pstat">+34% call volume</div>
         </div>
-        <p>Operational infrastructure for modern healthcare. Remote teams, RCM, AR recovery, and AI-assisted workflows — built for providers who want to grow without the overhead.</p>
-      </div>
-      <div class="footer-col">
-        <h6>Services</h6>
-        <ul>
-          <li><a href="#">Revenue Cycle Mgmt</a></li>
-          <li><a href="#">AR Recovery</a></li>
-          <li><a href="#">Medical Billing</a></li>
-          <li><a href="#">Prior Authorization</a></li>
-          <li><a href="#">Insurance Verification</a></li>
-          <li><a href="#">Virtual Medical Assistants</a></li>
-          <li><a href="#">Front Desk Support</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h6>Solutions</h6>
-        <ul>
-          <li><a href="#">For Private Practices</a></li>
-          <li><a href="#">For Medical Groups</a></li>
-          <li><a href="#">For Behavioral Health</a></li>
-          <li><a href="#">For Dental</a></li>
-          <li><a href="#">For Urgent Care</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h6>Company</h6>
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Case Studies</a></li>
-          <li><a href="#">Insights / Blog</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h6>Trust</h6>
-        <ul>
-          <li><a href="#">Security</a></li>
-          <li><a href="#">HIPAA</a></li>
-          <li><a href="#">BAA</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms</a></li>
-        </ul>
+        <div class="pain-row">
+          <div class="pn">02</div>
+          <div class="ptitle">Claims are aging</div>
+          <div class="pdesc">Claims sit in 60+ buckets. AR keeps growing. Cash flow is unpredictable.</div>
+          <div class="pstat">$1 in $4 lost</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">03</div>
+          <div class="ptitle">Denials are increasing</div>
+          <div class="pdesc">Payer rules shift weekly. Coding errors slip through. Appeals never get filed.</div>
+          <div class="pstat">~18% denial rate</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">04</div>
+          <div class="ptitle">Staff costs are rising</div>
+          <div class="pdesc">W-2s, benefits, turnover, training, PTO. Salaries outpacing reimbursement, every year.
+          </div>
+          <div class="pstat">+11% YoY overhead</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">05</div>
+          <div class="ptitle">Doctors are doing admin</div>
+          <div class="pdesc">Charting after hours. Chasing prior auths. Doing the work two people should be doing.</div>
+          <div class="pstat">2 hrs / day lost</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">06</div>
+          <div class="ptitle">Hiring is broken</div>
+          <div class="pdesc">90 days to fill a billing seat. 6 months to train. 14 months to lose them.</div>
+          <div class="pstat">$22k cost / hire</div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div>© 2026 Hired Billing Support. All rights reserved.</div>
-      <div class="legal">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Cookies</a>
-        <a href="#">hiredbillingsupport.com</a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- APPROACH                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block warm" id="approach">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">A different model</div>
+        <h2 class="display">Not outsourcing. <em>Operational infrastructure.</em></h2>
+        <p style="font-size:18px; line-height:1.6; color:var(--ink-mute); margin-top:24px; max-width:640px;">
+          We don't sell hours. We embed trained healthcare specialists directly into your workflow — operating inside
+          your EHR, your communication tools, and your standards. You get the throughput of a 12-person back office
+          without hiring one.
+        </p>
+      </div>
+
+      <div class="approach-grid fade-in">
+        <div class="approach-card feature">
+          <span class="approach-num">— 01 / EMBEDDED TEAMS</span>
+          <h3 class="display">A back office that <em>shows up</em> on Monday morning.</h3>
+          <p>Pre-vetted billers, AR specialists, virtual assistants, and front desk talent — onboarded into your EHR,
+            your SOPs, and your standards. They report to you. They feel like yours. Because operationally, they are.
+          </p>
+          <div class="approach-illust">
+            <svg width="100%" height="100%" viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg"
+              style="opacity:0.9;">
+              <g fill="none" stroke="#00C896" stroke-width="1">
+                <circle cx="80" cy="70" r="22" />
+                <circle cx="160" cy="70" r="22" />
+                <circle cx="240" cy="70" r="22" />
+                <circle cx="320" cy="70" r="22" />
+                <line x1="102" y1="70" x2="138" y2="70" stroke-dasharray="3 3" />
+                <line x1="182" y1="70" x2="218" y2="70" stroke-dasharray="3 3" />
+                <line x1="262" y1="70" x2="298" y2="70" stroke-dasharray="3 3" />
+              </g>
+              <g font-family="JetBrains Mono" font-size="9" fill="#FAF7F2" opacity="0.7" text-anchor="middle">
+                <text x="80" y="108">RCM</text>
+                <text x="160" y="108">AR</text>
+                <text x="240" y="108">VA</text>
+                <text x="320" y="108">FRONT</text>
+              </g>
+              <g font-family="Fraunces" font-size="12" fill="#FAF7F2" text-anchor="middle">
+                <text x="80" y="74">M</text>
+                <text x="160" y="74">J</text>
+                <text x="240" y="74">S</text>
+                <text x="320" y="74">A</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="approach-card">
+          <span class="approach-num">— 02 / AI + HUMAN</span>
+          <h3 class="display">AI does the lifting. <em>Humans do the judgment.</em></h3>
+          <p>Eligibility checks, claim scrubbing, denial categorization — automated. The complex appeals, payer calls,
+            and patient conversations — handled by trained specialists.</p>
+        </div>
+
+        <div class="approach-card">
+          <span class="approach-num">— 03 / RCM, NOT HOURS</span>
+          <h3 class="display">A percentage model. <em>Aligned incentives.</em></h3>
+          <p>For full RCM engagements, we charge a percentage of collections. We only win when you do — and we don't get
+            paid for claims that don't.</p>
+        </div>
+
+        <div class="approach-card">
+          <span class="approach-num">— 04 / SCALES WITH YOU</span>
+          <h3 class="display">Add capacity in <em>days</em>, not quarters.</h3>
+          <p>Open a new location? Doubled patient volume? We scale your team within a week — without W-2s, benefits,
+            recruiting cycles, or hiring risk.</p>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script>
-  // Sticky nav border on scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 8) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SERVICES                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block" id="services">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">What we operate</div>
+        <h2 class="display">The full operational <em>stack</em>.</h2>
+        <p style="font-size:18px; line-height:1.6; color:var(--ink-mute); margin-top:24px; max-width:640px;">
+          Pick the layers you need. Run one service, or hand us the entire back office. Every engagement is shaped
+          around your specialty, EHR, and growth stage.
+        </p>
+      </div>
 
-  // Fade-in observer
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
+      <div class="services-grid fade-in">
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 3v18h18" />
+            <path d="M7 14l4-4 4 4 5-5" />
+          </svg>
+          <h4>Revenue Cycle Management</h4>
+          <p>End-to-end ownership of your collections — coding, claim submission, AR follow-up, denials, payment
+            posting, patient billing. One team, one accountable scorecard.</p>
+          <a href="#" class="arrow-link">Explore RCM <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 3" />
+          </svg>
+          <h4>AR Recovery & Follow-Up</h4>
+          <p>We hunt aging claims — 30, 60, 90, 120+ days. Payer calls, status checks, resubmissions, appeals. Most
+            clients see AR days drop below 30 within 90 days.</p>
+          <a href="#" class="arrow-link">AR services <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 11l3 3 7-7" />
+            <path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9" />
+          </svg>
+          <h4>Medical Billing</h4>
+          <p>Specialty-trained coders and billers. CPT, ICD-10, HCPCS, modifier accuracy. Clean-claim submission as a
+            discipline, not an afterthought.</p>
+          <a href="#" class="arrow-link">Billing services <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+              d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+          </svg>
+          <h4>Prior Authorization</h4>
+          <p>Pre-cert submission, payer follow-up, peer-to-peer prep. We shorten time-to-approval and stop the auth
+            bottleneck from holding up patient care.</p>
+          <a href="#" class="arrow-link">Prior auth <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
+          <h4>Insurance Verification</h4>
+          <p>Real-time eligibility and benefits checks before the patient walks in. Co-pays, deductibles, coverage
+            limits — clarified, documented, in the chart.</p>
+          <a href="#" class="arrow-link">Verification <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 7l-8 8-4-4" />
+            <path d="M14 3h7v7" />
+            <path d="M21 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5" />
+          </svg>
+          <h4>Virtual Medical Assistants</h4>
+          <p>Charting support, message triage, refill management, referrals, lab follow-up. A clinical extension of the
+            provider — quiet, accurate, always there.</p>
+          <a href="#" class="arrow-link">Virtual MAs <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z" />
+          </svg>
+          <h4>Front Desk Support</h4>
+          <p>Phones answered. Patients greeted (virtually). Schedules managed. We absorb the noise so your in-clinic
+            team can focus on the patient in front of them.</p>
+          <a href="#" class="arrow-link">Front desk <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M3 10h18M8 2v4M16 2v4M8 14h2M14 14h2M8 18h2M14 18h2" />
+          </svg>
+          <h4>Scheduling & Coordination</h4>
+          <p>Appointment scheduling, reminders, recall, no-show recovery. We protect the calendar — the single most
+            expensive asset in your practice.</p>
+          <a href="#" class="arrow-link">Scheduling <span class="arrow">→</span></a>
+        </div>
+        <div class="service-cell">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+          </svg>
+          <h4>Healthcare Operations Mgmt</h4>
+          <p>For larger practices: an operations lead embedded in your team. Workflows, dashboards, KPIs, vendor
+            management. The COO-layer you don't have yet.</p>
+          <a href="#" class="arrow-link">Operations <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- AI + HUMAN WORKFLOW                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block dark" id="workflow">
+    <div class="container">
+      <div class="workflow fade-in">
+        <div>
+          <div class="eyebrow">The AI + human advantage</div>
+          <h2 class="display" style="margin-top:20px;">AI does the lifting. <em>People do the thinking.</em></h2>
+          <p class="lede">
+            We pair trained healthcare specialists with AI-assisted workflows. Eligibility checks, claim scrubs, and
+            denial categorization happen in seconds. Specialists focus on the work that actually requires a human —
+            payer escalations, complex appeals, and patient relationships.
+          </p>
+          <ul class="workflow-points">
+            <li><span class="num">01</span>
+              <div class="txt"><strong>Automated eligibility & scrubbing</strong><span>Every claim is validated against
+                  payer rules before submission. First-pass rate above 98%.</span></div>
+            </li>
+            <li><span class="num">02</span>
+              <div class="txt"><strong>AI-triaged denials</strong><span>Denials are categorized, prioritized, and routed
+                  to the right specialist queue within minutes — not weeks.</span></div>
+            </li>
+            <li><span class="num">03</span>
+              <div class="txt"><strong>Human-led appeals</strong><span>Trained appeals specialists write payer-specific
+                  responses. Higher overturn rates, less staff time.</span></div>
+            </li>
+            <li><span class="num">04</span>
+              <div class="txt"><strong>Real-time visibility</strong><span>You see everything we see — KPIs, queues,
+                  payments, denials — in a shared dashboard.</span></div>
+            </li>
+          </ul>
+        </div>
+        <div class="workflow-diagram">
+          <div class="wd-layer l1">
+            <div class="wl-tag">— LAYER 01 / INTAKE</div>
+            <div class="wl-name">Eligibility · Auth · Demographics</div>
+          </div>
+          <div class="wd-connector c1"></div>
+          <div class="wd-layer l2">
+            <div class="wl-tag">— LAYER 02 / AI SCRUB</div>
+            <div class="wl-name">Claim validation · Payer rules</div>
+          </div>
+          <div class="wd-connector c2"></div>
+          <div class="wd-layer l3">
+            <div class="wl-tag">— LAYER 03 / SPECIALIST QUEUE</div>
+            <div class="wl-name">Triaged · Routed · Tracked</div>
+          </div>
+          <div class="wd-connector c3"></div>
+          <div class="wd-layer l4">
+            <div class="wl-tag">— LAYER 04 / HUMAN JUDGMENT</div>
+            <div class="wl-name">Appeals · Calls · Resolution</div>
+          </div>
+          <div class="wd-output">
+            <div class="ot">— OUTCOME</div>
+            <div class="on">Faster reimbursement. Cleaner books.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- STATS                                                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">By the numbers</div>
+        <h2 class="display">What it looks like <em>after 90 days.</em></h2>
+      </div>
+      <div class="stats-row fade-in">
+        <div class="stat-block">
+          <div class="figure">+27<span class="unit">%</span></div>
+          <div class="desc">Average collections lift within the first quarter of full RCM engagement.</div>
+        </div>
+        <div class="stat-block">
+          <div class="figure">22<span class="unit">d</span></div>
+          <div class="desc">Average days in AR for active clients — down from a 47-day baseline.</div>
+        </div>
+        <div class="stat-block">
+          <div class="figure">98<span class="unit">%</span></div>
+          <div class="desc">First-pass clean-claim rate across all submitted claims, all specialties.</div>
+        </div>
+        <div class="stat-block">
+          <div class="figure">60<span class="unit">%</span></div>
+          <div class="desc">Lower operating cost versus building the equivalent in-house team.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CASE STUDY                                                   -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block warm" id="cases">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">Case study</div>
+        <h2 class="display">A 4-physician primary care group, <em>after 6 months.</em></h2>
+      </div>
+      <div class="case-card fade-in">
+        <div class="case-body">
+          <div class="eyebrow">Primary care · 4 providers · Texas</div>
+          <h3>From 47 days in AR and burnout, to a calmer practice and 31% more revenue.</h3>
+          <p>
+            The practice was running on two in-house billers, a stretched-thin front desk, and a $180k AR backlog. We
+            embedded a 3-person remote team: one biller, one AR specialist, one verification VA. We took over the AR
+            aging report on day one.
+          </p>
+          <p>By month six: AR days under 25, denials cut in half, the in-house team redeployed to patient experience,
+            and the lead physician home for dinner.</p>
+          <a href="#" class="btn btn-light">Read the full case →</a>
+        </div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="v">+31<span class="unit">%</span></div>
+            <div class="k">Monthly collections lift</div>
+          </div>
+          <div class="case-metric">
+            <div class="v">-47<span class="unit">%</span></div>
+            <div class="k">Denial rate reduction</div>
+          </div>
+          <div class="case-metric">
+            <div class="v">22<span class="unit">d</span></div>
+            <div class="k">Days in AR (from 47)</div>
+          </div>
+          <div class="case-metric">
+            <div class="v">$112<span class="unit">k</span></div>
+            <div class="k">AR recovered in 90 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- TESTIMONIALS                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">In their own words</div>
+        <h2 class="display">From physicians who got their <em>evenings back.</em></h2>
+      </div>
+      <div class="testi-wrap fade-in">
+        <div class="testi">
+          <div class="testi-quote">
+            The first month, our AR dropped 30%. The second month, I stopped charting at home. I didn't realize how much
+            operational noise was bleeding into my clinical day until it was gone.
+          </div>
+          <div class="testi-attr">
+            <div class="testi-avatar">RP</div>
+            <div>
+              <div class="testi-name">Dr. Ravi Patel</div>
+              <div class="testi-role">Internal Medicine · Houston, TX</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-quote">
+            We hired and lost three billers in two years. HBS gave us a team in eleven days. They know our payers better
+            than our last in-house person did — and they're never out sick.
+          </div>
+          <div class="testi-attr">
+            <div class="testi-avatar">SM</div>
+            <div>
+              <div class="testi-name">Sandra Mireles</div>
+              <div class="testi-role">Practice Manager · Behavioral Health Group</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- COMPLIANCE                                                   -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block warm">
+    <div class="container">
+      <div class="compliance fade-in">
+        <div>
+          <div class="eyebrow">Security & compliance</div>
+          <h2 class="display" style="margin-top:20px;">Built for healthcare. <em>Auditable by design.</em></h2>
+          <p style="font-size:17px; line-height:1.65; color:var(--ink-mute); margin-top:24px; max-width:560px;">
+            We operate to HIPAA standards across our entire stack — workstations, networks, communications, and access
+            controls. Every team member is BAA-bound, background-checked, and trained on PHI handling before they touch
+            your data.
+          </p>
+          <a href="#" class="btn btn-ghost" style="margin-top:32px;">Read the security overview →</a>
+        </div>
+        <div class="compliance-badges">
+          <div class="badge">
+            <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg></div>
+            <div>
+              <h5>HIPAA Compliant</h5>
+              <p>Full administrative, physical, technical safeguards.</p>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9 12l2 2 4-4" />
+              </svg></div>
+            <div>
+              <h5>SOC 2 Aligned</h5>
+              <p>Trust service criteria mapped across operations.</p>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg></div>
+            <div>
+              <h5>Encrypted End-to-End</h5>
+              <p>At rest, in transit, in storage. AES-256.</p>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="badge-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="8.5" cy="7" r="4" />
+                <path d="M20 8v6M23 11h-6" />
+              </svg></div>
+            <div>
+              <h5>Vetted Personnel</h5>
+              <p>Background-checked. BAA-bound. Continuously audited.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FAQ                                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="block" id="faq">
+    <div class="container">
+      <div class="block-head fade-in" style="text-align:center; margin-left:auto; margin-right:auto;">
+        <div class="eyebrow" style="justify-content:center;">Frequently asked</div>
+        <h2 class="display">Questions <em>we hear often.</em></h2>
+      </div>
+      <div class="faq-list fade-in">
+        <details class="faq" open>
+          <summary>How is this different from a typical VA or outsourcing company?<span class="toggle">+</span>
+          </summary>
+          <div class="faq-body">VAs sell hours. We deliver outcomes. Our team is healthcare-trained — not generalist —
+            and embedded directly into your EHR and SOPs. For RCM, we work on a percentage-of-collections model, meaning
+            we only get paid when you do. You're hiring an operational system, not a contractor.</div>
+        </details>
+        <details class="faq">
+          <summary>Which EHRs and PM systems do you work in?<span class="toggle">+</span></summary>
+          <div class="faq-body">We're EHR-agnostic. Active client work spans Athenahealth, eClinicalWorks, Kareo,
+            AdvancedMD, DrChrono, NextGen, Practice Fusion, Epic, and Cerner. If you're on something newer or niche,
+            we'll learn it during onboarding.</div>
+        </details>
+        <details class="faq">
+          <summary>How fast can a team be live?<span class="toggle">+</span></summary>
+          <div class="faq-body">Most engagements go live within 10–14 business days. That includes vetting, EHR access
+            provisioning, SOP intake, BAA execution, and a phased takeover so nothing falls through the cracks during
+            transition.</div>
+        </details>
+        <details class="faq">
+          <summary>How are you HIPAA compliant?<span class="toggle">+</span></summary>
+          <div class="faq-body">Every team member operates from a controlled workstation with enforced access policies,
+            end-to-end encryption, no local storage of PHI, and continuous monitoring. We sign a BAA, complete
+            role-based training quarterly, and align our administrative, physical, and technical safeguards to HIPAA and
+            SOC 2 trust criteria.</div>
+        </details>
+        <details class="faq">
+          <summary>What does pricing look like?<span class="toggle">+</span></summary>
+          <div class="faq-body">For full Revenue Cycle Management: percentage of net collections (typically 3–7%
+            depending on specialty and volume). For dedicated remote staff (VA, front desk, AR-only): flat monthly per
+            seat. No long-term contracts — we earn renewals month over month.</div>
+        </details>
+        <details class="faq">
+          <summary>Can we start with just one service?<span class="toggle">+</span></summary>
+          <div class="faq-body">Yes. Most clients start with one bottleneck — usually AR recovery or insurance
+            verification — and expand once they see the throughput. You're never locked into the full stack.</div>
+        </details>
+        <details class="faq">
+          <summary>Will the team really feel like ours?<span class="toggle">+</span></summary>
+          <div class="faq-body">Yes. Your team uses your email domain, joins your standups, follows your SOPs, and
+            reports to your practice manager. To your patients, they're staff. To us, they're accountable to outcomes
+            you define.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FINAL CTA                                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="final-cta" id="cta">
+    <div class="final-cta-glow"></div>
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center; color:rgba(250,247,242,0.55);">Let's talk</div>
+      <h2 class="display">More patient care. <em>Less administrative burden.</em></h2>
+      <p>Book a 30-minute discovery call. We'll audit your current operations and show you exactly where time and
+        revenue are leaking — no pitch, no obligation.</p>
+      <div class="actions">
+        <a href="#" class="btn btn-light">Book a discovery call
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#" class="btn btn-ghost" style="color:var(--paper); border-color:rgba(250,247,242,0.3);">Request an RCM
+          audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FOOTER                                                       -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="color: var(--paper);">
+            <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+          </div>
+          <p>Operational infrastructure for modern healthcare. Remote teams, RCM, AR recovery, and AI-assisted workflows
+            — built for providers who want to grow without the overhead.</p>
+        </div>
+        <div class="footer-col">
+          <h6>Services</h6>
+          <ul>
+            <li><a href="#">Revenue Cycle Mgmt</a></li>
+            <li><a href="#">AR Recovery</a></li>
+            <li><a href="#">Medical Billing</a></li>
+            <li><a href="#">Prior Authorization</a></li>
+            <li><a href="#">Insurance Verification</a></li>
+            <li><a href="#">Virtual Medical Assistants</a></li>
+            <li><a href="#">Front Desk Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h6>Solutions</h6>
+          <ul>
+            <li><a href="#">For Private Practices</a></li>
+            <li><a href="#">For Medical Groups</a></li>
+            <li><a href="#">For Behavioral Health</a></li>
+            <li><a href="#">For Dental</a></li>
+            <li><a href="#">For Urgent Care</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h6>Company</h6>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Insights / Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h6>Trust</h6>
+          <ul>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">HIPAA</a></li>
+            <li><a href="#">BAA</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Hired Billing Support. All rights reserved.</div>
+        <div class="legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+          <a href="#">hiredbillingsupport.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky nav border on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 8) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-</script>
+
+    // Fade-in observer
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
 
 </body>
+
 </html>

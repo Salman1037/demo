@@ -1,785 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dental Billing Services & RCM | Hired Billing Support</title>
-<meta name="description" content="Dental billing, insurance verification, AR recovery, and front desk support — embedded into your practice management software. Close the gap between production and collection without hiring more staff." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0A1628;
-    --ink-soft: #1B2942;
-    --ink-mute: #475569;
-    --paper: #FAF7F2;
-    --paper-warm: #F2EDE3;
-    --paper-line: #E8E2D5;
-    --white: #FFFFFF;
-    --signal: #00C896;
-    --signal-deep: #00876B;
-    --danger: #D64545;
-    --radius: 4px;
-    --radius-lg: 12px;
-    --max: 1240px;
-    --gutter: clamp(20px, 4vw, 48px);
-    --serif: 'Fraunces', 'Times New Roman', serif;
-    --sans: 'Inter Tight', -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.5; font-size: 16px; overflow-x: hidden; }
-  ::selection { background: var(--ink); color: var(--paper); }
-  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-
-  .display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; font-variation-settings: "opsz" 144; }
-  .display em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
-  .eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 10px; }
-  .eyebrow::before { content:''; width: 24px; height: 1px; background: currentColor; }
-
-  /* NAV */
-  nav.top { position: fixed; top:0; left:0; right:0; z-index: 100; backdrop-filter: blur(20px) saturate(180%); background: rgba(250,247,242,0.78); border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease); }
-  nav.top.scrolled { border-bottom-color: var(--paper-line); }
-  .nav-inner { max-width: var(--max); margin: 0 auto; padding: 18px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
-  .logo-mark { width: 28px; height: 28px; background: var(--ink); border-radius: 50%; position: relative; flex-shrink: 0; }
-  .logo-mark::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--signal); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500; position: relative; padding: 4px 0; }
-  .nav-links a::after { content:''; position: absolute; bottom:0; left:0; width:0; height:1px; background: var(--ink); transition: width 0.3s var(--ease); }
-  .nav-links a:hover::after { width:100%; }
-  .nav-dropdown { position: relative; display: inline-block; }
-  .dropdown-toggle { color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: 6px; cursor: pointer; border: 1px solid var(--ink); background: transparent; transition: all 0.3s var(--ease); display: flex; align-items: center; gap: 6px; }
-  .dropdown-toggle:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(10, 22, 40, 0.15); }
-  .dropdown-toggle::after { content: '▼'; font-size: 10px; transition: transform 0.3s var(--ease); }
-  .nav-dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
-  .dropdown-menu { position: absolute; top: 100%; left: 0; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(10,22,40,0.12); min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease); margin-top: 12px; overflow: hidden; }
-  .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-  .dropdown-menu a { display: block; padding: 14px 20px; color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s var(--ease); border-bottom: 1px solid var(--paper-line); }
-  .dropdown-menu a:last-child { border-bottom: none; }
-  .dropdown-menu a:hover { background: var(--paper-warm); color: var(--ink); padding-left: 24px; }
-  @media (max-width: 900px) { .nav-links { display: none; } .dropdown-menu { position: fixed; top: 70px; left: 0; right: 0; min-width: 100%; border-radius: 0; box-shadow: 0 8px 16px rgba(10,22,40,0.1); } }
-
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: var(--radius); font-family: var(--sans); font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; border: none; transition: all 0.25s var(--ease); white-space: nowrap; }
-  .btn-primary { background: var(--ink); color: var(--paper); }
-  .btn-primary:hover { background: var(--ink-soft); transform: translateY(-1px); box-shadow: 0 12px 28px -12px rgba(10,22,40,0.4); }
-  .btn-primary .arrow { transition: transform 0.25s var(--ease); }
-  .btn-primary:hover .arrow { transform: translateX(3px); }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
-  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
-  .btn-text { background: transparent; color: var(--ink); padding: 12px 0; border-bottom: 1px solid var(--ink); border-radius: 0; }
-  .btn-light { background: var(--paper); color: var(--ink); }
-  .btn-light:hover { background: var(--white); transform: translateY(-1px); }
-
-  /* HERO */
-  .hero { position: relative; padding: 160px var(--gutter) 100px; min-height: 92vh; display: flex; align-items: center; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-  .hero-bg svg { position: absolute; width: 100%; height: 100%; opacity: 0.35; }
-  .hero-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); mix-blend-mode: multiply; pointer-events: none; }
-  .hero-inner { max-width: var(--max); margin: 0 auto; width: 100%; position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
-  @media (max-width: 1000px) { .hero-inner { grid-template-columns: 1fr; gap: 56px; } }
-  .hero h1 { font-size: clamp(44px, 6.8vw, 84px); margin: 28px 0 32px; }
-  .hero h1 .underline { display: inline-block; position: relative; }
-  .hero h1 .underline::after { content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 8px; background: var(--signal); opacity: 0.35; z-index: -1; border-radius: 2px; }
-  .hero p.sub { font-size: clamp(17px, 1.45vw, 19px); line-height: 1.55; color: var(--ink-soft); max-width: 580px; margin-bottom: 24px; }
-  .hero p.lede { font-size: 16px; line-height: 1.6; color: var(--ink-mute); max-width: 580px; margin-bottom: 36px; }
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-
-  /* Hero side card — production vs collection visual */
-  .hero-card { background: var(--ink); color: var(--paper); border-radius: var(--radius-lg); padding: 28px; position: relative; box-shadow: 0 60px 80px -40px rgba(10,22,40,0.35); transform: rotate(-1.5deg); transition: transform 0.6s var(--ease); }
-  .hero-card:hover { transform: rotate(0deg) translateY(-4px); }
-  .hero-card h4 { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(250,247,242,0.5); margin-bottom: 20px; }
-  .bar-set { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
-  .bar-row { display: grid; grid-template-columns: 90px 1fr 80px; align-items: center; gap: 12px; }
-  .bar-row .lbl { font-family: var(--mono); font-size: 10px; color: rgba(250,247,242,0.6); letter-spacing: 0.05em; }
-  .bar-row .val { font-family: var(--serif); font-size: 18px; text-align: right; font-weight: 500; }
-  .bar { height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
-  .bar > span { display: block; height: 100%; border-radius: 4px; }
-  .bar.production > span { background: var(--paper); width: 100%; }
-  .bar.collection-before > span { background: var(--danger); width: 71%; }
-  .bar.collection-after > span { background: var(--signal); width: 96%; }
-  .card-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 16px 0; }
-  .card-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; padding: 4px 8px; border-radius: 4px; }
-  .card-tag.before { background: rgba(214,69,69,0.12); color: #FF8585; }
-  .card-tag.after { background: rgba(0,200,150,0.12); color: var(--signal); }
-  .gap-callout { background: rgba(0,200,150,0.08); border: 1px solid rgba(0,200,150,0.2); border-radius: 8px; padding: 14px 16px; margin-top: 18px; }
-  .gap-callout .gc-lbl { font-family: var(--mono); font-size: 10px; color: var(--signal); letter-spacing: 0.1em; margin-bottom: 6px; }
-  .gap-callout .gc-val { font-family: var(--serif); font-size: 22px; font-weight: 500; }
-
-  .reveal { opacity: 0; transform: translateY(20px); animation: reveal 0.9s var(--ease) forwards; }
-  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
-  .reveal-1 { animation-delay: 0.05s; }
-  .reveal-2 { animation-delay: 0.15s; }
-  .reveal-3 { animation-delay: 0.3s; }
-  .reveal-4 { animation-delay: 0.45s; }
-  .reveal-5 { animation-delay: 0.6s; }
-
-  /* Generic section */
-  section.block { padding: 110px 0; position: relative; }
-  section.block.warm { background: var(--paper-warm); }
-  section.block.dark { background: var(--ink); color: var(--paper); }
-  .block.dark .display em { color: rgba(250,247,242,0.55); }
-  .block.dark .eyebrow { color: rgba(250,247,242,0.55); }
-  .block-head { max-width: 760px; margin-bottom: 64px; }
-  .block-head h2 { font-size: clamp(34px, 4.5vw, 56px); margin-top: 20px; }
-  .block-head p { font-size: 17px; line-height: 1.6; color: var(--ink-mute); margin-top: 22px; max-width: 640px; }
-  .block.dark .block-head p { color: rgba(250,247,242,0.75); }
-
-  /* Story-style monologue section */
-  .monologue { max-width: 760px; }
-  .monologue p {
-    font-family: var(--serif);
-    font-size: clamp(20px, 1.9vw, 24px);
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-    margin-bottom: 24px;
-    color: var(--ink);
-    font-weight: 400;
-  }
-  .monologue p em { font-style: italic; color: var(--ink-mute); font-weight: 300; }
-  .monologue p.emphasis { font-style: italic; color: var(--ink-soft); }
-
-  /* Pain ledger */
-  .pain-ledger { border-top: 1px solid var(--paper-line); margin-top: 56px; }
-  .pain-row { display: grid; grid-template-columns: 60px 1.2fr 1.4fr 160px; gap: 24px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--paper-line); transition: padding 0.3s var(--ease); }
-  .pain-row:hover { padding-left: 12px; }
-  .pain-row .pn { font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.1em; }
-  .pain-row .ptitle { font-family: var(--serif); font-size: clamp(20px, 1.9vw, 26px); letter-spacing: -0.02em; line-height: 1.2; }
-  .pain-row .pdesc { color: var(--ink-mute); font-size: 14.5px; line-height: 1.55; }
-  .pain-row .pstat { text-align: right; font-family: var(--mono); font-size: 12px; color: var(--danger); font-weight: 500; }
-  @media (max-width: 800px) {
-    .pain-row { grid-template-columns: 40px 1fr; gap: 8px 16px; }
-    .pain-row .pdesc { grid-column: 2; }
-    .pain-row .pstat { grid-column: 2; text-align: left; }
-  }
-
-  /* Behind the scenes — data section */
-  .bts-data { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-  @media (max-width: 900px) { .bts-data { grid-template-columns: 1fr; gap: 40px; } }
-  .bts-data .lhs p { font-size: 17px; line-height: 1.65; color: var(--ink-mute); margin-bottom: 16px; }
-  .bts-data .lhs p strong { color: var(--ink); font-weight: 600; }
-  .bts-list { list-style: none; }
-  .bts-list li {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--paper-line);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 16px;
-    align-items: baseline;
-    font-size: 15px;
-    color: var(--ink-soft);
-  }
-  .bts-list li:first-child { padding-top: 0; }
-  .bts-list li:last-child { border-bottom: none; }
-  .bts-list .stat { font-family: var(--mono); font-size: 13px; color: var(--danger); font-weight: 500; }
-
-  /* Solution */
-  .solution-card {
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: var(--radius-lg);
-    padding: 64px;
-    position: relative;
-    overflow: hidden;
-  }
-  @media (max-width: 700px) { .solution-card { padding: 40px; } }
-  .solution-card h2 { font-size: clamp(30px, 3.8vw, 44px); max-width: 760px; }
-  .solution-card p { color: rgba(250,247,242,0.78); font-size: 17px; line-height: 1.65; max-width: 700px; margin-top: 24px; }
-  .solution-glow { position: absolute; right: -120px; bottom: -120px; width: 380px; height: 380px; background: radial-gradient(circle, rgba(0,200,150,0.22), transparent 70%); pointer-events: none; }
-
-  /* Services table */
-  .svc-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--paper-line); }
-  .svc-table tr { border-bottom: 1px solid var(--paper-line); transition: background 0.3s var(--ease); }
-  .svc-table tr:hover { background: var(--white); }
-  .svc-table td { padding: 28px 0; vertical-align: top; }
-  .svc-table td:first-child {
-    width: 30%;
-    padding-right: 32px;
-    font-family: var(--serif);
-    font-size: clamp(18px, 1.7vw, 22px);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-  .svc-table td:last-child {
-    color: var(--ink-mute);
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  @media (max-width: 700px) {
-    .svc-table td { display: block; padding: 8px 0; }
-    .svc-table td:first-child { width: 100%; padding-top: 24px; }
-    .svc-table td:last-child { padding-bottom: 24px; }
-  }
-
-  /* How we work — 4 steps */
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 600px) { .steps { grid-template-columns: 1fr; } }
-  .step { background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); padding: 28px; position: relative; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); }
-  .step:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -24px rgba(10,22,40,0.18); }
-  .step .num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--ink-mute); margin-bottom: 20px; display: block; }
-  .step h4 { font-family: var(--serif); font-size: 21px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 10px; line-height: 1.2; }
-  .step p { font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
-
-  /* AI + Human — dark split */
-  .aihum { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  @media (max-width: 900px) { .aihum { grid-template-columns: 1fr; gap: 48px; } }
-  .aihum h2 { font-size: clamp(34px, 4vw, 48px); margin-bottom: 20px; }
-  .aihum p { font-size: 17px; line-height: 1.65; color: rgba(250,247,242,0.78); margin-bottom: 18px; }
-
-  .ledger {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-  }
-  .ledger-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .ledger-row:last-child { border-bottom: none; }
-  .ledger-row.head { padding-top: 0; font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; color: rgba(250,247,242,0.5); }
-  .ledger-row .ai { color: var(--signal); }
-  .ledger-row .hu { color: var(--paper); }
-  .ledger-row .item { font-family: var(--serif); font-size: 16px; line-height: 1.3; }
-  .ledger-row .item span { display: block; font-family: var(--sans); font-size: 12px; color: rgba(250,247,242,0.55); margin-top: 4px; }
-
-  /* Results */
-  .results-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--paper-line); }
-  @media (max-width: 800px) { .results-row { grid-template-columns: repeat(2, 1fr); } }
-  .result-block { padding: 40px 28px; border-right: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
-  .result-block:last-child { border-right: none; }
-  .result-block .v { font-family: var(--serif); font-size: clamp(38px, 4.5vw, 58px); font-weight: 400; line-height: 1; letter-spacing: -0.03em; }
-  .result-block .v .unit { color: var(--signal); }
-  .result-block .d { margin-top: 14px; color: var(--ink-mute); font-size: 13.5px; line-height: 1.5; }
-
-  /* Testimonial */
-  .testi {
-    background: var(--white);
-    border: 1px solid var(--paper-line);
-    border-radius: var(--radius-lg);
-    padding: 56px;
-    position: relative;
-    max-width: 880px;
-    margin: 64px auto 0;
-  }
-  .testi::before { content: '"'; position: absolute; top: -14px; left: 36px; font-family: var(--serif); font-size: 130px; line-height: 1; color: var(--signal); opacity: 0.6; }
-  .testi .q { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); line-height: 1.4; letter-spacing: -0.01em; margin-top: 24px; margin-bottom: 28px; position: relative; z-index: 1; }
-  .testi .attr { display: flex; align-items: center; gap: 14px; }
-  .testi .av { width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 16px; font-weight: 500; }
-  .testi .nm { font-size: 14px; font-weight: 600; }
-  .testi .role { font-size: 13px; color: var(--ink-mute); margin-top: 2px; }
-
-  /* Comparison table */
-  .compare {
-    border: 1px solid var(--paper-line);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--white);
-  }
-  .compare-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--paper-line); }
-  .compare-row:last-child { border-bottom: none; }
-  .compare-row .col { padding: 20px 28px; font-size: 15px; line-height: 1.55; }
-  .compare-row .col.left { color: var(--ink-mute); border-right: 1px solid var(--paper-line); background: var(--paper-warm); }
-  .compare-row .col.right { color: var(--ink); font-weight: 500; }
-  .compare-row.head .col {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--ink-mute);
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-  .compare-row.head .col.right { color: var(--signal-deep); }
-  @media (max-width: 700px) {
-    .compare-row .col { padding: 16px 20px; font-size: 14px; }
-  }
-
-  .insight {
-    margin-top: 28px;
-    padding: 24px 28px;
-    background: var(--paper-warm);
-    border-left: 3px solid var(--signal);
-    border-radius: 4px;
-    font-family: var(--serif);
-    font-size: clamp(17px, 1.5vw, 19px);
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-  }
-  .insight em { font-style: italic; color: var(--ink-mute); }
-
-  /* Final CTA */
-  .final-cta { background: var(--ink); color: var(--paper); position: relative; overflow: hidden; }
-  .final-cta .cta-inner { max-width: var(--max); margin: 0 auto; padding: 120px var(--gutter); text-align: center; position: relative; z-index: 2; }
-  .final-cta h2 { font-size: clamp(36px, 5.5vw, 68px); max-width: 880px; margin: 24px auto 28px; }
-  .final-cta p { font-size: 17px; color: rgba(250,247,242,0.75); max-width: 620px; margin: 0 auto 40px; line-height: 1.6; }
-  .final-cta .actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .final-cta-glow { position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,150,0.25), transparent 70%); pointer-events: none; }
-  .trust-line { margin-top: 32px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,242,0.45); }
-
-  /* Footer */
-  footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 32px; border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-size: 13px; }
-  .footer-inner a { color: rgba(250,247,242,0.6); text-decoration: none; }
-  .footer-inner a:hover { color: var(--signal); }
-  .footer-legal { display: flex; gap: 24px; }
-
-  /* Scroll reveal */
-  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
-  .fade-in.in { opacity: 1; transform: translateY(0); }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Billing Services & RCM | Hired Billing Support</title>
+  <meta name="description"
+    content="Dental billing, insurance verification, AR recovery, and front desk support — embedded into your practice management software. Close the gap between production and collection without hiring more staff." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav class="top" id="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
-    </a>
-    <ul class="nav-links">
-      <li><a href="#pain">The problem</a></li>
-      <li><a href="#solution">Our model</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#results">Results</a></li>
-    </ul>
-    <div class="nav-dropdown">
-      <button class="dropdown-toggle">Hire Talent</button>
-      <div class="dropdown-menu">
-        <a href="index.html">Home</a>
-        <a href="dental.html">Dental</a>
-        <a href="medical.html">Medical</a>
-        <a href="enterprise.html">Enterprise</a>
-        <a href="mso.html">MSO/Payer</a>
-      </div>
-    </div>
-    <a href="#cta" class="btn btn-primary">Book a discovery call
-      <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)"/>
-    </svg>
-    <div class="hero-grain"></div>
-  </div>
-
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow reveal reveal-1">For dental practices, DSOs &amp; cosmetic dentists</div>
-      <h1 class="display reveal reveal-2">
-        You produced $180,000 last month. You collected $128,000.
-        <em>That <span class="underline">gap</span> is the problem.</em>
-      </h1>
-      <p class="sub reveal reveal-3">
-        Treatment is happening. Patients are saying yes. Production looks great on the report.
-        But somewhere between the chair and the bank, your collections are leaking — and your front desk is too buried to chase it.
-      </p>
-      <p class="lede reveal reveal-3">
-        Hired Billing Support is the remote dental operations team that closes that gap. Insurance verification, claims, AR follow-up, write-off recovery, front desk relief — all inside your PMS, working like your in-house team. So your office can focus on patients, not on chasing payers.
-      </p>
-      <div class="hero-actions reveal reveal-4">
-        <a href="#cta" class="btn btn-primary">Book a discovery call
-          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#audit" class="btn btn-text">Get a free production-to-collection audit →</a>
-      </div>
-    </div>
-
-    <!-- Side card: production vs collection -->
-    <div class="reveal reveal-4" style="animation-delay:0.55s;">
-      <div class="hero-card">
-        <h4>— Production vs. Collection · 90-day view</h4>
-
-        <div class="bar-set">
-          <div class="bar-row">
-            <span class="lbl">PRODUCTION</span>
-            <div class="bar production"><span></span></div>
-            <span class="val">$180k</span>
-          </div>
-          <div class="bar-row">
-            <span class="lbl">BEFORE HBS</span>
-            <div class="bar collection-before"><span></span></div>
-            <span class="val">$128k</span>
-          </div>
-          <div class="bar-row">
-            <span class="lbl">WITH HBS</span>
-            <div class="bar collection-after"><span></span></div>
-            <span class="val">$172k</span>
-          </div>
-        </div>
-
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <span class="card-tag before">71% COLLECTION RATE</span>
-          <span class="card-tag after">96% COLLECTION RATE</span>
-        </div>
-
-        <div class="gap-callout">
-          <div class="gc-lbl">— RECOVERED MONTHLY</div>
-          <div class="gc-val">$44,000 — the gap, closed.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MONOLOGUE / PAIN -->
-<section class="block" id="pain">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">The Tuesday morning everyone in dental knows</div>
-      <h2 class="display">You already know how this <em>goes.</em></h2>
-    </div>
-
-    <div class="monologue fade-in">
-      <p>It's Tuesday. The schedule is packed. You're three minutes behind on every patient.</p>
-      <p>
-        Your front desk is on hold with Delta Dental — again — trying to verify a benefit for a patient who walked in fifteen minutes ago. The new hygiene patient is sitting in the waiting room with a clipboard nobody has time to review. The phone keeps ringing because somebody else is also trying to confirm coverage.
-      </p>
-      <p>
-        Meanwhile, last month's claims? Still sitting. The PPO write-offs from January are confusing. The aging report has buckets in 90+ that nobody's touched since the office manager went on maternity leave. Your last hygiene block had two openings that didn't get filled because nobody had time to work the recall list.
-      </p>
-      <p>You produced great numbers last month. You know you did.</p>
-      <p class="emphasis"><em>So why does the bank account not reflect it?</em></p>
-    </div>
-
-    <div class="pain-ledger fade-in">
-      <div class="pain-row">
-        <div class="pn">01</div>
-        <div class="ptitle">Production looks good. Collection doesn't.</div>
-        <div class="pdesc">You're producing $X and collecting 70-80% of it. Industry benchmark is 98%. That gap is somebody's salary — maybe two.</div>
-        <div class="pstat">20pt gap = $$$</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">02</div>
-        <div class="ptitle">Insurance verification is killing your front desk.</div>
-        <div class="pdesc">Average call to a payer is 12-18 minutes. Multiply by 30 patients a day. They're on the phone more than with patients.</div>
-        <div class="pstat">~6 hrs/day lost</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">03</div>
-        <div class="ptitle">PPO write-offs are quietly bleeding you.</div>
-        <div class="pdesc">You're writing off contracted amounts you should be appealing. Nobody has the bandwidth to dig into it.</div>
-        <div class="pstat">$4-11k/month</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">04</div>
-        <div class="ptitle">AR is aging in silence.</div>
-        <div class="pdesc">Claims past 60 days have a 30% lower collection rate. Yours are sitting in 90+ and nobody's working them.</div>
-        <div class="pstat">30% recovery loss</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">05</div>
-        <div class="ptitle">Treatment plans are getting delayed by paperwork.</div>
-        <div class="pdesc">Same-day acceptance is shrinking because patients don't have clarity on coverage. Estimates are guesses.</div>
-        <div class="pstat">-12% acceptance</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">06</div>
-        <div class="ptitle">Hygiene recall is a leaky bucket.</div>
-        <div class="pdesc">Every unfilled hygiene block is ~$200 in lost production. You have unfilled blocks every week. Do the math.</div>
-        <div class="pstat">~$3-5k/month</div>
-      </div>
-      <div class="pain-row">
-        <div class="pn">07</div>
-        <div class="ptitle">You keep hiring. They keep leaving.</div>
-        <div class="pdesc">You trained the last biller for six months. She left for a $4/hour raise. You're back to square one.</div>
-        <div class="pstat">$22k / hire</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BEHIND THE SCENES -->
-<section class="block warm">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">What's actually happening behind the scenes</div>
-      <h2 class="display">You don't have a marketing problem. <em>You have an operational throughput problem.</em></h2>
-    </div>
-
-    <div class="bts-data fade-in">
-      <div class="lhs">
-        <p>You think you have a marketing problem. You think you have a hygiene problem. You think you have a front desk problem.</p>
-        <p>You don't. <strong>You have an operational throughput problem.</strong></p>
-        <p>Your practice is producing more than your back office can clean up. And the more you grow, the wider the gap gets. Here's what it looks like in real numbers, in a typical 3-doctor dental practice:</p>
-      </div>
-      <ul class="bts-list">
-        <li><span>Claims submitted with at least one error</span><span class="stat">25-30%</span></li>
-        <li><span>Recoverable AR sitting past 90 days</span><span class="stat">$8-15k</span></li>
-        <li><span>Monthly production lost to unfilled hygiene</span><span class="stat">$3-5k</span></li>
-        <li><span>Front desk time spent on verification calls</span><span class="stat">15-25 hrs/wk</span></li>
-        <li><span>Treatment plans lost to coverage confusion</span><span class="stat">12-18%</span></li>
-      </ul>
-    </div>
-
-    <div class="insight fade-in" style="margin-top:48px;">
-      That's not a staffing problem you fix by posting on Indeed. <em>That's an operational layer your practice is missing.</em>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section class="block" id="solution">
-  <div class="container">
-    <div class="solution-card fade-in">
-      <div class="solution-glow"></div>
-      <div class="eyebrow" style="color:var(--signal);">— Our model</div>
-      <h2 class="display" style="margin-top:20px;">We don't replace your team. <em>We're the back office your team has been begging for.</em></h2>
-      <p>Hired Billing Support gives you a dental-trained remote operations team that lives inside your practice management software. Same usernames. Same workflows. Same SOPs. They show up Monday morning ready to verify, bill, follow up, and close claims — and they don't take PTO during your busiest week.</p>
-      <p>You'll have specific people assigned to your account. They'll learn your codes, your PPO contracts, your providers, your patients' names. They'll feel like staff — because operationally, they are.</p>
-      <p style="font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--paper); margin-top: 32px; max-width: 680px;">
-        The difference: you didn't have to hire them, train them for six months, or watch them leave for $4 more an hour.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="block" id="services">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">What we run for your practice</div>
-      <h2 class="display">The full dental operational <em>stack.</em></h2>
-      <p>Pick the layers you need. Run one service, or hand us the entire back office.</p>
-    </div>
-
-    <table class="svc-table fade-in">
-      <tbody>
-        <tr><td>Insurance verification</td><td>Full breakdown of benefits 48 hours before the appointment. Maximums, deductibles, frequency limits, downgrades, missing tooth clauses, waiting periods — all documented in the chart before they sit down.</td></tr>
-        <tr><td>Eligibility &amp; estimates</td><td>Real, accurate treatment estimates at presentation. No more "we'll call you" — patients accept treatment the same day.</td></tr>
-        <tr><td>Dental billing &amp; claims</td><td>CDT-coded, X-ray-attached, narrative-included claims submitted within 24 hours of the procedure. Clean-claim rate above 98%.</td></tr>
-        <tr><td>PPO write-off recovery</td><td>We audit your fee schedules against actual EOBs. We find write-offs that shouldn't have been written off. We re-submit and appeal.</td></tr>
-        <tr><td>AR follow-up</td><td>We work every aging bucket — 30, 60, 90, 120+. Payer calls, re-submissions, narrative appeals. Most clients see AR days drop below 25 within 90 days.</td></tr>
-        <tr><td>Denial management</td><td>Every denial is categorized, prioritized, and appealed by a specialist who knows the payer playbook. Not your office manager Googling "downgrade appeal letter."</td></tr>
-        <tr><td>Payment posting</td><td>EOBs posted accurately and reconciled daily. No more end-of-month surprises.</td></tr>
-        <tr><td>Patient billing</td><td>Statements sent on schedule. Patient calls answered with empathy and clarity. Balances followed up without making patients feel hounded.</td></tr>
-        <tr><td>Front desk relief</td><td>Phones, scheduling, recall, hygiene reactivation, new patient intake. Either virtual coverage or full takeover — your call.</td></tr>
-        <tr><td>Hygiene recall</td><td>We work your recall list. Inactive patients get reactivated. Unfilled blocks get filled. Production goes up without you adding a chair.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- HOW WE WORK -->
-<section class="block warm">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">How we work</div>
-      <h2 class="display">We don't sit outside your practice. <em>We sit inside it.</em></h2>
-    </div>
-
-    <div class="steps fade-in">
-      <div class="step">
-        <span class="num">— 01</span>
-        <h4>We log into your software.</h4>
-        <p>Open Dental. Dentrix. Eaglesoft. Curve. Denticon. CareStack. We work where you work. No exports, no portals, no "email us the file."</p>
-      </div>
-      <div class="step">
-        <span class="num">— 02</span>
-        <h4>We follow your workflow.</h4>
-        <p>We learn your SOPs, fee schedules, appointment types, provider notes, write-off rules. We plug into how you already run.</p>
-      </div>
-      <div class="step">
-        <span class="num">— 03</span>
-        <h4>We report to your office manager.</h4>
-        <p>Daily Slack, Teams, or email. Weekly KPI review. Monthly working session. We function as a department, not a vendor.</p>
-      </div>
-      <div class="step">
-        <span class="num">— 04</span>
-        <h4>We use your communication tools.</h4>
-        <p>Our team is on your channels. They join huddles if you want. They email patients from your domain. To everyone outside, they are your practice.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AI + HUMAN -->
-<section class="block dark">
-  <div class="container">
-    <div class="aihum fade-in">
-      <div>
-        <div class="eyebrow">The AI + human advantage</div>
-        <h2 class="display" style="margin-top:20px;">AI does the lifting. <em>Humans do the thinking.</em></h2>
-        <p>Insurance verification calls that used to take 18 minutes? Automated eligibility checks pull most of it in under 30 seconds. The 20% that needs a real human voice on the line — we make that call.</p>
-        <p>Claim scrubbing? Every claim validated against payer rules before it goes out. First-pass clean rate above 98%.</p>
-        <p>Denials? Categorized and routed to the right specialist queue within minutes — not weeks of sitting in someone's "to-do" pile.</p>
-        <p style="color: var(--paper); font-style: italic; font-family: var(--serif); font-size: 20px; margin-top: 24px;">You don't want a chatbot calling Delta Dental. You don't want AI explaining a $1,200 balance to a confused patient. Neither do we.</p>
-      </div>
-
-      <div class="ledger">
-        <div class="ledger-row head">
-          <div class="ai">— AI handles</div>
-          <div class="hu">— Humans handle</div>
-        </div>
-        <div class="ledger-row">
-          <div class="item ai">Eligibility checks <span>30 seconds, automated</span></div>
-          <div class="item hu">Peer-to-peer calls <span>complex, judgment-driven</span></div>
-        </div>
-        <div class="ledger-row">
-          <div class="item ai">Claim scrubbing <span>payer-rule validated</span></div>
-          <div class="item hu">Narrative appeals <span>specialty-trained</span></div>
-        </div>
-        <div class="ledger-row">
-          <div class="item ai">Denial categorization <span>routed in minutes</span></div>
-          <div class="item hu">Patient conversations <span>tone, empathy, clarity</span></div>
-        </div>
-        <div class="ledger-row">
-          <div class="item ai">Document classification <span>indexed automatically</span></div>
-          <div class="item hu">PPO contract analysis <span>recover write-offs</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RESULTS -->
-<section class="block" id="results">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">By the numbers</div>
-      <h2 class="display">What changes in the <em>first 90 days.</em></h2>
-      <p>Pulled from active dental clients across general, ortho, perio, and cosmetic practices.</p>
-    </div>
-
-    <div class="results-row fade-in">
-      <div class="result-block">
-        <div class="v">+24<span class="unit">%</span></div>
-        <div class="d">Average monthly collections lift across active dental clients.</div>
-      </div>
-      <div class="result-block">
-        <div class="v">25<span class="unit">d</span></div>
-        <div class="d">AR days dropped from a 47-day baseline within 90 days.</div>
-      </div>
-      <div class="result-block">
-        <div class="v">98<span class="unit">%</span></div>
-        <div class="d">First-pass clean-claim rate on submitted dental claims.</div>
-      </div>
-      <div class="result-block">
-        <div class="v">$7.5<span class="unit">k</span></div>
-        <div class="d">Average PPO write-off recovery in the first 60 days.</div>
-      </div>
-    </div>
-
-    <div class="testi fade-in">
-      <div class="q">
-        We were producing well over $200k a month and collecting $145k. Three months in with HBS, we collected $189k on the same production. I didn't add a chair, a hygienist, or a biller. They just stopped the leak.
-      </div>
-      <div class="attr">
-        <div class="av">M</div>
-        <div>
-          <div class="nm">Dr. M.</div>
-          <div class="role">4-op general practice · Phoenix, AZ</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY NOT HIRE IN-HOUSE -->
-<section class="block warm">
-  <div class="container">
-    <div class="block-head fade-in">
-      <div class="eyebrow">The honest comparison</div>
-      <h2 class="display">Why not just hire an <em>in-house biller?</em></h2>
-      <p>You already tried. That's why you're reading this. Let's do the math out loud.</p>
-    </div>
-
-    <div class="compare fade-in">
-      <div class="compare-row head">
-        <div class="col left">In-house biller</div>
-        <div class="col right">Embedded HBS team</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">$48,000-$68,000 salary</div>
-        <div class="col right">Percentage of collections — we earn it back</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">+ benefits, PTO, training, payroll tax</div>
-        <div class="col right">No overhead, no benefits, no taxes</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">6-month learning curve</div>
-        <div class="col right">Live in 10-14 business days</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">Out sick = work stops</div>
-        <div class="col right">Cross-covered every day</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">One person, one perspective</div>
-        <div class="col right">Specialist team — billing, AR, verification, appeals</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">14-month average tenure</div>
-        <div class="col right">Embedded long-term, no turnover risk</div>
-      </div>
-      <div class="compare-row">
-        <div class="col left">You manage them</div>
-        <div class="col right">They report to you. We manage them.</div>
-      </div>
-    </div>
-
-    <div class="insight fade-in">
-      And the part nobody talks about: when your one in-house biller leaves, <em>all the institutional knowledge leaves with them.</em> With an embedded team, the SOPs are documented, the system runs, and the work continues regardless.
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta" id="cta">
-  <div class="final-cta-glow"></div>
-  <div class="cta-inner">
-    <div class="eyebrow" style="justify-content:center; color:rgba(250,247,242,0.55);">Let's look at your numbers</div>
-    <h2 class="display">Send us last month's report. <em>We'll show you the leak.</em></h2>
-    <p>Send your production summary and aging report. Within 5 business days, we'll come back with a free audit showing exactly where the gap is — and what we'd do about it. No pitch. No pressure. If the audit shows you don't need us, we'll tell you.</p>
-    <div class="actions">
-      <a href="#" class="btn btn-light">Book a discovery call
-        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  <!-- NAV -->
+  <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
       </a>
-      <a href="#" class="btn btn-ghost" style="color:var(--paper); border-color:rgba(250,247,242,0.3);" id="audit">Request a free dental audit</a>
+      <ul class="nav-links">
+        <li><a href="#pain">The problem</a></li>
+        <li><a href="#solution">Our model</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Results</a></li>
+      </ul>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent</button>
+        <div class="dropdown-menu">
+          <a href="index.html">Home</a>
+          <a href="dental.html">Dental</a>
+          <a href="medical.html">Medical</a>
+          <a href="enterprise.html">Enterprise</a>
+          <a href="mso.html">MSO/Payer</a>
+        </div>
+      </div>
+      <a href="#cta" class="btn btn-primary">Book a discovery call
+        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </a>
     </div>
-    <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract</div>
-  </div>
-</section>
+  </nav>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container footer-inner">
-    <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
-    <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Security</a>
-      <a href="#">HIPAA</a>
-      <a href="#">Contact</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+      <div class="hero-grain"></div>
     </div>
-  </div>
-</footer>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 8) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow reveal reveal-1">For dental practices, DSOs &amp; cosmetic dentists</div>
+        <h1 class="display reveal reveal-2">
+          You produced $180,000 last month. You collected $128,000.
+          <em>That <span class="underline">gap</span> is the problem.</em>
+        </h1>
+        <p class="sub reveal reveal-3">
+          Treatment is happening. Patients are saying yes. Production looks great on the report.
+          But somewhere between the chair and the bank, your collections are leaking — and your front desk is too buried
+          to chase it.
+        </p>
+        <p class="lede reveal reveal-3">
+          Hired Billing Support is the remote dental operations team that closes that gap. Insurance verification,
+          claims, AR follow-up, write-off recovery, front desk relief — all inside your PMS, working like your in-house
+          team. So your office can focus on patients, not on chasing payers.
+        </p>
+        <div class="hero-actions reveal reveal-4">
+          <a href="#cta" class="btn btn-primary">Book a discovery call
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#audit" class="btn btn-text">Get a free production-to-collection audit →</a>
+        </div>
+      </div>
+
+      <!-- Side card: production vs collection -->
+      <div class="reveal reveal-4" style="animation-delay:0.55s;">
+        <div class="hero-card">
+          <h4>— Production vs. Collection · 90-day view</h4>
+
+          <div class="bar-set">
+            <div class="bar-row">
+              <span class="lbl">PRODUCTION</span>
+              <div class="bar production"><span></span></div>
+              <span class="val">$180k</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">BEFORE HBS</span>
+              <div class="bar collection-before"><span></span></div>
+              <span class="val">$128k</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">WITH HBS</span>
+              <div class="bar collection-after"><span></span></div>
+              <span class="val">$172k</span>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="card-tag before">71% COLLECTION RATE</span>
+            <span class="card-tag after">96% COLLECTION RATE</span>
+          </div>
+
+          <div class="gap-callout">
+            <div class="gc-lbl">— RECOVERED MONTHLY</div>
+            <div class="gc-val">$44,000 — the gap, closed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONOLOGUE / PAIN -->
+  <section class="block" id="pain">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">The Tuesday morning everyone in dental knows</div>
+        <h2 class="display">You already know how this <em>goes.</em></h2>
+      </div>
+
+      <div class="monologue fade-in">
+        <p>It's Tuesday. The schedule is packed. You're three minutes behind on every patient.</p>
+        <p>
+          Your front desk is on hold with Delta Dental — again — trying to verify a benefit for a patient who walked in
+          fifteen minutes ago. The new hygiene patient is sitting in the waiting room with a clipboard nobody has time
+          to review. The phone keeps ringing because somebody else is also trying to confirm coverage.
+        </p>
+        <p>
+          Meanwhile, last month's claims? Still sitting. The PPO write-offs from January are confusing. The aging report
+          has buckets in 90+ that nobody's touched since the office manager went on maternity leave. Your last hygiene
+          block had two openings that didn't get filled because nobody had time to work the recall list.
+        </p>
+        <p>You produced great numbers last month. You know you did.</p>
+        <p class="emphasis"><em>So why does the bank account not reflect it?</em></p>
+      </div>
+
+      <div class="pain-ledger fade-in">
+        <div class="pain-row">
+          <div class="pn">01</div>
+          <div class="ptitle">Production looks good. Collection doesn't.</div>
+          <div class="pdesc">You're producing $X and collecting 70-80% of it. Industry benchmark is 98%. That gap is
+            somebody's salary — maybe two.</div>
+          <div class="pstat">20pt gap = $$$</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">02</div>
+          <div class="ptitle">Insurance verification is killing your front desk.</div>
+          <div class="pdesc">Average call to a payer is 12-18 minutes. Multiply by 30 patients a day. They're on the
+            phone more than with patients.</div>
+          <div class="pstat">~6 hrs/day lost</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">03</div>
+          <div class="ptitle">PPO write-offs are quietly bleeding you.</div>
+          <div class="pdesc">You're writing off contracted amounts you should be appealing. Nobody has the bandwidth to
+            dig into it.</div>
+          <div class="pstat">$4-11k/month</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">04</div>
+          <div class="ptitle">AR is aging in silence.</div>
+          <div class="pdesc">Claims past 60 days have a 30% lower collection rate. Yours are sitting in 90+ and nobody's
+            working them.</div>
+          <div class="pstat">30% recovery loss</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">05</div>
+          <div class="ptitle">Treatment plans are getting delayed by paperwork.</div>
+          <div class="pdesc">Same-day acceptance is shrinking because patients don't have clarity on coverage. Estimates
+            are guesses.</div>
+          <div class="pstat">-12% acceptance</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">06</div>
+          <div class="ptitle">Hygiene recall is a leaky bucket.</div>
+          <div class="pdesc">Every unfilled hygiene block is ~$200 in lost production. You have unfilled blocks every
+            week. Do the math.</div>
+          <div class="pstat">~$3-5k/month</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">07</div>
+          <div class="ptitle">You keep hiring. They keep leaving.</div>
+          <div class="pdesc">You trained the last biller for six months. She left for a $4/hour raise. You're back to
+            square one.</div>
+          <div class="pstat">$22k / hire</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEHIND THE SCENES -->
+  <section class="block warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">What's actually happening behind the scenes</div>
+        <h2 class="display">You don't have a marketing problem. <em>You have an operational throughput problem.</em>
+        </h2>
+      </div>
+
+      <div class="bts-data fade-in">
+        <div class="lhs">
+          <p>You think you have a marketing problem. You think you have a hygiene problem. You think you have a front
+            desk problem.</p>
+          <p>You don't. <strong>You have an operational throughput problem.</strong></p>
+          <p>Your practice is producing more than your back office can clean up. And the more you grow, the wider the
+            gap gets. Here's what it looks like in real numbers, in a typical 3-doctor dental practice:</p>
+        </div>
+        <ul class="bts-list">
+          <li><span>Claims submitted with at least one error</span><span class="stat">25-30%</span></li>
+          <li><span>Recoverable AR sitting past 90 days</span><span class="stat">$8-15k</span></li>
+          <li><span>Monthly production lost to unfilled hygiene</span><span class="stat">$3-5k</span></li>
+          <li><span>Front desk time spent on verification calls</span><span class="stat">15-25 hrs/wk</span></li>
+          <li><span>Treatment plans lost to coverage confusion</span><span class="stat">12-18%</span></li>
+        </ul>
+      </div>
+
+      <div class="insight fade-in" style="margin-top:48px;">
+        That's not a staffing problem you fix by posting on Indeed. <em>That's an operational layer your practice is
+          missing.</em>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="block" id="solution">
+    <div class="container">
+      <div class="solution-card fade-in">
+        <div class="solution-glow"></div>
+        <div class="eyebrow" style="color:var(--signal);">— Our model</div>
+        <h2 class="display" style="margin-top:20px;">We don't replace your team. <em>We're the back office your team has
+            been begging for.</em></h2>
+        <p>Hired Billing Support gives you a dental-trained remote operations team that lives inside your practice
+          management software. Same usernames. Same workflows. Same SOPs. They show up Monday morning ready to verify,
+          bill, follow up, and close claims — and they don't take PTO during your busiest week.</p>
+        <p>You'll have specific people assigned to your account. They'll learn your codes, your PPO contracts, your
+          providers, your patients' names. They'll feel like staff — because operationally, they are.</p>
+        <p
+          style="font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--paper); margin-top: 32px; max-width: 680px;">
+          The difference: you didn't have to hire them, train them for six months, or watch them leave for $4 more an
+          hour.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="block" id="services">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">What we run for your practice</div>
+        <h2 class="display">The full dental operational <em>stack.</em></h2>
+        <p>Pick the layers you need. Run one service, or hand us the entire back office.</p>
+      </div>
+
+      <table class="svc-table fade-in">
+        <tbody>
+          <tr>
+            <td>Insurance verification</td>
+            <td>Full breakdown of benefits 48 hours before the appointment. Maximums, deductibles, frequency limits,
+              downgrades, missing tooth clauses, waiting periods — all documented in the chart before they sit down.
+            </td>
+          </tr>
+          <tr>
+            <td>Eligibility &amp; estimates</td>
+            <td>Real, accurate treatment estimates at presentation. No more "we'll call you" — patients accept treatment
+              the same day.</td>
+          </tr>
+          <tr>
+            <td>Dental billing &amp; claims</td>
+            <td>CDT-coded, X-ray-attached, narrative-included claims submitted within 24 hours of the procedure.
+              Clean-claim rate above 98%.</td>
+          </tr>
+          <tr>
+            <td>PPO write-off recovery</td>
+            <td>We audit your fee schedules against actual EOBs. We find write-offs that shouldn't have been written
+              off. We re-submit and appeal.</td>
+          </tr>
+          <tr>
+            <td>AR follow-up</td>
+            <td>We work every aging bucket — 30, 60, 90, 120+. Payer calls, re-submissions, narrative appeals. Most
+              clients see AR days drop below 25 within 90 days.</td>
+          </tr>
+          <tr>
+            <td>Denial management</td>
+            <td>Every denial is categorized, prioritized, and appealed by a specialist who knows the payer playbook. Not
+              your office manager Googling "downgrade appeal letter."</td>
+          </tr>
+          <tr>
+            <td>Payment posting</td>
+            <td>EOBs posted accurately and reconciled daily. No more end-of-month surprises.</td>
+          </tr>
+          <tr>
+            <td>Patient billing</td>
+            <td>Statements sent on schedule. Patient calls answered with empathy and clarity. Balances followed up
+              without making patients feel hounded.</td>
+          </tr>
+          <tr>
+            <td>Front desk relief</td>
+            <td>Phones, scheduling, recall, hygiene reactivation, new patient intake. Either virtual coverage or full
+              takeover — your call.</td>
+          </tr>
+          <tr>
+            <td>Hygiene recall</td>
+            <td>We work your recall list. Inactive patients get reactivated. Unfilled blocks get filled. Production goes
+              up without you adding a chair.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="block warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">How we work</div>
+        <h2 class="display">We don't sit outside your practice. <em>We sit inside it.</em></h2>
+      </div>
+
+      <div class="steps fade-in">
+        <div class="step">
+          <span class="num">— 01</span>
+          <h4>We log into your software.</h4>
+          <p>Open Dental. Dentrix. Eaglesoft. Curve. Denticon. CareStack. We work where you work. No exports, no
+            portals, no "email us the file."</p>
+        </div>
+        <div class="step">
+          <span class="num">— 02</span>
+          <h4>We follow your workflow.</h4>
+          <p>We learn your SOPs, fee schedules, appointment types, provider notes, write-off rules. We plug into how you
+            already run.</p>
+        </div>
+        <div class="step">
+          <span class="num">— 03</span>
+          <h4>We report to your office manager.</h4>
+          <p>Daily Slack, Teams, or email. Weekly KPI review. Monthly working session. We function as a department, not
+            a vendor.</p>
+        </div>
+        <div class="step">
+          <span class="num">— 04</span>
+          <h4>We use your communication tools.</h4>
+          <p>Our team is on your channels. They join huddles if you want. They email patients from your domain. To
+            everyone outside, they are your practice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI + HUMAN -->
+  <section class="block dark">
+    <div class="container">
+      <div class="aihum fade-in">
+        <div>
+          <div class="eyebrow">The AI + human advantage</div>
+          <h2 class="display" style="margin-top:20px;">AI does the lifting. <em>Humans do the thinking.</em></h2>
+          <p>Insurance verification calls that used to take 18 minutes? Automated eligibility checks pull most of it in
+            under 30 seconds. The 20% that needs a real human voice on the line — we make that call.</p>
+          <p>Claim scrubbing? Every claim validated against payer rules before it goes out. First-pass clean rate above
+            98%.</p>
+          <p>Denials? Categorized and routed to the right specialist queue within minutes — not weeks of sitting in
+            someone's "to-do" pile.</p>
+          <p
+            style="color: var(--paper); font-style: italic; font-family: var(--serif); font-size: 20px; margin-top: 24px;">
+            You don't want a chatbot calling Delta Dental. You don't want AI explaining a $1,200 balance to a confused
+            patient. Neither do we.</p>
+        </div>
+
+        <div class="ledger">
+          <div class="ledger-row head">
+            <div class="ai">— AI handles</div>
+            <div class="hu">— Humans handle</div>
+          </div>
+          <div class="ledger-row">
+            <div class="item ai">Eligibility checks <span>30 seconds, automated</span></div>
+            <div class="item hu">Peer-to-peer calls <span>complex, judgment-driven</span></div>
+          </div>
+          <div class="ledger-row">
+            <div class="item ai">Claim scrubbing <span>payer-rule validated</span></div>
+            <div class="item hu">Narrative appeals <span>specialty-trained</span></div>
+          </div>
+          <div class="ledger-row">
+            <div class="item ai">Denial categorization <span>routed in minutes</span></div>
+            <div class="item hu">Patient conversations <span>tone, empathy, clarity</span></div>
+          </div>
+          <div class="ledger-row">
+            <div class="item ai">Document classification <span>indexed automatically</span></div>
+            <div class="item hu">PPO contract analysis <span>recover write-offs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="block" id="results">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">By the numbers</div>
+        <h2 class="display">What changes in the <em>first 90 days.</em></h2>
+        <p>Pulled from active dental clients across general, ortho, perio, and cosmetic practices.</p>
+      </div>
+
+      <div class="results-row fade-in">
+        <div class="result-block">
+          <div class="v">+24<span class="unit">%</span></div>
+          <div class="d">Average monthly collections lift across active dental clients.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">25<span class="unit">d</span></div>
+          <div class="d">AR days dropped from a 47-day baseline within 90 days.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">98<span class="unit">%</span></div>
+          <div class="d">First-pass clean-claim rate on submitted dental claims.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">$7.5<span class="unit">k</span></div>
+          <div class="d">Average PPO write-off recovery in the first 60 days.</div>
+        </div>
+      </div>
+
+      <div class="testi fade-in">
+        <div class="q">
+          We were producing well over $200k a month and collecting $145k. Three months in with HBS, we collected $189k
+          on the same production. I didn't add a chair, a hygienist, or a biller. They just stopped the leak.
+        </div>
+        <div class="attr">
+          <div class="av">M</div>
+          <div>
+            <div class="nm">Dr. M.</div>
+            <div class="role">4-op general practice · Phoenix, AZ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NOT HIRE IN-HOUSE -->
+  <section class="block warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">The honest comparison</div>
+        <h2 class="display">Why not just hire an <em>in-house biller?</em></h2>
+        <p>You already tried. That's why you're reading this. Let's do the math out loud.</p>
+      </div>
+
+      <div class="compare fade-in">
+        <div class="compare-row head">
+          <div class="col left">In-house biller</div>
+          <div class="col right">Embedded HBS team</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">$48,000-$68,000 salary</div>
+          <div class="col right">Percentage of collections — we earn it back</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">+ benefits, PTO, training, payroll tax</div>
+          <div class="col right">No overhead, no benefits, no taxes</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">6-month learning curve</div>
+          <div class="col right">Live in 10-14 business days</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">Out sick = work stops</div>
+          <div class="col right">Cross-covered every day</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">One person, one perspective</div>
+          <div class="col right">Specialist team — billing, AR, verification, appeals</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">14-month average tenure</div>
+          <div class="col right">Embedded long-term, no turnover risk</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">You manage them</div>
+          <div class="col right">They report to you. We manage them.</div>
+        </div>
+      </div>
+
+      <div class="insight fade-in">
+        And the part nobody talks about: when your one in-house biller leaves, <em>all the institutional knowledge
+          leaves with them.</em> With an embedded team, the SOPs are documented, the system runs, and the work continues
+        regardless.
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="cta">
+    <div class="final-cta-glow"></div>
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center; color:rgba(250,247,242,0.55);">Let's look at your numbers
+      </div>
+      <h2 class="display">Send us last month's report. <em>We'll show you the leak.</em></h2>
+      <p>Send your production summary and aging report. Within 5 business days, we'll come back with a free audit
+        showing exactly where the gap is — and what we'd do about it. No pitch. No pressure. If the audit shows you
+        don't need us, we'll tell you.</p>
+      <div class="actions">
+        <a href="#" class="btn btn-light">Book a discovery call
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#" class="btn btn-ghost" style="color:var(--paper); border-color:rgba(250,247,242,0.3);"
+          id="audit">Request a free dental audit</a>
+      </div>
+      <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">HIPAA</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 8) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
-</script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
 
 </body>
+
 </html>
