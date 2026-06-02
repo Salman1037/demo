@@ -392,8 +392,8 @@ nav.top.scrolled {
   border-radius: var(--radius-lg);
   padding: 28px;
   position: relative;
-  box-shadow: 0 60px 80px -40px rgba(10, 22, 40, 0.35);
-  transform: rotate(-1.5deg);
+  box-shadow: 0 60px 80px -40px rgba(10, 22, 40, 0.35), 0 30px 40px -20px rgba(10, 22, 40, 0.15);
+  transform: rotate(-1deg);
   transition: transform 0.6s var(--ease);
 }
 .hero-card:hover {
@@ -406,6 +406,82 @@ nav.top.scrolled {
   letter-spacing: 0.15em;
   color: rgba(250, 247, 242, 0.5);
   margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 20px;
+}
+
+.hero-card-header .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(250, 247, 242, 0.5);
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.15);
+  animation: pulse 2s infinite;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(0, 200, 150, 0.05);
+  }
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.stat-cell {
+  background: var(--ink);
+  padding: 18px 16px;
+}
+
+.stat-cell .v {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-cell .v .delta {
+  color: var(--signal);
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.stat-cell .k {
+  font-size: 11px;
+  color: rgba(250, 247, 242, 0.55);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 /* Bar charts inside hero card */
 .bar-set { 
@@ -530,9 +606,9 @@ nav.top.scrolled {
 .denial-row:last-of-type { border-bottom: none; }
 .denial-lbl { font-size: 12px; color: var(--ink-mute); }
 .denial-val { font-family: var(--mono); font-size: 11px; font-weight: 500; }
-.denial-val.good  { color: var(--signal-deep); }
-.denial-val.warn  { color: #B45309; }
-.denial-val.bad   { color: var(--danger); }
+.denial-val.good  { color: var(--signal); }
+.denial-val.warn  { color: var(--accent); }
+.denial-val.bad   { color: #FF8585; }
 .denial-pill {
   font-family: var(--mono);
   font-size: 9px;
@@ -540,9 +616,9 @@ nav.top.scrolled {
   padding: 2px 8px;
   border-radius: 100px;
 }
-.pill-good  { background: rgba(0,200,150,0.12); color: var(--signal-deep); }
-.pill-warn  { background: rgba(245,158,11,0.12); color: #92400E; }
-.pill-bad   { background: rgba(214,69,69,0.1); color: var(--danger); }
+.pill-good  { background: rgba(0,200,150,0.12); color: var(--signal); }
+.pill-warn  { background: rgba(212,165,116,0.12); color: var(--accent); }
+.pill-bad   { background: rgba(214,69,69,0.1); color: #FF8585; }
 
 /* ── SECTIONS (blocks) ── */
 .block {

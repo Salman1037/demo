@@ -471,6 +471,17 @@ nav.top.scrolled {
     transform: rotate(0deg) translateY(-4px);
 }
 
+.hero-card h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(250, 247, 242, 0.5);
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .hero-card-header {
     display: flex;
     justify-content: space-between;
@@ -510,6 +521,7 @@ nav.top.scrolled {
         box-shadow: 0 0 0 7px rgba(0, 200, 150, 0.05);
     }
 }
+    
 
 .stat-grid {
     display: grid;
@@ -1730,6 +1742,12 @@ footer {
     margin: 16px 0;
 }
 
+.card-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 .card-tag {
     display: inline-flex;
     align-items: center;
@@ -2420,6 +2438,17 @@ footer {
     animation: pulse 2s infinite
 }
 
+.live-dot-pill {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--danger);
+    box-shadow: 0 0 0 4px rgba(214, 69, 69, .15);
+    animation: pulse 2s infinite;
+    display: inline-block;
+    margin-right: 6px;
+}
+
 @keyframes pulse {
 
     0%,
@@ -2529,7 +2558,7 @@ footer {
 }
 
 .sv.a {
-    color: var(--amber)
+    color: var(--accent)
 }
 
 .sv.r {
@@ -2708,7 +2737,7 @@ footer {
 }
 
 .val.warn {
-    color: var(--amber)
+    color: var(--accent)
 }
 
 .val.bad {
