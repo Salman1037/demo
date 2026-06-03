@@ -67,15 +67,327 @@ img { max-width: 100%; display: block; }
 .eyebrow--light { color: rgba(250,247,242,0.5); }
 
 /* ── NAV ── */
-nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(250,247,242,0.82); border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease); }
-nav.top.scrolled { border-bottom-color: var(--paper-line); }
-.nav-inner { max-width: var(--max); margin: 0 auto; padding: 18px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-.logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
-.logo-mark { width: 28px; height: 28px; background: var(--ink); border-radius: 50%; position: relative; flex-shrink: 0; }
-.logo-mark::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--signal); }
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { color: var(--ink-soft); font-size: 14px; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--ink); }
+/* Navigation */
+nav.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(250, 247, 242, 0.78);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease);
+}
+
+nav.top.scrolled {
+    border-bottom-color: var(--paper-line);
+}
+
+.nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--ink);
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+}
+
+.nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--ink);
+    transition: width 0.3s var(--ease);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.3s var(--ease);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.dropdown-toggle:hover {
+    color: var(--signal);
+    background: transparent;
+}
+
+.dropdown-toggle .chevron {
+    font-size: 9px;
+    transition: transform 0.3s var(--ease);
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+.nav-dropdown:hover .dropdown-toggle .chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    background: var(--white);
+    border: 1px solid var(--paper-line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
+    margin-top: 8px;
+    z-index: 1000;
+    min-width: 280px;
+    max-width: 100vw;
+}
+
+.dropdown-menu.dropdown-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    min-width: 500px;
+}
+
+.dropdown-menu.dropdown-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    min-width: 680px;
+}
+
+.dropdown-menu.dropdown-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    min-width: 900px;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.column-header {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.column-header::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+    margin-right: 8px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 12px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s var(--ease);
+    border-radius: 4px;
+    position: relative;
+}
+
+.dropdown-menu a:hover {
+    background: var(--paper-warm);
+    color: var(--ink);
+    padding-left: 16px;
+}
+
+.dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: var(--signal);
+    border-radius: 2px;
+    transition: height 0.2s var(--ease);
+}
+
+.dropdown-menu a:hover::before {
+    height: 16px;
+}
+
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        border-radius: 0;
+        box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .dropdown-menu.dropdown-grid-2 {
+        grid-template-columns: 1fr;
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-menu.dropdown-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-column {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .dropdown-menu {
+        left: -10px;
+        right: -10px;
+        padding: 16px;
+    }
+
+    .dropdown-menu.dropdown-grid-2,
+    .dropdown-menu.dropdown-grid-3,
+    .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: 1fr;
+        min-width: calc(100vw - 32px);
+    }
+
+    .column-header {
+        font-size: 10px;
+    }
+
+    .dropdown-menu a {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
 
 /* ── BUTTONS ── */
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--radius); font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: background 0.2s var(--ease), color 0.2s, transform 0.15s; white-space: nowrap; }
@@ -322,11 +634,152 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
 }
 </style></head>
 <body>
-<nav class="top" id="nav"><div class="nav-inner">
-  <a href="/" class="logo"><span class="logo-mark"></span><span>Hired<em style="font-style:italic"> Billing </em>Support</span></a>
-  <ul class="nav-links"><li><a href="#pain">The problem</a></li><li><a href="#solution">Our approach</a></li><li><a href="#services">Services</a></li><li><a href="#results">Outcomes</a></li></ul>
-  <a href="#cta" class="btn btn-primary">Book a call <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-</div></nav>
+ <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+    
+
+      <!-- Hire Talent Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="Hire/dental.html">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Enterprise & BILLING</div>
+            <a href="Hire/enterprise.html">Enterprise & Billing Specialists</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">MSO / Payer Partners</div>
+            <a href="Hire/mso.html">MSO / Payer Partners</a>
+            <!-- <a href="#">Contact Hiring Team</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="Solutions/rcm-management.html">Revenue Cycle Management</a>
+            <a href="Solutions/medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="Solutions/ar-management.html">AR Management</a>
+            <a href="Solutions/ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="Solutions/old-aging-ar.html">Old & Aging AR Recovery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="Solutions/medical-coding.html">Medical Coding</a>
+            <a href="Solutions/medical-auditing.html">Medical Auditing</a>
+            <a href="Solutions/compliance-reporting.html">Compliance & Reporting</a>
+            <a href="Solutions/quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="Solutions/provider-credential.html">Provider Credential</a>
+            <a href="Solutions/payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="Solutions/practice-launch.html">Practice Launch</a>
+            <a href="Solutions/operations-management.html">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="#">Marketing & Patient Engagement</a>
+            <a href="#">Virtual Healthcare Solutions</a>
+            <a href="#">Analytics & Reporting</a>
+            <a href="#">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who We Serve Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">BY PRACTICE TYPE</div>
+            <a href="Hire/dental.html">Dental Practices</a>
+            <a href="Hire/medical.html">Medical Practices</a>
+            <a href="Hire/enterprise.html">Enterprise & Medical Groups</a>
+            <a href="Hire/mso.html">MSO / Payer Partners</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">BY SPECIALTY</div>
+            <a href="#">Primary Care</a>
+            <a href="#">Behavioral Health</a>
+            <a href="#">Urgent Care</a>
+            <a href="#">Orthopedics & Surgery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">RESOURCES</div>
+            <a href="#">Case Studies</a>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Security & Compliance</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
 <section class="service-hero">
   <div class="service-hero-bg"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="service-hero-grain"></div></div>
   <div class="service-hero-inner">
