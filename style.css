@@ -187,50 +187,74 @@ nav.top.scrolled {
     color: var(--ink);
     text-decoration: none;
     font-size: 14px;
-    font-weight: 600;
-    padding: 10px 16px;
-    border-radius: 6px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
     cursor: pointer;
-    border: 1px solid var(--ink);
+    border: none;
     background: transparent;
     transition: all 0.3s var(--ease);
     display: flex;
     align-items: center;
     gap: 6px;
+    position: relative;
 }
 
 .dropdown-toggle:hover {
-    background: var(--ink);
-    color: var(--paper);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(10, 22, 40, 0.15);
+    color: var(--signal);
+    background: transparent;
 }
 
-.dropdown-toggle::after {
-    content: '▼';
-    font-size: 10px;
+.dropdown-toggle .chevron {
+    font-size: 9px;
     transition: transform 0.3s var(--ease);
+    opacity: 0.6;
+    margin-left: 4px;
 }
 
-.nav-dropdown:hover .dropdown-toggle::after {
+.nav-dropdown:hover .dropdown-toggle .chevron {
     transform: rotate(180deg);
+    opacity: 1;
 }
 
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -20px;
     background: var(--white);
     border: 1px solid var(--paper-line);
     border-radius: var(--radius-lg);
-    box-shadow: 0 20px 40px rgba(10, 22, 40, 0.12);
-    min-width: 200px;
+    box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+    padding: 24px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-12px);
     transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
-    margin-top: 12px;
-    overflow: hidden;
+    margin-top: 8px;
+    z-index: 1000;
+    min-width: 280px;
+    max-width: 100vw;
+}
+
+.dropdown-menu.dropdown-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    min-width: 500px;
+}
+
+.dropdown-menu.dropdown-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    min-width: 680px;
+}
+
+.dropdown-menu.dropdown-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    min-width: 900px;
 }
 
 .nav-dropdown:hover .dropdown-menu {
@@ -239,30 +263,79 @@ nav.top.scrolled {
     transform: translateY(0);
 }
 
+.dropdown-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.column-header {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.column-header::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+    margin-right: 8px;
+}
+
 .dropdown-menu a {
     display: block;
-    padding: 14px 20px;
+    padding: 10px 12px;
     color: var(--ink-soft);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.2s var(--ease);
-    border-bottom: 1px solid var(--paper-line);
-}
-
-.dropdown-menu a:last-child {
-    border-bottom: none;
+    border-radius: 4px;
+    position: relative;
 }
 
 .dropdown-menu a:hover {
     background: var(--paper-warm);
     color: var(--ink);
-    padding-left: 24px;
+    padding-left: 16px;
+}
+
+.dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: var(--signal);
+    border-radius: 2px;
+    transition: height 0.2s var(--ease);
+}
+
+.dropdown-menu a:hover::before {
+    height: 16px;
 }
 
 @media (max-width: 900px) {
     .nav-links {
         display: none;
+    }
+
+    .nav-dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        font-size: 13px;
+        padding: 6px 10px;
     }
 
     .dropdown-menu {
@@ -273,6 +346,64 @@ nav.top.scrolled {
         min-width: 100%;
         border-radius: 0;
         box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .dropdown-menu.dropdown-grid-2 {
+        grid-template-columns: 1fr;
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-menu.dropdown-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-column {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .dropdown-menu {
+        left: -10px;
+        right: -10px;
+        padding: 16px;
+    }
+
+    .dropdown-menu.dropdown-grid-2,
+    .dropdown-menu.dropdown-grid-3,
+    .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: 1fr;
+        min-width: calc(100vw - 32px);
+    }
+
+    .column-header {
+        font-size: 10px;
+    }
+
+    .dropdown-menu a {
+        font-size: 13px;
+        padding: 8px 10px;
     }
 }
 
@@ -471,17 +602,6 @@ nav.top.scrolled {
     transform: rotate(0deg) translateY(-4px);
 }
 
-.hero-card h4 {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(250, 247, 242, 0.5);
-    margin-bottom: 20px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
 .hero-card-header {
     display: flex;
     justify-content: space-between;
@@ -521,7 +641,6 @@ nav.top.scrolled {
         box-shadow: 0 0 0 7px rgba(0, 200, 150, 0.05);
     }
 }
-    
 
 .stat-grid {
     display: grid;
@@ -1742,12 +1861,6 @@ footer {
     margin: 16px 0;
 }
 
-.card-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
 .card-tag {
     display: inline-flex;
     align-items: center;
@@ -2438,17 +2551,6 @@ footer {
     animation: pulse 2s infinite
 }
 
-.live-dot-pill {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--danger);
-    box-shadow: 0 0 0 4px rgba(214, 69, 69, .15);
-    animation: pulse 2s infinite;
-    display: inline-block;
-    margin-right: 6px;
-}
-
 @keyframes pulse {
 
     0%,
@@ -2558,7 +2660,7 @@ footer {
 }
 
 .sv.a {
-    color: var(--accent)
+    color: var(--amber)
 }
 
 .sv.r {
@@ -2737,7 +2839,7 @@ footer {
 }
 
 .val.warn {
-    color: var(--accent)
+    color: var(--amber)
 }
 
 .val.bad {

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Practice Launch Support | Hired Billing Support</title><meta name="description" content="Hired Billing Support helps healthcare practices launch with the operational infrastructure they need — credentialing, payer enrollment, billing setup, intake workflow, EHR coordination, and RCM launch planning before patient volume grows."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>/* ================================================================
+   HBS PRACTICE MANAGEMENT — SHARED STYLESHEET
+   Extends: HBS Redesign by Talha design system
+   Fraunces · Inter Tight · JetBrains Mono
+   Palette: ink / paper / signal + amber + danger
+   Section: Provider Credentialing · Payer Enrollment
+            Practice Launch · Operations Management
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --ink:          #0A1628;
+  --ink-soft:     #1B2942;
+  --ink-mute:     #475569;
+  --paper:        #FAF7F2;
+  --paper-warm:   #F2EDE3;
+  --paper-line:   #E8E2D5;
+  --white:        #FFFFFF;
+  --signal:       #00C896;
+  --signal-deep:  #00876B;
+  --signal-pale:  rgba(0,200,150,0.08);
+  --amber:        #F59E0B;
+  --amber-deep:   #B45309;
+  --amber-pale:   rgba(245,158,11,0.08);
+  --danger:       #D64545;
+  --danger-pale:  rgba(214,69,69,0.07);
+  --radius:       4px;
+  --radius-lg:    12px;
+  --max:          1280px;
+  --gutter:       clamp(20px, 4vw, 48px);
+  --serif:        'Fraunces', 'Times New Roman', serif;
+  --sans:         'Inter Tight', -apple-system, sans-serif;
+  --mono:         'JetBrains Mono', monospace;
+  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.5; font-size: 16px; overflow-x: hidden; }
+::selection { background: var(--ink); color: var(--paper); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── LAYOUT ── */
+.container   { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.two-col     { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.two-col--sm { gap: 48px; }
+.three-col   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+
+/* ── TYPOGRAPHY ── */
+.display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; font-variation-settings: "opsz" 144; }
+.display em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.display--light { color: var(--paper); }
+.display--light em { color: rgba(250,247,242,0.5); }
+.eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+.eyebrow--light { color: rgba(250,247,242,0.5); }
+
+/* ── NAV ── */
+nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(250,247,242,0.82); border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease); }
+nav.top.scrolled { border-bottom-color: var(--paper-line); }
+.nav-inner { max-width: var(--max); margin: 0 auto; padding: 18px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+.logo-mark { width: 28px; height: 28px; background: var(--ink); border-radius: 50%; position: relative; flex-shrink: 0; }
+.logo-mark::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--signal); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { color: var(--ink-soft); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--radius); font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: background 0.2s var(--ease), color 0.2s, transform 0.15s; white-space: nowrap; }
+.btn:hover { transform: translateY(-1px); }
+.btn .arrow { transition: transform 0.2s; flex-shrink: 0; }
+.btn:hover .arrow { transform: translateX(3px); }
+.btn-primary  { background: var(--ink);   color: var(--paper); border-color: var(--ink); }
+.btn-primary:hover { background: var(--ink-soft); }
+.btn-ghost    { background: transparent;  color: var(--ink);   border-color: var(--paper-line); }
+.btn-ghost:hover { background: var(--paper-warm); border-color: var(--ink-mute); }
+.btn-light    { background: var(--paper); color: var(--ink);   border-color: var(--paper); }
+.btn-light:hover { background: var(--paper-warm); }
+.btn-lg { padding: 14px 28px; font-size: 15px; }
+
+/* ── HERO (service-hero) ── */
+.service-hero { background: var(--paper); padding: 140px 0 100px; position: relative; overflow: hidden; }
+.service-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.service-hero-bg svg { width: 100%; height: 100%; }
+.service-hero-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); opacity: 0.4; }
+.service-hero-inner { position: relative; z-index: 1; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+.service-hero-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--signal-deep); background: rgba(0,200,150,0.08); border: 1px solid rgba(0,200,150,0.2); padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+.service-hero-title { font-family: var(--serif); font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; color: var(--ink); margin-bottom: 24px; font-variation-settings: "opsz" 144; }
+.service-hero-title em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.service-hero-subtitle { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px; }
+.service-hero-lede { font-size: 15px; line-height: 1.75; color: var(--ink-mute); max-width: 540px; margin-bottom: 40px; }
+.service-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Hero Card */
+.hero-card {
+  background: var(--ink); /* Dark background */
+  color: var(--paper); /* Off-white text */
+  border-radius: var(--radius-lg); /* 12px */
+  padding: 28px;
+  position: relative;
+  box-shadow:
+    0 60px 80px -40px rgba(10, 22, 40, 0.35),
+    0 30px 40px -20px rgba(10, 22, 40, 0.15);
+  transform: rotate(-1.5deg);
+  transition: transform 0.6s var(--ease);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+}
+
+.hero-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.hero-card-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(250, 247, 242, 0.5); /* 50% opacity white */
+  margin-bottom: 20px;
+}
+
+/* Checklist Items */
+.checklist-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* Lighter border for dark mode */
+}
+
+.checklist-card:last-of-type {
+  border-bottom: none;
+}
+
+.check-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 8px;
+}
+
+.check-done {
+  background: var(--signal); /* Green */
+  color: var(--ink); /* Dark text for contrast */
+}
+
+.check-pending {
+  background: var(--amber-pale); /* Light amber */
+  border: 1px solid var(--amber);
+  color: var(--amber-deep);
+}
+
+.check-open {
+  background: rgba(255, 255, 255, 0.04); /* Very subtle */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: transparent;
+}
+
+.checklist-text {
+  font-size: 11px;
+  color: rgba(250, 247, 242, 0.8); /* 80% opacity white */
+  line-height: 1.4;
+}
+
+.checklist-text.done {
+  color: rgba(250, 247, 242, 0.5); /* 50% opacity white */
+  text-decoration: line-through;
+}
+
+/* Dashboard Divider */
+.dash-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08); /* Subtle divider */
+  margin: 14px 0;
+}
+
+/* Dashboard Stats */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.dash-stat {
+  background: rgba(255, 255, 255, 0.04); /* Very subtle */
+  border-radius: var(--radius);
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.dash-stat-num {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--signal-deep); /* Dark green */
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.dash-stat-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: rgba(250, 247, 242, 0.5); /* 50% opacity white */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Gap Callout */
+.gap-callout {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: rgba(0, 200, 150, 0.08); /* Signal pale */
+  border-left: 2px solid var(--signal); /* Green border */
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.gc-lbl {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--signal-deep); /* Dark green */
+  margin-bottom: 4px;
+}
+
+.gc-val {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--paper); /* Off-white */
+}
+/* Status rows (for credentialing / enrollment dashboards) */
+.status-card { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--paper-line); }
+.status-card:last-of-type { border-bottom: none; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-green  { background: var(--signal); }
+.dot-amber  { background: var(--amber); }
+.dot-red    { background: var(--danger); }
+.dot-grey   { background: var(--paper-line); border: 1px solid var(--ink-mute); }
+.status-label { font-size: 12px; color: var(--ink-soft); flex: 1; }
+.status-value { font-family: var(--mono); font-size: 10px; font-weight: 500; }
+.status-value.done    { color: var(--signal-deep); }
+.status-value.pending { color: var(--amber-deep); }
+.status-value.blocked { color: var(--danger); }
+.status-value.waiting { color: var(--ink-mute); }
+.status-pill { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 100px; }
+.pill-green { background: rgba(0,200,150,0.12); color: var(--signal-deep); }
+.pill-amber { background: rgba(245,158,11,0.14); color: var(--amber-deep); }
+.pill-red   { background: rgba(214,69,69,0.1);  color: var(--danger); }
+.pill-grey  { background: var(--paper-warm); color: var(--ink-mute); }
+
+/* Dashboard divider + stats */
+.dash-divider { height: 1px; background: var(--paper-line); margin: 14px 0; }
+.dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.dash-stat { background: var(--paper-warm); border-radius: var(--radius); padding: 10px 8px; text-align: center; }
+.dash-stat-num   { font-family: var(--serif); font-size: 1.25rem; color: var(--signal-deep); display: block; line-height: 1; margin-bottom: 4px; }
+.dash-stat-label { font-family: var(--mono); font-size: 8px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
+.gap-callout { margin-top: 16px; padding: 12px 14px; background: var(--signal-pale); border-left: 2px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0; }
+.gc-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--signal-deep); margin-bottom: 4px; }
+.gc-val { font-family: var(--serif); font-size: 14px; color: var(--ink); }
+
+/* Checklist rows */
+.checklist-card { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--paper-line); }
+.checklist-card:last-of-type { border-bottom: none; }
+.check-icon { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 8px; }
+.check-done    { background: var(--signal); color: #fff; }
+.check-pending { background: var(--amber-pale); border: 1px solid var(--amber); color: var(--amber-deep); }
+.check-open    { background: var(--paper-warm); border: 1px solid var(--paper-line); color: transparent; }
+.checklist-text { font-size: 11px; color: var(--ink-soft); line-height: 1.4; }
+.checklist-text.done { color: var(--ink-mute); text-decoration: line-through; }
+
+/* ── SCROLL REVEALS ── */
+.reveal   { opacity: 0; transform: translateY(20px); }
+.reveal-1 { animation: rv 0.8s var(--ease) 0.10s forwards; }
+.reveal-2 { animation: rv 0.8s var(--ease) 0.22s forwards; }
+.reveal-3 { animation: rv 0.8s var(--ease) 0.36s forwards; }
+.reveal-4 { animation: rv 0.8s var(--ease) 0.50s forwards; }
+@keyframes rv { to { opacity: 1; transform: translateY(0); } }
+.fade-in  { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+.fade-in.in { opacity: 1; transform: translateY(0); }
+
+/* ── SERVICE SECTION BASE ── */
+.service-section { padding: 100px 0; position: relative; }
+.service-section--warm     { background: var(--paper-warm); }
+.service-section--ink      { background: var(--ink); color: var(--paper); }
+.service-section--ink-soft { background: var(--ink-soft); color: var(--paper); }
+.service-section--ink      .display,
+.service-section--ink-soft .display { color: var(--paper); }
+.service-section--ink      .display em,
+.service-section--ink-soft .display em { color: rgba(250,247,242,0.5); }
+.service-section--ink      .eyebrow,
+.service-section--ink-soft .eyebrow { color: rgba(250,247,242,0.5); }
+.service-section--ink      .eyebrow::before,
+.service-section--ink-soft .eyebrow::before { background: rgba(250,247,242,0.4); }
+.service-section--ink p,
+.service-section--ink-soft p { color: rgba(250,247,242,0.65); }
+
+/* ── SECTION HEADER ── */
+.section-header { margin-bottom: 64px; }
+.section-eyebrow { /* uses .eyebrow */ }
+.section-title { font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.06; margin-top: 16px; max-width: 780px; font-variation-settings: "opsz" 144; }
+.section-title em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.section-subtitle { margin-top: 18px; font-size: 16px; line-height: 1.75; color: var(--ink-mute); max-width: 560px; }
+.service-section--ink      .section-title,
+.service-section--ink-soft .section-title { color: var(--paper); }
+.service-section--ink      .section-title em,
+.service-section--ink-soft .section-title em { color: rgba(250,247,242,0.5); }
+.service-section--ink      .section-subtitle,
+.service-section--ink-soft .section-subtitle { color: rgba(250,247,242,0.6); }
+
+/* ── 
+    <p>The lease is signed. The equipment is ordered. The provider's schedule is filling. And then — two weeks before opening — someone asks whether credentialing is done. Whether payer applications have been submitted. Whether the billing system is configured. Whether staff know how to verify insurance before a patient arrives.</p>
+    <p>You already know how quickly a practice launch can turn into a stack of forms, portal deadlines, payer follow-ups, missing documents, and unanswered status requests — all competing for attention during the most operationally demanding period a new practice ever faces.</p>
+    <p class="highlight">"A practice cannot scale on clinical skill alone. It needs a backend operation that is credentialing-ready, payer-enrolled, billing-configured, and administratively structured before the first patient walks in — not months afterward."</p>
+    <p>Most practices open with clinical confidence and operational uncertainty. The clinical work starts immediately. The operational infrastructure catches up slowly, in real time, at the expense of revenue, staff stress, and patient experience. HBS helps practices close that gap before it opens.</p>
+   ── */
+.monologue { max-width: 780px; border-left: 2px solid var(--paper-line); padding-left: 32px; }
+.monologue p { font-size: 16px; line-height: 1.85; color: var(--ink-soft); margin-bottom: 20px; }
+.monologue p:last-child { margin-bottom: 0; }
+.monologue .highlight { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--ink); line-height: 1.5; }
+
+/* ── PAIN GRID ── */
+.pain-grid { display: flex; flex-direction: column; margin-top: 48px; }
+.pain-card { display: grid; grid-template-columns: 48px 1fr; gap: 0 24px; padding: 28px 0; border-bottom: 1px solid var(--paper-line); align-items: start; }
+.pain-card:last-child { border-bottom: none; }
+.pain-card-num { font-family: var(--serif); font-size: 13px; color: var(--ink-mute); padding-top: 3px; }
+.pain-card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+.pain-card p  { font-size: 14px; color: var(--ink-mute); line-height: 1.72; }
+
+/* ── SERVICE GRID ── */
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--paper-line); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); overflow: hidden; }
+.service-card { background: var(--white); padding: 28px; transition: background 0.2s; }
+.service-card:hover { background: var(--paper-warm); }
+.service-card-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--signal-deep); margin-bottom: 12px; display: block; }
+.service-card h4  { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.service-card p   { font-size: 13px; color: var(--ink-mute); line-height: 1.65; }
+
+/* ── PROCESS TIMELINE ── */
+.process-timeline { display: flex; flex-direction: column; }
+.process-step { display: grid; grid-template-columns: 48px 1fr; gap: 0 24px; padding: 28px 0; border-bottom: 1px solid var(--paper-line); align-items: start; }
+.process-step:last-child { border-bottom: none; }
+.process-step-num { font-family: var(--mono); font-size: 11px; color: var(--signal-deep); letter-spacing: 0.1em; padding-top: 4px; }
+.process-step h4  { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.process-step p   { font-size: 14px; color: var(--ink-mute); line-height: 1.72; }
+.service-section--ink .process-step      { border-color: rgba(250,247,242,0.1); }
+.service-section--ink .process-step h4   { color: var(--paper); }
+.service-section--ink .process-step p    { color: rgba(250,247,242,0.6); }
+.service-section--ink .process-step-num  { color: var(--signal); }
+
+/* ── WORKFLOW DASHBOARD (phase tracker) ── */
+.workflow-dashboard { display: flex; align-items: flex-start; gap: 0; margin-top: 48px; position: relative; overflow-x: auto; padding-bottom: 8px; }
+.workflow-dashboard::before { content: ''; position: absolute; top: 18px; left: 24px; right: 24px; height: 1px; background: var(--paper-line); z-index: 0; }
+.wf-node { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 110px; position: relative; z-index: 1; padding: 0 6px; }
+.wf-dot  { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 500; margin-bottom: 10px; border: 1px solid var(--paper-line); flex-shrink: 0; background: var(--white); }
+.wf-dot--signal { background: rgba(0,200,150,0.1); color: var(--signal-deep); border-color: rgba(0,200,150,0.25); }
+.wf-dot--amber  { background: rgba(245,158,11,0.1); color: var(--amber-deep); border-color: rgba(245,158,11,0.25); }
+.wf-dot--ink    { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.wf-node-label  { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.3; margin-bottom: 3px; }
+.wf-node-sub    { font-family: var(--mono); font-size: 9px; color: var(--ink-mute); text-align: center; letter-spacing: 0.06em; }
+
+/* ── AI + HUMAN SPLIT ── */
+.ai-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--paper-line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
+.ai-col { padding: 36px; }
+.ai-col--machine { background: var(--paper-warm); }
+.ai-col--human   { background: var(--white); }
+.ai-col-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--paper-line); }
+.ai-col--machine .ai-col-label { color: var(--signal-deep); }
+.ai-col--human   .ai-col-label { color: var(--ink-mute); }
+.ai-items { display: flex; flex-direction: column; gap: 14px; }
+.ai-item  { display: flex; gap: 12px; align-items: flex-start; }
+.ai-item-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.ai-col--machine .ai-item-dot { background: var(--signal); }
+.ai-col--human   .ai-item-dot { background: var(--ink); }
+.ai-item p { font-size: 13px; color: var(--ink-mute); line-height: 1.6; }
+
+/* ── OUTCOME GRID ── */
+.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
+.outcome-card { padding: 28px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); }
+.outcome-card-num { font-family: var(--serif); font-size: 2.4rem; font-weight: 400; color: var(--signal); line-height: 1; margin-bottom: 8px; }
+.outcome-card h4  { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.outcome-card p   { font-size: 13px; color: var(--ink-mute); line-height: 1.65; }
+
+/* ── COMPARE TABLE ── */
+.compare-wrap { background: var(--ink); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
+.compare-header { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 14px 28px; background: rgba(255,255,255,0.04); }
+.compare-header span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+.compare-header span.hbs-col { color: var(--signal); }
+.compare-row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 14px 28px; border-top: 1px solid rgba(255,255,255,0.05); }
+.compare-row span { font-size: 13px; }
+.c-label { color: rgba(250,247,242,0.55); }
+.c-hbs   { color: var(--signal); font-weight: 500; }
+.c-other { color: rgba(250,247,242,0.3); }
+
+/* ── PULL QUOTE ── */
+.pull-quote { font-family: var(--serif); font-size: clamp(1.1rem, 2.2vw, 1.45rem); font-style: italic; color: var(--ink); line-height: 1.65; padding: 28px 32px; border-left: 3px solid var(--signal); background: var(--signal-pale); border-radius: 0 var(--radius) var(--radius) 0; margin: 40px 0; max-width: 860px; }
+
+/* ── CTA SECTION ── */
+.cta-section { background: var(--ink); padding: 120px var(--gutter); text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse at center, rgba(0,200,150,0.2), transparent 70%); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.cta-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.06; color: var(--paper); margin: 16px 0 24px; font-variation-settings: "opsz" 144; }
+.cta-title em { font-style: italic; font-weight: 300; color: rgba(250,247,242,0.5); }
+.cta-text { font-size: 16px; line-height: 1.75; color: rgba(250,247,242,0.6); margin-bottom: 40px; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.trust-line { margin-top: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-size: 13px; }
+.footer-inner a { color: rgba(250,247,242,0.6); }
+.footer-inner a:hover { color: var(--signal); }
+.footer-legal { display: flex; gap: 24px; }
+
+/* ── 
+    <a class="related-link" href="/provider-credential">Provider Credentialing</a>
+    <a class="related-link" href="/payer-insurer-enrollment">Payer & Insurer Enrollment</a>
+    <a class="related-link" href="/operations-management">Operations Management</a>
+    <a class="related-link" href="/medical-billing-rcm">Medical Billing & RCM</a>
+    <a class="related-link" href="/medical-coding">Medical Coding</a>
+   STRIP ── */
+.related-strip { background: var(--paper-warm); border-top: 1px solid var(--paper-line); padding: 28px 0; }
+.related-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.related-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.related-link { font-size: 13px; color: var(--ink-soft); padding: 5px 14px; border: 1px solid var(--paper-line); border-radius: 100px; background: var(--white); transition: border-color 0.2s, color 0.2s; }
+.related-link:hover { border-color: var(--signal-deep); color: var(--signal-deep); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .service-hero-inner { grid-template-columns: 1fr; }
+  .service-hero-visual { display: none; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .ai-split { grid-template-columns: 1fr; }
+  .workflow-dashboard::before { display: none; }
+}
+@media (max-width: 720px) {
+  .service-section { padding: 64px 0; }
+  .service-hero   { padding: 110px 0 72px; }
+  .cta-section    { padding: 80px var(--gutter); }
+  .section-header { margin-bottom: 40px; }
+  .nav-links      { display: none; }
+  .compare-header, .compare-row { grid-template-columns: 1.5fr 1fr 1fr; padding: 12px 16px; }
+  .service-grid   { grid-template-columns: 1fr; }
+  .wf-node        { min-width: 80px; }
+}
+</style></head>
+<body>
+<nav class="top" id="nav"><div class="nav-inner">
+  <a href="/" class="logo"><span class="logo-mark"></span><span>Hired<em style="font-style:italic"> Billing </em>Support</span></a>
+  <ul class="nav-links"><li><a href="#pain">The problem</a></li><li><a href="#solution">Our approach</a></li><li><a href="#services">Services</a></li><li><a href="#results">Outcomes</a></li></ul>
+  <a href="#cta" class="btn btn-primary">Book a call <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+</div></nav>
+<section class="service-hero">
+  <div class="service-hero-bg"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="service-hero-grain"></div></div>
+  <div class="service-hero-inner">
+    <div class="service-hero-content">
+      <div class="service-hero-badge reveal reveal-1">Practice Management · Practice Launch</div>
+      <h1 class="service-hero-title reveal reveal-2">Your practice will be clinically ready long before<br><em>it is operationally ready. That gap costs more than most providers expect.</em></h1>
+      <p class="service-hero-subtitle reveal reveal-3">Clinical preparation and operational preparation move on completely different timelines. Credentialing takes months. Payer enrollment takes months. Billing setup, intake workflow, EHR configuration, and team training all take time that does not automatically happen while you are focused on clinical readiness.</p>
+      <p class="service-hero-lede reveal reveal-3">Hired Billing Support helps practices build the operational foundation they need before patient volume starts — coordinating credentialing, payer enrollment, billing workflow setup, admin structure, and RCM launch planning so the practice opens on a stronger backend than most providers start with.</p>
+      <div class="service-hero-actions reveal reveal-4">
+        <a href="#cta" class="btn btn-primary btn-lg">Plan my practice launch <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#pain" class="btn btn-ghost btn-lg">See what launch covers</a>
+      </div>
+    </div>
+    <div class="service-hero-visual reveal reveal-4" style="animation-delay:0.55s">
+      
+    <div class="hero-card">
+    <div class="hero-card-title">— Practice Launch Readiness · Pre-Open Checklist</div>
+    <div class="checklist-card"><div class="check-icon check-done">✓</div><span class="checklist-text done">Entity formation & tax ID obtained</span></div>
+    <div class="checklist-card"><div class="check-icon check-done">✓</div><span class="checklist-text done">NPI — Individual &amp; Group registered</span></div>
+    <div class="checklist-card"><div class="check-icon check-done">✓</div><span class="checklist-text done">CAQH profile built and attested</span></div>
+    <div class="checklist-card"><div class="check-icon check-pending">!</div><span class="checklist-text">Medicare PECOS submitted — Day 28</span></div>
+    <div class="checklist-card"><div class="check-icon check-pending">!</div><span class="checklist-text">Commercial payer apps — 3 submitted, 2 pending</span></div>
+    <div class="checklist-card"><div class="check-icon check-open"></div><span class="checklist-text">EHR billing module configured</span></div>
+    <div class="checklist-card"><div class="check-icon check-open"></div><span class="checklist-text">Eligibility verification workflow set up</span></div>
+    <div class="checklist-card"><div class="check-icon check-open"></div><span class="checklist-text">Patient intake forms finalized</span></div>
+    <div class="dash-divider"></div>
+    <div class="dash-stats">
+      <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">3</span><span class="dash-stat-label">Complete</span></div>
+      <div class="dash-stat"><span class="dash-stat-num" style="color:var(--amber-deep)">2</span><span class="dash-stat-label">In Progress</span></div>
+      <div class="dash-stat"><span class="dash-stat-num" style="color:var(--ink-mute)">3</span><span class="dash-stat-label">Not Started</span></div>
+    </div>
+    <div class="gap-callout"><div class="gc-lbl">— Estimated to billing-ready</div><div class="gc-val">6–8 weeks if started today. 4+ months if delayed.</div></div>
+  </div>
+
+</div>
+  </div>
+</section>
+<section class="service-section" id="pain"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The launch reality most providers discover too late</div><h2 class="section-title">Opening the doors is the easy part. <em>Opening the doors is the easy part.EM</em></h2></div>
+  <div class="monologue fade-in">
+    <p>The lease is signed. The equipment is ordered. The provider's schedule is filling. And then — two weeks before opening — someone asks whether credentialing is done. Whether payer applications have been submitted. Whether the billing system is configured. Whether staff know how to verify insurance before a patient arrives.</p>
+    <p>You already know how quickly a practice launch can turn into a stack of forms, portal deadlines, payer follow-ups, missing documents, and unanswered status requests — all competing for attention during the most operationally demanding period a new practice ever faces.</p>
+    <p class="highlight">"A practice cannot scale on clinical skill alone. It needs a backend operation that is credentialing-ready, payer-enrolled, billing-configured, and administratively structured before the first patient walks in — not months afterward."</p>
+    <p>Most practices open with clinical confidence and operational uncertainty. The clinical work starts immediately. The operational infrastructure catches up slowly, in real time, at the expense of revenue, staff stress, and patient experience. HBS helps practices close that gap before it opens.</p>
+  </div>
+</div></section>
+<section class="service-section service-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Where the problem lives</div><h2 class="section-title">The specific gaps <em>behind the surface.</em></h2></div>
+  <div class="pain-grid fade-in">
+    <div class="pain-card"><div class="pain-card-num">01</div><div><h4>Credentialing and enrollment timelines are underestimated</h4><p>New providers typically expect credentialing and payer enrollment to take four to six weeks. The reality — especially for Medicare, Medicaid, and multiple commercial payers simultaneously — is often three to five months. Starting this process after other launch preparations are complete is a costly sequence error.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">02</div><div><h4>Billing workflow is configured too late</h4><p>EHR billing module setup, clearinghouse enrollment, charge capture workflow, and claim submission testing require structured configuration time. When billing setup is treated as a task for the week before opening, errors appear in the first week of claims — and take additional weeks to correct.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">03</div><div><h4>Front desk workflow is undefined</h4><p>How does the front desk verify insurance? What happens when eligibility fails? Who handles prior authorization requests? How are co-pays collected? These questions need documented answers before the first patient — not answers improvised during it.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">04</div><div><h4>The practice opens but claims cannot be submitted</h4><p>Patients are seen. Charges are entered. And then billing discovers that two major payers have not yet approved enrollment, the clearinghouse is not connected, and the claim submission queue is backed up from the first day. The practice is operating. It is just not getting paid.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">05</div><div><h4>Staffing needs increase before revenue starts</h4><p>Staff are hired to manage patient volume. But credentialing is not done, payer enrollment is pending, and billing is not generating revenue yet. The practice is carrying operating costs before it can bill for the work being done — a gap that grows the longer operational setup takes.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">06</div><div><h4>No one is managing the launch timeline end to end</h4><p>Credentialing is being handled by someone. Billing setup is being handled by someone else. Payer enrollment is whoever had time this week. Without a single team coordinating the full launch timeline across all operational tracks simultaneously, timelines diverge and gaps appear.</p></div></div>
+  </div>
+</div></section>
+<section class="service-section service-section--ink" id="solution"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The solution</div><h2 class="section-title">A coordinated launch infrastructure <em>A coordinated launch infrastructureEM</em></h2><p class="section-subtitle">Hired Billing Support coordinates all operational launch tracks simultaneously — credentialing, payer enrollment, billing setup, intake workflow, and admin structure — so the practice opens on a backend foundation that is ready to generate revenue from day one.</p></div>
+  <div class="two-col fade-in">
+    <div class="process-timeline">
+      <div class="process-step"><div class="process-step-num">01</div><div><h4>Launch timeline assessment and planning</h4><p>We review your target opening date, current operational status, and identify every task that needs to be completed — and when it needs to start — to have the practice billing-ready on schedule.</p></div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div><h4>Credentialing and payer enrollment initiated early</h4><p>We start credentialing and payer enrollment immediately — not after other tasks are complete. These processes have the longest timelines and must run in parallel with everything else.</p></div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div><h4>Billing workflow setup and EHR coordination</h4><p>Charge capture workflow, clearinghouse enrollment, claim submission configuration, and billing module setup coordinated with your EHR team or vendor to ensure the system is ready to submit claims on opening day.</p></div></div>
+    </div>
+    <div class="process-timeline">
+      <div class="process-step"><div class="process-step-num">04</div><div><h4>Front desk and intake workflow documentation</h4><p>Eligibility verification process, prior authorization workflow, patient intake forms, co-pay collection, and insurance information capture — documented as step-by-step SOPs your staff can follow from day one.</p></div></div>
+      <div class="process-step"><div class="process-step-num">05</div><div><h4>Launch readiness review before opening</h4><p>Before the first patient, we review every operational track — what is complete, what is pending, and what contingencies exist for the items still in progress — so leadership opens with a clear-eyed picture of operational status.</p></div></div>
+      <div class="process-step"><div class="process-step-num">06</div><div><h4>Post-launch support as operations stabilize</h4><p>We stay engaged in the weeks after opening — supporting billing operations, completing pending enrollments, refining workflows, and ensuring revenue starts flowing before transitioning to an ongoing operations model.</p></div></div>
+    </div>
+  </div>
+</div></section>
+<section class="service-section" id="services"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Practice launch services</div><h2 class="section-title">Every operational track. <em>Every operational track.EM</em></h2></div>
+  <div class="service-grid fade-in">
+    <div class="service-card"><span class="service-card-num">01</span><h4>Launch Timeline Planning</h4><p>Complete launch roadmap built around your opening date — every operational task sequenced, assigned, and tracked against the timeline that allows billing to start on schedule.</p></div>
+    <div class="service-card"><span class="service-card-num">02</span><h4>Entity & Tax ID Setup Coordination</h4><p>Business entity formation, EIN setup, and legal structure coordination — ensuring the administrative foundation is in place for payer applications and billing operations.</p></div>
+    <div class="service-card"><span class="service-card-num">03</span><h4>NPI Registration</h4><p>Individual and Group NPI registration through NPPES, taxonomy code selection, and profile verification for accurate payer application submission.</p></div>
+    <div class="service-card"><span class="service-card-num">04</span><h4>Provider Credentialing</h4><p>Document collection, CAQH setup, and payer credentialing applications initiated at launch start — not left until the practice is nearly open.</p></div>
+    <div class="service-card"><span class="service-card-num">05</span><h4>Payer Enrollment</h4><p>Commercial, Medicare, and Medicaid enrollment applications submitted in parallel with credentialing — with follow-up, portal management, and EFT/ERA setup at approval.</p></div>
+    <div class="service-card"><span class="service-card-num">06</span><h4>Billing System Setup</h4><p>EHR billing module configuration, clearinghouse enrollment, claim submission testing, and charge capture workflow setup — ready to submit before the first appointment.</p></div>
+    <div class="service-card"><span class="service-card-num">07</span><h4>Front Desk Workflow Documentation</h4><p>Eligibility verification, prior authorization, intake forms, co-pay collection, and scheduling workflow documented as SOPs your staff can follow from day one.</p></div>
+    <div class="service-card"><span class="service-card-num">08</span><h4>Insurance Verification Process Setup</h4><p>Eligibility verification workflow built — which payers to check, when to check them, how to handle failures, and how to communicate coverage to patients before their visit.</p></div>
+    <div class="service-card"><span class="service-card-num">09</span><h4>RCM Launch Planning</h4><p>Revenue cycle management workflow designed for the practice's payer mix, specialty, and volume projection — with reporting structure and billing team responsibilities defined before launch.</p></div>
+    <div class="service-card"><span class="service-card-num">10</span><h4>Post-Launch Operations Support</h4><p>Ongoing operational and billing support in the weeks after opening — completing pending enrollments, resolving early billing issues, and ensuring revenue flows before transitioning to steady-state operations.</p></div>
+  </div>
+</div></section>
+<section class="service-section service-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Practice launch roadmap</div><h2 class="section-title">A sequenced operational timeline. <em>A sequenced operational timeline.EM</em></h2><p class="section-subtitle">Every operational track runs on a different timeline. The ones with the longest lead times need to start first — and that means starting before you think you need to.</p></div>
+  
+    <div class="workflow-dashboard fade-in">
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Pre-Open<br>M-4</div><div class="wf-node-label">Entity & NPI</div><div class="wf-node-sub">Tax ID · NPPES</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">M-4</div><div class="wf-node-label">Credentialing</div><div class="wf-node-sub">CAQH · Docs</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">M-4</div><div class="wf-node-label">Payer Apps</div><div class="wf-node-sub">All payers submitted</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">M-2</div><div class="wf-node-label">Billing Setup</div><div class="wf-node-sub">EHR · Clearinghouse</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">M-2</div><div class="wf-node-label">Workflows</div><div class="wf-node-sub">Front desk · Intake</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">M-1</div><div class="wf-node-label">Readiness Check</div><div class="wf-node-sub">All tracks reviewed</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--ink">Open</div><div class="wf-node-label">First Patients</div><div class="wf-node-sub">Claims submit Day 1</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Post</div><div class="wf-node-label">Revenue Active</div><div class="wf-node-sub">Full billing operational</div></div>
+    </div>
+  
+</div></section>
+<section class="service-section"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">How HBS supports your launch</div><h2 class="section-title">One team coordinating all operational tracks. <em>One team coordinating all operational tracks.EM</em></h2><p class="section-subtitle">Launch fails operationally when different tasks are owned by different people with different timelines and no one coordinating the full picture. We provide that coordination.</p></div>
+  <div class="process-timeline fade-in" style="max-width:780px">
+    <div class="process-step"><div class="process-step-num">01</div><div><h4>We map your full launch timeline in week one</h4><p>Every task identified, sequenced, and assigned a start date based on your opening target — with the long-lead tasks (credentialing, payer enrollment) identified as immediate priorities regardless of what else is happening.</p></div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div><h4>We run credentialing and enrollment in parallel from the start</h4><p>These processes take months. We start them immediately — before the EHR is configured, before staff is hired, before the physical space is ready. The timeline does not wait for other things to be done first.</p></div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div><h4>We configure billing operations ahead of opening</h4><p>EHR billing setup, clearinghouse connection, claim submission testing, and charge entry workflow — configured and tested before the first patient, not after the first denial.</p></div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div><h4>We document workflows your staff can use from day one</h4><p>Eligibility verification, prior authorization, patient intake, insurance collection — step-by-step SOPs for every administrative function, ready for staff training before opening.</p></div></div>
+    <div class="process-step"><div class="process-step-num">05</div><div><h4>We stay through stabilization, not just opening</h4><p>The first four to eight weeks after opening are when operational gaps surface. We stay engaged through stabilization — completing pending enrollments, resolving early billing issues, and refining workflows under real conditions.</p></div></div>
+  </div>
+</div></section>
+<section class="service-section service-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The AI + human advantage</div><h2 class="section-title">Technology handles the tracking. <em>People handle the follow-through.</em></h2></div>
+  <div class="ai-split fade-in">
+    <div class="ai-col ai-col--machine"><div class="ai-col-label">AI-assisted workflows</div><div class="ai-items">
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Launch timeline tracking and milestone monitoring</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Credentialing and enrollment status tracking across all providers</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Document collection checklist monitoring and reminder generation</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Billing configuration checklist tracking and readiness alerts</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Payer application follow-up scheduling and deadline monitoring</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Launch readiness dashboard and leadership reporting</p></div>
+  </div></div>
+    <div class="ai-col ai-col--human"><div class="ai-col-label">Human specialists</div><div class="ai-items">
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Launch timeline planning and task sequencing</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Credentialing and payer enrollment management</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>EHR billing configuration coordination with vendor</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Front desk and intake workflow documentation</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Post-launch billing support and operational troubleshooting</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Leadership guidance on operational decisions and priorities</p></div>
+  </div></div>
+  </div>
+  <div class="pull-quote fade-in">"The practices that launch well are not the ones that move fastest. They are the ones that started the right things first — and managed all the tracks simultaneously instead of sequentially."</div>
+</div></section>
+<section class="service-section" id="results"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">What changes</div><h2 class="section-title">A practice that opens billing-ready. <em>A practice that opens billing-ready.EM</em></h2></div>
+  <div class="outcome-grid fade-in">
+    <div class="outcome-card"><div class="outcome-card-num">⚡</div><h4>Claims submitting from the first week</h4><p>Credentialing complete, payer enrollment active, billing configured — the practice generates revenue from opening day rather than weeks or months into operations.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">◎</div><h4>Full operational visibility at launch</h4><p>Leadership knows what is complete, what is pending, and what the contingency is for every operational item — no surprises in the first week of patient care.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">✓</div><h4>Staff have documented workflows to follow</h4><p>Eligibility verification, prior authorization, intake, and billing processes documented before training — so staff start with clarity, not improvisation.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">$</div><h4>Revenue gap between opening and billing is minimized</h4><p>The period when the practice is operating but not yet collecting is shorter — reducing the financial pressure that delays cost a new practice in its first months.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">→</div><h4>A backend structure that supports growth</h4><p>Not just a launch — an operational foundation that scales as providers, locations, and patient volume increase.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">↓</div><h4>Early operational chaos avoided</h4><p>The first months of a new practice are intense enough clinically. Starting with a structured operational backend means administrative problems do not add to that pressure.</p></div>
+  </div>
+</div></section>
+<section class="service-section service-section--ink-soft"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Why launch planning affects revenue</div><h2 class="section-title">Practices that plan operationally <em>Practices that plan operationallyEM</em></h2><p class="section-subtitle">The difference between a well-planned launch and an unplanned one is not just stress — it is months of revenue delay, credentialing gaps, billing errors, and operational inefficiency that compound through the practice's first year.</p></div>
+  <div class="compare-wrap fade-in"><div class="compare-header"><span></span><span class="hbs-col">With HBS</span><span>Without It</span></div>
+    <div class="compare-row"><span class="c-label">Credentialing start date</span><span class="c-hbs">4+ months before opening</span><span class="c-other">1–2 months before — too late</span></div>
+    <div class="compare-row"><span class="c-label">First billable claim</span><span class="c-hbs">Opening week</span><span class="c-other">Weeks to months after open</span></div>
+    <div class="compare-row"><span class="c-label">Billing system configuration</span><span class="c-hbs">Complete before first appointment</span><span class="c-other">Configured under patient pressure</span></div>
+    <div class="compare-row"><span class="c-label">Staff workflow documentation</span><span class="c-hbs">Ready for training before open</span><span class="c-other">Built reactively after opening</span></div>
+    <div class="compare-row"><span class="c-label">Revenue gap (open to first payment)</span><span class="c-hbs">Minimized</span><span class="c-other">Extended — months in some cases</span></div>
+    <div class="compare-row"><span class="c-label">Post-launch operational issues</span><span class="c-hbs">Anticipated and managed</span><span class="c-other">Discovered and improvised</span></div>
+  </div>
+</div></section>
+<section class="cta-section" id="cta"><div class="cta-glow"></div><div class="cta-inner">
+  <div class="eyebrow eyebrow--light" style="justify-content:center">Start with a launch readiness assessment</div>
+  <h2 class="cta-title">If you are planning to open a practice in the next six months, <em>If you are planning to open a practice in the next six months,EM</em></h2>
+  <p class="cta-text">We start with a launch readiness assessment — mapping your timeline, identifying what needs to start immediately, and showing you where the gaps are between your current status and billing-ready. No commitment required to see the picture.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn btn-light btn-lg">Plan my practice launch <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to our launch team</a>
+  </div>
+  <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract required</div>
+</div></section>
+<div class="related-strip"><div class="container"><div class="related-inner"><span class="related-label">Related services</span>
+    <a class="related-link" href="/provider-credential">Provider Credentialing</a>
+    <a class="related-link" href="/payer-insurer-enrollment">Payer & Insurer Enrollment</a>
+    <a class="related-link" href="/operations-management">Operations Management</a>
+    <a class="related-link" href="/medical-billing-rcm">Medical Billing & RCM</a>
+    <a class="related-link" href="/medical-coding">Medical Coding</a>
+  </div></div></div>
+<footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
+</body></html>

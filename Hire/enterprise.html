@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Healthcare Operations & RCM for Multi-Location Groups | HBS</title>
+  <meta name="description"
+    content="Remote operations department for multi-location practices, medical groups, and chains. Standardized RCM, AR, prior auth, and operations management across every site." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+   <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+    
+
+      <!-- Hire Talent Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="#">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="#">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">INSURANCE & BILLING</div>
+            <a href="#">Insurance — CSR, Claims Processing</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">HIRING HELP</div>
+            <a href="#">Contact Hiring Team</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="../Solutions/rcm-management.html">Revenue Cycle Management</a>
+            <a href="../Solutions/medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="#">AR Management</a>
+            <a href="#">Old & Aging AR</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="../Solutions/medical-coding.html">Medical Coding</a>
+            <a href="../Solutions/medical-auditing.html">Medical Auditing</a>
+            <a href="../Solutions/compliance-reporting.html">Compliance & Reporting</a>
+            <a href="../Solutions/quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="#">Provider Credentialing</a>
+            <a href="#">Payer & Insurer Enrolment</a>
+            <a href="#">Practice Launch</a>
+            <a href="#">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="#">Marketing & Patient Engagement</a>
+            <a href="#">Virtual Healthcare Solutions</a>
+            <a href="#">Analytics & Reporting</a>
+            <a href="#">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who We Serve Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">BY PRACTICE TYPE</div>
+            <a href="dental.html">Dental Practices</a>
+            <a href="medical.html">Medical Practices</a>
+            <a href="enterprise.html">Enterprise & Medical Groups</a>
+            <a href="mso.html">MSO / Payer Partners</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">BY SPECIALTY</div>
+            <a href="#">Primary Care</a>
+            <a href="#">Behavioral Health</a>
+            <a href="#">Urgent Care</a>
+            <a href="#">Orthopedics & Surgery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">RESOURCES</div>
+            <a href="#">Case Studies</a>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Security & Compliance</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+    </div>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+      <div class="hero-grain"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow reveal reveal-1">For multi-location groups, medical chains &amp; large practices</div>
+        <h1 class="display reveal reveal-2">Eleven locations. Eleven different ways of doing the same thing. <em>That's
+            the <span class="ul">real</span> problem.</em></h1>
+        <p class="sub reveal reveal-3">Each office runs its own playbook. One location's AR is clean; another's is
+          buried. Your reports tell you the what — they can't tell you the why. And your payroll keeps growing while
+          your standardization doesn't.</p>
+        <p class="lede reveal reveal-3">Hired Billing Support becomes your remote operations department — a
+          standardized, accountable layer that runs RCM, AR, prior auth, scheduling, and operations management across
+          every site. One playbook. One scoreboard. One team you don't have to recruit.</p>
+        <div class="hero-actions reveal reveal-4">
+          <a href="#cta" class="btn btn-primary">Book an enterprise discovery call <svg class="arrow" width="14"
+              height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg></a>
+          <a href="#cta" class="btn btn-text">Request a multi-location ops assessment →</a>
+        </div>
+      </div>
+
+      <!-- Command center card -->
+      <div class="reveal reveal-4" style="animation-delay:.55s;">
+        <div class="hero-card">
+          <h4>— Multi-site command center · Live</h4>
+          <div class="site-grid">
+            <div class="site-tile">
+              <div class="sn">Austin</div>
+              <div class="site-row"><span>Collections</span><span class="sv g">96%</span></div>
+              <div class="site-row"><span>AR days</span><span class="sv g">22</span></div>
+              <div class="site-row"><span>Clean rate</span><span class="sv g">98%</span></div>
+            </div>
+            <div class="site-tile">
+              <div class="sn">Dallas</div>
+              <div class="site-row"><span>Collections</span><span class="sv g">93%</span></div>
+              <div class="site-row"><span>AR days</span><span class="sv g">26</span></div>
+              <div class="site-row"><span>Clean rate</span><span class="sv g">97%</span></div>
+            </div>
+            <div class="site-tile problem">
+              <div class="sn">Houston ⚠</div>
+              <div class="site-row"><span>Collections</span><span class="sv r">71%</span></div>
+              <div class="site-row"><span>AR days</span><span class="sv r">58</span></div>
+              <div class="site-row"><span>Clean rate</span><span class="sv a">89%</span></div>
+            </div>
+            <div class="site-tile">
+              <div class="sn">Phoenix</div>
+              <div class="site-row"><span>Collections</span><span class="sv g">94%</span></div>
+              <div class="site-row"><span>AR days</span><span class="sv g">24</span></div>
+              <div class="site-row"><span>Clean rate</span><span class="sv g">97%</span></div>
+            </div>
+            <div class="site-tile">
+              <div class="sn">Denver</div>
+              <div class="site-row"><span>Collections</span><span class="sv a">87%</span></div>
+              <div class="site-row"><span>AR days</span><span class="sv a">34</span></div>
+              <div class="site-row"><span>Clean rate</span><span class="sv g">95%</span></div>
+            </div>
+            <div class="site-tile">
+              <div class="sn">Tampa</div>
+              <div class="site-row"><span>Collections</span><span class="sv g">92%</span></div>
+              <div class="site-row"><span>AR days</span><span class="sv g">27</span></div>
+              <div class="site-row"><span>Clean rate</span><span class="sv g">96%</span></div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="lbl">Avg group AR days</span>
+            <span class="val">31.8 → needs to be 25</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAIN ═══════════ -->
+  <section class="block" id="pain">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">The growth tax</div>
+        <h2 class="display">You've grown. The operational complexity has grown <em>faster.</em></h2>
+      </div>
+
+      <div class="monologue fade-in">
+        <p>You added the fourth location and it felt fine. The seventh started to strain. By eleven, every operational
+          meeting is a tour of which office is broken this week.</p>
+        <p>You have an office manager at every site. They're good. But they all manage slightly differently. Your
+          highest-collecting location is great because Linda is great — not because the system is great. If Linda
+          leaves, the location regresses. You know this because it happened in Phoenix last year.</p>
+        <p>You have a billing director at HQ. She's drowning. She's overseeing eleven separate workflows that should be
+          one workflow.</p>
+        <p>Payroll has grown 40% in two years. Collections growth hasn't kept pace.</p>
+        <p><em>You don't need more people. You need a different operating model.</em></p>
+      </div>
+
+      <div class="pain-ledger fade-in">
+        <div class="pain-row">
+          <div class="pn">01</div>
+          <div class="ptitle">Eleven locations, eleven workflows.</div>
+          <div class="pdesc">Standardization decays as you scale. What was once "how we do things" becomes "how each
+            office does things." Reporting gaps widen. Quality varies by site.</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">02</div>
+          <div class="ptitle">Performance depends on people, not systems.</div>
+          <div class="pdesc">Your best office is best because of a person. When that person leaves, the location moves.
+            That's not a business — that's a craft shop.</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">03</div>
+          <div class="ptitle">Payroll is outpacing collections.</div>
+          <div class="pdesc">You added three billers, two MAs, and a coordinator last year. Collections grew 6%.
+            Operational margin shrank. The math is heading the wrong direction.</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">04</div>
+          <div class="ptitle">Reporting tells you what, not why.</div>
+          <div class="pdesc">AR is at 41 days. Houston is at 58. You see it on the dashboard. You don't see why. Or who.
+            Or what to do about it.</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">05</div>
+          <div class="ptitle">Standardization is a project nobody finishes.</div>
+          <div class="pdesc">Every quarter someone writes a new SOP doc. Three offices adopt it. Two don't. Six adopt
+            the parts they like. By next quarter, it's stale.</div>
+        </div>
+        <div class="pain-row">
+          <div class="pn">06</div>
+          <div class="ptitle">Talent acquisition is consuming leadership time.</div>
+          <div class="pdesc">Your billing director is interviewing instead of optimizing. Your COO is recruiting instead
+            of strategizing. You're solving last quarter's hiring problem while next quarter's bottleneck builds.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BEHIND THE SCENES ═══════════ -->
+  <section class="block warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">What's actually happening behind the scenes</div>
+        <h2 class="display">You don't have an execution problem. <em>You have an operating model problem.</em></h2>
+      </div>
+
+      <div class="monologue fade-in" style="max-width:820px;">
+        <p style="font-family:var(--sans);font-size:17px;line-height:1.65;color:var(--ink-mute);">Most multi-location
+          groups grow the same way: replicate the original office, hire a manager, hope it works. It scales until it
+          doesn't — usually somewhere between 5 and 12 locations, where the cost of inconsistency starts to outweigh the
+          cost of the next hire.</p>
+        <p style="font-family:var(--sans);font-size:17px;line-height:1.65;color:var(--ink-mute);">At that point, the
+          answer isn't "hire harder." It's not "buy better software." It's: <strong
+            style="color:var(--ink);">standardize the operational layer across the entire group, and run it from one
+            accountable place.</strong></p>
+      </div>
+
+      <div style="margin-top:48px;" class="fade-in">
+        <div class="eyebrow" style="margin-bottom:24px;">What the standardized layer looks like</div>
+        <ul class="ops-model-list">
+          <li><strong>One billing operation</strong> across all locations, not eleven</li>
+          <li><strong>One AR follow-up team</strong> working a single aging report, not eleven</li>
+          <li><strong>One prior-auth queue</strong> across all providers, with payer-specialized routing</li>
+          <li><strong>One front-desk overflow team</strong> supporting every location during volume spikes</li>
+          <li><strong>One operations lead</strong> embedded with your COO, owning KPIs across all sites</li>
+          <li><strong>One real-time dashboard</strong> showing performance by site, by provider, by payer</li>
+        </ul>
+      </div>
+
+      <div class="insight fade-in" style="margin-top:40px;">That's the remote operations department. <em>That's what we
+          build for groups.</em></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SOLUTION ═══════════ -->
+  <section class="block" id="solution">
+    <div class="container">
+      <div class="solution-card fade-in">
+        <div class="solution-glow"></div>
+        <div class="eyebrow" style="color:var(--signal);">— Our model</div>
+        <h2 class="display" style="margin-top:20px;">We become your remote <em>operations department.</em></h2>
+        <p>Hired Billing Support gives multi-location groups a standardized, embedded operations layer that runs the
+          work consistently across every site — at a fraction of the cost of doing it in-house. Same SOPs everywhere.
+          Same KPIs. Same accountability.</p>
+        <p>You'll have a dedicated operations lead from our side who functions as a department head — reporting into
+          your COO, owning the operational scorecard across all sites, and managing the team that executes underneath
+          them.</p>
+        <p>Your office managers stop fighting fires and start managing patient experience. Your billing director stops
+          chasing eleven workflows and starts running one. Your COO stops recruiting and starts strategizing.</p>
+        <p
+          style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--paper);margin-top:32px;max-width:700px;">
+          The chaos doesn't disappear because you wished it away. It disappears because someone is finally running it as
+          one operation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <section class="block warm" id="services">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">What we run for enterprise groups</div>
+        <h2 class="display">The full operational <em>stack — standardized.</em></h2>
+        <p>Every capability built to run across multiple sites, multiple EHRs, and multiple specialties from a single
+          accountable layer.</p>
+      </div>
+
+      <div class="svc-grid-2 fade-in">
+        <div class="svc-card">
+          <h4>Centralized RCM</h4>
+          <p>One billing operation across every site. Same SOPs, same QA standards, same KPIs. Site-level reporting,
+            group-level dashboard.</p>
+        </div>
+        <div class="svc-card">
+          <h4>Centralized AR Follow-Up</h4>
+          <p>One AR team working a single consolidated aging report. Payer-specialized routing. Cleared systematically,
+            not opportunistically.</p>
+        </div>
+        <div class="svc-card">
+          <h4>Centralized Prior Authorization</h4>
+          <p>Single queue across all providers and specialties. Payer-specialized authorizers. Turnaround tracked at the
+            group level.</p>
+        </div>
+        <div class="svc-card">
+          <h4>Insurance Verification at Scale</h4>
+          <p>Verifications batched and processed for every site's next-day schedule. Real-time visibility into coverage
+            issues before patients arrive.</p>
+        </div>
+        <div class="svc-card">
+          <h4>Front Desk Overflow &amp; Coverage</h4>
+          <p>Phone overflow during volume spikes, after-hours coverage, full virtual front desk for new locations during
+            ramp.</p>
+        </div>
+        <div class="svc-card">
+          <h4>Operations Management Layer</h4>
+          <p>A dedicated ops lead embedded with your leadership, owning standardization, KPIs, vendor management, and
+            continuous improvement.</p>
+        </div>
+        <div class="svc-card">
+          <h4>Group-Level Reporting &amp; Analytics</h4>
+          <p>Consolidated dashboards showing site comparison, provider comparison, payer comparison — with drill-down to
+            root cause.</p>
+        </div>
+        <div class="svc-card">
+          <h4>New Location &amp; M&amp;A Integration</h4>
+          <p>When you open or acquire a site, the operational layer is already standardized and ready. Billing and ops
+            integrated within 30-60 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HOW WE WORK ═══════════ -->
+  <section class="block">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">How we work</div>
+        <h2 class="display">We become a department <em>of your organization.</em></h2>
+      </div>
+
+      <div class="steps-5 fade-in">
+        <div class="step featured">
+          <span class="num">— 01</span>
+          <h4>Embedded ops leadership.</h4>
+          <p>A dedicated ops lead from our side, reporting to your COO or VP of Operations. Weekly sync. Monthly review.
+            Quarterly strategy.</p>
+        </div>
+        <div class="step">
+          <span class="num">— 02</span>
+          <h4>Standardized SOPs.</h4>
+          <p>We work with leadership to define one operational standard, then enforce it consistently. No more "how each
+            office does it."</p>
+        </div>
+        <div class="step">
+          <span class="num">— 03</span>
+          <h4>One scorecard.</h4>
+          <p>Collections by site, AR by site, clean-claim rate, denial rate, prior-auth turnaround. Real-time.
+            Drill-down.</p>
+        </div>
+        <div class="step">
+          <span class="num">— 04</span>
+          <h4>We work in your systems.</h4>
+          <p>Whatever each site uses. If you've consolidated, we work in that. Mid-migration? We work in both.</p>
+        </div>
+        <div class="step">
+          <span class="num">— 05</span>
+          <h4>Scale with your growth.</h4>
+          <p>New location? Operationally ready before the doors open. Acquisition? Integrated within 60 days. Growth
+            doesn't break the operation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ AI + HUMAN ═══════════ -->
+  <section class="block dark">
+    <div class="container">
+      <div class="ai-section-inner fade-in">
+        <div class="eyebrow">AI + human at enterprise scale</div>
+        <h2 class="display" style="margin-top:20px;">At enterprise scale, AI is the only way <em>the math works.</em>
+        </h2>
+        <p>A 12-location practice generates the operational volume of a hospital. The only way to run it efficiently is
+          to use AI for the repetitive lifting — eligibility checks, claim scrubbing, denial categorization, document
+          classification — and put trained humans on the work that requires judgment.</p>
+        <p>We've built our enterprise model around that ratio. AI handles the volume. Specialists handle the judgment.
+          Leadership handles the strategy.</p>
+        <p style="color:var(--paper);font-style:italic;font-family:var(--serif);font-size:22px;margin-top:32px;">That's
+          the only model that doesn't break at scale.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ RESULTS ═══════════ -->
+  <section class="block" id="results">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">By the numbers</div>
+        <h2 class="display">What standardization looks like <em>in numbers.</em></h2>
+        <p>Drawn from multi-location clients (5–30+ locations) across primary care, dental, behavioral health, urgent
+          care, and multi-specialty groups.</p>
+      </div>
+
+      <div class="results-row fade-in">
+        <div class="result-block">
+          <div class="v">+20<span class="unit">%</span></div>
+          <div class="d">Group-wide collections lift within the first two quarters.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">45<span class="unit">%</span></div>
+          <div class="d">Lower operational cost versus equivalent in-house build.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">28<span class="unit">d</span></div>
+          <div class="d">Standardized AR days across all sites within 6 months.</div>
+        </div>
+      </div>
+
+      <div class="results-row fade-in" style="border-top:none;">
+        <div class="result-block">
+          <div class="v">97<span class="unit">%+</span></div>
+          <div class="d">First-pass clean-claim rate consistently across all sites.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">-60<span class="unit">%</span></div>
+          <div class="d">Reduction in site-to-site performance variance.</div>
+        </div>
+        <div class="result-block">
+          <div class="v">-70<span class="unit">%</span></div>
+          <div class="d">Leadership time spent recruiting and managing operations.</div>
+        </div>
+      </div>
+
+     <div class="testi">
+          <div class="testi-quote">
+           Working with HBS has been a game-changer. The team is professional, responsive, and has streamlined our billing operations seamlessly.
+          </div>
+          <div class="testi-attr">
+            <div class="testi-avatar">HM</div>
+            <div>
+              <div class="testi-name">Herma Thompson PMHNP-BC</div>
+              <div class="testi-role">Nurse Practitioner - Psych/Mental Health</div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COMPARE ═══════════ -->
+  <section class="block warm">
+    <div class="container">
+      <div class="block-head fade-in">
+        <div class="eyebrow">The honest comparison</div>
+        <h2 class="display">Why not build a centralized billing office <em>in-house?</em></h2>
+        <p>It's the right question. Many groups try. Here's the trade-off honestly.</p>
+      </div>
+
+      <div class="compare fade-in">
+        <div class="compare-row head">
+          <div class="col left">Build centralized BO in-house</div>
+          <div class="col right">Embed HBS as remote ops dept</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">12–24 months to stand up</div>
+          <div class="col right">30–60 days to live</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">Real estate, infrastructure, fixed cost</div>
+          <div class="col right">Variable cost — scales with you</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">Hiring 20–40 FTEs</div>
+          <div class="col right">We provide the team</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">25–30% admin overhead on payroll</div>
+          <div class="col right">None</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">You bear attrition risk</div>
+          <div class="col right">We absorb it</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">Capped by your local labor market</div>
+          <div class="col right">Trained healthcare specialist pool</div>
+        </div>
+        <div class="compare-row">
+          <div class="col left">One more business to run</div>
+          <div class="col right">Operations runs itself. You focus on growth.</div>
+        </div>
+      </div>
+
+      <div class="insight fade-in">For groups at 5+ locations, the math almost always favors embedding versus building.
+        Not because building doesn't work — <em>but because the opportunity cost of leadership time spent building
+          operations is higher than the cost of leasing them.</em></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FINAL CTA ═══════════ -->
+  <section class="final-cta" id="cta">
+    <div class="final-cta-glow"></div>
+    <div class="cta-inner">
+      <div class="eyebrow" style="justify-content:center;color:rgba(250,247,242,.55);">Let's look at the whole operation
+      </div>
+      <h2 class="display">One call. Every site on the table. <em>Let's find the leaks.</em></h2>
+      <p>Give us a 60-minute discovery call. We'll review your operational structure across locations, identify where
+        standardization moves the most dollars, and come back within 10 business days with a phased integration plan. If
+        we're not the right fit, we'll tell you and recommend an alternative.</p>
+      <div class="actions">
+        <a href="#" class="btn btn-light">Book an enterprise discovery call <svg class="arrow" width="14" height="14"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg></a>
+        <a href="#" class="btn btn-ghost" style="color:var(--paper);border-color:rgba(250,247,242,.3);">Request a
+          multi-location ops assessment</a>
+      </div>
+      <div class="trust-line">Mutual NDA · BAA · SOC 2 aligned · Enterprise references available</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">HIPAA</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 8) });
+    const io = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target) } }) }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+
+</body>
+
+</html>
