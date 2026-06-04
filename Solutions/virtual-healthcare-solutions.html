@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Virtual Healthcare Solutions | Hired Billing Support</title>
+<meta name="description" content="Hired Billing Support provides virtual healthcare operations support — telehealth coordination, virtual medical assistants, remote scheduling, eligibility verification, EHR task management, and care coordination inside your existing workflow."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>/* ================================================================
+   HBS ADVANCED SOLUTIONS — SHARED STYLESHEET
+   Extends: HBS Redesign by Talha design system
+   Fraunces · Inter Tight · JetBrains Mono
+   Section: Marketing & Patient Engagement
+            Virtual Healthcare Solutions
+            Analytics & Reporting
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --ink:          #0A1628;
+  --ink-soft:     #1B2942;
+  --ink-mute:     #475569;
+  --paper:        #FAF7F2;
+  --paper-warm:   #F2EDE3;
+  --paper-line:   #E8E2D5;
+  --white:        #FFFFFF;
+  --signal:       #00C896;
+  --signal-deep:  #00876B;
+  --signal-pale:  rgba(0,200,150,0.08);
+  --amber:        #F59E0B;
+  --amber-deep:   #B45309;
+  --amber-pale:   rgba(245,158,11,0.08);
+  --danger:       #D64545;
+  --danger-pale:  rgba(214,69,69,0.07);
+  --violet:       #7C3AED;
+  --violet-pale:  rgba(124,58,237,0.07);
+  --radius:       4px;
+  --radius-lg:    12px;
+  --max:          1280px;
+  --gutter:       clamp(20px, 4vw, 48px);
+  --serif:        'Fraunces', 'Times New Roman', serif;
+  --sans:         'Inter Tight', -apple-system, sans-serif;
+  --mono:         'JetBrains Mono', monospace;
+  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.5; font-size: 16px; overflow-x: hidden; }
+::selection { background: var(--ink); color: var(--paper); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── LAYOUT ── */
+.container   { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.two-col     { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.two-col--sm { gap: 48px; }
+
+/* ── TYPOGRAPHY ── */
+.display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; font-variation-settings: "opsz" 144; }
+.display em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.display--light { color: var(--paper); }
+.display--light em { color: rgba(250,247,242,0.5); }
+.eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+.eyebrow--light { color: rgba(250,247,242,0.5); }
+
+/* Navigation */
+nav.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(250, 247, 242, 0.78);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease);
+}
+
+nav.top.scrolled {
+    border-bottom-color: var(--paper-line);
+}
+
+.nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--ink);
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+}
+
+.nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--ink);
+    transition: width 0.3s var(--ease);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.3s var(--ease);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.dropdown-toggle:hover {
+    color: var(--signal);
+    background: transparent;
+}
+
+.dropdown-toggle .chevron {
+    font-size: 9px;
+    transition: transform 0.3s var(--ease);
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+.nav-dropdown:hover .dropdown-toggle .chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    background: var(--white);
+    border: 1px solid var(--paper-line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
+    margin-top: 8px;
+    z-index: 1000;
+    min-width: 280px;
+    max-width: 100vw;
+}
+
+.dropdown-menu.dropdown-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    min-width: 500px;
+}
+
+.dropdown-menu.dropdown-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    min-width: 680px;
+}
+
+.dropdown-menu.dropdown-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    min-width: 900px;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.column-header {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.column-header::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+    margin-right: 8px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 12px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s var(--ease);
+    border-radius: 4px;
+    position: relative;
+}
+
+.dropdown-menu a:hover {
+    background: var(--paper-warm);
+    color: var(--ink);
+    padding-left: 16px;
+}
+
+.dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: var(--signal);
+    border-radius: 2px;
+    transition: height 0.2s var(--ease);
+}
+
+.dropdown-menu a:hover::before {
+    height: 16px;
+}
+
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        border-radius: 0;
+        box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .dropdown-menu.dropdown-grid-2 {
+        grid-template-columns: 1fr;
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-menu.dropdown-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+    }
+
+    .dropdown-column {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .dropdown-menu {
+        left: -10px;
+        right: -10px;
+        padding: 16px;
+    }
+
+    .dropdown-menu.dropdown-grid-2,
+    .dropdown-menu.dropdown-grid-3,
+    .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: 1fr;
+        min-width: calc(100vw - 32px);
+    }
+
+    .column-header {
+        font-size: 10px;
+    }
+
+    .dropdown-menu a {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
+
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--radius); font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: background 0.2s var(--ease), color 0.2s, transform 0.15s; white-space: nowrap; }
+.btn:hover { transform: translateY(-1px); }
+.btn .arrow { transition: transform 0.2s; flex-shrink: 0; }
+.btn:hover .arrow { transform: translateX(3px); }
+.btn-primary  { background: var(--ink);   color: var(--paper); border-color: var(--ink); }
+.btn-primary:hover { background: var(--ink-soft); }
+.btn-ghost    { background: transparent;  color: var(--ink);   border-color: var(--paper-line); }
+.btn-ghost:hover { background: var(--paper-warm); border-color: var(--ink-mute); }
+.btn-light    { background: var(--paper); color: var(--ink);   border-color: var(--paper); }
+.btn-light:hover { background: var(--paper-warm); }
+.btn-lg { padding: 14px 28px; font-size: 15px; }
+
+/* ── SERVICE HERO ── */
+.service-hero { background: var(--paper); padding: 140px 0 100px; position: relative; overflow: hidden; }
+.service-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.service-hero-bg svg { width: 100%; height: 100%; }
+.service-hero-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); opacity: 0.4; }
+.service-hero-inner { position: relative; z-index: 1; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+.service-hero-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--signal-deep); background: rgba(0,200,150,0.08); border: 1px solid rgba(0,200,150,0.2); padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+.service-hero-title { font-family: var(--serif); font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; color: var(--ink); margin-bottom: 24px; font-variation-settings: "opsz" 144; }
+.service-hero-title em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.service-hero-subtitle { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px; }
+.service-hero-lede { font-size: 15px; line-height: 1.75; color: var(--ink-mute); max-width: 540px; margin-bottom: 40px; }
+.service-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── HERO CARD (right-side visual) ── */
+.hero-card { background: var(--ink); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 4px 24px rgba(10,22,40,0.08), 0 1px 4px rgba(10,22,40,0.05); }
+.hero-card-title { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--paper); margin-bottom: 20px; }
+
+/* Metric rows */
+.metric-card { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--paper-line); }
+.metric-card:last-of-type { border-bottom: none; }
+.metric-label { font-size: 12px; color: var(--paper); flex: 1; }
+.metric-value { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--paper); }
+.metric-value.up    { color: var(--signal-deep); }
+.metric-value.warn  { color: var(--amber-deep); }
+.metric-value.down  { color: var(--danger); }
+.metric-pill { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 100px; }
+.pill-up   { background: rgba(0,200,150,0.12); color: var(--signal-deep); }
+.pill-warn { background: rgba(245,158,11,0.14); color: var(--amber-deep); }
+.pill-down { background: rgba(214,69,69,0.1);  color: var(--danger); }
+
+/* Journey step rows (for patient engagement / virtual) */
+.journey-card { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--paper-line); }
+.journey-card:last-of-type { border-bottom: none; }
+.journey-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.jdot-done    { background: var(--signal); }
+.jdot-active  { background: var(--amber); }
+.jdot-pending { background: var(--paper-line); border: 1px solid var(--ink-mute); }
+.journey-text { font-size: 11px; color: var(--paper); line-height: 1.45; }
+.journey-tag  { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; margin-left: auto; flex-shrink: 0; }
+.jtag-done    { color: var(--signal-deep); }
+.jtag-active  { color: var(--amber-deep); }
+.jtag-pending { color: var(--ink-mute); }
+
+/* KPI bar rows (for analytics) */
+.kpi-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--paper-line); }
+.kpi-row:last-of-type { border-bottom: none; }
+.kpi-lbl  { font-size: 11px; color: var(--ink-mute); min-width: 110px; }
+.kpi-bar  { flex: 1; height: 6px; background: var(--paper-line); border-radius: 3px; overflow: hidden; }
+.kpi-fill { height: 100%; border-radius: 3px; }
+.kpi-fill.high   { background: var(--signal); }
+.kpi-fill.mid    { background: var(--amber); }
+.kpi-fill.low    { background: var(--danger); }
+.kpi-val  { font-family: var(--mono); font-size: 10px; font-weight: 500; min-width: 44px; text-align: right; }
+.kpi-val.high { color: var(--signal-deep); }
+.kpi-val.mid  { color: var(--amber-deep); }
+.kpi-val.low  { color: var(--danger); }
+
+/* Dash utilities */
+.dash-divider { height: 1px; background: var(--paper-line); margin: 14px 0; }
+.dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.dash-stat { background: var(--paper-warm); border-radius: var(--radius); padding: 10px 8px; text-align: center; }
+.dash-stat-num   { font-family: var(--serif); font-size: 1.25rem; color: var(--signal-deep); display: block; line-height: 1; margin-bottom: 4px; }
+.dash-stat-label { font-family: var(--mono); font-size: 8px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
+.gap-callout { margin-top: 16px; padding: 12px 14px; background: var(--signal-pale); border-left: 2px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0; }
+.gc-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--signal-deep); margin-bottom: 4px; }
+.gc-val { font-family: var(--serif); font-size: 14px; color: var(--paper); }
+
+/* ── SCROLL REVEALS ── */
+.reveal   { opacity: 0; transform: translateY(20px); }
+.reveal-1 { animation: rv 0.8s var(--ease) 0.10s forwards; }
+.reveal-2 { animation: rv 0.8s var(--ease) 0.22s forwards; }
+.reveal-3 { animation: rv 0.8s var(--ease) 0.36s forwards; }
+.reveal-4 { animation: rv 0.8s var(--ease) 0.50s forwards; }
+@keyframes rv { to { opacity: 1; transform: translateY(0); } }
+.fade-in  { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+.fade-in.in { opacity: 1; transform: translateY(0); }
+
+/* ── SERVICE SECTION BASE ── */
+.service-section { padding: 100px 0; position: relative; }
+.service-section--warm     { background: var(--paper-warm); }
+.service-section--ink      { background: var(--ink); color: var(--paper); }
+.service-section--ink-soft { background: var(--ink-soft); color: var(--paper); }
+.service-section--ink .display,
+.service-section--ink-soft .display { color: var(--paper); }
+.service-section--ink .display em,
+.service-section--ink-soft .display em { color: rgba(250,247,242,0.5); }
+.service-section--ink .eyebrow,
+.service-section--ink-soft .eyebrow { color: rgba(250,247,242,0.5); }
+.service-section--ink .eyebrow::before,
+.service-section--ink-soft .eyebrow::before { background: rgba(250,247,242,0.4); }
+.service-section--ink p,
+.service-section--ink-soft p { color: rgba(250,247,242,0.65); }
+
+/* ── SECTION HEADER ── */
+.section-header  { margin-bottom: 64px; }
+.section-eyebrow { /* alias for .eyebrow */ }
+.section-title { font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.06; margin-top: 16px; max-width: 780px; font-variation-settings: "opsz" 144; }
+.section-title em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.section-subtitle { margin-top: 18px; font-size: 16px; line-height: 1.75; color: var(--ink-mute); max-width: 560px; }
+.service-section--ink .section-title,
+.service-section--ink-soft .section-title { color: var(--paper); }
+.service-section--ink .section-title em,
+.service-section--ink-soft .section-title em { color: rgba(250,247,242,0.5); }
+.service-section--ink .section-subtitle,
+.service-section--ink-soft .section-subtitle { color: rgba(250,247,242,0.6); }
+
+/* ── MONOLOGUE ── */
+.monologue { max-width: 780px; border-left: 2px solid var(--paper-line); padding-left: 32px; }
+.monologue p { font-size: 16px; line-height: 1.85; color: var(--ink-soft); margin-bottom: 20px; }
+.monologue p:last-child { margin-bottom: 0; }
+.monologue .highlight { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--ink); line-height: 1.5; }
+
+/* ── PAIN GRID ── */
+.pain-grid { display: flex; flex-direction: column; margin-top: 48px; }
+.pain-card { display: grid; grid-template-columns: 48px 1fr; gap: 0 24px; padding: 28px 0; border-bottom: 1px solid var(--paper-line); align-items: start; }
+.pain-card:last-child { border-bottom: none; }
+.pain-card-num { font-family: var(--serif); font-size: 13px; color: var(--ink-mute); padding-top: 3px; }
+.pain-card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+.pain-card p  { font-size: 14px; color: var(--ink-mute); line-height: 1.72; }
+
+/* ── SERVICE GRID ── */
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--paper-line); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); overflow: hidden; }
+.service-card { background: var(--white); padding: 28px; transition: background 0.2s; }
+.service-card:hover { background: var(--paper-warm); }
+.service-card-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--signal-deep); margin-bottom: 12px; display: block; }
+.service-card h4  { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.service-card p   { font-size: 13px; color: var(--ink-mute); line-height: 1.65; }
+
+/* ── PROCESS TIMELINE ── */
+.process-timeline { display: flex; flex-direction: column; }
+.process-step { display: grid; grid-template-columns: 48px 1fr; gap: 0 24px; padding: 28px 0; border-bottom: 1px solid var(--paper-line); align-items: start; }
+.process-step:last-child { border-bottom: none; }
+.process-step-num { font-family: var(--mono); font-size: 11px; color: var(--signal-deep); letter-spacing: 0.1em; padding-top: 4px; }
+.process-step h4  { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.process-step p   { font-size: 14px; color: var(--ink-mute); line-height: 1.72; }
+.service-section--ink .process-step      { border-color: rgba(250,247,242,0.1); }
+.service-section--ink .process-step h4   { color: var(--paper); }
+.service-section--ink .process-step p    { color: rgba(250,247,242,0.6); }
+.service-section--ink .process-step-num  { color: var(--signal); }
+
+/* ── WORKFLOW DASHBOARD (phase tracker) ── */
+.workflow-dashboard { display: flex; align-items: flex-start; gap: 0; margin-top: 48px; position: relative; overflow-x: auto; padding-bottom: 8px; }
+.workflow-dashboard::before { content: ''; position: absolute; top: 18px; left: 24px; right: 24px; height: 1px; background: var(--paper-line); z-index: 0; }
+.wf-node { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 110px; position: relative; z-index: 1; padding: 0 6px; }
+.wf-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 500; margin-bottom: 10px; border: 1px solid var(--paper-line); flex-shrink: 0; background: var(--white); }
+.wf-dot--signal { background: rgba(0,200,150,0.1); color: var(--signal-deep); border-color: rgba(0,200,150,0.25); }
+.wf-dot--amber  { background: rgba(245,158,11,0.1); color: var(--amber-deep); border-color: rgba(245,158,11,0.25); }
+.wf-dot--ink    { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.wf-node-label  { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.3; margin-bottom: 3px; }
+.wf-node-sub    { font-family: var(--mono); font-size: 9px; color: var(--ink-mute); text-align: center; letter-spacing: 0.06em; }
+
+/* ── AI + HUMAN SPLIT ── */
+.ai-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--paper-line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
+.ai-col { padding: 36px; }
+.ai-col--machine { background: var(--paper-warm); }
+.ai-col--human   { background: var(--white); }
+.ai-col-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--paper-line); }
+.ai-col--machine .ai-col-label { color: var(--signal-deep); }
+.ai-col--human   .ai-col-label { color: var(--ink-mute); }
+.ai-items { display: flex; flex-direction: column; gap: 14px; }
+.ai-item  { display: flex; gap: 12px; align-items: flex-start; }
+.ai-item-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.ai-col--machine .ai-item-dot { background: var(--signal); }
+.ai-col--human   .ai-item-dot { background: var(--ink); }
+.ai-item p { font-size: 13px; color: var(--ink-mute); line-height: 1.6; }
+
+/* ── OUTCOME GRID ── */
+.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
+.outcome-card { padding: 28px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); }
+.outcome-card-num { font-family: var(--serif); font-size: 2.4rem; font-weight: 400; color: var(--signal); line-height: 1; margin-bottom: 8px; }
+.outcome-card h4  { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.outcome-card p   { font-size: 13px; color: var(--ink-mute); line-height: 1.65; }
+
+/* ── COMPARE TABLE ── */
+.compare-wrap { background: var(--ink); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
+.compare-header { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 14px 28px; background: rgba(255,255,255,0.04); }
+.compare-header span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+.compare-header span.hbs-col { color: var(--signal); }
+.compare-row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 14px 28px; border-top: 1px solid rgba(255,255,255,0.05); }
+.compare-row span { font-size: 13px; }
+.c-label { color: rgba(250,247,242,0.55); }
+.c-hbs   { color: var(--signal); font-weight: 500; }
+.c-other { color: rgba(250,247,242,0.3); }
+
+/* ── PULL QUOTE ── */
+.pull-quote { font-family: var(--serif); font-size: clamp(1.1rem, 2.2vw, 1.45rem); font-style: italic; color: var(--ink); line-height: 1.65; padding: 28px 32px; border-left: 3px solid var(--signal); background: var(--signal-pale); border-radius: 0 var(--radius) var(--radius) 0; margin: 40px 0; max-width: 860px; }
+
+/* ── REPORT / ANALYTICS CARDS ── */
+.report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 48px; }
+.report-card { background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); padding: 24px; }
+.report-card-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 10px; }
+.report-card-num { font-family: var(--serif); font-size: 2rem; font-weight: 400; line-height: 1; margin-bottom: 6px; }
+.report-card-num.up   { color: var(--signal-deep); }
+.report-card-num.warn { color: var(--amber-deep); }
+.report-card-num.down { color: var(--danger); }
+.report-card h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.report-card p  { font-size: 12px; color: var(--ink-mute); line-height: 1.6; }
+.report-trend   { display: flex; align-items: center; gap: 5px; margin-top: 10px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; }
+.trend-up   { color: var(--signal-deep); }
+.trend-warn { color: var(--amber-deep); }
+.trend-down { color: var(--danger); }
+
+/* ── CTA SECTION ── */
+.cta-section { background: var(--ink); padding: 120px var(--gutter); text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse at center, rgba(0,200,150,0.2), transparent 70%); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.cta-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.06; color: var(--paper); margin: 16px 0 24px; font-variation-settings: "opsz" 144; }
+.cta-title em { font-style: italic; font-weight: 300; color: rgba(250,247,242,0.5); }
+.cta-text { font-size: 16px; line-height: 1.75; color: rgba(250,247,242,0.6); margin-bottom: 40px; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.trust-line { margin-top: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-size: 13px; }
+.footer-inner a { color: rgba(250,247,242,0.6); }
+.footer-inner a:hover { color: var(--signal); }
+.footer-legal { display: flex; gap: 24px; }
+
+/* ── RELATED STRIP ── */
+.related-strip { background: var(--paper-warm); border-top: 1px solid var(--paper-line); padding: 28px 0; }
+.related-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.related-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.related-link { font-size: 13px; color: var(--ink-soft); padding: 5px 14px; border: 1px solid var(--paper-line); border-radius: 100px; background: var(--white); transition: border-color 0.2s, color 0.2s; }
+.related-link:hover { border-color: var(--signal-deep); color: var(--signal-deep); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .service-hero-inner { grid-template-columns: 1fr; }
+  .service-hero-visual { display: none; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .ai-split { grid-template-columns: 1fr; }
+  .workflow-dashboard::before { display: none; }
+}
+@media (max-width: 720px) {
+  .service-section { padding: 64px 0; }
+  .service-hero   { padding: 110px 0 72px; }
+  .cta-section    { padding: 80px var(--gutter); }
+  .section-header { margin-bottom: 40px; }
+  .nav-links      { display: none; }
+  .compare-header, .compare-row { grid-template-columns: 1.5fr 1fr 1fr; padding: 12px 16px; }
+  .service-grid   { grid-template-columns: 1fr; }
+  .wf-node        { min-width: 80px; }
+  .report-grid    { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+ <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="/logo.Png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+
+
+      <!-- Hire Talent Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="../Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="../Hire/dental.html">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Enterprise & BILLING</div>
+            <a href="../Hire/enterprise.html">Enterprise & Billing Specialists</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">MSO / Payer Partners</div>
+            <a href="../Hire/mso.html">MSO / Payer Partners</a>
+            <!-- <a href="#">Contact Hiring Team</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="./rcm-management.html">Revenue Cycle Management</a>
+            <a href="./medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="./ar-management.html">AR Management</a>
+            <a href="./ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="./old-aging-ar.html">Old & Aging AR Recovery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="./medical-coding.html">Medical Coding</a>
+            <a href="./medical-auditing.html">Medical Auditing</a>
+            <a href="./compliance-reporting.html">Compliance & Reporting</a>
+            <a href="./quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="./provider-credential.html">Provider Credential</a>
+            <a href="./payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="./practice-launch.html">Practice Launch</a>
+            <a href="./operations-management.html">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="./marketing-patient-engagement.html">Marketing & Patient Engagement</a>
+            <a href="./virtual-healthcare-solutions.html">Virtual Healthcare Solutions</a>
+            <a href="./virtual-healthcare-solutions.html">Analytics & Reporting</a>
+            <a href="#">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who We Serve Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">BY PRACTICE TYPE</div>
+            <a href="../Hire/dental.html">Dental Practices</a>
+            <a href="../Hire/medical.html">Medical Practices</a>
+            <a href="../Hire/enterprise.html">Enterprise & Medical Groups</a>
+            <a href="../Hire/mso.html">MSO / Payer Partners</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">BY SPECIALTY</div>
+            <a href="#">Primary Care</a>
+            <a href="#">Behavioral Health</a>
+            <a href="#">Urgent Care</a>
+            <a href="#">Orthopedics & Surgery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">RESOURCES</div>
+            <a href="#">Case Studies</a>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Security & Compliance</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="service-hero-bg">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    <div class="service-hero-grain"></div>
+  </div>
+  <div class="service-hero-inner">
+    <div class="service-hero-content">
+      <div class="service-hero-badge reveal reveal-1">Advanced Solutions · Virtual Healthcare</div>
+      <h1 class="service-hero-title reveal reveal-2">Virtual care works when the workflow behind it works.<br><em>Most of the time, the workflow is the problem.</em></h1>
+      <p class="service-hero-subtitle reveal reveal-3">Telehealth adds clinical access. It also adds scheduling complexity, documentation load, eligibility requirements, patient reminders, technical coordination, and follow-up tasks — all of which require the same operational infrastructure as in-person care, managed remotely.</p>
+      <p class="service-hero-lede reveal reveal-3">Hired Billing Support provides virtual healthcare operations support that works like an extension of your internal team — inside your EHR, inside your workflow, aligned with your providers' daily schedule and your patients' expectations.</p>
+      <div class="service-hero-actions reveal reveal-4">
+        <a href="#cta" class="btn btn-primary btn-lg">Build your virtual care team <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#pain" class="btn btn-ghost btn-lg">See what virtual support covers</a>
+      </div>
+    </div>
+    <div class="service-hero-visual reveal reveal-4" style="animation-delay:0.55s">
+      <div class="hero-card">
+        <div class="hero-card-title">— Virtual Care Operations · Daily Queue</div>
+        <div class="journey-card"><div class="journey-dot jdot-done"></div><span class="journey-text">Tomorrow's telehealth patients — eligibility verified</span><span class="journey-tag jtag-done">Complete</span></div>
+        <div class="journey-card"><div class="journey-dot jdot-done"></div><span class="journey-text">Visit links sent — 24hr and 1hr reminders scheduled</span><span class="journey-tag jtag-done">Complete</span></div>
+        <div class="journey-card"><div class="journey-dot jdot-done"></div><span class="journey-text">Intake forms completed — 8 of 9 patients</span><span class="journey-tag jtag-done">Complete</span></div>
+        <div class="journey-card"><div class="journey-dot jdot-active"></div><span class="journey-text">Prior auth — 2 visits requiring review before noon</span><span class="journey-tag jtag-active">In progress</span></div>
+        <div class="journey-card"><div class="journey-dot jdot-active"></div><span class="journey-text">Provider EHR tasks — 3 items pending review</span><span class="journey-tag jtag-active">In progress</span></div>
+        <div class="journey-card"><div class="journey-dot jdot-pending"></div><span class="journey-text">Post-visit follow-up — yesterday's patients queued</span><span class="journey-tag jtag-pending">Queued</span></div>
+        <div class="dash-divider"></div>
+        <div class="dash-stats">
+          <div class="dash-stat"><span class="dash-stat-num">9</span><span class="dash-stat-label">Visits Prepped</span></div>
+          <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">0</span><span class="dash-stat-label">Missing Eligibility</span></div>
+          <div class="dash-stat"><span class="dash-stat-num" style="color:var(--amber-deep)">2</span><span class="dash-stat-label">Auth Actions Needed</span></div>
+        </div>
+        <div class="gap-callout"><div class="gc-lbl">— Provider time saved daily</div><div class="gc-val">Estimated 2.4 hrs of admin tasks handled before first visit.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN MONOLOGUE -->
+<section class="service-section" id="pain">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="eyebrow">The virtual care operations reality</div>
+      <h2 class="section-title">Adding telehealth to a practice <em>adds operational work, not less.</em></h2>
+    </div>
+    <div class="monologue fade-in">
+      <p>The vision of virtual care is seamless. A patient logs in. The provider sees them. Documentation happens. Next patient. In practice, what actually happens is a provider starting a video visit with a patient who never received the link, did not complete intake forms, has unverified insurance, and is on a plan that requires prior authorization for the service being provided.</p>
+      <p>Virtual care creates more messages, more coordination tasks, more follow-up requirements, and more documentation overhead — not less. And it creates all of that in addition to in-person care, which is still happening, still demanding the same staff bandwidth, and still generating its own administrative load.</p>
+      <p class="highlight">"Virtual care only works when the workflow behind it is organized — scheduling, reminders, documentation, eligibility, follow-up, and patient coordination all have to move together. When they do not, the provider carries the coordination burden alone."</p>
+      <p>The problem is not the technology. Most telehealth platforms work adequately. The problem is the administrative infrastructure around the technology — the human and operational layer that ensures every patient is prepared, every visit is covered, every document is in place, and every follow-up task is handled before the provider has to think about it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN LEDGER -->
+<section class="service-section service-section--warm">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Where virtual care workflow breaks</div><h2 class="section-title">The operational gaps <em>behind every difficult telehealth day.</em></h2></div>
+    <div class="pain-grid fade-in">
+      <div class="pain-card"><div class="pain-card-num">01</div><div><h4>Patients arrive to virtual visits unprepared</h4><p>No intake forms completed. Insurance never verified. Visit link either not received or not tested before the session. The first five minutes of a 20-minute virtual visit become administrative triage — and the provider absorbs the time cost.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">02</div><div><h4>Eligibility for telehealth visits is handled differently than in-person</h4><p>Many payers have specific coverage requirements for telehealth — modifiers, place-of-service codes, originating site requirements, and coverage limitations that differ from in-person benefits. When eligibility is verified for in-person and assumed to cover virtual, claims fail for reasons that were entirely preventable.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">03</div><div><h4>Providers lose time between visits managing administrative tasks</h4><p>In-basket messages. Prior authorization requests. Prescription refill coordination. Documentation questions. Scheduling conflicts. These tasks accumulate between virtual visits and get pushed to end-of-day — extending provider time far beyond the scheduled clinical hours.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">04</div><div><h4>Front desk staff manage in-person and virtual simultaneously without enough support</h4><p>A single front desk team managing in-person check-in, phone calls, scheduling, and virtual care coordination simultaneously is being asked to do the work of two different operational models at the same time. Something always falls behind — usually the less visible virtual tasks.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">05</div><div><h4>Virtual visit follow-up is inconsistent</h4><p>After-visit summaries, follow-up care reminders, referral coordination, and prescription confirmations require the same follow-through as in-person visits — but they are easier to defer when the patient was never physically in the building. Virtual follow-up gets less attention than it needs.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">06</div><div><h4>Generic VA services do not understand healthcare workflow</h4><p>A virtual assistant who does not understand clinical context, payer requirements, prior authorization processes, or HIPAA-compliant communication creates as many problems as they solve. Healthcare virtual support requires healthcare-specific knowledge — not general administrative experience.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="service-section service-section--ink" id="solution">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="eyebrow">The solution</div>
+      <h2 class="section-title">A virtual operations team that works <em>like an extension of your in-house staff.</em></h2>
+      <p class="section-subtitle">Hired Billing Support provides virtual healthcare support that operates inside your EHR, your telehealth platform, and your daily workflow — handling the administrative layer that allows virtual care to run smoothly without burdening your providers or front desk team.</p>
+    </div>
+    <div class="two-col fade-in">
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-step-num">01</div><div><h4>Pre-visit preparation for every telehealth appointment</h4><p>Intake forms sent, eligibility verified for telehealth-specific coverage, visit links distributed and tested, reminders sent at defined intervals — so every virtual patient arrives prepared and every provider starts on time.</p></div></div>
+        <div class="process-step"><div class="process-step-num">02</div><div><h4>Prior authorization and insurance coordination</h4><p>Virtual visit authorization requirements tracked and managed — payer-specific telehealth coverage criteria, authorization requests submitted, and coverage confirmed before the patient logs in.</p></div></div>
+        <div class="process-step"><div class="process-step-num">03</div><div><h4>Provider EHR task support between visits</h4><p>In-basket messages triaged, documentation requests coordinated, prescription refill workflows managed, and patient questions routed — so providers spend inter-visit time on clinical decisions, not administrative queue management.</p></div></div>
+      </div>
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-step-num">04</div><div><h4>Remote scheduling and patient coordination</h4><p>New telehealth appointment scheduling, rescheduling, cancellation management, and waitlist coordination handled remotely — inside your scheduling system with your scheduling protocols.</p></div></div>
+        <div class="process-step"><div class="process-step-num">05</div><div><h4>Post-visit follow-up and care coordination</h4><p>After-visit summaries distributed, follow-up care reminders sent, referral coordination initiated, and prescription confirmation tasks managed — so virtual visits have the same follow-through quality as in-person care.</p></div></div>
+        <div class="process-step"><div class="process-step-num">06</div><div><h4>Billing coordination for virtual visits</h4><p>Telehealth-specific billing modifiers, place-of-service codes, and documentation requirements coordinated with billing operations — so virtual visit claims submit correctly and do not create a separate denial category.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="service-section" id="services">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Virtual healthcare services</div><h2 class="section-title">Every layer of virtual care operations. <em>Handled inside your workflow.</em></h2></div>
+    <div class="service-grid fade-in">
+      <div class="service-card"><span class="service-card-num">01</span><h4>Virtual Medical Assistant Support</h4><p>Trained healthcare virtual assistants working inside your EHR — clinical context aware, HIPAA compliant, and aligned with your provider's workflow and documentation standards.</p></div>
+      <div class="service-card"><span class="service-card-num">02</span><h4>Telehealth Scheduling Support</h4><p>New appointment scheduling, rescheduling, and cancellation management for virtual visits — inside your scheduling system, following your provider availability and booking protocols.</p></div>
+      <div class="service-card"><span class="service-card-num">03</span><h4>Pre-Visit Patient Preparation</h4><p>Intake forms, visit links, insurance information requests, and pre-visit reminders sent on a defined schedule before every telehealth appointment — so visits start on time with prepared patients.</p></div>
+      <div class="service-card"><span class="service-card-num">04</span><h4>Telehealth Eligibility Verification</h4><p>Insurance verification specific to telehealth coverage — payer-specific telehealth benefits, modifiers, and coverage limitations checked before the visit, not after the claim fails.</p></div>
+      <div class="service-card"><span class="service-card-num">05</span><h4>Prior Authorization — Virtual Visits</h4><p>Telehealth prior authorization requirements tracked and managed — authorization requests submitted with payer-specific telehealth documentation and coverage confirmation obtained before service.</p></div>
+      <div class="service-card"><span class="service-card-num">06</span><h4>Provider EHR Task Management</h4><p>In-basket messages, documentation requests, prescription refill coordination, and patient inquiries triaged and managed — reducing the administrative accumulation that extends provider days.</p></div>
+      <div class="service-card"><span class="service-card-num">07</span><h4>Virtual Front Desk Support</h4><p>Patient inquiry response, appointment coordination, and general administrative support managed remotely — supplementing your in-person front desk during high-volume periods or after-hours coverage.</p></div>
+      <div class="service-card"><span class="service-card-num">08</span><h4>Post-Visit Follow-Up Coordination</h4><p>After-visit documentation distribution, follow-up care reminders, referral initiation, and prescription confirmation — ensuring virtual visits generate the same follow-through as in-person encounters.</p></div>
+      <div class="service-card"><span class="service-card-num">09</span><h4>Telehealth Billing Coordination</h4><p>Virtual visit billing modifier requirements, place-of-service codes, and documentation standards coordinated with billing operations to prevent telehealth-specific claim errors.</p></div>
+      <div class="service-card"><span class="service-card-num">10</span><h4>Remote Care Coordination</h4><p>Patient communication, referral tracking, care plan follow-up, and multi-provider coordination managed remotely — inside your EHR with full clinical context.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="service-section service-section--warm">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Virtual care support workflow</div><h2 class="section-title">Before the visit. During the visit. <em>After the visit.</em></h2><p class="section-subtitle">Virtual care operational support needs to be present across the full visit lifecycle — not just at scheduling and not just at billing.</p></div>
+    <div class="workflow-dashboard fade-in">
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Pre</div><div class="wf-node-label">Scheduling</div><div class="wf-node-sub">Appointment booked</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Pre</div><div class="wf-node-label">Eligibility</div><div class="wf-node-sub">Telehealth coverage</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">Pre</div><div class="wf-node-label">Prior Auth</div><div class="wf-node-sub">If required</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Pre</div><div class="wf-node-label">Patient Prep</div><div class="wf-node-sub">Forms · Link · Reminder</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--ink">Visit</div><div class="wf-node-label">Provider Visit</div><div class="wf-node-sub">Clinical care</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">During</div><div class="wf-node-label">EHR Support</div><div class="wf-node-sub">Tasks · Messages</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Post</div><div class="wf-node-label">Follow-Up</div><div class="wf-node-sub">Referral · Summary</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">Post</div><div class="wf-node-label">Billing Coord.</div><div class="wf-node-sub">Modifier · Codes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="service-section">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">How HBS works inside your virtual operations</div><h2 class="section-title">Not a generic VA. <em>A healthcare-specific operations team.</em></h2><p class="section-subtitle">The difference between a generic virtual assistant and a healthcare virtual operations team is not the tasks — it is the knowledge, the context, and the integration.</p></div>
+    <div class="process-timeline fade-in" style="max-width:780px">
+      <div class="process-step"><div class="process-step-num">01</div><div><h4>We work inside your EHR and telehealth platform</h4><p>Your electronic health record, your telehealth platform, your scheduling system — we access the same tools your in-house team uses so the patient experience is seamless and the operational record is complete and consistent.</p></div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div><h4>We understand clinical context and payer requirements</h4><p>Our virtual support team is trained in healthcare workflow — not general administrative work. We understand the difference between a routine follow-up and a new problem visit, the prior authorization requirements for specific payers, and the documentation standards that support billing for virtual encounters.</p></div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div><h4>We operate under HIPAA-compliant protocols</h4><p>Every interaction, every document, and every communication handled through HIPAA-compliant tools and protocols — with BAA in place and privacy practices aligned to your clinical standards.</p></div></div>
+      <div class="process-step"><div class="process-step-num">04</div><div><h4>We communicate with your team through your channels</h4><p>EHR messaging, Slack, Teams, email — wherever your practice communicates internally, we communicate there too. Your providers and staff interact with a team member, not a support ticket.</p></div></div>
+      <div class="process-step"><div class="process-step-num">05</div><div><h4>We report virtual care metrics to leadership</h4><p>Telehealth visit completion rates, no-show rates, eligibility failure rates, and administrative load metrics — reported regularly so leadership can see how virtual operations are performing and where support is having the most impact.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI + HUMAN -->
+<section class="service-section service-section--warm">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">The AI + human advantage</div><h2 class="section-title">Automation where repetition adds risk. <em>Humans where context determines the outcome.</em></h2></div>
+    <div class="ai-split fade-in">
+      <div class="ai-col ai-col--machine"><div class="ai-col-label">AI-assisted virtual workflows</div><div class="ai-items">
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Pre-visit checklist monitoring and preparation status alerts</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Eligibility verification scheduling and result tracking</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Reminder delivery scheduling and delivery confirmation</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Provider EHR task queue monitoring and prioritization</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Post-visit follow-up routing and scheduling</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Virtual care performance reporting and metric tracking</p></div>
+      </div></div>
+      <div class="ai-col ai-col--human"><div class="ai-col-label">Healthcare virtual specialists</div><div class="ai-items">
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Patient communication requiring clinical context and judgment</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Prior authorization coordination with payer-specific requirements</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Provider EHR task triage and escalation decisions</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Telehealth billing coordination with coding and modifier review</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Complex patient coordination requiring care context</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Leadership communication on virtual operations performance</p></div>
+      </div></div>
+    </div>
+    <div class="pull-quote fade-in">"Practices that want virtual support but do not want a low-quality VA experience need healthcare-specific knowledge, EHR access, and clinical context — not just someone available to answer messages. That distinction is the difference between virtual support that helps and virtual support that creates more work."</div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="service-section" id="results">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">What changes</div><h2 class="section-title">Virtual care that runs as smoothly <em>as your best in-person days.</em></h2></div>
+    <div class="outcome-grid fade-in">
+      <div class="outcome-card"><div class="outcome-card-num">⚡</div><h4>Providers start virtual visits with prepared patients</h4><p>Intake complete, eligibility verified, visit link confirmed — every virtual patient ready before the session begins.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">↓</div><h4>Administrative time between visits decreases</h4><p>EHR tasks, messages, and coordination work managed during the day — providers end their schedule without a two-hour administrative tail.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">◎</div><h4>Telehealth claims submit correctly the first time</h4><p>Billing modifiers, place-of-service codes, and documentation requirements coordinated before submission — telehealth-specific denials become preventable rather than expected.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">✓</div><h4>Virtual follow-up has the same quality as in-person</h4><p>After-visit summaries, referral coordination, and follow-up reminders happen consistently — not only when someone has time to manage them.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">$</div><h4>Virtual visit revenue captures correctly</h4><p>Eligibility failures, missing authorizations, and billing code errors that were costing revenue on telehealth claims identified and eliminated.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">→</div><h4>Front desk focus returns to in-person patients</h4><p>Virtual coordination tasks removed from in-person front desk responsibilities — staff manage the patients in front of them without the divided attention that virtual care creates.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="service-section service-section--ink-soft">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Why virtual support must be healthcare-specific</div><h2 class="section-title">General virtual assistants create healthcare problems. <em>Healthcare virtual specialists solve them.</em></h2><p class="section-subtitle">The gap between a general VA and a healthcare virtual operations specialist is not speed or availability — it is knowledge, context, and the ability to work inside clinical systems without creating compliance risk.</p></div>
+    <div class="compare-wrap fade-in">
+      <div class="compare-header"><span></span><span class="hbs-col">HBS Healthcare Virtual Support</span><span>Generic VA Service</span></div>
+      <div class="compare-row"><span class="c-label">EHR access and operation</span><span class="c-hbs">Trained — works inside your system</span><span class="c-other">Limited — often outside system</span></div>
+      <div class="compare-row"><span class="c-label">Clinical context understanding</span><span class="c-hbs">Healthcare-specific training</span><span class="c-other">General administrative knowledge</span></div>
+      <div class="compare-row"><span class="c-label">HIPAA compliance</span><span class="c-hbs">BAA in place — compliant protocols</span><span class="c-other">Variable — not always addressed</span></div>
+      <div class="compare-row"><span class="c-label">Prior auth coordination</span><span class="c-hbs">Payer-specific knowledge</span><span class="c-other">Not typically in scope</span></div>
+      <div class="compare-row"><span class="c-label">Telehealth billing support</span><span class="c-hbs">Modifier and coding coordination</span><span class="c-other">Not in scope</span></div>
+      <div class="compare-row"><span class="c-label">Integration with billing operations</span><span class="c-hbs">Connected — same HBS ecosystem</span><span class="c-other">Disconnected — separate vendor</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="eyebrow eyebrow--light" style="justify-content:center">Build your virtual care support team</div>
+    <h2 class="cta-title">If your virtual care workflow is creating more administrative burden than it removes, <em>the support structure needs to change.</em></h2>
+    <p class="cta-text">We start with a review of your current virtual care operations — identifying where workflow breaks down, what is creating provider administrative burden, and what a healthcare-specific virtual support model would change. No commitment required.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn-light btn-lg">Build my virtual care team <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to our virtual team first</a>
+    </div>
+    <div class="trust-line">HIPAA · BAA on every engagement · Healthcare-trained specialists · No long-term contract required</div>
+  </div>
+</section>
+
+
+
+<footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
+</body></html>

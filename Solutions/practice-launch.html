@@ -28,11 +28,11 @@
   --signal:       #00C896;
   --signal-deep:  #00876B;
   --signal-pale:  rgba(0,200,150,0.08);
-  --amber:        #F59E0B;
-  --amber-deep:   #B45309;
-  --amber-pale:   rgba(245,158,11,0.08);
-  --danger:       #D64545;
-  --danger-pale:  rgba(214,69,69,0.07);
+  --amber:        #D4A574;
+  --amber-deep:   #D4A574;
+  --amber-pale:   rgba(212,165,116,0.08);
+  --danger:       #FF8585;
+  --danger-pale:  rgba(255,133,133,0.07);
   --radius:       4px;
   --radius-lg:    12px;
   --max:          1280px;
@@ -415,157 +415,20 @@ nav.top.scrolled {
 .service-hero-lede { font-size: 15px; line-height: 1.75; color: var(--ink-mute); max-width: 540px; margin-bottom: 40px; }
 .service-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* Hero Card */
-.hero-card {
-  background: var(--ink); /* Dark background */
-  color: var(--paper); /* Off-white text */
-  border-radius: var(--radius-lg); /* 12px */
-  padding: 28px;
-  position: relative;
-  box-shadow:
-    0 60px 80px -40px rgba(10, 22, 40, 0.35),
-    0 30px 40px -20px rgba(10, 22, 40, 0.15);
-  transform: rotate(-1.5deg);
-  transition: transform 0.6s var(--ease);
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
-}
+/* ── HERO VISUAL CARD ── */
+.hero-card { background: var(--ink); color: var(--paper); border-radius: var(--radius-lg); padding: 28px; position: relative; box-shadow: 0 60px 80px -40px rgba(10,22,40,0.35), 0 30px 40px -20px rgba(10,22,40,0.15); transform: rotate(-1deg); transition: transform 0.6s var(--ease); }
+.hero-card:hover { transform: rotate(0deg) translateY(-4px); }
+.hero-card-title { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(250,247,242,0.5); margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); }
 
-.hero-card:hover {
-  transform: rotate(0deg) translateY(-4px);
-}
-
-.hero-card-title {
-  font-family: var(--mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: rgba(250, 247, 242, 0.5); /* 50% opacity white */
-  margin-bottom: 20px;
-}
-
-/* Checklist Items */
-.checklist-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* Lighter border for dark mode */
-}
-
-.checklist-card:last-of-type {
-  border-bottom: none;
-}
-
-.check-icon {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-  font-size: 8px;
-}
-
-.check-done {
-  background: var(--signal); /* Green */
-  color: var(--ink); /* Dark text for contrast */
-}
-
-.check-pending {
-  background: var(--amber-pale); /* Light amber */
-  border: 1px solid var(--amber);
-  color: var(--amber-deep);
-}
-
-.check-open {
-  background: rgba(255, 255, 255, 0.04); /* Very subtle */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: transparent;
-}
-
-.checklist-text {
-  font-size: 11px;
-  color: rgba(250, 247, 242, 0.8); /* 80% opacity white */
-  line-height: 1.4;
-}
-
-.checklist-text.done {
-  color: rgba(250, 247, 242, 0.5); /* 50% opacity white */
-  text-decoration: line-through;
-}
-
-/* Dashboard Divider */
-.dash-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08); /* Subtle divider */
-  margin: 14px 0;
-}
-
-/* Dashboard Stats */
-.dash-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.dash-stat {
-  background: rgba(255, 255, 255, 0.04); /* Very subtle */
-  border-radius: var(--radius);
-  padding: 10px 8px;
-  text-align: center;
-}
-
-.dash-stat-num {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  color: var(--signal-deep); /* Dark green */
-  display: block;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.dash-stat-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: rgba(250, 247, 242, 0.5); /* 50% opacity white */
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* Gap Callout */
-.gap-callout {
-  margin-top: 16px;
-  padding: 12px 14px;
-  background: rgba(0, 200, 150, 0.08); /* Signal pale */
-  border-left: 2px solid var(--signal); /* Green border */
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-
-.gc-lbl {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--signal-deep); /* Dark green */
-  margin-bottom: 4px;
-}
-
-.gc-val {
-  font-family: var(--serif);
-  font-size: 14px;
-  color: var(--paper); /* Off-white */
-}
 /* Status rows (for credentialing / enrollment dashboards) */
-.status-card { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--paper-line); }
+.status-card { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
 .status-card:last-of-type { border-bottom: none; }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .dot-green  { background: var(--signal); }
 .dot-amber  { background: var(--amber); }
 .dot-red    { background: var(--danger); }
 .dot-grey   { background: var(--paper-line); border: 1px solid var(--ink-mute); }
-.status-label { font-size: 12px; color: var(--ink-soft); flex: 1; }
+.status-label { font-size: 12px; color: var(--paper); flex: 1; }
 .status-value { font-family: var(--mono); font-size: 10px; font-weight: 500; }
 .status-value.done    { color: var(--signal-deep); }
 .status-value.pending { color: var(--amber-deep); }
@@ -573,19 +436,19 @@ nav.top.scrolled {
 .status-value.waiting { color: var(--ink-mute); }
 .status-pill { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 100px; }
 .pill-green { background: rgba(0,200,150,0.12); color: var(--signal-deep); }
-.pill-amber { background: rgba(245,158,11,0.14); color: var(--amber-deep); }
-.pill-red   { background: rgba(214,69,69,0.1);  color: var(--danger); }
+.pill-amber { background: rgba(212,165,116,0.12); color: var(--amber-deep); }
+.pill-red   { background: rgba(255,133,133,0.1);  color: var(--danger); }
 .pill-grey  { background: var(--paper-warm); color: var(--ink-mute); }
 
 /* Dashboard divider + stats */
-.dash-divider { height: 1px; background: var(--paper-line); margin: 14px 0; }
+.dash-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 0; }
 .dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-.dash-stat { background: var(--paper-warm); border-radius: var(--radius); padding: 10px 8px; text-align: center; }
+.dash-stat { background: rgba(255,255,255,0.05); border-radius: var(--radius); padding: 10px 8px; text-align: center; }
 .dash-stat-num   { font-family: var(--serif); font-size: 1.25rem; color: var(--signal-deep); display: block; line-height: 1; margin-bottom: 4px; }
-.dash-stat-label { font-family: var(--mono); font-size: 8px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
-.gap-callout { margin-top: 16px; padding: 12px 14px; background: var(--signal-pale); border-left: 2px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0; }
-.gc-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--signal-deep); margin-bottom: 4px; }
-.gc-val { font-family: var(--serif); font-size: 14px; color: var(--ink); }
+.dash-stat-label { font-family: var(--mono); font-size: 8px; color: rgba(250,247,242,0.5); text-transform: uppercase; letter-spacing: 0.1em; }
+.gap-callout { margin-top: 18px; padding: 14px 16px; background: rgba(0,200,150,0.08); border: 1px solid rgba(0,200,150,0.2); border-radius: 8px; }
+.gc-lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--signal); margin-bottom: 6px; }
+.gc-val { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--paper); }
 
 /* Checklist rows */
 .checklist-card { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--paper-line); }
@@ -594,8 +457,8 @@ nav.top.scrolled {
 .check-done    { background: var(--signal); color: #fff; }
 .check-pending { background: var(--amber-pale); border: 1px solid var(--amber); color: var(--amber-deep); }
 .check-open    { background: var(--paper-warm); border: 1px solid var(--paper-line); color: transparent; }
-.checklist-text { font-size: 11px; color: var(--ink-soft); line-height: 1.4; }
-.checklist-text.done { color: var(--ink-mute); text-decoration: line-through; }
+.checklist-text { font-size: 11px; color: var(--paper); line-height: 1.4; }
+.checklist-text.done { color: var(--paper); text-decoration: line-through; }
 
 /* ── SCROLL REVEALS ── */
 .reveal   { opacity: 0; transform: translateY(20px); }
@@ -774,10 +637,10 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
 <body>
  <nav class="top" id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <img src="/logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      <a href="../index.html" class="logo">
+        <img src="/logo.Png" alt="Hired Billing Support" style="height: 70px; width: auto;">
       </a>
-    
+
 
       <!-- Hire Talent Dropdown -->
       <div class="nav-dropdown">
@@ -785,19 +648,19 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
         <div class="dropdown-menu dropdown-grid-4">
           <div class="dropdown-column">
             <div class="column-header">CLINICAL ROLES</div>
-            <a href="Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
+            <a href="../Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">DENTAL ROLES</div>
-            <a href="Hire/dental.html">Dental — Assistants & Coordinators</a>
+            <a href="../Hire/dental.html">Dental — Assistants & Coordinators</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">Enterprise & BILLING</div>
-            <a href="Hire/enterprise.html">Enterprise & Billing Specialists</a>
+            <a href="../Hire/enterprise.html">Enterprise & Billing Specialists</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">MSO / Payer Partners</div>
-            <a href="Hire/mso.html">MSO / Payer Partners</a>
+            <a href="../Hire/mso.html">MSO / Payer Partners</a>
             <!-- <a href="#">Contact Hiring Team</a> -->
           </div>
         </div>
@@ -809,31 +672,31 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
         <div class="dropdown-menu dropdown-grid-4">
           <div class="dropdown-column">
             <div class="column-header">BILLING SERVICES</div>
-            <a href="Solutions/rcm-management.html">Revenue Cycle Management</a>
-            <a href="Solutions/medical-billing-rcm.html">Medical Billing & RCM</a>
-            <a href="Solutions/ar-management.html">AR Management</a>
-            <a href="Solutions/ar-denial-fixation.html">Denial Management & Fixation</a>
-            <a href="Solutions/old-aging-ar.html">Old & Aging AR Recovery</a>
+            <a href="./rcm-management.html">Revenue Cycle Management</a>
+            <a href="./medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="./ar-management.html">AR Management</a>
+            <a href="./ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="./old-aging-ar.html">Old & Aging AR Recovery</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">CODING & COMPLIANCE</div>
-            <a href="Solutions/medical-coding.html">Medical Coding</a>
-            <a href="Solutions/medical-auditing.html">Medical Auditing</a>
-            <a href="Solutions/compliance-reporting.html">Compliance & Reporting</a>
-            <a href="Solutions/quality-assurance.html">Quality Assurance</a>
+            <a href="./medical-coding.html">Medical Coding</a>
+            <a href="./medical-auditing.html">Medical Auditing</a>
+            <a href="./compliance-reporting.html">Compliance & Reporting</a>
+            <a href="./quality-assurance.html">Quality Assurance</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">PRACTICE MANAGEMENT</div>
-            <a href="Solutions/provider-credential.html">Provider Credential</a>
-            <a href="Solutions/payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
-            <a href="Solutions/practice-launch.html">Practice Launch</a>
-            <a href="Solutions/operations-management.html">Operations Management</a>
+            <a href="./provider-credential.html">Provider Credential</a>
+            <a href="./payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="./practice-launch.html">Practice Launch</a>
+            <a href="./operations-management.html">Operations Management</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">ADVANCED SOLUTIONS</div>
-            <a href="#">Marketing & Patient Engagement</a>
-            <a href="#">Virtual Healthcare Solutions</a>
-            <a href="#">Analytics & Reporting</a>
+            <a href="./marketing-patient-engagement.html">Marketing & Patient Engagement</a>
+            <a href="./virtual-healthcare-solutions.html">Virtual Healthcare Solutions</a>
+            <a href="./virtual-healthcare-solutions.html">Analytics & Reporting</a>
             <a href="#">View All Solutions →</a>
           </div>
         </div>
@@ -845,10 +708,10 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
         <div class="dropdown-menu dropdown-grid-3">
           <div class="dropdown-column">
             <div class="column-header">BY PRACTICE TYPE</div>
-            <a href="Hire/dental.html">Dental Practices</a>
-            <a href="Hire/medical.html">Medical Practices</a>
-            <a href="Hire/enterprise.html">Enterprise & Medical Groups</a>
-            <a href="Hire/mso.html">MSO / Payer Partners</a>
+            <a href="../Hire/dental.html">Dental Practices</a>
+            <a href="../Hire/medical.html">Medical Practices</a>
+            <a href="../Hire/enterprise.html">Enterprise & Medical Groups</a>
+            <a href="../Hire/mso.html">MSO / Payer Partners</a>
           </div>
           <div class="dropdown-column">
             <div class="column-header">BY SPECIALTY</div>
@@ -931,9 +794,7 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
         <a href="#pain" class="btn btn-ghost btn-lg">See what launch covers</a>
       </div>
     </div>
-    <div class="service-hero-visual reveal reveal-4" style="animation-delay:0.55s">
-      
-    <div class="hero-card">
+    <div class="service-hero-visual reveal reveal-4" style="animation-delay:0.55s"><div class="hero-card">
     <div class="hero-card-title">— Practice Launch Readiness · Pre-Open Checklist</div>
     <div class="checklist-card"><div class="check-icon check-done">✓</div><span class="checklist-text done">Entity formation & tax ID obtained</span></div>
     <div class="checklist-card"><div class="check-icon check-done">✓</div><span class="checklist-text done">NPI — Individual &amp; Group registered</span></div>
@@ -950,9 +811,7 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
       <div class="dash-stat"><span class="dash-stat-num" style="color:var(--ink-mute)">3</span><span class="dash-stat-label">Not Started</span></div>
     </div>
     <div class="gap-callout"><div class="gc-lbl">— Estimated to billing-ready</div><div class="gc-val">6–8 weeks if started today. 4+ months if delayed.</div></div>
-  </div>
-
-</div>
+  </div></div>
   </div>
 </section>
 <section class="service-section" id="pain"><div class="container">
@@ -1084,7 +943,13 @@ footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 3
   </div>
   <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract required</div>
 </div></section>
-
+<div class="related-strip"><div class="container"><div class="related-inner"><span class="related-label">Related services</span>
+    <a class="related-link" href="/provider-credential">Provider Credentialing</a>
+    <a class="related-link" href="/payer-insurer-enrollment">Payer & Insurer Enrollment</a>
+    <a class="related-link" href="/operations-management">Operations Management</a>
+    <a class="related-link" href="/medical-billing-rcm">Medical Billing & RCM</a>
+    <a class="related-link" href="/medical-coding">Medical Coding</a>
+  </div></div></div>
 <footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
 <script>
   const nav=document.getElementById('nav');

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Healthcare Analytics & Reporting | Hired Billing Support</title>
+<meta name="description" content="Hired Billing Support turns your billing, AR, denial, operational, and patient engagement data into structured healthcare analytics and reporting — giving leadership the visibility to make better decisions, control revenue, and manage operations with confidence."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>/* ================================================================
+   HBS ADVANCED SOLUTIONS — SHARED STYLESHEET
+   Extends: HBS Redesign by Talha design system
+   Fraunces · Inter Tight · JetBrains Mono
+   Section: Marketing & Patient Engagement
+            Virtual Healthcare Solutions
+            Analytics & Reporting
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --ink:          #0A1628;
+  --ink-soft:     #1B2942;
+  --ink-mute:     #475569;
+  --paper:        #FAF7F2;
+  --paper-warm:   #F2EDE3;
+  --paper-line:   #E8E2D5;
+  --white:        #FFFFFF;
+  --signal:       #00C896;
+  --signal-deep:  #00876B;
+  --signal-pale:  rgba(0,200,150,0.08);
+  --amber:        #F59E0B;
+  --amber-deep:   #B45309;
+  --amber-pale:   rgba(245,158,11,0.08);
+  --danger:       #D64545;
+  --danger-pale:  rgba(214,69,69,0.07);
+  --violet:       #7C3AED;
+  --violet-pale:  rgba(124,58,237,0.07);
+  --radius:       4px;
+  --radius-lg:    12px;
+  --max:          1280px;
+  --gutter:       clamp(20px, 4vw, 48px);
+  --serif:        'Fraunces', 'Times New Roman', serif;
+  --sans:         'Inter Tight', -apple-system, sans-serif;
+  --mono:         'JetBrains Mono', monospace;
+  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.5; font-size: 16px; overflow-x: hidden; }
+::selection { background: var(--ink); color: var(--paper); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── LAYOUT ── */
+.container   { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.two-col     { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.two-col--sm { gap: 48px; }
+
+/* ── TYPOGRAPHY ── */
+.display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; font-variation-settings: "opsz" 144; }
+.display em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.display--light { color: var(--paper); }
+.display--light em { color: rgba(250,247,242,0.5); }
+.eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-mute); display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+.eyebrow--light { color: rgba(250,247,242,0.5); }
+
+/* ── NAV ── */
+nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); background: rgba(250,247,242,0.82); border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease); }
+nav.top.scrolled { border-bottom-color: var(--paper-line); }
+.nav-inner { max-width: var(--max); margin: 0 auto; padding: 18px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+.logo-mark { width: 28px; height: 28px; background: var(--ink); border-radius: 50%; position: relative; flex-shrink: 0; }
+.logo-mark::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--signal); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { color: var(--ink-soft); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--radius); font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: background 0.2s var(--ease), color 0.2s, transform 0.15s; white-space: nowrap; }
+.btn:hover { transform: translateY(-1px); }
+.btn .arrow { transition: transform 0.2s; flex-shrink: 0; }
+.btn:hover .arrow { transform: translateX(3px); }
+.btn-primary  { background: var(--ink);   color: var(--paper); border-color: var(--ink); }
+.btn-primary:hover { background: var(--ink-soft); }
+.btn-ghost    { background: transparent;  color: var(--ink);   border-color: var(--paper-line); }
+.btn-ghost:hover { background: var(--paper-warm); border-color: var(--ink-mute); }
+.btn-light    { background: var(--paper); color: var(--ink);   border-color: var(--paper); }
+.btn-light:hover { background: var(--paper-warm); }
+.btn-lg { padding: 14px 28px; font-size: 15px; }
+
+/* ── SERVICE HERO ── */
+.service-hero { background: var(--paper); padding: 140px 0 100px; position: relative; overflow: hidden; }
+.service-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.service-hero-bg svg { width: 100%; height: 100%; }
+.service-hero-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); opacity: 0.4; }
+.service-hero-inner { position: relative; z-index: 1; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+.service-hero-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--signal-deep); background: rgba(0,200,150,0.08); border: 1px solid rgba(0,200,150,0.2); padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+.service-hero-title { font-family: var(--serif); font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; color: var(--ink); margin-bottom: 24px; font-variation-settings: "opsz" 144; }
+.service-hero-title em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.service-hero-subtitle { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px; }
+.service-hero-lede { font-size: 15px; line-height: 1.75; color: var(--ink-mute); max-width: 540px; margin-bottom: 40px; }
+.service-hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── HERO CARD (right-side visual) ── */
+.hero-card { background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 4px 24px rgba(10,22,40,0.08), 0 1px 4px rgba(10,22,40,0.05); }
+.hero-card-title { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-mute); margin-bottom: 20px; }
+
+/* Metric rows */
+.metric-card { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--paper-line); }
+.metric-card:last-of-type { border-bottom: none; }
+.metric-label { font-size: 12px; color: var(--ink-mute); flex: 1; }
+.metric-value { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--ink); }
+.metric-value.up    { color: var(--signal-deep); }
+.metric-value.warn  { color: var(--amber-deep); }
+.metric-value.down  { color: var(--danger); }
+.metric-pill { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 100px; }
+.pill-up   { background: rgba(0,200,150,0.12); color: var(--signal-deep); }
+.pill-warn { background: rgba(245,158,11,0.14); color: var(--amber-deep); }
+.pill-down { background: rgba(214,69,69,0.1);  color: var(--danger); }
+
+/* Journey step rows (for patient engagement / virtual) */
+.journey-card { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--paper-line); }
+.journey-card:last-of-type { border-bottom: none; }
+.journey-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.jdot-done    { background: var(--signal); }
+.jdot-active  { background: var(--amber); }
+.jdot-pending { background: var(--paper-line); border: 1px solid var(--ink-mute); }
+.journey-text { font-size: 11px; color: var(--ink-soft); line-height: 1.45; }
+.journey-tag  { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; margin-left: auto; flex-shrink: 0; }
+.jtag-done    { color: var(--signal-deep); }
+.jtag-active  { color: var(--amber-deep); }
+.jtag-pending { color: var(--ink-mute); }
+
+/* KPI bar rows (for analytics) */
+.kpi-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--paper-line); }
+.kpi-row:last-of-type { border-bottom: none; }
+.kpi-lbl  { font-size: 11px; color: var(--ink-mute); min-width: 110px; }
+.kpi-bar  { flex: 1; height: 6px; background: var(--paper-line); border-radius: 3px; overflow: hidden; }
+.kpi-fill { height: 100%; border-radius: 3px; }
+.kpi-fill.high   { background: var(--signal); }
+.kpi-fill.mid    { background: var(--amber); }
+.kpi-fill.low    { background: var(--danger); }
+.kpi-val  { font-family: var(--mono); font-size: 10px; font-weight: 500; min-width: 44px; text-align: right; }
+.kpi-val.high { color: var(--signal-deep); }
+.kpi-val.mid  { color: var(--amber-deep); }
+.kpi-val.low  { color: var(--danger); }
+
+/* Dash utilities */
+.dash-divider { height: 1px; background: var(--paper-line); margin: 14px 0; }
+.dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.dash-stat { background: var(--paper-warm); border-radius: var(--radius); padding: 10px 8px; text-align: center; }
+.dash-stat-num   { font-family: var(--serif); font-size: 1.25rem; color: var(--signal-deep); display: block; line-height: 1; margin-bottom: 4px; }
+.dash-stat-label { font-family: var(--mono); font-size: 8px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; }
+.gap-callout { margin-top: 16px; padding: 12px 14px; background: var(--signal-pale); border-left: 2px solid var(--signal); border-radius: 0 var(--radius) var(--radius) 0; }
+.gc-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--signal-deep); margin-bottom: 4px; }
+.gc-val { font-family: var(--serif); font-size: 14px; color: var(--ink); }
+
+/* ── SCROLL REVEALS ── */
+.reveal   { opacity: 0; transform: translateY(20px); }
+.reveal-1 { animation: rv 0.8s var(--ease) 0.10s forwards; }
+.reveal-2 { animation: rv 0.8s var(--ease) 0.22s forwards; }
+.reveal-3 { animation: rv 0.8s var(--ease) 0.36s forwards; }
+.reveal-4 { animation: rv 0.8s var(--ease) 0.50s forwards; }
+@keyframes rv { to { opacity: 1; transform: translateY(0); } }
+.fade-in  { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+.fade-in.in { opacity: 1; transform: translateY(0); }
+
+/* ── SERVICE SECTION BASE ── */
+.service-section { padding: 100px 0; position: relative; }
+.service-section--warm     { background: var(--paper-warm); }
+.service-section--ink      { background: var(--ink); color: var(--paper); }
+.service-section--ink-soft { background: var(--ink-soft); color: var(--paper); }
+.service-section--ink .display,
+.service-section--ink-soft .display { color: var(--paper); }
+.service-section--ink .display em,
+.service-section--ink-soft .display em { color: rgba(250,247,242,0.5); }
+.service-section--ink .eyebrow,
+.service-section--ink-soft .eyebrow { color: rgba(250,247,242,0.5); }
+.service-section--ink .eyebrow::before,
+.service-section--ink-soft .eyebrow::before { background: rgba(250,247,242,0.4); }
+.service-section--ink p,
+.service-section--ink-soft p { color: rgba(250,247,242,0.65); }
+
+/* ── SECTION HEADER ── */
+.section-header  { margin-bottom: 64px; }
+.section-eyebrow { /* alias for .eyebrow */ }
+.section-title { font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.06; margin-top: 16px; max-width: 780px; font-variation-settings: "opsz" 144; }
+.section-title em { font-style: italic; font-weight: 300; color: var(--ink-mute); }
+.section-subtitle { margin-top: 18px; font-size: 16px; line-height: 1.75; color: var(--ink-mute); max-width: 560px; }
+.service-section--ink .section-title,
+.service-section--ink-soft .section-title { color: var(--paper); }
+.service-section--ink .section-title em,
+.service-section--ink-soft .section-title em { color: rgba(250,247,242,0.5); }
+.service-section--ink .section-subtitle,
+.service-section--ink-soft .section-subtitle { color: rgba(250,247,242,0.6); }
+
+/* ── MONOLOGUE ── */
+.monologue { max-width: 780px; border-left: 2px solid var(--paper-line); padding-left: 32px; }
+.monologue p { font-size: 16px; line-height: 1.85; color: var(--ink-soft); margin-bottom: 20px; }
+.monologue p:last-child { margin-bottom: 0; }
+.monologue .highlight { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--ink); line-height: 1.5; }
+
+/* ── PAIN GRID ── */
+.pain-grid { display: flex; flex-direction: column; margin-top: 48px; }
+.pain-card { display: grid; grid-template-columns: 48px 1fr; gap: 0 24px; padding: 28px 0; border-bottom: 1px solid var(--paper-line); align-items: start; }
+.pain-card:last-child { border-bottom: none; }
+.pain-card-num { font-family: var(--serif); font-size: 13px; color: var(--ink-mute); padding-top: 3px; }
+.pain-card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+.pain-card p  { font-size: 14px; color: var(--ink-mute); line-height: 1.72; }
+
+/* ── SERVICE GRID ── */
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--paper-line); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); overflow: hidden; }
+.service-card { background: var(--white); padding: 28px; transition: background 0.2s; }
+.service-card:hover { background: var(--paper-warm); }
+.service-card-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--signal-deep); margin-bottom: 12px; display: block; }
+.service-card h4  { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.service-card p   { font-size: 13px; color: var(--ink-mute); line-height: 1.65; }
+
+/* ── PROCESS TIMELINE ── */
+.process-timeline { display: flex; flex-direction: column; }
+.process-step { display: grid; grid-template-columns: 48px 1fr; gap: 0 24px; padding: 28px 0; border-bottom: 1px solid var(--paper-line); align-items: start; }
+.process-step:last-child { border-bottom: none; }
+.process-step-num { font-family: var(--mono); font-size: 11px; color: var(--signal-deep); letter-spacing: 0.1em; padding-top: 4px; }
+.process-step h4  { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.process-step p   { font-size: 14px; color: var(--ink-mute); line-height: 1.72; }
+.service-section--ink .process-step      { border-color: rgba(250,247,242,0.1); }
+.service-section--ink .process-step h4   { color: var(--paper); }
+.service-section--ink .process-step p    { color: rgba(250,247,242,0.6); }
+.service-section--ink .process-step-num  { color: var(--signal); }
+
+/* ── WORKFLOW DASHBOARD (phase tracker) ── */
+.workflow-dashboard { display: flex; align-items: flex-start; gap: 0; margin-top: 48px; position: relative; overflow-x: auto; padding-bottom: 8px; }
+.workflow-dashboard::before { content: ''; position: absolute; top: 18px; left: 24px; right: 24px; height: 1px; background: var(--paper-line); z-index: 0; }
+.wf-node { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 110px; position: relative; z-index: 1; padding: 0 6px; }
+.wf-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 500; margin-bottom: 10px; border: 1px solid var(--paper-line); flex-shrink: 0; background: var(--white); }
+.wf-dot--signal { background: rgba(0,200,150,0.1); color: var(--signal-deep); border-color: rgba(0,200,150,0.25); }
+.wf-dot--amber  { background: rgba(245,158,11,0.1); color: var(--amber-deep); border-color: rgba(245,158,11,0.25); }
+.wf-dot--ink    { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.wf-node-label  { font-size: 11px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.3; margin-bottom: 3px; }
+.wf-node-sub    { font-family: var(--mono); font-size: 9px; color: var(--ink-mute); text-align: center; letter-spacing: 0.06em; }
+
+/* ── AI + HUMAN SPLIT ── */
+.ai-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--paper-line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
+.ai-col { padding: 36px; }
+.ai-col--machine { background: var(--paper-warm); }
+.ai-col--human   { background: var(--white); }
+.ai-col-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--paper-line); }
+.ai-col--machine .ai-col-label { color: var(--signal-deep); }
+.ai-col--human   .ai-col-label { color: var(--ink-mute); }
+.ai-items { display: flex; flex-direction: column; gap: 14px; }
+.ai-item  { display: flex; gap: 12px; align-items: flex-start; }
+.ai-item-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.ai-col--machine .ai-item-dot { background: var(--signal); }
+.ai-col--human   .ai-item-dot { background: var(--ink); }
+.ai-item p { font-size: 13px; color: var(--ink-mute); line-height: 1.6; }
+
+/* ── OUTCOME GRID ── */
+.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
+.outcome-card { padding: 28px; background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); }
+.outcome-card-num { font-family: var(--serif); font-size: 2.4rem; font-weight: 400; color: var(--signal); line-height: 1; margin-bottom: 8px; }
+.outcome-card h4  { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.outcome-card p   { font-size: 13px; color: var(--ink-mute); line-height: 1.65; }
+
+/* ── COMPARE TABLE ── */
+.compare-wrap { background: var(--ink); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
+.compare-header { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 14px 28px; background: rgba(255,255,255,0.04); }
+.compare-header span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+.compare-header span.hbs-col { color: var(--signal); }
+.compare-row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 14px 28px; border-top: 1px solid rgba(255,255,255,0.05); }
+.compare-row span { font-size: 13px; }
+.c-label { color: rgba(250,247,242,0.55); }
+.c-hbs   { color: var(--signal); font-weight: 500; }
+.c-other { color: rgba(250,247,242,0.3); }
+
+/* ── PULL QUOTE ── */
+.pull-quote { font-family: var(--serif); font-size: clamp(1.1rem, 2.2vw, 1.45rem); font-style: italic; color: var(--ink); line-height: 1.65; padding: 28px 32px; border-left: 3px solid var(--signal); background: var(--signal-pale); border-radius: 0 var(--radius) var(--radius) 0; margin: 40px 0; max-width: 860px; }
+
+/* ── REPORT / ANALYTICS CARDS ── */
+.report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 48px; }
+.report-card { background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius-lg); padding: 24px; }
+.report-card-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 10px; }
+.report-card-num { font-family: var(--serif); font-size: 2rem; font-weight: 400; line-height: 1; margin-bottom: 6px; }
+.report-card-num.up   { color: var(--signal-deep); }
+.report-card-num.warn { color: var(--amber-deep); }
+.report-card-num.down { color: var(--danger); }
+.report-card h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.report-card p  { font-size: 12px; color: var(--ink-mute); line-height: 1.6; }
+.report-trend   { display: flex; align-items: center; gap: 5px; margin-top: 10px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; }
+.trend-up   { color: var(--signal-deep); }
+.trend-warn { color: var(--amber-deep); }
+.trend-down { color: var(--danger); }
+
+/* ── CTA SECTION ── */
+.cta-section { background: var(--ink); padding: 120px var(--gutter); text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse at center, rgba(0,200,150,0.2), transparent 70%); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.cta-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.06; color: var(--paper); margin: 16px 0 24px; font-variation-settings: "opsz" 144; }
+.cta-title em { font-style: italic; font-weight: 300; color: rgba(250,247,242,0.5); }
+.cta-text { font-size: 16px; line-height: 1.75; color: rgba(250,247,242,0.6); margin-bottom: 40px; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.trust-line { margin-top: 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); color: rgba(250,247,242,0.6); padding: 60px 0 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-size: 13px; }
+.footer-inner a { color: rgba(250,247,242,0.6); }
+.footer-inner a:hover { color: var(--signal); }
+.footer-legal { display: flex; gap: 24px; }
+
+/* ── RELATED STRIP ── */
+.related-strip { background: var(--paper-warm); border-top: 1px solid var(--paper-line); padding: 28px 0; }
+.related-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.related-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.related-link { font-size: 13px; color: var(--ink-soft); padding: 5px 14px; border: 1px solid var(--paper-line); border-radius: 100px; background: var(--white); transition: border-color 0.2s, color 0.2s; }
+.related-link:hover { border-color: var(--signal-deep); color: var(--signal-deep); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .service-hero-inner { grid-template-columns: 1fr; }
+  .service-hero-visual { display: none; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .ai-split { grid-template-columns: 1fr; }
+  .workflow-dashboard::before { display: none; }
+}
+@media (max-width: 720px) {
+  .service-section { padding: 64px 0; }
+  .service-hero   { padding: 110px 0 72px; }
+  .cta-section    { padding: 80px var(--gutter); }
+  .section-header { margin-bottom: 40px; }
+  .nav-links      { display: none; }
+  .compare-header, .compare-row { grid-template-columns: 1.5fr 1fr 1fr; padding: 12px 16px; }
+  .service-grid   { grid-template-columns: 1fr; }
+  .wf-node        { min-width: 80px; }
+  .report-grid    { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+ <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="/logo.Png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+
+
+      <!-- Hire Talent Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="../Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="../Hire/dental.html">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Enterprise & BILLING</div>
+            <a href="../Hire/enterprise.html">Enterprise & Billing Specialists</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">MSO / Payer Partners</div>
+            <a href="../Hire/mso.html">MSO / Payer Partners</a>
+            <!-- <a href="#">Contact Hiring Team</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="./rcm-management.html">Revenue Cycle Management</a>
+            <a href="./medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="./ar-management.html">AR Management</a>
+            <a href="./ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="./old-aging-ar.html">Old & Aging AR Recovery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="./medical-coding.html">Medical Coding</a>
+            <a href="./medical-auditing.html">Medical Auditing</a>
+            <a href="./compliance-reporting.html">Compliance & Reporting</a>
+            <a href="./quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="./provider-credential.html">Provider Credential</a>
+            <a href="./payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="./practice-launch.html">Practice Launch</a>
+            <a href="./operations-management.html">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="./marketing-patient-engagement.html">Marketing & Patient Engagement</a>
+            <a href="./virtual-healthcare-solutions.html">Virtual Healthcare Solutions</a>
+            <a href="./virtual-healthcare-solutions.html">Analytics & Reporting</a>
+            <a href="#">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who We Serve Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">BY PRACTICE TYPE</div>
+            <a href="../Hire/dental.html">Dental Practices</a>
+            <a href="../Hire/medical.html">Medical Practices</a>
+            <a href="../Hire/enterprise.html">Enterprise & Medical Groups</a>
+            <a href="../Hire/mso.html">MSO / Payer Partners</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">BY SPECIALTY</div>
+            <a href="#">Primary Care</a>
+            <a href="#">Behavioral Health</a>
+            <a href="#">Urgent Care</a>
+            <a href="#">Orthopedics & Surgery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">RESOURCES</div>
+            <a href="#">Case Studies</a>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Security & Compliance</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="service-hero-bg">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    <div class="service-hero-grain"></div>
+  </div>
+  <div class="service-hero-inner">
+    <div class="service-hero-content">
+      <div class="service-hero-badge reveal reveal-1">Advanced Solutions · Analytics & Reporting</div>
+      <h1 class="service-hero-title reveal reveal-2">Your practice generates data every day.<br><em>Most of it is not being turned into decisions.</em></h1>
+      <p class="service-hero-subtitle reveal reveal-3">Your EHR has reports. Your billing software has dashboards. Your clearinghouse has claim analytics. And yet leadership still cannot answer with confidence: where is revenue leaking, which payer is causing the most problems, and what changed in AR this month compared to last?</p>
+      <p class="service-hero-lede reveal reveal-3">Hired Billing Support turns scattered healthcare operations data into structured reporting that gives leadership the visibility to manage revenue, control operational risk, and make better decisions — consistently, not just when a crisis makes it necessary.</p>
+      <div class="service-hero-actions reveal reveal-4">
+        <a href="#cta" class="btn btn-primary btn-lg">Improve reporting visibility <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#pain" class="btn btn-ghost btn-lg">See what data is missing</a>
+      </div>
+    </div>
+    <div class="service-hero-visual reveal reveal-4" style="animation-delay:0.55s">
+      <div class="hero-card">
+        <div class="hero-card-title">— Practice Analytics Dashboard · Monthly</div>
+        <div class="kpi-row"><span class="kpi-lbl">Collection Rate</span><div class="kpi-bar"><div class="kpi-fill high" style="width:94%"></div></div><span class="kpi-val high">94.2%</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Clean Claim Rate</span><div class="kpi-bar"><div class="kpi-fill high" style="width:98%"></div></div><span class="kpi-val high">97.8%</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Denial Rate</span><div class="kpi-bar"><div class="kpi-fill mid" style="width:34%"></div></div><span class="kpi-val mid">3.4%</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Days in AR</span><div class="kpi-bar"><div class="kpi-fill high" style="width:76%"></div></div><span class="kpi-val high">24 days</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">AR &gt; 90 Days</span><div class="kpi-bar"><div class="kpi-fill mid" style="width:28%"></div></div><span class="kpi-val mid">8.2%</span></div>
+        <div class="kpi-row"><span class="kpi-lbl">Revenue vs. Budget</span><div class="kpi-bar"><div class="kpi-fill high" style="width:91%"></div></div><span class="kpi-val high">+2.1%</span></div>
+        <div class="dash-divider"></div>
+        <div class="dash-stats">
+          <div class="dash-stat"><span class="dash-stat-num">Monthly</span><span class="dash-stat-label">Report Cadence</span></div>
+          <div class="dash-stat"><span class="dash-stat-num">8</span><span class="dash-stat-label">KPIs Tracked</span></div>
+          <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">3</span><span class="dash-stat-label">Actions Generated</span></div>
+        </div>
+        <div class="gap-callout"><div class="gc-lbl">— This month's finding</div><div class="gc-val">Denial rate above target — Cigna auth-related. Fix in progress.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN MONOLOGUE -->
+<section class="service-section" id="pain">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="eyebrow">The analytics reality in most healthcare practices</div>
+      <h2 class="section-title">The data exists. <em>The insight does not.</em></h2>
+    </div>
+    <div class="monologue fade-in">
+      <p>Your practice runs reports every month. Collection rates, AR aging, denial summaries. The numbers are there. But when leadership asks why collections were lower in March, whether the AR situation is improving or getting worse, or which payer is creating the most operational problems — the answer requires someone to manually pull data from three systems, build a comparison, and interpret what it means in the context of everything else that happened that month.</p>
+      <p>That work almost never happens on schedule. The reports get reviewed. The numbers get noted. And then the meeting moves on to something more urgent, because turning data into decisions requires time that nobody can find between billing queues, patient volume, and operational fires.</p>
+      <p class="highlight">"Your team is not ignoring the data. They are buried in daily work and do not have the time, the tools, or the structure to turn scattered reports into clear decisions — and so the data sits unused while problems that the data could identify continue to compound."</p>
+      <p>Analytics is not a technology problem. Most practices already have the data. The gap is in the interpretation layer — someone who synthesizes data from multiple sources, identifies what it means, connects it to operational root causes, and delivers clear findings with specific recommended actions on a schedule that allows leadership to act before problems get worse.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN LEDGER -->
+<section class="service-section service-section--warm">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Where data fails to become decisions</div><h2 class="section-title">Six reasons your data <em>is not improving your performance.</em></h2></div>
+    <div class="pain-grid fade-in">
+      <div class="pain-card"><div class="pain-card-num">01</div><div><h4>Data is scattered across disconnected systems</h4><p>Billing data is in the billing software. Clinical data is in the EHR. AR data is in the PM. Denial data is in the clearinghouse. Patient engagement data is in a separate platform. No single view of operational performance exists — so leadership always has an incomplete picture.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">02</div><div><h4>Reports show numbers but not what to do about them</h4><p>A denial rate of 4.2 percent does not tell you whether it is trending up, which payers are driving it, what coding issue is behind it, or what the practice should change this month. Numbers without interpretation produce awareness without direction.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">03</div><div><h4>Revenue leakage is invisible until it is significant</h4><p>Undercoding, missed charges, underpayments, write-offs that should not have happened — these leakage sources are only visible in detailed analysis. In summary reports, they are hidden inside aggregate numbers that look acceptable.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">04</div><div><h4>Payer problems are buried in portal data nobody has time to analyze</h4><p>A specific payer is denying a specific procedure at twice the expected rate. Nobody has identified it because nobody has run the analysis. The practice is losing revenue on those claims every week while the pattern goes unnoticed.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">05</div><div><h4>Cash flow feels unpredictable because the data that predicts it is not being used</h4><p>AR aging, claims in process, denial work in queue, and expected payment timelines together create a reasonably predictable cash flow picture. But synthesizing those inputs requires someone doing the analysis — and that rarely happens consistently enough to be useful.</p></div></div>
+      <div class="pain-card"><div class="pain-card-num">06</div><div><h4>Decisions are made reactively because reporting is delayed</h4><p>When the AR aging report comes out three weeks after the period ends, the optimal window to act on the findings in that report has already passed. Reporting cadence that does not match decision timelines produces insight that is always about the past, never about the present.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="service-section service-section--ink" id="solution">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="eyebrow">The solution</div>
+      <h2 class="section-title">Reporting that gives leadership clarity. <em>Analytics that produce action.</em></h2>
+      <p class="section-subtitle">Hired Billing Support pulls data from your billing, AR, denial, operational, and patient engagement systems — synthesizes it into structured reports with clear interpretation and specific recommended actions — and delivers it to leadership on a schedule that allows real decisions, not retrospective observations.</p>
+    </div>
+    <div class="two-col fade-in">
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-step-num">01</div><div><h4>Multi-source data synthesis</h4><p>Billing software, EHR, clearinghouse, AR reports, denial queues, and operational metrics pulled together and synthesized into a single coherent view of practice performance — so leadership sees the full picture, not disconnected fragments.</p></div></div>
+        <div class="process-step"><div class="process-step-num">02</div><div><h4>KPI tracking and trend analysis</h4><p>Collection rate, denial rate, days in AR, clean claim rate, AR aging distribution, and revenue-versus-budget tracked with trend lines and period-over-period comparison — so changes are visible before they become problems.</p></div></div>
+        <div class="process-step"><div class="process-step-num">03</div><div><h4>Root cause analysis on performance gaps</h4><p>When a metric is off target, we do not just report the number — we identify the cause. Which payer is driving the denial rate? Which code type is creating AR aging? What workflow change would move the collection rate? Leadership gets the diagnosis, not just the symptom.</p></div></div>
+      </div>
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-step-num">04</div><div><h4>Revenue leakage identification</h4><p>Undercoding, missed charges, underpayments, premature write-offs, and billing errors identified in the data and quantified — so the practice knows what is being lost and where the recovery opportunity is.</p></div></div>
+        <div class="process-step"><div class="process-step-num">05</div><div><h4>Payer-specific analytics</h4><p>Denial rates, payment timeliness, underpayment frequency, and claim rejection patterns analyzed by payer — revealing which payer relationships are performing and which need attention or escalation.</p></div></div>
+        <div class="process-step"><div class="process-step-num">06</div><div><h4>Executive reporting delivered on schedule</h4><p>Weekly operational snapshots. Monthly performance reviews with root cause analysis. Quarterly strategic summaries with trend direction and forward-looking risk assessment — delivered before leadership needs to ask for them.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYTICS KPI CARDS -->
+<section class="service-section" id="services">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Analytics and reporting services</div><h2 class="section-title">Every operational metric. <em>Reported, interpreted, and acted on.</em></h2></div>
+    <div class="report-grid fade-in">
+      <div class="report-card"><div class="report-card-eyebrow">Revenue Cycle</div><div class="report-card-num up">94.2%</div><h4>Collection Rate Tracking</h4><p>Monthly collection rate with trend analysis, period comparison, and root cause annotation when the rate falls below target.</p><div class="report-trend trend-up">↑ 2.1% vs last month</div></div>
+      <div class="report-card"><div class="report-card-eyebrow">Claims</div><div class="report-card-num up">97.8%</div><h4>Clean Claim Rate</h4><p>First-submission clean claim percentage tracked by payer, code type, and provider — with error pattern identification.</p><div class="report-trend trend-up">↑ 1.3% vs last month</div></div>
+      <div class="report-card"><div class="report-card-eyebrow">Denials</div><div class="report-card-num warn">3.4%</div><h4>Denial Rate & Trend</h4><p>Denial rate by reason code, payer, and provider — with root cause analysis and upstream workflow recommendations each month.</p><div class="report-trend trend-warn">Target &lt;3.0% — monitor</div></div>
+      <div class="report-card"><div class="report-card-eyebrow">Cash Flow</div><div class="report-card-num up">24</div><h4>Days in AR</h4><p>Average days in AR tracked with aging distribution and movement analysis — showing whether AR is improving or building risk.</p><div class="report-trend trend-up">↓ 4 days vs last quarter</div></div>
+      <div class="report-card"><div class="report-card-eyebrow">AR Aging</div><div class="report-card-num warn">8.2%</div><h4>AR Over 90 Days</h4><p>90-day-plus AR percentage tracked by payer and amount — with collectibility assessment and recovery priority sequencing.</p><div class="report-trend trend-warn">Slightly above target</div></div>
+      <div class="report-card"><div class="report-card-eyebrow">Revenue</div><div class="report-card-num up">+2.1%</div><h4>Revenue vs. Budget</h4><p>Actual collections compared to budget and prior period — with contributing factor analysis when variance exists in either direction.</p><div class="report-trend trend-up">Above budget this month</div></div>
+    </div>
+    <div class="service-grid fade-in" style="margin-top:40px">
+      <div class="service-card"><span class="service-card-num">01</span><h4>RCM Performance Reporting</h4><p>Full revenue cycle performance — collection rate, clean claim rate, days in AR, denial rate — with trend lines and root cause analysis.</p></div>
+      <div class="service-card"><span class="service-card-num">02</span><h4>AR Aging Analytics</h4><p>AR aging distribution by bucket, payer, and provider — with movement analysis, recovery targets, and collectibility assessment.</p></div>
+      <div class="service-card"><span class="service-card-num">03</span><h4>Denial Trend Analysis</h4><p>Denial volume by reason code, payer, and provider — with root cause identification and specific upstream workflow recommendations.</p></div>
+      <div class="service-card"><span class="service-card-num">04</span><h4>Payer Performance Analytics</h4><p>Denial rates, payment timeliness, underpayment frequency, and claim pattern analysis by payer — identifying which relationships need attention.</p></div>
+      <div class="service-card"><span class="service-card-num">05</span><h4>Revenue Leakage Analysis</h4><p>Undercoding, missed charges, underpayments, and write-off patterns identified and quantified — with specific recovery opportunities documented.</p></div>
+      <div class="service-card"><span class="service-card-num">06</span><h4>Cash Flow Visibility Reporting</h4><p>AR in process, expected payments, and collections trend synthesized into a forward-looking cash flow picture — so surprises are rare rather than monthly.</p></div>
+      <div class="service-card"><span class="service-card-num">07</span><h4>Provider Productivity Reporting</h4><p>Collection rates, coding accuracy, and billing performance by provider — giving leadership visibility into performance variation and improvement opportunities.</p></div>
+      <div class="service-card"><span class="service-card-num">08</span><h4>Operational Performance Reporting</h4><p>Task queue metrics, workflow adherence, scheduling performance, and prior authorization tracking — operational data translated into management-ready insights.</p></div>
+      <div class="service-card"><span class="service-card-num">09</span><h4>Patient Engagement Analytics</h4><p>Inquiry conversion rates, appointment no-show rates, recall success rates, and review scores — patient engagement data connected to revenue and growth outcomes.</p></div>
+      <div class="service-card"><span class="service-card-num">10</span><h4>Executive Dashboard & Summary</h4><p>Monthly leadership report synthesizing all operational, financial, and clinical performance data — with clear findings, trends, and specific recommended actions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="service-section service-section--warm">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">How reporting becomes action</div><h2 class="section-title">Data collected. Synthesized. Interpreted. <em>Delivered with recommended next steps.</em></h2><p class="section-subtitle">Most reporting stops at the data. The value is in what comes after — the interpretation, the root cause, and the specific action that changes the outcome.</p></div>
+    <div class="workflow-dashboard fade-in">
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">01</div><div class="wf-node-label">Data Pull</div><div class="wf-node-sub">All sources synced</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">02</div><div class="wf-node-label">KPI Calculation</div><div class="wf-node-sub">Metrics computed</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">03</div><div class="wf-node-label">Trend Analysis</div><div class="wf-node-sub">vs. prior period</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">04</div><div class="wf-node-label">Root Cause</div><div class="wf-node-sub">Why it changed</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--amber">05</div><div class="wf-node-label">Leakage ID</div><div class="wf-node-sub">Revenue gaps found</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">06</div><div class="wf-node-label">Report Built</div><div class="wf-node-sub">Commentary added</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--signal">07</div><div class="wf-node-label">Leadership Review</div><div class="wf-node-sub">Findings delivered</div></div>
+      <div class="wf-node"><div class="wf-dot wf-dot--ink">08</div><div class="wf-node-label">Action Taken</div><div class="wf-node-sub">Decisions made</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="service-section">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">How HBS delivers analytics</div><h2 class="section-title">Reports your leadership team can read. <em>Insights they can act on.</em></h2><p class="section-subtitle">Reporting only creates value when it is timely, clear, and connected to specific actions. We build every report with those three criteria as the standard.</p></div>
+    <div class="process-timeline fade-in" style="max-width:780px">
+      <div class="process-step"><div class="process-step-num">01</div><div><h4>We align the reporting framework to your leadership priorities</h4><p>What does your leadership team need to see, and how often? We build the reporting structure around the specific decisions your practice needs to make — not a generic template that reports everything but answers nothing.</p></div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div><h4>We pull data from your existing systems</h4><p>Billing software, EHR, clearinghouse, PM — we work in your systems. No new platforms, no data migration, no third-party integration projects required. Reports are built from the data sources your practice already uses.</p></div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div><h4>We write reports with commentary, not just data</h4><p>Every report includes plain-language commentary explaining what the numbers mean, what changed from last period, and what the practice should consider doing in response. Numbers are presented in context, not isolation.</p></div></div>
+      <div class="process-step"><div class="process-step-num">04</div><div><h4>We identify root causes — not just symptoms</h4><p>When a metric is trending the wrong direction, we go upstream. Which payer is driving the denial rate? What coding issue is behind the AR aging? What process change would improve the collection rate? Leadership receives diagnosis, not just observations.</p></div></div>
+      <div class="process-step"><div class="process-step-num">05</div><div><h4>We track findings through to resolution</h4><p>Every actionable finding in a report has an owner, a recommended action, and a verification step at the next reporting cycle. Reports generate change — not recurring documentation of the same unresolved problems.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI + HUMAN -->
+<section class="service-section service-section--warm">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">The AI + human advantage</div><h2 class="section-title">Data processing by machine. <em>Interpretation and judgment by people.</em></h2></div>
+    <div class="ai-split fade-in">
+      <div class="ai-col ai-col--machine"><div class="ai-col-label">AI-assisted analytics workflows</div><div class="ai-items">
+        <div class="ai-item"><div class="ai-item-dot"></div><p>KPI data collection, aggregation, and trend calculation across systems</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Denial reason code categorization and frequency tracking</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>AR aging movement monitoring and threshold alerting</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Payer performance benchmarking and variance flagging</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Revenue leakage pattern detection and quantification</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Report generation, scheduling, and delivery</p></div>
+      </div></div>
+      <div class="ai-col ai-col--human"><div class="ai-col-label">Healthcare analytics specialists</div><div class="ai-items">
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Report commentary — translating numbers into decisions</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Root cause analysis connecting metrics to operational causes</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Revenue leakage assessment and recovery prioritization</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Payer trend interpretation and escalation recommendations</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Leadership communication and findings presentation</p></div>
+        <div class="ai-item"><div class="ai-item-dot"></div><p>Reporting framework updates as practice needs evolve</p></div>
+      </div></div>
+    </div>
+    <div class="pull-quote fade-in">"The practices that manage their revenue cycle well are not the ones with the most data. They are the ones who understand what their data is telling them — and who have someone translating the numbers into decisions before the problems those numbers represent become too large to ignore."</div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="service-section" id="results">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">What changes</div><h2 class="section-title">Leadership that makes decisions with data. <em>Not intuition about data.</em></h2></div>
+    <div class="outcome-grid fade-in">
+      <div class="outcome-card"><div class="outcome-card-num">◎</div><h4>Full performance visibility across the revenue cycle</h4><p>Every major operational and financial metric tracked, trended, and explained — so leadership always knows where the practice stands and where attention is needed.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">$</div><h4>Revenue leakage identified and quantified</h4><p>Undercoding, underpayments, missed charges, and premature write-offs found in the data — with specific recovery opportunities and dollar estimates attached.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">↓</div><h4>Denial trends traced to root causes</h4><p>Not just denial rates — the specific reasons, payers, and workflow gaps driving them, with targeted upstream changes that reduce the rate over time.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">⚡</div><h4>Cash flow becomes more predictable</h4><p>AR in process, expected collections, and trend data synthesized into a forward-looking cash flow picture — fewer monthly surprises, more confident planning.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">→</div><h4>Findings lead to action, not just documentation</h4><p>Every identified issue tracked through to a verified resolution — so reports produce change, not recurring documentation of the same problems.</p></div>
+      <div class="outcome-card"><div class="outcome-card-num">✓</div><h4>Payer problems are visible before they become significant</h4><p>Payer performance tracked by denial rate, payment timing, and underpayment frequency — problems surfaced when they are addressable, not after months of silent revenue loss.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="service-section service-section--ink-soft">
+  <div class="container">
+    <div class="section-header fade-in"><div class="eyebrow">Why reporting must lead to action</div><h2 class="section-title">Reporting that does not produce decisions <em>is documentation, not analytics.</em></h2><p class="section-subtitle">The goal is not to have better reports. The goal is to make better decisions. Reports are only valuable if they consistently connect data to action — and that requires interpretation, root cause analysis, and specific recommendations, not just data presentation.</p></div>
+    <div class="compare-wrap fade-in">
+      <div class="compare-header"><span></span><span class="hbs-col">With HBS Analytics</span><span>Standard Reporting Only</span></div>
+      <div class="compare-row"><span class="c-label">Performance visibility</span><span class="c-hbs">Multi-source synthesis with trends</span><span class="c-other">Single-system snapshots</span></div>
+      <div class="compare-row"><span class="c-label">Report commentary</span><span class="c-hbs">Plain-language context and meaning</span><span class="c-other">Numbers without interpretation</span></div>
+      <div class="compare-row"><span class="c-label">Root cause analysis</span><span class="c-hbs">Included — every gap traced upstream</span><span class="c-other">Not provided</span></div>
+      <div class="compare-row"><span class="c-label">Revenue leakage identification</span><span class="c-hbs">Systematic — quantified with recovery targets</span><span class="c-other">Visible only if someone looks</span></div>
+      <div class="compare-row"><span class="c-label">Reporting cadence</span><span class="c-hbs">Defined schedule — weekly and monthly</span><span class="c-other">When someone pulls a report</span></div>
+      <div class="compare-row"><span class="c-label">Finding follow-through</span><span class="c-hbs">Tracked to verified resolution</span><span class="c-other">Noted and not followed up</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="eyebrow eyebrow--light" style="justify-content:center">Start with an analytics review</div>
+    <h2 class="cta-title">If your leadership does not have a clear, current picture of your revenue cycle, <em>decisions are being made without the information they need.</em></h2>
+    <p class="cta-text">We start with a review of your current reporting — showing you what is tracked, what is missing, and what your leadership team should be seeing on a regular basis. You see the gap before we discuss anything else.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn-light btn-lg">Improve reporting visibility <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to our analytics team</a>
+    </div>
+    <div class="trust-line">HIPAA · BAA on every engagement · Existing systems only · No long-term contract required</div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<div class="related-strip"><div class="container"><div class="related-inner">
+  <span class="related-label">Related services</span>
+  <a class="related-link" href="/marketing-patient-engagement">Marketing & Patient Engagement</a>
+  <a class="related-link" href="/virtual-healthcare-solutions">Virtual Healthcare</a>
+  <a class="related-link" href="/compliance-reporting">Compliance & Reporting</a>
+  <a class="related-link" href="/rcm-management">RCM Management</a>
+  <a class="related-link" href="/ar-management">AR Management</a>
+  <a class="related-link" href="/ar-denial-fixation">Denial & Fixation</a>
+</div></div></div>
+
+<footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
+</body></html>
