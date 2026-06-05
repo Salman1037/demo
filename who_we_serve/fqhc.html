@@ -1,9 +1,19 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>FQHC Billing & Operations Support | Hired Billing Support</title><meta name="description" content="Hired Billing Support helps Federally Qualified Health Centers strengthen billing, AR, eligibility, credentialing, reporting, and operational workflows — supporting the mission-driven work of community health with reliable revenue cycle infrastructure."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>/* ================================================================
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FQHC Billing & Operations Support | Hired Billing Support</title>
+  <meta name="description"
+    content="Hired Billing Support helps Federally Qualified Health Centers strengthen billing, AR, eligibility, credentialing, reporting, and operational workflows — supporting the mission-driven work of community health with reliable revenue cycle infrastructure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ================================================================
    HBS PROVIDER ORGANIZATIONS — SHARED STYLESHEET
    Who We Serve: Provider Organizations (6 pages)
    Design system: HBS Redesign by Talha
@@ -11,310 +21,386 @@
    ink / paper / signal + amber + danger
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ── TOKENS ── */
-:root {
-  --ink:          #0A1628;
-  --ink-soft:     #1B2942;
-  --ink-mute:     #475569;
-  --paper:        #FAF7F2;
-  --paper-warm:   #F2EDE3;
-  --paper-line:   #E8E2D5;
-  --white:        #FFFFFF;
-  --signal:       #00C896;
-  --signal-deep:  #00876B;
-  --signal-pale:  rgba(0,200,150,0.08);
-  --amber:        #F59E0B;
-  --amber-deep:   #B45309;
-  --amber-pale:   rgba(245,158,11,0.08);
-  --danger:       #D64545;
-  --danger-pale:  rgba(214,69,69,0.07);
-  --radius:       4px;
-  --radius-lg:    12px;
-  --max:          1280px;
-  --gutter:       clamp(20px, 4vw, 48px);
-  --serif:        'Fraunces','Times New Roman',serif;
-  --sans:         'Inter Tight',-apple-system,sans-serif;
-  --mono:         'JetBrains Mono',monospace;
-  --ease:         cubic-bezier(0.22,1,0.36,1);
-}
+    /* ── TOKENS ── */
+    :root {
+      --ink: #0A1628;
+      --ink-soft: #1B2942;
+      --ink-mute: #475569;
+      --paper: #FAF7F2;
+      --paper-warm: #F2EDE3;
+      --paper-line: #E8E2D5;
+      --white: #FFFFFF;
+      --signal: #00C896;
+      --signal-deep: #00876B;
+      --signal-pale: rgba(0, 200, 150, 0.08);
+      --amber: #F59E0B;
+      --amber-deep: #B45309;
+      --amber-pale: rgba(245, 158, 11, 0.08);
+      --danger: #D64545;
+      --danger-pale: rgba(214, 69, 69, 0.07);
+      --radius: 4px;
+      --radius-lg: 12px;
+      --max: 1280px;
+      --gutter: clamp(20px, 4vw, 48px);
+      --serif: 'Fraunces', 'Times New Roman', serif;
+      --sans: 'Inter Tight', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
 
-/* ── RESET ── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;font-size:16px;overflow-x:hidden}
-::selection{background:var(--ink);color:var(--paper)}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+    /* ── RESET ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* ── LAYOUT ── */
-.container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased
+    }
 
-/* ── TYPOGRAPHY ── */
-.display{font-family:var(--serif);font-weight:400;letter-spacing:-0.025em;line-height:1.02;font-variation-settings:"opsz" 144}
-.display em{font-style:italic;font-weight:300;color:var(--ink-mute)}
-.display--light{color:var(--paper)}
-.display--light em{color:rgba(250,247,242,.5)}
-.eyebrow{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-mute);display:inline-flex;align-items:center;gap:10px}
-.eyebrow::before{content:'';width:24px;height:1px;background:currentColor}
-.eyebrow--light{color:rgba(250,247,242,.5)}
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 16px;
+      overflow-x: hidden
+    }
 
-/* Navigation */
-nav.top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(250, 247, 242, 0.78);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s var(--ease);
-}
+    ::selection {
+      background: var(--ink);
+      color: var(--paper)
+    }
 
-nav.top.scrolled {
-    border-bottom-color: var(--paper-line);
-}
+    a {
+      color: inherit;
+      text-decoration: none
+    }
 
-.nav-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 18px var(--gutter);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-}
+    img {
+      max-width: 100%;
+      display: block
+    }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
-}
+    /* ── LAYOUT ── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter)
+    }
 
-.logo-mark {
-    width: 28px;
-    height: 28px;
-    background: var(--ink);
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-}
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start
+    }
 
-.logo-mark::after {
-    content: '';
-    position: absolute;
-    inset: 7px;
-    border-radius: 50%;
-    background: var(--signal);
-}
+    /* ── TYPOGRAPHY ── */
+    .display {
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+      font-variation-settings: "opsz" 144
+    }
 
-.nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-}
+    .display em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mute)
+    }
 
-.nav-links a {
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    position: relative;
-    padding: 4px 0;
-}
+    .display--light {
+      color: var(--paper)
+    }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--ink);
-    transition: width 0.3s var(--ease);
-}
+    .display--light em {
+      color: rgba(250, 247, 242, .5)
+    }
 
-.nav-links a:hover::after {
-    width: 100%;
-}
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--ink-mute);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px
+    }
 
-.nav-cta {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: currentColor
+    }
 
-.nav-dropdown {
-    position: relative;
-    display: inline-block;
-}
+    .eyebrow--light {
+      color: rgba(250, 247, 242, .5)
+    }
 
-.dropdown-toggle {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    transition: all 0.3s var(--ease);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    position: relative;
-}
+    /* Navigation */
+    nav.top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(250, 247, 242, 0.78);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
 
-.dropdown-toggle:hover {
-    color: var(--signal);
-    background: transparent;
-}
+    nav.top.scrolled {
+      border-bottom-color: var(--paper-line);
+    }
 
-.dropdown-toggle .chevron {
-    font-size: 9px;
-    transition: transform 0.3s var(--ease);
-    opacity: 0.6;
-    margin-left: 4px;
-}
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
 
-.nav-dropdown:hover .dropdown-toggle .chevron {
-    transform: rotate(180deg);
-    opacity: 1;
-}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
 
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: -20px;
-    background: var(--white);
-    border: 1px solid var(--paper-line);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
-    padding: 24px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-12px);
-    transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
-    margin-top: 8px;
-    z-index: 1000;
-    min-width: 280px;
-    max-width: 100vw;
-}
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+    }
 
-.dropdown-menu.dropdown-grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    min-width: 500px;
-}
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background: var(--signal);
+    }
 
-.dropdown-menu.dropdown-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    min-width: 680px;
-}
-
-.dropdown-menu.dropdown-grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    min-width: 900px;
-}
-
-.nav-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-column {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.column-header {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--ink-mute);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-}
-
-.column-header::before {
-    content: '';
-    width: 16px;
-    height: 1px;
-    background: currentColor;
-    margin-right: 8px;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px 12px;
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s var(--ease);
-    border-radius: 4px;
-    position: relative;
-}
-
-.dropdown-menu a:hover {
-    background: var(--paper-warm);
-    color: var(--ink);
-    padding-left: 16px;
-}
-
-.dropdown-menu a::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 0;
-    background: var(--signal);
-    border-radius: 2px;
-    transition: height 0.2s var(--ease);
-}
-
-.dropdown-menu a:hover::before {
-    height: 16px;
-}
-
-@media (max-width: 900px) {
     .nav-links {
-        display: none;
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s var(--ease);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
     }
 
     .nav-dropdown {
-        display: inline-block;
+      position: relative;
+      display: inline-block;
     }
 
     .dropdown-toggle {
-        font-size: 13px;
-        padding: 6px 10px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--signal);
+      background: transparent;
+    }
+
+    .dropdown-toggle .chevron {
+      font-size: 9px;
+      transition: transform 0.3s var(--ease);
+      opacity: 0.6;
+      margin-left: 4px;
+    }
+
+    .nav-dropdown:hover .dropdown-toggle .chevron {
+      transform: rotate(180deg);
+      opacity: 1;
     }
 
     .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -20px;
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
+      margin-top: 8px;
+      z-index: 1000;
+      min-width: 280px;
+      max-width: 100vw;
+    }
+
+    .dropdown-menu.dropdown-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      min-width: 500px;
+    }
+
+    .dropdown-menu.dropdown-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      min-width: 680px;
+    }
+
+    .dropdown-menu.dropdown-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      min-width: 900px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .column-header {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .column-header::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      margin-right: 8px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 12px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s var(--ease);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--paper-warm);
+      color: var(--ink);
+      padding-left: 16px;
+    }
+
+    .dropdown-menu a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: var(--signal);
+      border-radius: 2px;
+      transition: height 0.2s var(--ease);
+    }
+
+    .dropdown-menu a:hover::before {
+      height: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-dropdown {
+        display: inline-block;
+      }
+
+      .dropdown-toggle {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+
+      .dropdown-menu {
         position: fixed;
         top: 70px;
         left: 0;
@@ -325,316 +411,1306 @@ nav.top.scrolled {
         max-height: calc(100vh - 70px);
         overflow-y: auto;
         padding: 20px;
-    }
+      }
 
-    .dropdown-menu.dropdown-grid-2 {
+      .dropdown-menu.dropdown-grid-2 {
         grid-template-columns: 1fr;
         min-width: 100%;
         gap: 24px;
-    }
+      }
 
-    .dropdown-menu.dropdown-grid-3 {
+      .dropdown-menu.dropdown-grid-3 {
         grid-template-columns: repeat(2, 1fr);
         min-width: 100%;
         gap: 24px;
-    }
+      }
 
-    .dropdown-menu.dropdown-grid-4 {
+      .dropdown-menu.dropdown-grid-4 {
         grid-template-columns: repeat(2, 1fr);
         min-width: 100%;
         gap: 24px;
-    }
+      }
 
-    .dropdown-column {
+      .dropdown-column {
         flex-direction: column;
+      }
     }
-}
 
-@media (max-width: 600px) {
-    .nav-dropdown {
+    @media (max-width: 600px) {
+      .nav-dropdown {
         display: inline-block;
-    }
+      }
 
-    .dropdown-toggle {
+      .dropdown-toggle {
         font-size: 12px;
         padding: 5px 8px;
-    }
+      }
 
-    .dropdown-menu {
+      .dropdown-menu {
         left: -10px;
         right: -10px;
         padding: 16px;
-    }
+      }
 
-    .dropdown-menu.dropdown-grid-2,
-    .dropdown-menu.dropdown-grid-3,
-    .dropdown-menu.dropdown-grid-4 {
+      .dropdown-menu.dropdown-grid-2,
+      .dropdown-menu.dropdown-grid-3,
+      .dropdown-menu.dropdown-grid-4 {
         grid-template-columns: 1fr;
         min-width: calc(100vw - 32px);
-    }
+      }
 
-    .column-header {
+      .column-header {
         font-size: 10px;
-    }
+      }
 
-    .dropdown-menu a {
+      .dropdown-menu a {
         font-size: 13px;
         padding: 8px 10px;
+      }
     }
-}
 
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--radius);font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:background .2s var(--ease),color .2s,transform .15s;white-space:nowrap}
-.btn:hover{transform:translateY(-1px)}
-.btn .arrow{transition:transform .2s;flex-shrink:0}
-.btn:hover .arrow{transform:translateX(3px)}
-.btn-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.btn-primary:hover{background:var(--ink-soft)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--paper-line)}
-.btn-ghost:hover{background:var(--paper-warm);border-color:var(--ink-mute)}
-.btn-light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.btn-light:hover{background:var(--paper-warm)}
-.btn-lg{padding:14px 28px;font-size:15px}
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: var(--radius);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background .2s var(--ease), color .2s, transform .15s;
+      white-space: nowrap
+    }
 
-/* ── WHO HERO ── */
-.who-hero{background:var(--paper);padding:140px 0 100px;position:relative;overflow:hidden}
-.who-hero-bg{position:absolute;inset:0;pointer-events:none}
-.who-hero-bg svg{width:100%;height:100%}
-.who-hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4}
-.who-hero-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center}
-.who-hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--signal-deep);background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);padding:6px 14px;border-radius:100px;margin-bottom:24px}
-.who-hero-title{font-family:var(--serif);font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:400;letter-spacing:-.025em;line-height:1.02;color:var(--ink);margin-bottom:24px;font-variation-settings:"opsz" 144}
-.who-hero-title em{font-style:italic;font-weight:300;color:var(--ink-mute)}
-.who-hero-subtitle{font-size:17px;line-height:1.7;color:var(--ink-soft);margin-bottom:14px;max-width:560px}
-.who-hero-lede{font-size:15px;line-height:1.75;color:var(--ink-mute);max-width:540px;margin-bottom:40px}
-.who-hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn:hover {
+      transform: translateY(-1px)
+    }
 
-/* ── HERO VISUAL / ORGANIZATION DASHBOARD ── */
-.organization-dashboard{background:var(--ink);border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:28px;box-shadow:0 4px 24px rgba(10,22,40,.08),0 1px 4px rgba(10,22,40,.05)}
-.org-dash-title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:var(--paper);margin-bottom:20px}
+    .btn .arrow {
+      transition: transform .2s;
+      flex-shrink: 0
+    }
 
-/* Metric rows */
-.metric-card{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--paper-line)}
-.metric-card:last-of-type{border-bottom:none}
-.metric-label{font-size:12px;color:var(--paper);flex:1}
-.metric-value{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--paper)}
-.metric-value.up{color:var(--signal-deep)}
-.metric-value.warn{color:var(--amber-deep)}
-.metric-value.risk{color:var(--danger)}
+    .btn:hover .arrow {
+      transform: translateX(3px)
+    }
 
-/* Status dot rows */
-.status-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--paper-line)}
-.status-row:last-of-type{border-bottom:none}
-.s-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.dot-g{background:var(--signal)}
-.dot-a{background:var(--amber)}
-.dot-r{background:var(--danger)}
-.dot-x{background:var(--paper-line);border:1px solid var(--ink-mute)}
-.s-label{font-size:12px;color:var(--paper);flex:1}
-.s-val{font-family:var(--mono);font-size:10px;font-weight:500}
-.s-val.done{color:var(--signal-deep)}
-.s-val.pend{color:var(--amber-deep)}
-.s-val.block{color:var(--danger)}
-.s-val.wait{color:var(--ink-mute)}
-.s-pill{font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:2px 8px;border-radius:100px}
-.pill-g{background:rgba(0,200,150,.12);color:var(--signal-deep)}
-.pill-a{background:rgba(245,158,11,.14);color:var(--amber-deep)}
-.pill-r{background:rgba(214,69,69,.1);color:var(--danger)}
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink)
+    }
 
-/* Check rows */
-.check-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--paper-line)}
-.check-row:last-of-type{border-bottom:none}
-.ck{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;margin-top:1px}
-.ck-done{background:var(--signal);color:#fff}
-.ck-pend{background:var(--amber-pale);border:1px solid var(--amber);color:var(--amber-deep)}
-.ck-open{background:var(--paper-warm);border:1px solid var(--paper-line);color:transparent}
-.ck-label{font-size:11px;color:var(--ink-soft);line-height:1.4}
-.ck-label.done{color:var(--ink-mute);text-decoration:line-through}
+    .btn-primary:hover {
+      background: var(--ink-soft)
+    }
 
-/* KPI bars */
-.kpi-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--paper-line)}
-.kpi-row:last-of-type{border-bottom:none}
-.kpi-lbl{font-size:11px;color:var(--paper);min-width:110px}
-.kpi-bar{flex:1;height:6px;background:var(--paper-line);border-radius:3px;overflow:hidden}
-.kpi-fill{height:100%;border-radius:3px}
-.kpi-fill.hi{background:var(--signal)}
-.kpi-fill.mi{background:var(--amber)}
-.kpi-fill.lo{background:var(--danger)}
-.kpi-val{font-family:var(--mono);font-size:10px;font-weight:500;min-width:44px;text-align:right}
-.kpi-val.hi{color:var(--signal-deep)}
-.kpi-val.mi{color:var(--amber-deep)}
-.kpi-val.lo{color:var(--danger)}
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--paper-line)
+    }
 
-/* Dash utilities */
-.dash-divider{height:1px;background:var(--paper-line);margin:14px 0}
-.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.dash-stat{background:var(--paper-warm);border-radius:var(--radius);padding:10px 8px;text-align:center}
-.dash-stat-num{font-family:var(--serif);font-size:1.25rem;color:var(--signal-deep);display:block;line-height:1;margin-bottom:4px}
-.dash-stat-label{font-family:var(--mono);font-size:8px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.1em}
-.gap-callout{margin-top:16px;padding:12px 14px;background:var(--signal-pale);border-left:2px solid var(--signal);border-radius:0 var(--radius) var(--radius) 0}
-.gc-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--paper);margin-bottom:4px}
-.gc-val{font-family:var(--serif);font-size:14px;color:var(--paper);}
+    .btn-ghost:hover {
+      background: var(--paper-warm);
+      border-color: var(--ink-mute)
+    }
 
-/* ── REVEALS ── */
-.reveal{opacity:0;transform:translateY(20px)}
-.reveal-1{animation:rv .8s var(--ease) .10s forwards}
-.reveal-2{animation:rv .8s var(--ease) .22s forwards}
-.reveal-3{animation:rv .8s var(--ease) .36s forwards}
-.reveal-4{animation:rv .8s var(--ease) .50s forwards}
-@keyframes rv{to{opacity:1;transform:translateY(0)}}
-.fade-in{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.fade-in.in{opacity:1;transform:translateY(0)}
+    .btn-light {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper)
+    }
 
-/* ── WHO SECTION BASE ── */
-.who-section{padding:100px 0;position:relative}
-.who-section--warm{background:var(--paper-warm)}
-.who-section--ink{background:var(--ink);color:var(--paper)}
-.who-section--ink-soft{background:var(--ink-soft);color:var(--paper)}
-.who-section--ink .display,.who-section--ink-soft .display{color:var(--paper)}
-.who-section--ink .display em,.who-section--ink-soft .display em{color:rgba(250,247,242,.5)}
-.who-section--ink .eyebrow,.who-section--ink-soft .eyebrow{color:rgba(250,247,242,.5)}
-.who-section--ink .eyebrow::before,.who-section--ink-soft .eyebrow::before{background:rgba(250,247,242,.4)}
-.who-section--ink p,.who-section--ink-soft p{color:rgba(250,247,242,.65)}
+    .btn-light:hover {
+      background: var(--paper-warm)
+    }
 
-/* ── SECTION HEADER ── */
-.section-header{margin-bottom:64px}
-.section-eyebrow{/* alias */}
-.section-title{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);font-weight:400;letter-spacing:-.025em;line-height:1.06;margin-top:16px;max-width:780px;font-variation-settings:"opsz" 144}
-.section-title em{font-style:italic;font-weight:300;color:var(--ink-mute)}
-.section-subtitle{margin-top:18px;font-size:16px;line-height:1.75;color:var(--ink-mute);max-width:560px}
-.who-section--ink .section-title,.who-section--ink-soft .section-title{color:var(--paper)}
-.who-section--ink .section-title em,.who-section--ink-soft .section-title em{color:rgba(250,247,242,.5)}
-.who-section--ink .section-subtitle,.who-section--ink-soft .section-subtitle{color:rgba(250,247,242,.6)}
+    .btn-lg {
+      padding: 14px 28px;
+      font-size: 15px
+    }
 
-/* ── MONOLOGUE ── */
-.monologue{max-width:780px;border-left:2px solid var(--paper-line);padding-left:32px}
-.monologue p{font-size:16px;line-height:1.85;color:var(--ink-soft);margin-bottom:20px}
-.monologue p:last-child{margin-bottom:0}
-.monologue .highlight{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);line-height:1.5}
+    /* ── WHO HERO ── */
+    .who-hero {
+      background: var(--paper);
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden
+    }
 
-/* ── PAIN GRID ── */
-.pain-grid{display:flex;flex-direction:column;margin-top:48px}
-.pain-card{display:grid;grid-template-columns:48px 1fr;gap:0 24px;padding:28px 0;border-bottom:1px solid var(--paper-line);align-items:start}
-.pain-card:last-child{border-bottom:none}
-.pain-card-num{font-family:var(--serif);font-size:13px;color:var(--ink-mute);padding-top:3px}
-.pain-card h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.35}
-.pain-card p{font-size:14px;color:var(--ink-mute);line-height:1.72}
+    .who-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none
+    }
 
-/* ── SERVICE FIT GRID ── */
-.service-fit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--paper-line);border:1px solid var(--paper-line);border-radius:var(--radius-lg);overflow:hidden}
-.service-fit-card{background:var(--white);padding:28px;transition:background .2s}
-.service-fit-card:hover{background:var(--paper-warm)}
-.service-fit-card-num{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--signal-deep);margin-bottom:12px;display:block}
-.service-fit-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
-.service-fit-card p{font-size:13px;color:var(--ink-mute);line-height:1.65}
+    .who-hero-bg svg {
+      width: 100%;
+      height: 100%
+    }
 
-/* ── PROCESS TIMELINE ── */
-.process-timeline{display:flex;flex-direction:column}
-.process-step{display:grid;grid-template-columns:48px 1fr;gap:0 24px;padding:28px 0;border-bottom:1px solid var(--paper-line);align-items:start}
-.process-step:last-child{border-bottom:none}
-.process-step-num{font-family:var(--mono);font-size:11px;color:var(--signal-deep);letter-spacing:.1em;padding-top:4px}
-.process-step h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px}
-.process-step p{font-size:14px;color:var(--ink-mute);line-height:1.72}
-.who-section--ink .process-step{border-color:rgba(250,247,242,.1)}
-.who-section--ink .process-step h4{color:var(--paper)}
-.who-section--ink .process-step p{color:rgba(250,247,242,.6)}
-.who-section--ink .process-step-num{color:var(--signal)}
+    .who-hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .4
+    }
 
-/* ── WORKFLOW DASHBOARD ── */
-.workflow-dashboard{display:flex;align-items:flex-start;gap:0;margin-top:48px;position:relative;overflow-x:auto;padding-bottom:8px}
-.workflow-dashboard::before{content:'';position:absolute;top:18px;left:24px;right:24px;height:1px;background:var(--paper-line);z-index:0}
-.wf-node{display:flex;flex-direction:column;align-items:center;flex:1;min-width:110px;position:relative;z-index:1;padding:0 6px}
-.wf-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:500;margin-bottom:10px;border:1px solid var(--paper-line);flex-shrink:0;background:var(--white)}
-.wf-dot--signal{background:rgba(0,200,150,.1);color:var(--signal-deep);border-color:rgba(0,200,150,.25)}
-.wf-dot--amber{background:rgba(245,158,11,.1);color:var(--amber-deep);border-color:rgba(245,158,11,.25)}
-.wf-dot--ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.wf-node-label{font-size:11px;font-weight:600;color:var(--ink);text-align:center;line-height:1.3;margin-bottom:3px}
-.wf-node-sub{font-family:var(--mono);font-size:9px;color:var(--ink-mute);text-align:center;letter-spacing:.06em}
+    .who-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center
+    }
 
-/* ── AI + HUMAN ── */
-.ai-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--paper-line);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px}
-.ai-col{padding:36px}
-.ai-col--machine{background:var(--paper-warm)}
-.ai-col--human{background:var(--white)}
-.ai-col-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--paper-line)}
-.ai-col--machine .ai-col-label{color:var(--signal-deep)}
-.ai-col--human .ai-col-label{color:var(--ink-mute)}
-.ai-items{display:flex;flex-direction:column;gap:14px}
-.ai-item{display:flex;gap:12px;align-items:flex-start}
-.ai-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
-.ai-col--machine .ai-item-dot{background:var(--signal)}
-.ai-col--human .ai-item-dot{background:var(--ink)}
-.ai-item p{font-size:13px;color:var(--ink-mute);line-height:1.6}
+    .who-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--signal-deep);
+      background: rgba(0, 200, 150, .08);
+      border: 1px solid rgba(0, 200, 150, .2);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px
+    }
 
-/* ── OUTCOME GRID ── */
-.outcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:48px}
-.outcome-card{padding:28px;background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg)}
-.outcome-card-num{font-family:var(--serif);font-size:2.4rem;font-weight:400;color:var(--signal);line-height:1;margin-bottom:8px}
-.outcome-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
-.outcome-card p{font-size:13px;color:var(--ink-mute);line-height:1.65}
+    .who-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.02;
+      color: var(--ink);
+      margin-bottom: 24px;
+      font-variation-settings: "opsz" 144
+    }
 
-/* ── COMPARE TABLE ── */
-.compare-wrap{background:var(--ink);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px}
-.compare-header{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 28px;background:rgba(255,255,255,.04)}
-.compare-header span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,247,242,.35)}
-.compare-header span.hbs-col{color:var(--signal)}
-.compare-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 28px;border-top:1px solid rgba(255,255,255,.05)}
-.compare-row span{font-size:13px}
-.c-label{color:rgba(250,247,242,.55)}
-.c-hbs{color:var(--signal);font-weight:500}
-.c-other{color:rgba(250,247,242,.3)}
+    .who-hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mute)
+    }
 
-/* ── PULL QUOTE ── */
-.pull-quote{font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);font-style:italic;color:var(--ink);line-height:1.65;padding:28px 32px;border-left:3px solid var(--signal);background:var(--signal-pale);border-radius:0 var(--radius) var(--radius) 0;margin:40px 0;max-width:860px}
+    .who-hero-subtitle {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+      max-width: 560px
+    }
 
-/* ── CTA SECTION ── */
-.cta-section{background:var(--ink);padding:120px var(--gutter);text-align:center;position:relative;overflow:hidden}
-.cta-glow{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at center,rgba(0,200,150,.2),transparent 70%);pointer-events:none}
-.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
-.cta-title{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:400;letter-spacing:-.025em;line-height:1.06;color:var(--paper);margin:16px 0 24px;font-variation-settings:"opsz" 144}
-.cta-title em{font-style:italic;font-weight:300;color:rgba(250,247,242,.5)}
-.cta-text{font-size:16px;line-height:1.75;color:rgba(250,247,242,.6);margin-bottom:40px}
-.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.trust-line{margin-top:28px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.35)}
+    .who-hero-lede {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-mute);
+      max-width: 540px;
+      margin-bottom: 40px
+    }
 
-/* ── FOOTER ── */
-footer{background:var(--ink);color:rgba(250,247,242,.6);padding:60px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;font-size:13px}
-.footer-inner a{color:rgba(250,247,242,.6)}
-.footer-inner a:hover{color:var(--signal)}
-.footer-legal{display:flex;gap:24px}
+    .who-hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
 
-/* ── RELATED STRIP ── */
-.related-strip{background:var(--paper-warm);border-top:1px solid var(--paper-line);padding:28px 0}
-.related-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.related-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
-.related-link{font-size:13px;color:var(--ink-soft);padding:5px 14px;border:1px solid var(--paper-line);border-radius:100px;background:var(--white);transition:border-color .2s,color .2s}
-.related-link:hover{border-color:var(--signal-deep);color:var(--signal-deep)}
+    /* ── HERO VISUAL / ORGANIZATION DASHBOARD ── */
+    .organization-dashboard {
+      background: var(--ink);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 4px 24px rgba(10, 22, 40, .08), 0 1px 4px rgba(10, 22, 40, .05)
+    }
 
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  .who-hero-inner{grid-template-columns:1fr}
-  .who-hero-visual{display:none}
-  .two-col{grid-template-columns:1fr;gap:40px}
-  .ai-split{grid-template-columns:1fr}
-  .workflow-dashboard::before{display:none}
-}
-@media(max-width:720px){
-  .who-section{padding:64px 0}
-  .who-hero{padding:110px 0 72px}
-  .cta-section{padding:80px var(--gutter)}
-  .section-header{margin-bottom:40px}
-  .nav-links{display:none}
-  .compare-header,.compare-row{grid-template-columns:1.5fr 1fr 1fr;padding:12px 16px}
-  .service-fit-grid{grid-template-columns:1fr}
-  .wf-node{min-width:80px}
-}
-</style>
+    .org-dash-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--paper);
+      margin-bottom: 20px
+    }
 
-</head><body>
+    /* Metric rows */
+    .metric-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--paper-line)
+    }
+
+    .metric-card:last-of-type {
+      border-bottom: none
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--paper);
+      flex: 1
+    }
+
+    .metric-value {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--paper)
+    }
+
+    .metric-value.up {
+      color: var(--signal-deep)
+    }
+
+    .metric-value.warn {
+      color: var(--amber-deep)
+    }
+
+    .metric-value.risk {
+      color: var(--danger)
+    }
+
+    /* Status dot rows */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--paper-line)
+    }
+
+    .status-row:last-of-type {
+      border-bottom: none
+    }
+
+    .s-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .dot-g {
+      background: var(--signal)
+    }
+
+    .dot-a {
+      background: var(--amber)
+    }
+
+    .dot-r {
+      background: var(--danger)
+    }
+
+    .dot-x {
+      background: var(--paper-line);
+      border: 1px solid var(--ink-mute)
+    }
+
+    .s-label {
+      font-size: 12px;
+      color: var(--paper);
+      flex: 1
+    }
+
+    .s-val {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500
+    }
+
+    .s-val.done {
+      color: var(--signal-deep)
+    }
+
+    .s-val.pend {
+      color: var(--amber-deep)
+    }
+
+    .s-val.block {
+      color: var(--danger)
+    }
+
+    .s-val.wait {
+      color: var(--ink-mute)
+    }
+
+    .s-pill {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .1em;
+      padding: 2px 8px;
+      border-radius: 100px
+    }
+
+    .pill-g {
+      background: rgba(0, 200, 150, .12);
+      color: var(--signal-deep)
+    }
+
+    .pill-a {
+      background: rgba(245, 158, 11, .14);
+      color: var(--amber-deep)
+    }
+
+    .pill-r {
+      background: rgba(214, 69, 69, .1);
+      color: var(--danger)
+    }
+
+    /* Check rows */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--paper-line)
+    }
+
+    .check-row:last-of-type {
+      border-bottom: none
+    }
+
+    .ck {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .ck-done {
+      background: var(--signal);
+      color: #fff
+    }
+
+    .ck-pend {
+      background: var(--amber-pale);
+      border: 1px solid var(--amber);
+      color: var(--amber-deep)
+    }
+
+    .ck-open {
+      background: var(--paper-warm);
+      border: 1px solid var(--paper-line);
+      color: transparent
+    }
+
+    .ck-label {
+      font-size: 11px;
+      color: var(--ink-soft);
+      line-height: 1.4
+    }
+
+    .ck-label.done {
+      color: var(--ink-mute);
+      text-decoration: line-through
+    }
+
+    /* KPI bars */
+    .kpi-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--paper-line)
+    }
+
+    .kpi-row:last-of-type {
+      border-bottom: none
+    }
+
+    .kpi-lbl {
+      font-size: 11px;
+      color: var(--paper);
+      min-width: 110px
+    }
+
+    .kpi-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--paper-line);
+      border-radius: 3px;
+      overflow: hidden
+    }
+
+    .kpi-fill {
+      height: 100%;
+      border-radius: 3px
+    }
+
+    .kpi-fill.hi {
+      background: var(--signal)
+    }
+
+    .kpi-fill.mi {
+      background: var(--amber)
+    }
+
+    .kpi-fill.lo {
+      background: var(--danger)
+    }
+
+    .kpi-val {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      min-width: 44px;
+      text-align: right
+    }
+
+    .kpi-val.hi {
+      color: var(--signal-deep)
+    }
+
+    .kpi-val.mi {
+      color: var(--amber-deep)
+    }
+
+    .kpi-val.lo {
+      color: var(--danger)
+    }
+
+    /* Dash utilities */
+    .dash-divider {
+      height: 1px;
+      background: var(--paper-line);
+      margin: 14px 0
+    }
+
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px
+    }
+
+    .dash-stat {
+      background: var(--paper-warm);
+      border-radius: var(--radius);
+      padding: 10px 8px;
+      text-align: center
+    }
+
+    .dash-stat-num {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--signal-deep);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px
+    }
+
+    .dash-stat-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+      letter-spacing: .1em
+    }
+
+    .gap-callout {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--signal-pale);
+      border-left: 2px solid var(--signal);
+      border-radius: 0 var(--radius) var(--radius) 0
+    }
+
+    .gc-lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin-bottom: 4px
+    }
+
+    .gc-val {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: var(--paper);
+    }
+
+    /* ── REVEALS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px)
+    }
+
+    .reveal-1 {
+      animation: rv .8s var(--ease) .10s forwards
+    }
+
+    .reveal-2 {
+      animation: rv .8s var(--ease) .22s forwards
+    }
+
+    .reveal-3 {
+      animation: rv .8s var(--ease) .36s forwards
+    }
+
+    .reveal-4 {
+      animation: rv .8s var(--ease) .50s forwards
+    }
+
+    @keyframes rv {
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease)
+    }
+
+    .fade-in.in {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* ── WHO SECTION BASE ── */
+    .who-section {
+      padding: 100px 0;
+      position: relative
+    }
+
+    .who-section--warm {
+      background: var(--paper-warm)
+    }
+
+    .who-section--ink {
+      background: var(--ink);
+      color: var(--paper)
+    }
+
+    .who-section--ink-soft {
+      background: var(--ink-soft);
+      color: var(--paper)
+    }
+
+    .who-section--ink .display,
+    .who-section--ink-soft .display {
+      color: var(--paper)
+    }
+
+    .who-section--ink .display em,
+    .who-section--ink-soft .display em {
+      color: rgba(250, 247, 242, .5)
+    }
+
+    .who-section--ink .eyebrow,
+    .who-section--ink-soft .eyebrow {
+      color: rgba(250, 247, 242, .5)
+    }
+
+    .who-section--ink .eyebrow::before,
+    .who-section--ink-soft .eyebrow::before {
+      background: rgba(250, 247, 242, .4)
+    }
+
+    .who-section--ink p,
+    .who-section--ink-soft p {
+      color: rgba(250, 247, 242, .65)
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      margin-bottom: 64px
+    }
+
+    .section-eyebrow {
+      /* alias */
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.06;
+      margin-top: 16px;
+      max-width: 780px;
+      font-variation-settings: "opsz" 144
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mute)
+    }
+
+    .section-subtitle {
+      margin-top: 18px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink-mute);
+      max-width: 560px
+    }
+
+    .who-section--ink .section-title,
+    .who-section--ink-soft .section-title {
+      color: var(--paper)
+    }
+
+    .who-section--ink .section-title em,
+    .who-section--ink-soft .section-title em {
+      color: rgba(250, 247, 242, .5)
+    }
+
+    .who-section--ink .section-subtitle,
+    .who-section--ink-soft .section-subtitle {
+      color: rgba(250, 247, 242, .6)
+    }
+
+    /* ── MONOLOGUE ── */
+    .monologue {
+      max-width: 780px;
+      border-left: 2px solid var(--paper-line);
+      padding-left: 32px
+    }
+
+    .monologue p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--ink-soft);
+      margin-bottom: 20px
+    }
+
+    .monologue p:last-child {
+      margin-bottom: 0
+    }
+
+    .monologue .highlight {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5
+    }
+
+    /* ── PAIN GRID ── */
+    .pain-grid {
+      display: flex;
+      flex-direction: column;
+      margin-top: 48px
+    }
+
+    .pain-card {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--paper-line);
+      align-items: start
+    }
+
+    .pain-card:last-child {
+      border-bottom: none
+    }
+
+    .pain-card-num {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--ink-mute);
+      padding-top: 3px
+    }
+
+    .pain-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.35
+    }
+
+    .pain-card p {
+      font-size: 14px;
+      color: var(--ink-mute);
+      line-height: 1.72
+    }
+
+    /* ── SERVICE FIT GRID ── */
+    .service-fit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--paper-line);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      overflow: hidden
+    }
+
+    .service-fit-card {
+      background: var(--white);
+      padding: 28px;
+      transition: background .2s
+    }
+
+    .service-fit-card:hover {
+      background: var(--paper-warm)
+    }
+
+    .service-fit-card-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .12em;
+      color: var(--signal-deep);
+      margin-bottom: 12px;
+      display: block
+    }
+
+    .service-fit-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px
+    }
+
+    .service-fit-card p {
+      font-size: 13px;
+      color: var(--ink-mute);
+      line-height: 1.65
+    }
+
+    /* ── PROCESS TIMELINE ── */
+    .process-timeline {
+      display: flex;
+      flex-direction: column
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--paper-line);
+      align-items: start
+    }
+
+    .process-step:last-child {
+      border-bottom: none
+    }
+
+    .process-step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--signal-deep);
+      letter-spacing: .1em;
+      padding-top: 4px
+    }
+
+    .process-step h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px
+    }
+
+    .process-step p {
+      font-size: 14px;
+      color: var(--ink-mute);
+      line-height: 1.72
+    }
+
+    .who-section--ink .process-step {
+      border-color: rgba(250, 247, 242, .1)
+    }
+
+    .who-section--ink .process-step h4 {
+      color: var(--paper)
+    }
+
+    .who-section--ink .process-step p {
+      color: rgba(250, 247, 242, .6)
+    }
+
+    .who-section--ink .process-step-num {
+      color: var(--signal)
+    }
+
+    /* ── WORKFLOW DASHBOARD ── */
+    .workflow-dashboard {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-top: 48px;
+      position: relative;
+      overflow-x: auto;
+      padding-bottom: 8px
+    }
+
+    .workflow-dashboard::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      right: 24px;
+      height: 1px;
+      background: var(--paper-line);
+      z-index: 0
+    }
+
+    .wf-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 110px;
+      position: relative;
+      z-index: 1;
+      padding: 0 6px
+    }
+
+    .wf-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      border: 1px solid var(--paper-line);
+      flex-shrink: 0;
+      background: var(--white)
+    }
+
+    .wf-dot--signal {
+      background: rgba(0, 200, 150, .1);
+      color: var(--signal-deep);
+      border-color: rgba(0, 200, 150, .25)
+    }
+
+    .wf-dot--amber {
+      background: rgba(245, 158, 11, .1);
+      color: var(--amber-deep);
+      border-color: rgba(245, 158, 11, .25)
+    }
+
+    .wf-dot--ink {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink)
+    }
+
+    .wf-node-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 3px
+    }
+
+    .wf-node-sub {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--ink-mute);
+      text-align: center;
+      letter-spacing: .06em
+    }
+
+    /* ── AI + HUMAN ── */
+    .ai-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--paper-line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 48px
+    }
+
+    .ai-col {
+      padding: 36px
+    }
+
+    .ai-col--machine {
+      background: var(--paper-warm)
+    }
+
+    .ai-col--human {
+      background: var(--white)
+    }
+
+    .ai-col-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--paper-line)
+    }
+
+    .ai-col--machine .ai-col-label {
+      color: var(--signal-deep)
+    }
+
+    .ai-col--human .ai-col-label {
+      color: var(--ink-mute)
+    }
+
+    .ai-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .ai-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start
+    }
+
+    .ai-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px
+    }
+
+    .ai-col--machine .ai-item-dot {
+      background: var(--signal)
+    }
+
+    .ai-col--human .ai-item-dot {
+      background: var(--ink)
+    }
+
+    .ai-item p {
+      font-size: 13px;
+      color: var(--ink-mute);
+      line-height: 1.6
+    }
+
+    /* ── OUTCOME GRID ── */
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 48px
+    }
+
+    .outcome-card {
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg)
+    }
+
+    .outcome-card-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--signal);
+      line-height: 1;
+      margin-bottom: 8px
+    }
+
+    .outcome-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px
+    }
+
+    .outcome-card p {
+      font-size: 13px;
+      color: var(--ink-mute);
+      line-height: 1.65
+    }
+
+    /* ── COMPARE TABLE ── */
+    .compare-wrap {
+      background: var(--ink);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 48px
+    }
+
+    .compare-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 14px 28px;
+      background: rgba(255, 255, 255, .04)
+    }
+
+    .compare-header span {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .35)
+    }
+
+    .compare-header span.hbs-col {
+      color: var(--signal)
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 14px 28px;
+      border-top: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .compare-row span {
+      font-size: 13px
+    }
+
+    .c-label {
+      color: rgba(250, 247, 242, .55)
+    }
+
+    .c-hbs {
+      color: var(--signal);
+      font-weight: 500
+    }
+
+    .c-other {
+      color: rgba(250, 247, 242, .3)
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.65;
+      padding: 28px 32px;
+      border-left: 3px solid var(--signal);
+      background: var(--signal-pale);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 40px 0;
+      max-width: 860px
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--ink);
+      padding: 120px var(--gutter);
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta-glow {
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(0, 200, 150, .2), transparent 70%);
+      pointer-events: none
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto
+    }
+
+    .cta-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1.06;
+      color: var(--paper);
+      margin: 16px 0 24px;
+      font-variation-settings: "opsz" 144
+    }
+
+    .cta-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(250, 247, 242, .5)
+    }
+
+    .cta-text {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(250, 247, 242, .6);
+      margin-bottom: 40px
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .trust-line {
+      margin-top: 28px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, .35)
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(250, 247, 242, .6);
+      padding: 60px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 13px
+    }
+
+    .footer-inner a {
+      color: rgba(250, 247, 242, .6)
+    }
+
+    .footer-inner a:hover {
+      color: var(--signal)
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 24px
+    }
+
+    /* ── RELATED STRIP ── */
+    .related-strip {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--paper-line);
+      padding: 28px 0
+    }
+
+    .related-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    .related-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-mute)
+    }
+
+    .related-link {
+      font-size: 13px;
+      color: var(--ink-soft);
+      padding: 5px 14px;
+      border: 1px solid var(--paper-line);
+      border-radius: 100px;
+      background: var(--white);
+      transition: border-color .2s, color .2s
+    }
+
+    .related-link:hover {
+      border-color: var(--signal-deep);
+      color: var(--signal-deep)
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px) {
+      .who-hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .who-hero-visual {
+        display: none
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .ai-split {
+        grid-template-columns: 1fr
+      }
+
+      .workflow-dashboard::before {
+        display: none
+      }
+    }
+
+    @media(max-width:720px) {
+      .who-section {
+        padding: 64px 0
+      }
+
+      .who-hero {
+        padding: 110px 0 72px
+      }
+
+      .cta-section {
+        padding: 80px var(--gutter)
+      }
+
+      .section-header {
+        margin-bottom: 40px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .compare-header,
+      .compare-row {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        padding: 12px 16px
+      }
+
+      .service-fit-grid {
+        grid-template-columns: 1fr
+      }
+
+      .wf-node {
+        min-width: 80px
+      }
+    }
+  </style>
+
+</head>
+
+<body>
   <!-- NAV -->
- <nav class="top" id="nav">
+  <nav class="top" id="nav">
     <div class="nav-inner">
       <a href="../index.html" class="logo">
         <img src="../logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
@@ -701,7 +1777,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.6);padding:60px 0 32px;bord
         </div>
       </div>
 
-        <!-- Who We Serve Dropdown -->
+      <!-- Who We Serve Dropdown -->
       <div class="nav-dropdown">
         <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
         <div class="dropdown-menu dropdown-grid-3">
@@ -782,148 +1858,564 @@ footer{background:var(--ink);color:rgba(250,247,242,.6);padding:60px 0 32px;bord
       </div>
     </div>
   </nav>
-<section class="who-hero">
-  <div class="who-hero-bg"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="who-hero-grain"></div></div>
-  <div class="who-hero-inner">
-    <div class="who-hero-content">
-      <div class="who-hero-badge reveal reveal-1">Who We Serve · FQHCs & Community Health Centers</div>
-      <h1 class="who-hero-title reveal reveal-2">Your organization exists to serve patients who have fewer options.<br><em>The billing and operations that sustain that mission deserve the same dedication.</em></h1>
-      <p class="who-hero-subtitle reveal reveal-3">FQHCs and community health centers carry a unique operational burden — serving complex, high-need patient populations with administrative infrastructure that is often stretched thinner than the clinical load demands. Revenue that leaks through billing gaps, eligibility failures, or unworked denials is not just a financial problem. It is a threat to the organization's ability to keep serving its community.</p>
-      <p class="who-hero-lede reveal reveal-3">Hired Billing Support helps FQHCs strengthen their billing, AR management, eligibility verification, credentialing, and reporting workflows — protecting the revenue that allows community health organizations to continue doing the work they exist to do.</p>
-      <div class="who-hero-actions reveal reveal-4">
-        <a href="#cta" class="btn btn-primary btn-lg">Strengthen FQHC operations <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        <a href="#pain" class="btn btn-ghost btn-lg">See community health support</a>
+  <section class="who-hero">
+    <div class="who-hero-bg"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+      <div class="who-hero-grain"></div>
+    </div>
+    <div class="who-hero-inner">
+      <div class="who-hero-content">
+        <div class="who-hero-badge reveal reveal-1">Who We Serve · FQHCs & Community Health Centers</div>
+        <h1 class="who-hero-title reveal reveal-2">Your organization exists to serve patients who have fewer
+          options.<br><em>The billing and operations that sustain that mission deserve the same dedication.</em></h1>
+        <p class="who-hero-subtitle reveal reveal-3">FQHCs and community health centers carry a unique operational
+          burden — serving complex, high-need patient populations with administrative infrastructure that is often
+          stretched thinner than the clinical load demands. Revenue that leaks through billing gaps, eligibility
+          failures, or unworked denials is not just a financial problem. It is a threat to the organization's ability to
+          keep serving its community.</p>
+        <p class="who-hero-lede reveal reveal-3">Hired Billing Support helps FQHCs strengthen their billing, AR
+          management, eligibility verification, credentialing, and reporting workflows — protecting the revenue that
+          allows community health organizations to continue doing the work they exist to do.</p>
+        <div class="who-hero-actions reveal reveal-4">
+          <a href="#cta" class="btn btn-primary btn-lg">Strengthen FQHC operations <svg class="arrow" width="14"
+              height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg></a>
+          <a href="#pain" class="btn btn-ghost btn-lg">See community health support</a>
+        </div>
+      </div>
+      <div class="who-hero-visual reveal reveal-4" style="animation-delay:.55s">
+        <div class="organization-dashboard">
+          <div class="org-dash-title">— FQHC Operations Dashboard · Monthly</div>
+          <div class="status-row">
+            <div class="s-dot dot-g"></div><span class="s-label">Medicaid Claims — Clean Rate</span><span
+              class="s-val done">96.4% <span class="s-pill pill-g">On target</span></span>
+          </div>
+          <div class="status-row">
+            <div class="s-dot dot-a"></div><span class="s-label">Medicare Billing</span><span class="s-val pend">Denial
+              rate 4.1% — auth-related</span>
+          </div>
+          <div class="status-row">
+            <div class="s-dot dot-g"></div><span class="s-label">Sliding Fee Workflow</span><span
+              class="s-val done">Process documented</span>
+          </div>
+          <div class="status-row">
+            <div class="s-dot dot-a"></div><span class="s-label">Eligibility — Daily Queue</span><span
+              class="s-val pend">3 fails yesterday — reviewed</span>
+          </div>
+          <div class="status-row">
+            <div class="s-dot dot-g"></div><span class="s-label">AR Over 90 Days</span><span class="s-val done">6.8% —
+              below benchmark</span>
+          </div>
+          <div class="dash-divider"></div>
+          <div class="dash-stats">
+            <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">93%</span><span
+                class="dash-stat-label">Collection Rate</span></div>
+            <div class="dash-stat"><span class="dash-stat-num" style="color:var(--amber-deep)">4.1%</span><span
+                class="dash-stat-label">Denial Rate</span></div>
+            <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">2</span><span
+                class="dash-stat-label">Payers In Focus</span></div>
+          </div>
+          <div class="gap-callout">
+            <div class="gc-lbl">— Mission protection</div>
+            <div class="gc-val">Revenue recovered = services the community continues to receive.</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="who-hero-visual reveal reveal-4" style="animation-delay:.55s"><div class="organization-dashboard">
-    <div class="org-dash-title">— FQHC Operations Dashboard · Monthly</div>
-    <div class="status-row"><div class="s-dot dot-g"></div><span class="s-label">Medicaid Claims — Clean Rate</span><span class="s-val done">96.4% <span class="s-pill pill-g">On target</span></span></div>
-    <div class="status-row"><div class="s-dot dot-a"></div><span class="s-label">Medicare Billing</span><span class="s-val pend">Denial rate 4.1% — auth-related</span></div>
-    <div class="status-row"><div class="s-dot dot-g"></div><span class="s-label">Sliding Fee Workflow</span><span class="s-val done">Process documented</span></div>
-    <div class="status-row"><div class="s-dot dot-a"></div><span class="s-label">Eligibility — Daily Queue</span><span class="s-val pend">3 fails yesterday — reviewed</span></div>
-    <div class="status-row"><div class="s-dot dot-g"></div><span class="s-label">AR Over 90 Days</span><span class="s-val done">6.8% — below benchmark</span></div>
-    <div class="dash-divider"></div>
-    <div class="dash-stats">
-      <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">93%</span><span class="dash-stat-label">Collection Rate</span></div>
-      <div class="dash-stat"><span class="dash-stat-num" style="color:var(--amber-deep)">4.1%</span><span class="dash-stat-label">Denial Rate</span></div>
-      <div class="dash-stat"><span class="dash-stat-num" style="color:var(--signal-deep)">2</span><span class="dash-stat-label">Payers In Focus</span></div>
+  </section>
+  <section class="who-section" id="pain">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">The FQHC operational reality</div>
+        <h2 class="section-title">Mission-driven organizations deserve <em>operational infrastructure that matches their
+            mission.</em></h2>
+      </div>
+      <div class="monologue fade-in">
+        <p>Your clinical team provides complex care to patients who may have Medicaid, Medicare, managed care, sliding
+          fee, or no coverage at all — sometimes in the same session. Your front desk verifies eligibility across
+          multiple payer types. Your billers navigate FQHC-specific billing rules, encounter-based billing requirements,
+          and grant-reporting obligations alongside standard revenue cycle management. Your administrative team manages
+          all of this with a budget that does not allow for the staffing levels that would make every task manageable.
+        </p>
+        <p>Revenue that leaks through a missed eligibility check, an unworked denial, or an AR account that ages out is
+          not just a financial loss for the organization. It is a direct reduction in the organization's capacity to
+          serve the patients it exists for.</p>
+        <p class="highlight">"An FQHC that cannot protect its revenue cannot protect its mission. The clinical work and
+          the operational infrastructure that sustains it are not separate concerns — they are the same concern."</p>
+        <p>The challenge is that FQHC billing is genuinely complex — FQHC-specific billing rules, sliding fee scale
+          considerations, Medicaid and Medicare billing differences, and the reporting obligations that come with
+          federal qualification all require specific knowledge that general billing support does not always have.
+          Generic billing services create as many problems as they solve when applied to community health organizations.
+        </p>
+      </div>
     </div>
-    <div class="gap-callout"><div class="gc-lbl">— Mission protection</div><div class="gc-val">Revenue recovered = services the community continues to receive.</div></div></div></div>
-  </div>
-</section>
-<section class="who-section" id="pain"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">The FQHC operational reality</div><h2 class="section-title">Mission-driven organizations deserve <em>operational infrastructure that matches their mission.</em></h2></div>
-  <div class="monologue fade-in"><p>Your clinical team provides complex care to patients who may have Medicaid, Medicare, managed care, sliding fee, or no coverage at all — sometimes in the same session. Your front desk verifies eligibility across multiple payer types. Your billers navigate FQHC-specific billing rules, encounter-based billing requirements, and grant-reporting obligations alongside standard revenue cycle management. Your administrative team manages all of this with a budget that does not allow for the staffing levels that would make every task manageable.</p><p>Revenue that leaks through a missed eligibility check, an unworked denial, or an AR account that ages out is not just a financial loss for the organization. It is a direct reduction in the organization's capacity to serve the patients it exists for.</p><p class="highlight">"An FQHC that cannot protect its revenue cannot protect its mission. The clinical work and the operational infrastructure that sustains it are not separate concerns — they are the same concern."</p><p>The challenge is that FQHC billing is genuinely complex — FQHC-specific billing rules, sliding fee scale considerations, Medicaid and Medicare billing differences, and the reporting obligations that come with federal qualification all require specific knowledge that general billing support does not always have. Generic billing services create as many problems as they solve when applied to community health organizations.</p></div>
-</div></section>
-<section class="who-section who-section--warm"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">Where the pressure lives</div><h2 class="section-title">The specific gaps <em>behind enterprise operations.</em></h2></div>
-  <div class="pain-grid fade-in">
-    <div class="pain-card"><div class="pain-card-num">01</div><div><h4>High patient volume creates pressure on eligibility, billing, and follow-up simultaneously</h4><p>An FQHC seeing 80 patients per day generates 80 eligibility checks, 80 charge entries, and the downstream billing, denial management, and AR follow-up for all of them — with a team that is often sized for 50. Something always falls behind under that math.</p></div></div>
-    <div class="pain-card"><div class="pain-card-num">02</div><div><h4>Medicaid, Medicare, managed care, and sliding fee workflows require careful handling</h4><p>Each payer type has different billing requirements, different coverage rules, and different follow-up processes. The sliding fee scale adds another layer of complexity. When billing staff are managing all of these simultaneously without adequate support, errors accumulate and denials follow.</p></div></div>
-    <div class="pain-card"><div class="pain-card-num">03</div><div><h4>Revenue leakage threatens the organization's ability to serve its community</h4><p>For a safety-net provider, revenue leakage is not an abstraction. Every dollar of uncollected revenue that was legitimately earned is a reduction in the financial foundation that keeps the doors open and the services available. Billing gaps in an FQHC have direct programmatic consequences.</p></div></div>
-    <div class="pain-card"><div class="pain-card-num">04</div><div><h4>Hiring more administrative staff may not be financially realistic</h4><p>FQHCs operate with constrained administrative budgets. Adding in-house billing staff — with salary, benefits, training, and management overhead — may not be financially viable even when the operational need is clear. Scalable support that provides billing depth without fixed headcount cost directly addresses this constraint.</p></div></div>
-    <div class="pain-card"><div class="pain-card-num">05</div><div><h4>Reporting and compliance expectations add to an already heavy administrative load</h4><p>FQHC reporting obligations — UDS reporting, grant compliance, operational performance tracking — require administrative capacity beyond standard billing operations. Staff who are managing a high billing volume do not have the additional bandwidth to also produce the reporting that federal qualification requires.</p></div></div></div>
-</div></section>
-<section class="who-section who-section--ink" id="solution"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">The solution</div><h2 class="section-title">Billing and operations support that understands <em>the complexity of community health.</em></h2><p class="section-subtitle">Hired Billing Support provides FQHC-aware billing, AR, eligibility, credentialing, and reporting support — managing the revenue cycle functions that allow community health organizations to focus on patient care rather than administrative overload.</p></div>
-  <div class="two-col fade-in">
-    <div class="process-timeline">
-      <div class="process-step"><div class="process-step-num">01</div><div><h4>FQHC-aware billing and RCM management</h4><p>Billing managed with knowledge of FQHC-specific requirements — encounter-based billing, FQHC prospective payment system rules, and payer-specific requirements for Medicaid, Medicare, and managed care applied correctly.</p></div></div>
-      <div class="process-step"><div class="process-step-num">02</div><div><h4>Eligibility verification across all payer types</h4><p>Medicaid, Medicare, managed care, and commercial coverage verified before every visit — reducing the eligibility-related billing failures that create denials and delays in a high-volume FQHC environment.</p></div></div>
-      <div class="process-step"><div class="process-step-num">03</div><div><h4>AR management and payer follow-up</h4><p>Aging AR worked systematically — payer calls, portal follow-up, and escalation — with attention to the payer mix variations that make FQHC AR management more complex than standard practice AR.</p></div></div>
+  </section>
+  <section class="who-section who-section--warm">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">Where the pressure lives</div>
+        <h2 class="section-title">The specific gaps <em>behind enterprise operations.</em></h2>
+      </div>
+      <div class="pain-grid fade-in">
+        <div class="pain-card">
+          <div class="pain-card-num">01</div>
+          <div>
+            <h4>High patient volume creates pressure on eligibility, billing, and follow-up simultaneously</h4>
+            <p>An FQHC seeing 80 patients per day generates 80 eligibility checks, 80 charge entries, and the downstream
+              billing, denial management, and AR follow-up for all of them — with a team that is often sized for 50.
+              Something always falls behind under that math.</p>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card-num">02</div>
+          <div>
+            <h4>Medicaid, Medicare, managed care, and sliding fee workflows require careful handling</h4>
+            <p>Each payer type has different billing requirements, different coverage rules, and different follow-up
+              processes. The sliding fee scale adds another layer of complexity. When billing staff are managing all of
+              these simultaneously without adequate support, errors accumulate and denials follow.</p>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card-num">03</div>
+          <div>
+            <h4>Revenue leakage threatens the organization's ability to serve its community</h4>
+            <p>For a safety-net provider, revenue leakage is not an abstraction. Every dollar of uncollected revenue
+              that was legitimately earned is a reduction in the financial foundation that keeps the doors open and the
+              services available. Billing gaps in an FQHC have direct programmatic consequences.</p>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card-num">04</div>
+          <div>
+            <h4>Hiring more administrative staff may not be financially realistic</h4>
+            <p>FQHCs operate with constrained administrative budgets. Adding in-house billing staff — with salary,
+              benefits, training, and management overhead — may not be financially viable even when the operational need
+              is clear. Scalable support that provides billing depth without fixed headcount cost directly addresses
+              this constraint.</p>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card-num">05</div>
+          <div>
+            <h4>Reporting and compliance expectations add to an already heavy administrative load</h4>
+            <p>FQHC reporting obligations — UDS reporting, grant compliance, operational performance tracking — require
+              administrative capacity beyond standard billing operations. Staff who are managing a high billing volume
+              do not have the additional bandwidth to also produce the reporting that federal qualification requires.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="process-timeline">
-      <div class="process-step"><div class="process-step-num">04</div><div><h4>Denial management with FQHC-specific knowledge</h4><p>Denials reviewed with knowledge of FQHC billing rules — denials that are incorrectly applied to FQHC-specific encounter types identified and appealed with the correct regulatory basis.</p></div></div>
-      <div class="process-step"><div class="process-step-num">05</div><div><h4>Provider credentialing and enrollment support</h4><p>Credentialing and payer enrollment managed for FQHC providers — including Medicaid and Medicare enrollment processes specific to federally qualified health center providers.</p></div></div>
-      <div class="process-step"><div class="process-step-num">06</div><div><h4>Operational reporting support</h4><p>Billing and AR performance reporting that supports internal management and can be connected to the operational data that FQHC reporting obligations require.</p></div></div>
-    </div></div>
-</div></section>
-<section class="who-section" id="services"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">Services that fit FQHCs and community health centers</div><h2 class="section-title">Operational support that respects the mission. <em>And protects the revenue that sustains it.</em></h2></div>
-  <div class="service-fit-grid fade-in">
-    <div class="service-fit-card"><span class="service-fit-card-num">01</span><h4>FQHC Billing & RCM</h4><p>Billing managed with FQHC-specific knowledge — encounter-based billing rules, PPS requirements, and payer-specific requirements applied correctly across Medicaid, Medicare, and managed care.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">02</span><h4>Multi-Payer Eligibility Verification</h4><p>Medicaid, Medicare, managed care, and commercial eligibility verified before every visit — reducing billing failures across the complex payer mix that FQHCs manage daily.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">03</span><h4>AR Management & Payer Follow-Up</h4><p>Aging AR worked systematically across all payer types — with payer-specific follow-up processes appropriate for Medicaid, Medicare, and managed care relationships.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">04</span><h4>Denial Management</h4><p>FQHC-aware denial review — identifying denials that are incorrectly applied to FQHC encounter types and appealing with the correct regulatory and documentation basis.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">05</span><h4>Provider Credentialing & Enrollment</h4><p>Credentialing and Medicaid/Medicare enrollment support for FQHC providers — including enrollment processes specific to federally qualified health centers.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">06</span><h4>Coding Support</h4><p>FQHC-specific coding review — ensuring coding accuracy across the visit types, service codes, and diagnoses typical in a community health setting.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">07</span><h4>Billing Compliance Support</h4><p>Compliance monitoring appropriate to FQHC billing requirements — coding patterns, documentation standards, and billing practices reviewed with FQHC regulatory context.</p></div>
-    <div class="service-fit-card"><span class="service-fit-card-num">08</span><h4>Operational Reporting</h4><p>Billing and AR performance reporting — supporting internal management decisions and providing the operational data that connects to FQHC reporting requirements.</p></div></div>
-</div></section>
-<section class="who-section who-section--warm"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">Community health workflow support model</div><h2 class="section-title">Operational support that fits how FQHCs actually work. <em>Not how standard practices do.</em></h2><p class="section-subtitle">FQHC operations have specific complexity that generic billing support does not address. Our support is built around the actual workflow of community health — high patient volume, multi-payer complexity, and mission-driven priorities.</p></div>
-  <div class="workflow-dashboard fade-in">
-    <div class="wf-node"><div class="wf-dot wf-dot--signal">Intake</div><div class="wf-node-label">Eligibility</div><div class="wf-node-sub">Multi-payer</div></div>
-    <div class="wf-node"><div class="wf-dot wf-dot--amber">Auth</div><div class="wf-node-label">Prior Auth</div><div class="wf-node-sub">Payer-specific</div></div>
-    <div class="wf-node"><div class="wf-dot wf-dot--signal">FQHC</div><div class="wf-node-label">Billing Rules</div><div class="wf-node-sub">PPS-aware</div></div>
-    <div class="wf-node"><div class="wf-dot wf-dot--signal">Claims</div><div class="wf-node-label">Submission</div><div class="wf-node-sub">Medicaid · Medicare</div></div>
-    <div class="wf-node"><div class="wf-dot wf-dot--amber">Denials</div><div class="wf-node-label">FQHC Review</div><div class="wf-node-sub">Reg-aware</div></div>
-    <div class="wf-node"><div class="wf-dot wf-dot--signal">AR</div><div class="wf-node-label">Follow-Up</div><div class="wf-node-sub">All payer types</div></div>
-    <div class="wf-node"><div class="wf-dot wf-dot--ink">Report</div><div class="wf-node-label">Operations</div><div class="wf-node-sub">Mission-connected</div></div>
-  </div>
-</div></section>
-<section class="who-section"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">How HBS works with your FQHC team</div><h2 class="section-title">Inside your workflow. Respectful of your mission. <em>Knowledgeable about your specific requirements.</em></h2><p class="section-subtitle">FQHC support that treats a community health center like a standard medical practice creates problems. We understand the specific billing, regulatory, and operational context that community health requires.</p></div>
-  <div class="process-timeline fade-in" style="max-width:780px">
-    <div class="process-step"><div class="process-step-num">01</div><div><h4>We understand FQHC billing requirements before we start</h4><p>FQHC-specific billing rules, PPS requirements, and payer-specific coverage considerations for Medicaid, Medicare, and managed care — understood and applied from the first claim.</p></div></div>
-    <div class="process-step"><div class="process-step-num">02</div><div><h4>We work inside your EHR and billing system</h4><p>Your clinical and billing systems — we access them directly so there is no additional workflow step for your team. The support integrates, not interrupts.</p></div></div>
-    <div class="process-step"><div class="process-step-num">03</div><div><h4>We communicate with your team through existing channels</h4><p>EHR messaging, email, phone — your team communicates with a billing and operations specialist, not a support queue.</p></div></div>
-    <div class="process-step"><div class="process-step-num">04</div><div><h4>We report in a format that supports management and compliance needs</h4><p>Billing and AR performance reported in a way that informs internal management decisions and connects to the operational data that FQHC reporting requires.</p></div></div>
-    <div class="process-step"><div class="process-step-num">05</div><div><h4>We scale with the organization's needs</h4><p>New service lines, new providers, expanded locations — the support adapts without a new engagement or a separate onboarding process.</p></div></div></div>
-</div></section>
-<section class="who-section who-section--warm"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">The AI + human advantage</div><h2 class="section-title">Technology handles the repetitive. <em>People handle the judgment.</em></h2></div>
-  <div class="ai-split fade-in">
-    <div class="ai-col ai-col--machine"><div class="ai-col-label">AI-assisted workflows</div><div class="ai-items"><div class="ai-item"><div class="ai-item-dot"></div><p>Multi-payer eligibility verification queue management</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>FQHC billing queue monitoring and claim status tracking</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>AR aging alerts across all payer types</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Denial categorization by payer and reason code</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Credentialing expiration tracking for provider roster</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Operational reporting data aggregation and formatting</p></div></div></div>
-    <div class="ai-col ai-col--human"><div class="ai-col-label">Human specialists</div><div class="ai-items"><div class="ai-item"><div class="ai-item-dot"></div><p>FQHC-specific billing review and coding accuracy judgment</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Medicaid and Medicare follow-up with payer-specific protocols</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>FQHC-aware denial review and appeal construction</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Provider credentialing and Medicaid/Medicare enrollment</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Compliance review with FQHC regulatory context</p></div>
-    <div class="ai-item"><div class="ai-item-dot"></div><p>Leadership reporting with community health operational context</p></div></div></div>
-  </div>
-  <div class="pull-quote fade-in">"Community health centers exist to provide access to care for patients who need it most. The revenue cycle that sustains that work is not separate from the mission — it is what makes the mission possible. Protecting it is not administrative overhead. It is care delivery."</div>
-</div></section>
-<section class="who-section" id="results"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">What changes</div><h2 class="section-title">An FQHC with stronger revenue infrastructure <em>is an FQHC that can serve more patients.</em></h2></div>
-  <div class="outcome-grid fade-in">
-    <div class="outcome-card"><div class="outcome-card-num">$</div><h4>Revenue leakage reduced — access protected</h4><p>Every billing gap closed, every denied claim worked, every unverified eligibility caught — revenue that sustains the mission collected rather than lost.</p></div>
-    <div class="outcome-card"><div class="outcome-card-num">✓</div><h4>FQHC-specific billing applied correctly</h4><p>PPS requirements, encounter-based billing rules, and payer-specific considerations applied with specific knowledge — not with a generic billing approach.</p></div>
-    <div class="outcome-card"><div class="outcome-card-num">↓</div><h4>Denial rates decline — especially Medicaid and Medicare</h4><p>FQHC-aware denial management catches incorrectly applied denials and appeals with the regulatory basis that produces reversals.</p></div>
-    <div class="outcome-card"><div class="outcome-card-num">◎</div><h4>Operational reporting supports management and compliance</h4><p>Billing and AR performance data organized in a format that informs internal management and supports reporting obligations.</p></div>
-    <div class="outcome-card"><div class="outcome-card-num">→</div><h4>Clinical staff focus stays on patients</h4><p>Billing complexity removed from clinical staff attention — providers and care teams focus on the work the organization exists to do.</p></div>
-    <div class="outcome-card"><div class="outcome-card-num">⚡</div><h4>Operational depth without budget-breaking overhead</h4><p>Billing and operations support scaled to the FQHC's volume without requiring in-house headcount at a cost the budget cannot sustain.</p></div></div>
-</div></section>
-<section class="who-section who-section--ink-soft"><div class="container">
-  <div class="section-header fade-in"><div class="eyebrow">Why operational support protects patient access</div><h2 class="section-title">Revenue is what keeps the doors open. <em>Protecting it is part of the mission.</em></h2><p class="section-subtitle">An FQHC that loses revenue through billing gaps, unworked denials, or eligibility failures cannot provide the same level of access. Operational support that strengthens the revenue cycle directly protects the community health mission.</p></div>
-  <div class="compare-wrap fade-in"><div class="compare-header"><span></span><span class="hbs-col">With HBS</span><span>Without It</span></div>
-    <div class="compare-row"><span class="c-label">FQHC billing knowledge</span><span class="c-hbs">PPS and encounter-aware</span><span class="c-other">Generic billing approach</span></div>
-    <div class="compare-row"><span class="c-label">Medicaid/Medicare follow-up</span><span class="c-hbs">Payer-specific protocols</span><span class="c-other">Standard follow-up process</span></div>
-    <div class="compare-row"><span class="c-label">Denial management</span><span class="c-hbs">FQHC-aware — regulatory basis</span><span class="c-other">Standard appeal process</span></div>
-    <div class="compare-row"><span class="c-label">Cost to the organization</span><span class="c-hbs">No in-house payroll overhead</span><span class="c-other">Full salary + benefits per hire</span></div>
-    <div class="compare-row"><span class="c-label">Scalability with patient volume</span><span class="c-hbs">Adjusts without fixed cost</span><span class="c-other">Requires proportional hiring</span></div>
-    <div class="compare-row"><span class="c-label">Mission alignment</span><span class="c-hbs">Revenue cycle as mission support</span><span class="c-other">Generic billing service</span></div></div>
-</div></section>
-<section class="cta-section" id="cta"><div class="cta-glow"></div><div class="cta-inner">
-  <div class="eyebrow eyebrow--light" style="justify-content:center">Start with an FQHC billing review</div>
-  <h2 class="cta-title">If revenue is leaking through your billing workflow, <em>the community you serve is paying for it.</em></h2>
-  <p class="cta-text">We start with a review of your current billing performance — identifying where eligibility failures, denials, and AR gaps are costing the organization revenue it has legitimately earned. No commitment required.</p>
-  <div class="cta-actions">
-    <a href="#" class="btn btn-light btn-lg">Strengthen FQHC operations <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-    <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to our community health team</a>
-  </div>
-  <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract required</div>
-</div></section>
-<div class="related-strip"><div class="container"><div class="related-inner"><span class="related-label">Related services</span><a class="related-link" href="/medical-billing-rcm">Medical Billing & RCM</a><a class="related-link" href="/ar-management">AR Management</a><a class="related-link" href="/ar-denial-fixation">Denial Management</a><a class="related-link" href="/provider-credential">Credentialing</a><a class="related-link" href="/compliance-reporting">Compliance & Reporting</a><a class="related-link" href="/operations-management">Operations Management</a></div></div></div>
-<footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
-<script>
-  const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
-  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
-  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
-</script></body></html>
+  </section>
+  <section class="who-section who-section--ink" id="solution">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">The solution</div>
+        <h2 class="section-title">Billing and operations support that understands <em>the complexity of community
+            health.</em></h2>
+        <p class="section-subtitle">Hired Billing Support provides FQHC-aware billing, AR, eligibility, credentialing,
+          and reporting support — managing the revenue cycle functions that allow community health organizations to
+          focus on patient care rather than administrative overload.</p>
+      </div>
+      <div class="two-col fade-in">
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="process-step-num">01</div>
+            <div>
+              <h4>FQHC-aware billing and RCM management</h4>
+              <p>Billing managed with knowledge of FQHC-specific requirements — encounter-based billing, FQHC
+                prospective payment system rules, and payer-specific requirements for Medicaid, Medicare, and managed
+                care applied correctly.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">02</div>
+            <div>
+              <h4>Eligibility verification across all payer types</h4>
+              <p>Medicaid, Medicare, managed care, and commercial coverage verified before every visit — reducing the
+                eligibility-related billing failures that create denials and delays in a high-volume FQHC environment.
+              </p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">03</div>
+            <div>
+              <h4>AR management and payer follow-up</h4>
+              <p>Aging AR worked systematically — payer calls, portal follow-up, and escalation — with attention to the
+                payer mix variations that make FQHC AR management more complex than standard practice AR.</p>
+            </div>
+          </div>
+        </div>
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="process-step-num">04</div>
+            <div>
+              <h4>Denial management with FQHC-specific knowledge</h4>
+              <p>Denials reviewed with knowledge of FQHC billing rules — denials that are incorrectly applied to
+                FQHC-specific encounter types identified and appealed with the correct regulatory basis.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">05</div>
+            <div>
+              <h4>Provider credentialing and enrollment support</h4>
+              <p>Credentialing and payer enrollment managed for FQHC providers — including Medicaid and Medicare
+                enrollment processes specific to federally qualified health center providers.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">06</div>
+            <div>
+              <h4>Operational reporting support</h4>
+              <p>Billing and AR performance reporting that supports internal management and can be connected to the
+                operational data that FQHC reporting obligations require.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="who-section" id="services">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">Services that fit FQHCs and community health centers</div>
+        <h2 class="section-title">Operational support that respects the mission. <em>And protects the revenue that
+            sustains it.</em></h2>
+      </div>
+      <div class="service-fit-grid fade-in">
+        <div class="service-fit-card"><span class="service-fit-card-num">01</span>
+          <h4>FQHC Billing & RCM</h4>
+          <p>Billing managed with FQHC-specific knowledge — encounter-based billing rules, PPS requirements, and
+            payer-specific requirements applied correctly across Medicaid, Medicare, and managed care.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">02</span>
+          <h4>Multi-Payer Eligibility Verification</h4>
+          <p>Medicaid, Medicare, managed care, and commercial eligibility verified before every visit — reducing billing
+            failures across the complex payer mix that FQHCs manage daily.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">03</span>
+          <h4>AR Management & Payer Follow-Up</h4>
+          <p>Aging AR worked systematically across all payer types — with payer-specific follow-up processes appropriate
+            for Medicaid, Medicare, and managed care relationships.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">04</span>
+          <h4>Denial Management</h4>
+          <p>FQHC-aware denial review — identifying denials that are incorrectly applied to FQHC encounter types and
+            appealing with the correct regulatory and documentation basis.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">05</span>
+          <h4>Provider Credentialing & Enrollment</h4>
+          <p>Credentialing and Medicaid/Medicare enrollment support for FQHC providers — including enrollment processes
+            specific to federally qualified health centers.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">06</span>
+          <h4>Coding Support</h4>
+          <p>FQHC-specific coding review — ensuring coding accuracy across the visit types, service codes, and diagnoses
+            typical in a community health setting.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">07</span>
+          <h4>Billing Compliance Support</h4>
+          <p>Compliance monitoring appropriate to FQHC billing requirements — coding patterns, documentation standards,
+            and billing practices reviewed with FQHC regulatory context.</p>
+        </div>
+        <div class="service-fit-card"><span class="service-fit-card-num">08</span>
+          <h4>Operational Reporting</h4>
+          <p>Billing and AR performance reporting — supporting internal management decisions and providing the
+            operational data that connects to FQHC reporting requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="who-section who-section--warm">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">Community health workflow support model</div>
+        <h2 class="section-title">Operational support that fits how FQHCs actually work. <em>Not how standard practices
+            do.</em></h2>
+        <p class="section-subtitle">FQHC operations have specific complexity that generic billing support does not
+          address. Our support is built around the actual workflow of community health — high patient volume,
+          multi-payer complexity, and mission-driven priorities.</p>
+      </div>
+      <div class="workflow-dashboard fade-in">
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--signal">Intake</div>
+          <div class="wf-node-label">Eligibility</div>
+          <div class="wf-node-sub">Multi-payer</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--amber">Auth</div>
+          <div class="wf-node-label">Prior Auth</div>
+          <div class="wf-node-sub">Payer-specific</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--signal">FQHC</div>
+          <div class="wf-node-label">Billing Rules</div>
+          <div class="wf-node-sub">PPS-aware</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--signal">Claims</div>
+          <div class="wf-node-label">Submission</div>
+          <div class="wf-node-sub">Medicaid · Medicare</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--amber">Denials</div>
+          <div class="wf-node-label">FQHC Review</div>
+          <div class="wf-node-sub">Reg-aware</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--signal">AR</div>
+          <div class="wf-node-label">Follow-Up</div>
+          <div class="wf-node-sub">All payer types</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-dot wf-dot--ink">Report</div>
+          <div class="wf-node-label">Operations</div>
+          <div class="wf-node-sub">Mission-connected</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="who-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">How HBS works with your FQHC team</div>
+        <h2 class="section-title">Inside your workflow. Respectful of your mission. <em>Knowledgeable about your
+            specific requirements.</em></h2>
+        <p class="section-subtitle">FQHC support that treats a community health center like a standard medical practice
+          creates problems. We understand the specific billing, regulatory, and operational context that community
+          health requires.</p>
+      </div>
+      <div class="process-timeline fade-in" style="max-width:780px">
+        <div class="process-step">
+          <div class="process-step-num">01</div>
+          <div>
+            <h4>We understand FQHC billing requirements before we start</h4>
+            <p>FQHC-specific billing rules, PPS requirements, and payer-specific coverage considerations for Medicaid,
+              Medicare, and managed care — understood and applied from the first claim.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">02</div>
+          <div>
+            <h4>We work inside your EHR and billing system</h4>
+            <p>Your clinical and billing systems — we access them directly so there is no additional workflow step for
+              your team. The support integrates, not interrupts.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">03</div>
+          <div>
+            <h4>We communicate with your team through existing channels</h4>
+            <p>EHR messaging, email, phone — your team communicates with a billing and operations specialist, not a
+              support queue.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">04</div>
+          <div>
+            <h4>We report in a format that supports management and compliance needs</h4>
+            <p>Billing and AR performance reported in a way that informs internal management decisions and connects to
+              the operational data that FQHC reporting requires.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">05</div>
+          <div>
+            <h4>We scale with the organization's needs</h4>
+            <p>New service lines, new providers, expanded locations — the support adapts without a new engagement or a
+              separate onboarding process.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="who-section who-section--warm">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">The AI + human advantage</div>
+        <h2 class="section-title">Technology handles the repetitive. <em>People handle the judgment.</em></h2>
+      </div>
+      <div class="ai-split fade-in">
+        <div class="ai-col ai-col--machine">
+          <div class="ai-col-label">AI-assisted workflows</div>
+          <div class="ai-items">
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Multi-payer eligibility verification queue management</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>FQHC billing queue monitoring and claim status tracking</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>AR aging alerts across all payer types</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Denial categorization by payer and reason code</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Credentialing expiration tracking for provider roster</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Operational reporting data aggregation and formatting</p>
+            </div>
+          </div>
+        </div>
+        <div class="ai-col ai-col--human">
+          <div class="ai-col-label">Human specialists</div>
+          <div class="ai-items">
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>FQHC-specific billing review and coding accuracy judgment</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Medicaid and Medicare follow-up with payer-specific protocols</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>FQHC-aware denial review and appeal construction</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Provider credentialing and Medicaid/Medicare enrollment</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Compliance review with FQHC regulatory context</p>
+            </div>
+            <div class="ai-item">
+              <div class="ai-item-dot"></div>
+              <p>Leadership reporting with community health operational context</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pull-quote fade-in">"Community health centers exist to provide access to care for patients who need it
+        most. The revenue cycle that sustains that work is not separate from the mission — it is what makes the mission
+        possible. Protecting it is not administrative overhead. It is care delivery."</div>
+    </div>
+  </section>
+  <section class="who-section" id="results">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">What changes</div>
+        <h2 class="section-title">An FQHC with stronger revenue infrastructure <em>is an FQHC that can serve more
+            patients.</em></h2>
+      </div>
+      <div class="outcome-grid fade-in">
+        <div class="outcome-card">
+          <div class="outcome-card-num">$</div>
+          <h4>Revenue leakage reduced — access protected</h4>
+          <p>Every billing gap closed, every denied claim worked, every unverified eligibility caught — revenue that
+            sustains the mission collected rather than lost.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num">✓</div>
+          <h4>FQHC-specific billing applied correctly</h4>
+          <p>PPS requirements, encounter-based billing rules, and payer-specific considerations applied with specific
+            knowledge — not with a generic billing approach.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num">↓</div>
+          <h4>Denial rates decline — especially Medicaid and Medicare</h4>
+          <p>FQHC-aware denial management catches incorrectly applied denials and appeals with the regulatory basis that
+            produces reversals.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num">◎</div>
+          <h4>Operational reporting supports management and compliance</h4>
+          <p>Billing and AR performance data organized in a format that informs internal management and supports
+            reporting obligations.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num">→</div>
+          <h4>Clinical staff focus stays on patients</h4>
+          <p>Billing complexity removed from clinical staff attention — providers and care teams focus on the work the
+            organization exists to do.</p>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-num">⚡</div>
+          <h4>Operational depth without budget-breaking overhead</h4>
+          <p>Billing and operations support scaled to the FQHC's volume without requiring in-house headcount at a cost
+            the budget cannot sustain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="who-section who-section--ink-soft">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">Why operational support protects patient access</div>
+        <h2 class="section-title">Revenue is what keeps the doors open. <em>Protecting it is part of the mission.</em>
+        </h2>
+        <p class="section-subtitle">An FQHC that loses revenue through billing gaps, unworked denials, or eligibility
+          failures cannot provide the same level of access. Operational support that strengthens the revenue cycle
+          directly protects the community health mission.</p>
+      </div>
+      <div class="compare-wrap fade-in">
+        <div class="compare-header"><span></span><span class="hbs-col">With HBS</span><span>Without It</span></div>
+        <div class="compare-row"><span class="c-label">FQHC billing knowledge</span><span class="c-hbs">PPS and
+            encounter-aware</span><span class="c-other">Generic billing approach</span></div>
+        <div class="compare-row"><span class="c-label">Medicaid/Medicare follow-up</span><span
+            class="c-hbs">Payer-specific protocols</span><span class="c-other">Standard follow-up process</span></div>
+        <div class="compare-row"><span class="c-label">Denial management</span><span class="c-hbs">FQHC-aware —
+            regulatory basis</span><span class="c-other">Standard appeal process</span></div>
+        <div class="compare-row"><span class="c-label">Cost to the organization</span><span class="c-hbs">No in-house
+            payroll overhead</span><span class="c-other">Full salary + benefits per hire</span></div>
+        <div class="compare-row"><span class="c-label">Scalability with patient volume</span><span class="c-hbs">Adjusts
+            without fixed cost</span><span class="c-other">Requires proportional hiring</span></div>
+        <div class="compare-row"><span class="c-label">Mission alignment</span><span class="c-hbs">Revenue cycle as
+            mission support</span><span class="c-other">Generic billing service</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta-section" id="cta">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <div class="eyebrow eyebrow--light" style="justify-content:center">Start with an FQHC billing review</div>
+      <h2 class="cta-title">If revenue is leaking through your billing workflow, <em>the community you serve is paying
+          for it.</em></h2>
+      <p class="cta-text">We start with a review of your current billing performance — identifying where eligibility
+        failures, denials, and AR gaps are costing the organization revenue it has legitimately earned. No commitment
+        required.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-light btn-lg">Strengthen FQHC operations <svg class="arrow" width="14" height="14"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg></a>
+        <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to
+          our community health team</a>
+      </div>
+      <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract required</div>
+    </div>
+  </section>
+  <!-- <div class="related-strip"><div class="container"><div class="related-inner"><span class="related-label">Related services</span><a class="related-link" href="/medical-billing-rcm">Medical Billing & RCM</a><a class="related-link" href="/ar-management">AR Management</a><a class="related-link" href="/ar-denial-fixation">Denial Management</a><a class="related-link" href="/provider-credential">Credentialing</a><a class="related-link" href="/compliance-reporting">Compliance & Reporting</a><a class="related-link" href="/operations-management">Operations Management</a></div></div></div> -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
+      <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 8) });
+    const io = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target) } }) }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  </script>
+</body>
+
+</html>
