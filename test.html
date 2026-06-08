@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Medical Coding Support | Hired Billing Support</title>
+  <meta name="description"
+    content="Hired Billing Support provides medical coding solutions that reduce errors, improve clean claim rates, and maximize revenue for healthcare practices." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0A1628;
+      --ink-soft: #1B2942;
+      --ink-mute: #475569;
+      --paper: #FAF7F2;
+      --paper-warm: #F2EDE3;
+      --paper-line: #E8E2D5;
+      --white: #FFFFFF;
+      --signal: #00C896;
+      --signal-deep: #00876B;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --max: 1280px;
+      --gutter: clamp(20px, 4vw, 48px);
+      --serif: 'Fraunces', serif;
+      --sans: 'Inter Tight', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased }
+    body {
+      font-family: var(--sans); background: var(--paper); color: var(--ink);
+      line-height: 1.5; font-size: 16px; overflow-x: hidden
+    }
+    a { color: inherit; text-decoration: none }
+    img { max-width: 100%; display: block }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) }
+
+    /* NAVIGATION */
+    nav.top {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(20px); background: rgba(250, 247, 242, 0.78);
+      border-bottom: 1px solid transparent; transition: border-color 0.3s var(--ease);
+    }
+    nav.top.scrolled { border-bottom-color: var(--paper-line) }
+    .nav-inner {
+      max-width: var(--max); margin: 0 auto; padding: 18px var(--gutter);
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink) }
+    .logo-mark { width: 28px; height: 28px; background: var(--ink); border-radius: 50%; position: relative }
+    .logo-mark::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--signal) }
+    .nav-cta { display: flex; gap: 12px; align-items: center }
+    .nav-dropdown { position: relative; display: inline-block }
+    .dropdown-toggle {
+      color: var(--ink); font-size: 14px; font-weight: 500; padding: 8px 12px;
+      border-radius: 4px; cursor: pointer; border: none; background: transparent;
+      transition: all 0.3s var(--ease); display: flex; align-items: center; gap: 6px;
+    }
+    .dropdown-toggle:hover { color: var(--signal) }
+    .dropdown-toggle .chevron { font-size: 9px; opacity: 0.6; margin-left: 4px; transition: transform 0.3s var(--ease) }
+    .nav-dropdown:hover .dropdown-toggle .chevron { transform: rotate(180deg); opacity: 1 }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: -20px; background: var(--white);
+      border: 1px solid var(--paper-line); border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15); padding: 24px;
+      opacity: 0; visibility: hidden; transform: translateY(-12px);
+      transition: all 0.3s var(--ease); margin-top: 8px; z-index: 1000; min-width: 280px;
+    }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0) }
+    .dropdown-menu.dropdown-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; min-width: 500px }
+    .dropdown-menu.dropdown-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; min-width: 680px }
+    .dropdown-menu.dropdown-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; min-width: 900px }
+    .dropdown-column { display: flex; flex-direction: column; gap: 12px }
+    .column-header {
+      font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+      color: var(--ink-mute); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center;
+    }
+    .column-header::before { content: ''; width: 16px; height: 1px; background: currentColor; margin-right: 8px }
+    .dropdown-menu a {
+      display: block; padding: 10px 12px; color: var(--ink-soft); font-size: 14px;
+      font-weight: 500; transition: all 0.2s var(--ease); border-radius: 4px; position: relative;
+    }
+    .dropdown-menu a:hover { background: var(--paper-warm); color: var(--ink); padding-left: 16px }
+    .dropdown-menu a::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 0; background: var(--signal); border-radius: 2px; transition: height 0.2s var(--ease);
+    }
+    .dropdown-menu a:hover::before { height: 16px }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px;
+      border-radius: var(--radius); font-family: var(--sans); font-size: 14px;
+      font-weight: 600; cursor: pointer; border: 1px solid transparent;
+      transition: all 0.2s var(--ease); white-space: nowrap
+    }
+    .btn:hover { transform: translateY(-1px) }
+    .btn .arrow { transition: transform 0.2s; flex-shrink: 0 }
+    .btn:hover .arrow { transform: translateX(3px) }
+    .btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); box-shadow: 0 4px 12px rgba(10, 22, 40, 0.1) }
+    .btn-primary:hover { background: var(--ink-soft); box-shadow: 0 6px 16px rgba(10, 22, 40, 0.15) }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--paper-line) }
+    .btn-ghost:hover { background: var(--paper-warm); border-color: var(--ink-mute) }
+    .btn-lg { padding: 14px 28px; font-size: 15px }
+
+    /* HERO SECTION */
+    .who-hero {
+      background: var(--paper); padding: 140px 0 100px; position: relative; overflow: hidden
+    }
+    .who-hero-bg { position: absolute; inset: 0; pointer-events: none }
+    .who-hero-bg svg { width: 100%; height: 100% }
+    .who-hero-grain {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .4
+    }
+    .who-hero-inner {
+      position: relative; z-index: 1; max-width: var(--max); margin: 0 auto;
+      padding: 0 var(--gutter); display: grid; grid-template-columns: 1fr 420px;
+      gap: 64px; align-items: center
+    }
+    .eyebrow {
+      font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+      letter-spacing: .18em; color: var(--ink-mute); display: inline-flex;
+      align-items: center; gap: 10px
+    }
+    .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor }
+    .eyebrow--signal {
+      color: var(--signal-deep); background: rgba(0, 200, 150, 0.08);
+      padding: 4px 12px; border-radius: 6px; border: 1px solid rgba(0, 200, 150, 0.2);
+    }
+    .eyebrow--signal::before { display: none }
+    .who-hero-title {
+      font-family: var(--serif); font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 400; letter-spacing: -.025em; line-height: 1.02; color: var(--ink);
+      margin-bottom: 24px;
+    }
+    .who-hero-title em { font-style: italic; font-weight: 300; color: var(--ink-mute) }
+    .who-hero-subtitle { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 14px; max-width: 560px }
+    .who-hero-lede { font-size: 15px; line-height: 1.75; color: var(--ink-mute); max-width: 540px; margin-bottom: 40px }
+    .who-hero-actions { display: flex; gap: 12px; flex-wrap: wrap }
+    .hero-stats { display: flex; gap: 40px; margin-top: 60px; flex-wrap: wrap }
+    .stat-item { display: flex; align-items: center; gap: 12px }
+    .stat-icon {
+      width: 44px; height: 44px; background: rgba(0, 200, 150, 0.08);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .stat-icon svg { width: 20px; height: 20px; stroke: var(--signal-deep); fill: none }
+    .stat-text strong { font-family: var(--serif); font-size: 18px; color: var(--signal-deep); display: block }
+    .stat-text span { font-size: 12px; color: var(--ink-mute); line-height: 1.4 }
+
+    /* ENHANCED 3D CARD */
+    .card-3d-dark {
+      background: var(--ink); border-radius: var(--radius-lg);
+      box-shadow:
+        0 30px 60px -12px rgba(0, 0, 0, 0.5),
+        0 15px 30px -5px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      transform: perspective(1200px) rotateX(5deg) rotateY(-5deg) translateZ(20px);
+      transition: all 0.5s var(--ease); overflow: hidden; position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .card-3d-dark:hover {
+      transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(-12px) translateZ(0);
+      box-shadow:
+        0 40px 80px -12px rgba(0, 0, 0, 0.6),
+        0 20px 40px -5px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+    .card-3d-dark::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--signal), transparent); opacity: 0.4;
+    }
+    .card-3d-dark::after {
+      content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+      border-radius: var(--radius-lg); z-index: -1; opacity: 0.3;
+    }
+    .card-header-dark {
+      padding: 24px 28px; display: flex; align-items: flex-start; gap: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: relative;
+    }
+    .card-header-dark::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,200,150,0.3), transparent);
+    }
+    .header-icon-dark {
+      width: 52px; height: 52px; background: rgba(0, 200, 150, 0.1);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; box-shadow: 0 4px 12px rgba(0, 200, 150, 0.1);
+    }
+    .header-icon-dark::after {
+      content: ''; position: absolute; inset: 4px; background: var(--signal);
+      border-radius: 8px; opacity: 0.1;
+    }
+    .header-icon-dark svg { width: 26px; height: 26px; stroke: var(--signal); fill: none }
+    .header-text-dark { flex: 1 }
+    .header-title-dark { font-size: 17px; font-weight: 700; color: var(--paper); margin-bottom: 4px; letter-spacing: -0.01em }
+    .header-subtitle-dark { font-size: 13px; color: rgba(255, 255, 255, 0.6); line-height: 1.4 }
+    .live-badge-dark {
+      display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+      color: var(--signal); background: rgba(0, 200, 150, 0.1); padding: 4px 10px;
+      border-radius: 20px; margin-left: auto; box-shadow: 0 2px 8px rgba(0, 200, 150, 0.2);
+    }
+    .live-dot-dark {
+      width: 8px; height: 8px; background: var(--signal); border-radius: 50%;
+      animation: pulse 2s infinite; box-shadow: 0 0 0 0 rgba(0, 200, 150, 0.7);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 150, 0.7) }
+      50% { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 0 6px rgba(0, 200, 150, 0) }
+    }
+    .metrics-dark { padding: 0 }
+    .metric-row-dark {
+      display: flex; align-items: center; gap: 14px; padding: 16px 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: background 0.2s ease;
+    }
+    .metric-row-dark:hover { background: rgba(0, 200, 150, 0.02) }
+    .metric-row-dark:last-of-type { border-bottom: none }
+    .metric-icon-dark {
+      width: 40px; height: 40px; background: rgba(0, 200, 150, 0.1);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 2px 6px rgba(0, 200, 150, 0.1);
+    }
+    .metric-icon-dark svg { width: 20px; height: 20px; stroke: var(--signal); fill: none }
+    .metric-info-dark { flex: 1 }
+    .metric-label-dark { font-size: 14px; font-weight: 600; color: var(--paper); margin-bottom: 2px }
+    .metric-desc-dark { font-size: 12px; color: rgba(255, 255, 255, 0.5); line-height: 1.4 }
+    .metric-value-dark {
+      font-size: 20px; font-weight: 700; color: var(--signal);
+      font-variant-numeric: tabular-nums; min-width: 40px; text-align: right;
+      text-shadow: 0 0 8px rgba(0, 200, 150, 0.3);
+    }
+    .metric-trend-dark { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 60px }
+    .trend-label-dark { font-size: 10px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 0.05em }
+    .trend-arrow-dark {
+      width: 18px; height: 18px; background: rgba(0, 200, 150, 0.15);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .trend-arrow-dark:hover { transform: scale(1.1) }
+    .trend-arrow-dark svg { width: 12px; height: 12px; stroke: var(--signal); fill: none }
+    .health-section-dark {
+      padding: 16px 28px 24px; background: rgba(0, 200, 150, 0.03);
+      border-top: 1px solid rgba(255, 255, 255, 0.05); position: relative;
+    }
+    .health-section-dark::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,200,150,0.2), transparent);
+    }
+    .health-row-dark { display: flex; align-items: center; gap: 14px }
+    .health-icon-dark {
+      width: 40px; height: 40px; background: rgba(0, 200, 150, 0.15);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--signal); font-weight: 700; font-size: 16px;
+      box-shadow: 0 2px 8px rgba(0, 200, 150, 0.2);
+    }
+    .health-text-dark { flex: 1 }
+    .health-label-dark { font-size: 14px; font-weight: 600; color: var(--paper); margin-bottom: 2px }
+    .health-desc-dark { font-size: 12px; color: rgba(255, 255, 255, 0.5); line-height: 1.4 }
+    .health-value-dark {
+      font-size: 28px; font-weight: 700; color: var(--signal);
+      font-variant-numeric: tabular-nums; min-width: 50px; text-align: right;
+      text-shadow: 0 0 10px rgba(0, 200, 150, 0.3);
+    }
+    .health-subtitle-dark {
+      font-size: 10px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase;
+      letter-spacing: 0.05em; text-align: right; min-width: 120px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink); color: rgba(250, 247, 242, .6);
+      padding: 60px 0 32px; border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px; font-size: 13px
+    }
+    .footer-inner a { color: rgba(250, 247, 242, .6) }
+    .footer-inner a:hover { color: var(--signal) }
+    .footer-legal { display: flex; gap: 24px }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(20px) }
+    .reveal-1 { animation: rv .8s var(--ease) .10s forwards }
+    .reveal-2 { animation: rv .8s var(--ease) .22s forwards }
+    .reveal-3 { animation: rv .8s var(--ease) .36s forwards }
+    .reveal-4 { animation: rv .8s var(--ease) .50s forwards }
+    @keyframes rv { to { opacity: 1; transform: translateY(0) } }
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease) }
+    .fade-in.in { opacity: 1; transform: translateY(0) }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .who-hero-inner { grid-template-columns: 1fr; gap: 60px }
+      .card-3d-dark { margin: 0 auto; max-width: 480px; transform: perspective(1200px) rotateX(3deg) rotateY(0deg) translateZ(10px) }
+      .card-3d-dark:hover { transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(-8px) translateZ(0) }
+    }
+    @media (max-width: 768px) {
+      .container, .nav-inner, .who-hero-inner { padding: 0 20px }
+      .who-hero { padding: 110px 0 72px }
+      .hero-stats { gap: 20px }
+      .card-3d-dark { max-width: 100% }
+    }
+    @media (max-width: 900px) {
+      .nav-links { display: none }
+      .nav-dropdown { display: inline-block }
+      .dropdown-toggle { font-size: 13px; padding: 6px 10px }
+      .dropdown-menu {
+        position: fixed; top: 70px; left: 0; right: 0; min-width: 100%;
+        border-radius: 0; box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+        max-height: calc(100vh - 70px); overflow-y: auto; padding: 20px;
+      }
+      .dropdown-menu.dropdown-grid-2 { grid-template-columns: 1fr; min-width: 100%; gap: 24px }
+      .dropdown-menu.dropdown-grid-3 { grid-template-columns: repeat(2, 1fr); min-width: 100%; gap: 24px }
+      .dropdown-menu.dropdown-grid-4 { grid-template-columns: repeat(2, 1fr); min-width: 100%; gap: 24px }
+    }
+    @media (max-width: 600px) {
+      .dropdown-toggle { font-size: 12px; padding: 5px 8px }
+      .dropdown-menu { left: -10px; right: -10px; padding: 16px }
+      .dropdown-menu.dropdown-grid-2, .dropdown-menu.dropdown-grid-3, .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: 1fr; min-width: calc(100vw - 32px)
+      }
+      .column-header { font-size: 10px }
+      .dropdown-menu a { font-size: 13px; padding: 8px 10px }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <img src="../logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="./medical.html">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="./dental.html">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Enterprise & BILLING</div>
+            <a href="./enterprise.html">Enterprise & Billing Specialists</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">MSO / Payer Partners</div>
+            <a href="./mso.html">MSO / Payer Partners</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="../Solutions/rcm-management.html">Revenue Cycle Management</a>
+            <a href="../Solutions/medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="../Solutions/ar-management.html">AR Management</a>
+            <a href="../Solutions/ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="../Solutions/old-aging-ar.html">Old & Aging AR Recovery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="../Solutions/medical-coding.html">Medical Coding</a>
+            <a href="../Solutions/medical-auditing.html">Medical Auditing</a>
+            <a href="../Solutions/compliance-reporting.html">Compliance & Reporting</a>
+            <a href="../Solutions/quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="../Solutions/provider-credential.html">Provider Credential</a>
+            <a href="../Solutions/payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="../Solutions/practice-launch.html">Practice Launch</a>
+            <a href="../Solutions/operations-management.html">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="../Solutions/marketing-patient-engagement.html">Marketing & Patient Engagement</a>
+            <a href="../Solutions/virtual-healthcare-solutions.html">Virtual Healthcare Solutions</a>
+            <a href="../Solutions/analytics-reporting.html">Analytics & Reporting</a>
+            <a href="../Solutions/view-all-solutions.html">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">Provider Organizations</div>
+            <a href="./start-ups.html">Startups Practices</a>
+            <a href="./small-medical-practices.html">Small Medical Practices</a>
+            <a href="./medium-large-medical-practices.html">Medium & Large Medical Groups</a>
+            <a href="./enterprise-medical-operation.html">Enterprise Medical Operation</a>
+            <a href="./fqhc.html">Federally Qualified Health Centers</a>
+            <a href="./member-centric-care.html">Member Centric Care</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Medical Specialties</div>
+            <a href="./Medical/psychiatry.html">Psychiatry</a>
+            <a href="./Medical/orthopedic.html">Orthopedic</a>
+            <a href="./Medical/cardiology.html">Cardiology</a>
+            <a href="./Medical/obgyn.html">Obgyn</a>
+            <a href="./Medical/endocrinology.html">Endocrinology</a>
+            <a href="./Medical/neurology.html">Neurology</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">RESOURCES</div>
+            <a href="#">Case Studies</a>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Security & Compliance</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION - EXACTLY MATCHES IMAGE -->
+  <section class="who-hero">
+    <div class="who-hero-bg">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+      <div class="who-hero-grain"></div>
+    </div>
+    <div class="who-hero-inner">
+      <div class="who-hero-content">
+        <!-- MEDICAL CODING Badge -->
+        <div class="eyebrow eyebrow--signal reveal reveal-1">MEDICAL CODING</div>
+
+        <!-- Hero Title - EXACT from image -->
+        <h1 class="who-hero-title reveal reveal-2">A clean claim starts with accurate coding.<br><em>Yours may be leaving the door before anyone has checked.</em></h1>
+
+        <!-- Hero Text - EXACT from image -->
+        <p class="who-hero-subtitle reveal reveal-3">Coding errors do not announce themselves. They show up as denials, underpayments, and compliance risk — weeks after the visit, long after the clinical moment that created them.</p>
+
+        <!-- Hero Lede - EXACT from image -->
+        <p class="who-hero-lede reveal reveal-3">Hired Billing Support embeds medical coding support directly into your billing workflow — reviewing codes before submission, aligning documentation with billed services, and reducing the coding errors that quietly drain revenue every month.</p>
+
+        <!-- Hero Actions - EXACT from image -->
+        <div class="who-hero-actions reveal reveal-4">
+          <a href="#cta" class="btn btn-primary btn-lg">Review my coding workflow
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a href="#" class="btn btn-ghost btn-lg">See where coding fails
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Stats - EXACT from image -->
+        <div class="hero-stats reveal reveal-4">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="stat-text">
+              <strong>98%</strong>
+              <span>Clean-claim rate</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="stat-text">
+              <strong>22d</strong>
+              <span>Avg. days in AR</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="stat-text">
+              <strong>300+</strong>
+              <span>Healthcare pros</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <div class="stat-text">
+              <strong>$1.2M+</strong>
+              <span>Recovered for clients in '25</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENHANCED 3D CARD - EXACT from image with better 3D -->
+      <div class="card-3d-dark">
+        <!-- Header -->
+        <div class="card-header-dark">
+          <div class="header-icon-dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="header-text-dark">
+            <div class="header-title-dark">HBS Operations Center</div>
+            <div class="header-subtitle-dark">Your remote team working behind your practice, every day.</div>
+          </div>
+          <div class="live-badge-dark">
+            <span class="live-dot-dark"></span>
+            <span>Live</span>
+          </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="metrics-dark">
+          <div class="metric-row-dark">
+            <div class="metric-icon-dark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div class="metric-info-dark">
+              <div class="metric-label-dark">Medical Billing</div>
+              <div class="metric-desc-dark">Claims reviewed and submitted</div>
+            </div>
+            <div class="metric-value-dark">247</div>
+            <div class="metric-trend-dark">
+              <span class="trend-label-dark">Today</span>
+              <div class="trend-arrow-dark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-row-dark">
+            <div class="metric-icon-dark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="metric-info-dark">
+              <div class="metric-label-dark">AR Recovery</div>
+              <div class="metric-desc-dark">Denials identified and resolved</div>
+            </div>
+            <div class="metric-value-dark">12</div>
+            <div class="metric-trend-dark">
+              <span class="trend-label-dark">Today</span>
+              <div class="trend-arrow-dark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-row-dark">
+            <div class="metric-icon-dark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div class="metric-info-dark">
+              <div class="metric-label-dark">Credentialing</div>
+              <div class="metric-desc-dark">Providers enrolled and updated</div>
+            </div>
+            <div class="metric-value-dark">8</div>
+            <div class="metric-trend-dark">
+              <span class="trend-label-dark">Today</span>
+              <div class="trend-arrow-dark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-row-dark">
+            <div class="metric-icon-dark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="metric-info-dark">
+              <div class="metric-label-dark">Virtual Assistants</div>
+              <div class="metric-desc-dark">Patients scheduled and supported</div>
+            </div>
+            <div class="metric-value-dark">28</div>
+            <div class="metric-trend-dark">
+              <span class="trend-label-dark">Today</span>
+              <div class="trend-arrow-dark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operational Health -->
+        <div class="health-section-dark">
+          <div class="health-row-dark">
+            <div class="health-icon-dark">✓</div>
+            <div class="health-text-dark">
+              <div class="health-label-dark">Operational Health</div>
+              <div class="health-desc-dark">All systems running smoothly</div>
+            </div>
+            <div class="health-value-dark">295</div>
+            <div class="health-subtitle-dark">Tasks Completed Today</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="who-section who-section--warm" id="cta">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="eyebrow">Ready to optimize?</div>
+        <h2 class="section-title">Let's reduce errors and maximize your revenue. <em>Starting today.</em></h2>
+        <p class="section-subtitle">Schedule a free coding audit to see where improvements can be made in your current workflow.</p>
+      </div>
+      <div class="fade-in">
+        <a href="#" class="btn btn-primary btn-lg">Get a Free Coding Audit
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#" class="btn btn-ghost btn-lg">Talk to our coding team</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Hired Billing Support · hiredbillingsupport.com</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">HIPAA</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    });
+
+    // Scroll animations
+    const io = new IntersectionObserver(e => {
+      e.forEach(x => {
+        if (x.isIntersecting) {
+          x.target.classList.add('in');
+          io.unobserve(x.target);
+        }
+      })
+    }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+    // Enhanced 3D card mouse interaction
+    const card = document.querySelector('.card-3d-dark');
+    if (card) {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 8;
+        const rotateY = (centerX - x) / 8;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1200px) rotateX(5deg) rotateY(-5deg) translateZ(20px)';
+      });
+    }
+  </script>
+</body>
+
+</html>
