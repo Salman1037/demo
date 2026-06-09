@@ -1,0 +1,969 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Marketplace Partners | Hired Billing Support</title>
+<meta name="description" content="Hired Billing Support partners with healthcare marketplaces, platforms, agencies, and referral partners to deliver billing, RCM, credentialing, AR, coding, compliance, and operations support to healthcare clients — so partners can fulfill the promise after the sale."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>/* ================================================================
+   HBS PARTNERS — SHARED STYLESHEET
+   Who We Serve: Partners (2 pages)
+   Marketplace Partners · Developers
+   Design system: HBS Redesign by Talha
+   Fraunces · Inter Tight · JetBrains Mono
+   ink / paper / signal + amber + danger
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --ink:         #0A1628;
+  --ink-soft:    #1B2942;
+  --ink-mute:    #475569;
+  --paper:       #FAF7F2;
+  --paper-warm:  #F2EDE3;
+  --paper-line:  #E8E2D5;
+  --white:       #FFFFFF;
+  --signal:      #00C896;
+  --signal-deep: #00876B;
+  --signal-pale: rgba(0,200,150,.08);
+  --amber:       #F59E0B;
+  --amber-deep:  #B45309;
+  --amber-pale:  rgba(245,158,11,.08);
+  --danger:      #D64545;
+  --danger-pale: rgba(214,69,69,.07);
+  --radius:      4px;
+  --radius-lg:   12px;
+  --max:         1280px;
+  --gutter:      clamp(20px,4vw,48px);
+  --serif:       'Fraunces','Times New Roman',serif;
+  --sans:        'Inter Tight',-apple-system,sans-serif;
+  --mono:        'JetBrains Mono',monospace;
+  --ease:        cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;font-size:16px;overflow-x:hidden}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── LAYOUT ── */
+.container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-mute);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:24px;height:1px;background:currentColor}
+.eyebrow--light{color:rgba(250,247,242,.5)}
+.eyebrow--light::before{background:rgba(250,247,242,.4)}
+
+/* ── NAV ── */
+/* Navigation */
+    nav.top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(250, 247, 242, 0.78);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+
+    nav.top.scrolled {
+      border-bottom-color: var(--paper-line);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background: var(--signal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s var(--ease);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--signal);
+      background: transparent;
+    }
+
+    .dropdown-toggle .chevron {
+      font-size: 9px;
+      transition: transform 0.3s var(--ease);
+      opacity: 0.6;
+      margin-left: 4px;
+    }
+
+    .nav-dropdown:hover .dropdown-toggle .chevron {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -20px;
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
+      margin-top: 8px;
+      z-index: 1000;
+      min-width: 280px;
+      max-width: 100vw;
+    }
+
+    .dropdown-menu.dropdown-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      min-width: 500px;
+    }
+
+    .dropdown-menu.dropdown-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      min-width: 680px;
+    }
+
+    .dropdown-menu.dropdown-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      min-width: 900px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .column-header {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .column-header::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      margin-right: 8px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 12px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s var(--ease);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--paper-warm);
+      color: var(--ink);
+      padding-left: 16px;
+    }
+
+    .dropdown-menu a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: var(--signal);
+      border-radius: 2px;
+      transition: height 0.2s var(--ease);
+    }
+
+    .dropdown-menu a:hover::before {
+      height: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-dropdown {
+        display: inline-block;
+      }
+
+      .dropdown-toggle {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+
+      .dropdown-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        border-radius: 0;
+        box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .dropdown-menu.dropdown-grid-2 {
+        grid-template-columns: 1fr;
+        min-width: 100%;
+        gap: 24px;
+      }
+
+      .dropdown-menu.dropdown-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+      }
+
+      .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+      }
+
+      .dropdown-column {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-dropdown {
+        display: inline-block;
+      }
+
+      .dropdown-toggle {
+        font-size: 12px;
+        padding: 5px 8px;
+      }
+
+      .dropdown-menu {
+        left: -10px;
+        right: -10px;
+        padding: 16px;
+      }
+
+      .dropdown-menu.dropdown-grid-2,
+      .dropdown-menu.dropdown-grid-3,
+      .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: 1fr;
+        min-width: calc(100vw - 32px);
+      }
+
+      .column-header {
+        font-size: 10px;
+      }
+
+      .dropdown-menu a {
+        font-size: 13px;
+        padding: 8px 10px;
+      }
+    }
+
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--radius);font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:background .2s var(--ease),color .2s,transform .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn .arrow{transition:transform .2s;flex-shrink:0}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-primary:hover{background:var(--ink-soft)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--paper-line)}
+.btn-ghost:hover{background:var(--paper-warm);border-color:var(--ink-mute)}
+.btn-light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-light:hover{background:var(--paper-warm)}
+.btn-lg{padding:14px 28px;font-size:15px}
+
+/* ── PARTNER HERO ── */
+.partner-hero{background:var(--paper);padding:140px 0 100px;position:relative;overflow:hidden}
+.partner-hero-bg{position:absolute;inset:0;pointer-events:none}
+.partner-hero-bg svg{width:100%;height:100%}
+.partner-hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4}
+.partner-hero-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:1fr 440px;gap:64px;align-items:center}
+.partner-hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--signal-deep);background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);padding:6px 14px;border-radius:100px;margin-bottom:24px}
+.partner-hero-title{font-family:var(--serif);font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:400;letter-spacing:-.025em;line-height:1.02;color:var(--ink);margin-bottom:24px;font-variation-settings:"opsz" 144}
+.partner-hero-title em{font-style:italic;font-weight:300;color:var(--ink-mute)}
+.partner-hero-subtitle{font-size:17px;line-height:1.7;color:var(--ink-soft);margin-bottom:14px;max-width:560px}
+.partner-hero-lede{font-size:15px;line-height:1.75;color:var(--ink-mute);max-width:540px;margin-bottom:40px}
+.partner-hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── COMMAND PANEL CARD (Concept A hero right) ── */
+.cp-card{background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 4px 32px rgba(10,22,40,.10),0 1px 4px rgba(10,22,40,.05)}
+.cp-header{background:var(--ink);padding:22px 24px 18px}
+.cp-header-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:12px}
+.cp-main-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:6px}
+.cp-big{font-family:var(--serif);font-size:2.6rem;color:var(--signal);line-height:1;font-variation-settings:"opsz" 144}
+.cp-unit{font-size:11px;color:rgba(250,247,242,.45);padding-bottom:4px;margin-left:4px}
+.cp-trend{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--signal);background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.2);padding:3px 10px;border-radius:100px}
+.cp-trend-dot{width:5px;height:5px;border-radius:50%;background:var(--signal)}
+.cp-header-sub{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,.35);letter-spacing:.08em;margin-top:6px}
+.cp-body{background:#111f35;padding:16px 20px}
+.cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.cp-metric{padding:10px;border-bottom:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06)}
+.cp-metric:nth-child(2n){border-right:none}
+.cp-metric:nth-last-child(-n+2){border-bottom:none}
+.cp-m-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:rgba(250,247,242,.32);margin-bottom:5px}
+.cp-m-value{font-size:14px;font-weight:600;margin-bottom:5px}
+.cp-m-value.sig{color:var(--signal)}
+.cp-m-value.amb{color:var(--amber)}
+.cp-m-value.danger{color:var(--danger)}
+.cp-m-value.lite{color:rgba(250,247,242,.8)}
+.cp-spark{height:3px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
+.cp-spark-fill{height:100%;border-radius:2px}
+.spark-sig{background:var(--signal)}
+.spark-amb{background:var(--amber)}
+.spark-danger{background:var(--danger)}
+.spark-lite{background:rgba(250,247,242,.35)}
+.cp-queue{background:var(--white);padding:16px 20px}
+.cp-queue-title{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute);margin-bottom:10px}
+.cp-queue-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--paper-line)}
+.cp-queue-row:last-of-type{border-bottom:none}
+.cp-q-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cp-q-lbl{font-size:11px;color:var(--ink-soft);flex:1;line-height:1.3}
+.cp-q-badge{font-family:var(--mono);font-size:8px;letter-spacing:.08em;padding:2px 9px;border-radius:100px;white-space:nowrap}
+.badge-ok{background:rgba(0,200,150,.1);color:var(--signal-deep)}
+.badge-warn{background:rgba(245,158,11,.12);color:var(--amber-deep)}
+.badge-risk{background:rgba(214,69,69,.09);color:var(--danger)}
+.badge-idle{background:var(--paper-warm);color:var(--ink-mute)}
+.badge-info{background:rgba(10,22,40,.07);color:var(--ink-soft)}
+.cp-footer{background:var(--ink);padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.cp-footer-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--signal)}
+.cp-footer-pulse{width:6px;height:6px;border-radius:50%;background:var(--signal)}
+.cp-footer-right{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,.3);letter-spacing:.08em}
+
+/* ── REVEALS ── */
+.reveal{opacity:0;transform:translateY(20px)}
+.reveal-1{animation:rv .8s var(--ease) .10s forwards}
+.reveal-2{animation:rv .8s var(--ease) .22s forwards}
+.reveal-3{animation:rv .8s var(--ease) .36s forwards}
+.reveal-4{animation:rv .8s var(--ease) .50s forwards}
+@keyframes rv{to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.fade-in.in{opacity:1;transform:translateY(0)}
+
+/* ── PARTNER SECTION ── */
+.partner-section{padding:100px 0;position:relative}
+.partner-section--warm{background:var(--paper-warm)}
+.partner-section--ink{background:var(--ink);color:var(--paper)}
+.partner-section--ink-soft{background:var(--ink-soft);color:var(--paper)}
+.partner-section--ink .eyebrow,.partner-section--ink-soft .eyebrow{color:rgba(250,247,242,.5)}
+.partner-section--ink .eyebrow::before,.partner-section--ink-soft .eyebrow::before{background:rgba(250,247,242,.4)}
+.partner-section--ink p,.partner-section--ink-soft p{color:rgba(250,247,242,.65)}
+
+/* ── SECTION HEADER ── */
+.section-header{margin-bottom:64px}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);font-weight:400;letter-spacing:-.025em;line-height:1.06;margin-top:16px;max-width:780px;font-variation-settings:"opsz" 144}
+.section-title em{font-style:italic;font-weight:300;color:var(--ink-mute)}
+.section-subtitle{margin-top:18px;font-size:16px;line-height:1.75;color:var(--ink-mute);max-width:560px}
+.partner-section--ink .section-title,.partner-section--ink-soft .section-title{color:var(--paper)}
+.partner-section--ink .section-title em,.partner-section--ink-soft .section-title em{color:rgba(250,247,242,.5)}
+.partner-section--ink .section-subtitle,.partner-section--ink-soft .section-subtitle{color:rgba(250,247,242,.6)}
+
+/* ── MONOLOGUE ── */
+.monologue{max-width:780px;border-left:2px solid var(--paper-line);padding-left:32px}
+.monologue p{font-size:16px;line-height:1.85;color:var(--ink-soft);margin-bottom:20px}
+.monologue p:last-child{margin-bottom:0}
+.monologue .highlight{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);line-height:1.5}
+
+/* ── PAIN GRID ── */
+.pain-grid{display:flex;flex-direction:column;margin-top:48px}
+.pain-card{display:grid;grid-template-columns:48px 1fr;gap:0 24px;padding:28px 0;border-bottom:1px solid var(--paper-line);align-items:start}
+.pain-card:last-child{border-bottom:none}
+.pain-card-num{font-family:var(--serif);font-size:13px;color:var(--ink-mute);padding-top:3px}
+.pain-card h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.35}
+.pain-card p{font-size:14px;color:var(--ink-mute);line-height:1.72}
+
+/* ── PARTNER FIT GRID ── */
+.partner-fit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--paper-line);border:1px solid var(--paper-line);border-radius:var(--radius-lg);overflow:hidden}
+.partner-fit-card{background:var(--white);padding:28px;transition:background .2s}
+.partner-fit-card:hover{background:var(--paper-warm)}
+.partner-fit-card-num{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--signal-deep);margin-bottom:12px;display:block}
+.partner-fit-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.partner-fit-card p{font-size:13px;color:var(--ink-mute);line-height:1.65}
+
+/* ── PROCESS TIMELINE ── */
+.process-timeline{display:flex;flex-direction:column}
+.process-step{display:grid;grid-template-columns:48px 1fr;gap:0 24px;padding:28px 0;border-bottom:1px solid var(--paper-line);align-items:start}
+.process-step:last-child{border-bottom:none}
+.process-step-num{font-family:var(--mono);font-size:11px;color:var(--signal-deep);letter-spacing:.1em;padding-top:4px}
+.process-step h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.process-step p{font-size:14px;color:var(--ink-mute);line-height:1.72}
+.partner-section--ink .process-step{border-color:rgba(250,247,242,.1)}
+.partner-section--ink .process-step h4{color:var(--paper)}
+.partner-section--ink .process-step p{color:rgba(250,247,242,.6)}
+.partner-section--ink .process-step-num{color:var(--signal)}
+
+/* ── WORKFLOW NODE DASHBOARD ── */
+.workflow-dashboard{display:flex;align-items:flex-start;gap:0;margin-top:48px;position:relative;overflow-x:auto;padding-bottom:8px}
+.workflow-dashboard::before{content:'';position:absolute;top:18px;left:24px;right:24px;height:1px;background:var(--paper-line);z-index:0}
+.wf-node{display:flex;flex-direction:column;align-items:center;flex:1;min-width:100px;position:relative;z-index:1;padding:0 6px}
+.wf-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:500;margin-bottom:10px;border:1px solid var(--paper-line);flex-shrink:0;background:var(--white)}
+.wf-dot--signal{background:rgba(0,200,150,.1);color:var(--signal-deep);border-color:rgba(0,200,150,.25)}
+.wf-dot--amber{background:rgba(245,158,11,.1);color:var(--amber-deep);border-color:rgba(245,158,11,.25)}
+.wf-dot--ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.wf-node-label{font-size:11px;font-weight:600;color:var(--ink);text-align:center;line-height:1.3;margin-bottom:3px}
+.wf-node-sub{font-family:var(--mono);font-size:9px;color:var(--ink-mute);text-align:center;letter-spacing:.06em}
+
+/* ── AI + HUMAN SPLIT ── */
+.ai-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--paper-line);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px}
+.ai-col{padding:36px}
+.ai-col--machine{background:var(--paper-warm)}
+.ai-col--human{background:var(--white)}
+.ai-col-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--paper-line)}
+.ai-col--machine .ai-col-label{color:var(--signal-deep)}
+.ai-col--human .ai-col-label{color:var(--ink-mute)}
+.ai-items{display:flex;flex-direction:column;gap:14px}
+.ai-item{display:flex;gap:12px;align-items:flex-start}
+.ai-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.ai-col--machine .ai-item-dot{background:var(--signal)}
+.ai-col--human .ai-item-dot{background:var(--ink)}
+.ai-item p{font-size:13px;color:var(--ink-mute);line-height:1.6}
+
+/* ── OUTCOME GRID ── */
+.outcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:48px}
+.outcome-card{padding:28px;background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg)}
+.outcome-card-num{font-family:var(--serif);font-size:2.4rem;font-weight:400;color:var(--signal);line-height:1;margin-bottom:8px}
+.outcome-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.outcome-card p{font-size:13px;color:var(--ink-mute);line-height:1.65}
+
+/* ── COMPARE TABLE ── */
+.compare-wrap{background:var(--ink);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px}
+.compare-header{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 28px;background:rgba(255,255,255,.04)}
+.compare-header span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,247,242,.35)}
+.compare-header span.hbs-col{color:var(--signal)}
+.compare-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 28px;border-top:1px solid rgba(255,255,255,.05)}
+.compare-row span{font-size:13px}
+.c-label{color:rgba(250,247,242,.55)}
+.c-hbs{color:var(--signal);font-weight:500}
+.c-other{color:rgba(250,247,242,.3)}
+
+/* ── PULL QUOTE ── */
+.pull-quote{font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);font-style:italic;color:var(--ink);line-height:1.65;padding:28px 32px;border-left:3px solid var(--signal);background:var(--signal-pale);border-radius:0 var(--radius) var(--radius) 0;margin:40px 0;max-width:860px}
+
+/* ── INTEGRATION CARDS GRID (developer page) ── */
+.integration-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:40px}
+.integration-card{background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:24px}
+.int-tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px}
+.tag-tech{background:rgba(10,22,40,.07);color:var(--ink-soft)}
+.tag-ops{background:rgba(0,200,150,.1);color:var(--signal-deep)}
+.tag-data{background:rgba(245,158,11,.1);color:var(--amber-deep)}
+.tag-process{background:rgba(214,69,69,.08);color:var(--danger)}
+.integration-card h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.integration-card p{font-size:12px;color:var(--ink-mute);line-height:1.65}
+
+/* ── CODE BLOCK (developer page) ── */
+.code-block{background:var(--ink);border-radius:var(--radius-lg);padding:24px 28px;margin-top:32px;position:relative;overflow:hidden}
+.code-block::before{content:'';position:absolute;top:0;left:0;right:0;height:32px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06)}
+.code-dots{position:absolute;top:10px;left:18px;display:flex;gap:6px}
+.code-dot{width:10px;height:10px;border-radius:50%}
+.code-dot:nth-child(1){background:#FF5F57}
+.code-dot:nth-child(2){background:#FEBC2E}
+.code-dot:nth-child(3){background:#28C840}
+.code-content{padding-top:16px}
+.code-comment{font-family:var(--mono);font-size:11px;color:rgba(250,247,242,.3);line-height:1.8}
+.code-key{font-family:var(--mono);font-size:11px;color:#7DD3FC;line-height:1.8}
+.code-val{font-family:var(--mono);font-size:11px;color:var(--signal);line-height:1.8}
+.code-str{font-family:var(--mono);font-size:11px;color:#FCA5A5;line-height:1.8}
+.code-row{display:flex;gap:0;flex-wrap:wrap}
+
+/* ── CTA SECTION ── */
+.cta-section{background:var(--ink);padding:120px var(--gutter);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at center,rgba(0,200,150,.2),transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-title{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:400;letter-spacing:-.025em;line-height:1.06;color:var(--paper);margin:16px 0 24px;font-variation-settings:"opsz" 144}
+.cta-title em{font-style:italic;font-weight:300;color:rgba(250,247,242,.5)}
+.cta-text{font-size:16px;line-height:1.75;color:rgba(250,247,242,.6);margin-bottom:40px}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.trust-line{margin-top:28px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.35)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(250,247,242,.6);padding:60px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;font-size:13px}
+.footer-inner a{color:rgba(250,247,242,.6)}
+.footer-inner a:hover{color:var(--signal)}
+.footer-legal{display:flex;gap:24px}
+
+/* ── RELATED STRIP ── */
+.related-strip{background:var(--paper-warm);border-top:1px solid var(--paper-line);padding:28px 0}
+.related-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.related-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.related-link{font-size:13px;color:var(--ink-soft);padding:5px 14px;border:1px solid var(--paper-line);border-radius:100px;background:var(--white);transition:border-color .2s,color .2s}
+.related-link:hover{border-color:var(--signal-deep);color:var(--signal-deep)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .partner-hero-inner{grid-template-columns:1fr}
+  .partner-hero-visual{display:none}
+  .two-col{grid-template-columns:1fr;gap:40px}
+  .ai-split{grid-template-columns:1fr}
+  .workflow-dashboard::before{display:none}
+}
+@media(max-width:720px){
+  .partner-section{padding:64px 0}
+  .partner-hero{padding:110px 0 72px}
+  .cta-section{padding:80px var(--gutter)}
+  .section-header{margin-bottom:40px}
+  .nav-links{display:none}
+  .compare-header,.compare-row{grid-template-columns:1.5fr 1fr 1fr;padding:12px 16px}
+  .partner-fit-grid{grid-template-columns:1fr}
+  .wf-node{min-width:80px}
+  .integration-grid{grid-template-columns:1fr}
+}
+</style></head><body>
+ <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <img src="../../logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+
+
+      <!-- Hire Talent Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="../../Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="../../Hire/dental.html">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Enterprise & BILLING</div>
+            <a href="../../Hire/enterprise.html">Enterprise & Billing Specialists</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">MSO / Payer Partners</div>
+            <a href="../../Hire/mso.html">MSO / Payer Partners</a>
+            <!-- <a href="#">Contact Hiring Team</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="../../Solutions/rcm-management.html">Revenue Cycle Management</a>
+            <a href="../../Solutions/medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="../../Solutions/ar-management.html">AR Management</a>
+            <a href="../../Solutions/ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="../../Solutions/old-aging-ar.html">Old & Aging AR Recovery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="../../Solutions/medical-coding.html">Medical Coding</a>
+            <a href="../../Solutions/medical-auditing.html">Medical Auditing</a>
+            <a href="../../Solutions/compliance-reporting.html">Compliance & Reporting</a>
+            <a href="../../Solutions/quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="../../Solutions/provider-credential.html">Provider Credential</a>
+            <a href="../../Solutions/payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="../../Solutions/practice-launch.html">Practice Launch</a>
+            <a href="../../Solutions/operations-management.html">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="../../Solutions/marketing-patient-engagement.html">Marketing & Patient Engagement</a>
+            <a href="../../Solutions/virtual-healthcare-solutions.html">Virtual Healthcare Solutions</a>
+            <a href="../../Solutions/analytics-reporting.html">Analytics & Reporting</a>
+            <a href="../../Solutions/view-all-solutions.html">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who We Serve Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">Provider Organizations</div>
+            <a href="../start-ups.html">Startups Practices</a>
+            <a href="../small-medical-practices.html">Small Medical Practices</a>
+            <a href="../medium-large-medical-practices.html">Medium & Large Medical Groups</a>
+            <a href="../enterprise-medical-operation.html">Enterprise Medical Operation</a>
+            <a href="../fqhc.html">Federally Qualified Health Centers</a>
+            <a href="../member-centric-care.html">Member Centric Care</a>
+          </div>
+         <div class="dropdown-column">
+            <div class="column-header">Medical Specialties</div>
+            <a href="../Medical/psychiatry.html">Psychiatry</a>
+            <a href="../Medical/orthopedic.html">Orthopedic</a>
+            <a href="../Medical/cardiology.html">Cardiology</a>
+            <a href="../Medical/obgyn.html">Obgyn</a>
+              <a href="../Medical/endocrinology.html">Endocrinology</a>
+              <a href="../Medical/neurology.html">Neurology</a>
+
+    
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header"> Organizations & Partners</div>
+            <a href="./payers.html">Medical Payers</a>
+            <a href="./medical-order-transmission.html">Medical Order Transmission</a>
+            <a href="./hbs-marketing.html">Marketing Partners</a>
+            <a href="./developer-portal.html">Developer</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="partner-hero">
+  <div class="partner-hero-bg"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="partner-hero-grain"></div></div>
+  <div class="partner-hero-inner">
+    <div class="partner-hero-content">
+      <div class="partner-hero-badge reveal reveal-1">Partners · Marketplace Partners</div>
+      <h1 class="partner-hero-title reveal reveal-2">You created the opportunity.<br><em>We deliver the operations that make it worth it for your client.</em></h1>
+      <p class="partner-hero-subtitle reveal reveal-3">Marketplace partners and healthcare platforms are excellent at connecting providers with solutions, generating demand, and creating the conditions for growth. The gap appears after the client says yes — when the actual billing, credentialing, payer enrollment, AR management, and practice operations work has to happen and the partner has no reliable backend execution layer to deliver it.</p>
+      <p class="partner-hero-lede reveal reveal-3">Hired Billing Support acts as the operational engine behind your healthcare partnerships — delivering billing, RCM, credentialing, payer enrollment, coding, compliance, AR management, and practice operations support to your clients while protecting your brand and the relationship you built.</p>
+      <div class="partner-hero-actions reveal reveal-4">
+        <a href="#cta" class="btn btn-primary btn-lg">Partner with HBS <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#pain" class="btn btn-ghost btn-lg">See the partnership model</a>
+      </div>
+    </div>
+    <div class="partner-hero-visual reveal reveal-4" style="animation-delay:.55s">
+      <div class="cp-card">
+    <div class="cp-header">
+      <div class="cp-header-label">— Partner Delivery Dashboard · Active Clients</div>
+      <div class="cp-main-row">
+        <div style="display:flex;align-items:baseline;gap:2px">
+          <span class="cp-big">12</span>
+          <span class="cp-unit">partner clients supported</span>
+        </div>
+        <span class="cp-trend"><span class="cp-trend-dot"></span>↑ 4 new this quarter</span>
+      </div>
+      <div class="cp-header-sub">Updated today · Marketplace Partner View</div>
+    </div>
+    <div class="cp-body">
+      <div class="cp-grid">
+        <div class="cp-metric"><div class="cp-m-label">Client Retention</div><div class="cp-m-value sig">97.3%</div><div class="cp-spark"><div class="cp-spark-fill spark-sig" style="width:97%"></div></div></div>
+        <div class="cp-metric"><div class="cp-m-label">Avg Collection Rate</div><div class="cp-m-value sig">94.1%</div><div class="cp-spark"><div class="cp-spark-fill spark-sig" style="width:94%"></div></div></div>
+        <div class="cp-metric"><div class="cp-m-label">Onboarding Time</div><div class="cp-m-value amb">~14 days</div><div class="cp-spark"><div class="cp-spark-fill spark-amb" style="width:60%"></div></div></div>
+        <div class="cp-metric"><div class="cp-m-label">Clients in Ramp</div><div class="cp-m-value lite">3 active</div><div class="cp-spark"><div class="cp-spark-fill spark-lite" style="width:25%"></div></div></div>
+      </div>
+    </div>
+    <div class="cp-queue">
+      <div class="cp-queue-title">Partner Client Service Coverage</div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--signal)"></div><span class="cp-q-lbl">Billing & RCM — all partner clients</span><span class="cp-q-badge badge-ok">Active</span></div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--signal)"></div><span class="cp-q-lbl">Credentialing — 8 providers in process</span><span class="cp-q-badge badge-ok">On track</span></div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--amber)"></div><span class="cp-q-lbl">3 new client onboardings in progress</span><span class="cp-q-badge badge-warn">Week 2 of 3</span></div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--signal)"></div><span class="cp-q-lbl">Monthly partner reporting — delivered</span><span class="cp-q-badge badge-ok">Current</span></div>
+    </div>
+    <div class="cp-footer">
+      <span class="cp-footer-pill"><span class="cp-footer-pulse"></span>All 12 partner clients actively supported</span>
+      <span class="cp-footer-right">White-label available</span>
+    </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="partner-section" id="pain"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The healthcare partnership execution gap</div><h2 class="section-title">Generating healthcare demand is one skill. <em>Delivering the operations behind it is a completely different capability.</em></h2></div>
+  <div class="monologue fade-in"><p>Healthcare marketplaces and partner organizations are built on relationships, trust, and the promise of better outcomes for the providers and practices they serve. That promise holds when the operational delivery behind it is strong. It breaks down — quietly at first, then loudly — when the client is referred or onboarded and then discovers that the actual billing, credentialing, payer enrollment, and AR management support does not match what was described in the sales conversation.</p>
+<p>Most marketplace partners do not have a full internal team of billing specialists, credentialing coordinators, payer enrollment experts, coding auditors, and operations managers. They are marketplaces, platforms, or agencies — not healthcare operations companies. But their healthcare clients need all of those functions delivered competently, consistently, and compliantly.</p>
+<p class="highlight">"Partnership breaks down when the client says yes but the operational support behind the promise is not strong enough to deliver what was sold. The partner's reputation is the casualty — not just the client relationship."</p>
+<p>The solution is not building an internal healthcare operations department. The solution is a backend operations partner who works under your brand, delivers to your clients, and makes the operational execution strong enough that your clients stay — and refer others.</p></div>
+</div></section>
+
+<section class="partner-section partner-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Where marketplace partnerships lose clients</div><h2 class="section-title">The specific delivery gaps <em>that damage partner reputation.</em></h2></div>
+  <div class="pain-grid fade-in">
+    <div class="pain-card"><div class="pain-card-num">01</div><div><h4>Healthcare clients need execution, not just introductions</h4><p>A referral to a healthcare billing service is valuable only if that service actually delivers. Providers who have been burned by prior billing vendors are skeptical — they need to see operational execution from week one, not a sales pitch and a promise. Partners who cannot back their referrals with proven operational capacity lose the client and the relationship.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">02</div><div><h4>Building an internal healthcare operations team is expensive and slow</h4><p>Hiring billing managers, credentialing coordinators, coding specialists, payer enrollment experts, and compliance staff — training them, building the processes, and maintaining the team as healthcare regulations and payer rules change — is a full-time business in itself. Most marketplace partners and platforms are not positioned to build that capability internally.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">03</div><div><h4>Client onboarding after the sale is the highest-risk moment</h4><p>The first 30 to 60 days after a healthcare client is onboarded determine whether the relationship continues. If billing setup is delayed, credentialing is not started on time, or payer enrollment falls behind, the client's confidence erodes before the service has had a chance to perform. A structured, reliable onboarding process protects the relationship when it is most vulnerable.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">04</div><div><h4>Partner reputation is directly tied to vendor performance</h4><p>When a marketplace partner refers a client to a billing vendor and the billing vendor underperforms, the partner bears the reputational cost. Clients do not distinguish between the introduction and the execution — they remember who recommended the service and whether that recommendation was worth making. Partners need backend execution they can stand behind without qualification.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">05</div><div><h4>Growth creates delivery risk when fulfillment capacity is not scalable</h4><p>A successful marketplace or platform that generates 20 new healthcare clients in a quarter needs backend operations capacity that scales to support all 20 — not just the first five. When growth outpaces delivery capacity, the newest clients receive the least attention, churn rates increase, and the growth that should strengthen the business begins to damage it instead.</p></div></div></div>
+</div></section>
+
+<section class="partner-section partner-section--ink" id="solution"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The solution</div><h2 class="section-title">A backend healthcare operations partner <em>that makes your referrals and partnerships deliverable.</em></h2><p class="section-subtitle">Hired Billing Support provides the full operational execution layer behind your healthcare marketplace or partner business — billing, RCM, credentialing, payer enrollment, coding, compliance, AR management, and practice operations delivered to your clients while you maintain the relationship.</p></div>
+  <div class="two-col fade-in">
+    <div class="process-timeline">
+      <div class="process-step"><div class="process-step-num">01</div><div><h4>Structured client onboarding after referral or sale</h4><p>New partner clients onboarded on a defined timeline — EHR access obtained, billing workflow mapped, credentialing initiated, payer enrollment started, and initial reporting structure established in the first two to three weeks — so client confidence builds from the first interaction, not after weeks of setup delays.</p></div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div><h4>Full-spectrum healthcare operations delivered to your clients</h4><p>Billing, RCM, credentialing, payer enrollment, AR management, denial management, coding support, compliance, and practice operations — the complete operational support your healthcare clients need, delivered by a team that specializes in healthcare operations rather than general outsourcing.</p></div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div><h4>White-label or referral partner arrangements available</h4><p>We can work under your brand, as a referred vendor with your endorsement, or as a quietly embedded backend team — adapting to the partnership structure that fits your business model and the relationship you have with your clients.</p></div></div>
+    </div>
+    <div class="process-timeline">
+      <div class="process-step"><div class="process-step-num">04</div><div><h4>Regular reporting to you on client performance</h4><p>Monthly or quarterly partner reporting on client billing performance, credentialing status, AR aging, and operational KPIs — so you maintain visibility into how your clients are performing and can have informed conversations without asking your clients for status updates.</p></div></div>
+      <div class="process-step"><div class="process-step-num">05</div><div><h4>Scalable capacity as your partner portfolio grows</h4><p>When you add new healthcare clients to the partnership, the operational capacity scales to support them — no hiring cycle, no training delay, no quality degradation for your existing clients while new ones are being onboarded.</p></div></div>
+      <div class="process-step"><div class="process-step-num">06</div><div><h4>Client retention as a shared outcome</h4><p>We treat your clients as long-term relationships, not short-term projects. Client retention is the metric that demonstrates whether the operational execution is actually working — and it is the outcome that strengthens the partnership between HBS and the marketplace or platform we support.</p></div></div>
+    </div></div>
+</div></section>
+
+<section class="partner-section" id="services"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Services your healthcare clients receive</div><h2 class="section-title">The full operational support stack <em>your healthcare clients need — delivered behind your partnership.</em></h2></div>
+  <div class="partner-fit-grid fade-in">
+    <div class="partner-fit-card"><span class="partner-fit-card-num">01</span><h4>Medical Billing & RCM</h4><p>End-to-end revenue cycle management — charge entry, claim submission, payer follow-up, and payment posting — for every partner client.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">02</span><h4>AR Management & Recovery</h4><p>Aging AR worked systematically — payer follow-up, appeal submission, and AR recovery that protects the client revenue your partnership is meant to improve.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">03</span><h4>Denial Management</h4><p>Denials reviewed, corrected, appealed, and root-cause addressed so denial rates decline over time rather than remaining as background noise in the revenue cycle.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">04</span><h4>Provider Credentialing</h4><p>Full credentialing workflow — document collection, CAQH setup, payer application management, and status tracking — from new provider onboarding through ongoing recredentialing.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">05</span><h4>Payer Enrollment</h4><p>Commercial, Medicare, and Medicaid enrollment applications submitted, tracked, and followed up — providers reaching billing-active status on schedule.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">06</span><h4>Medical Coding Support</h4><p>ICD-10, CPT, and modifier accuracy reviewed — coding errors caught pre-submission so they do not become denials that damage the client's revenue cycle.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">07</span><h4>Compliance & Reporting</h4><p>Compliance-aware billing operations and reporting support — clients operating within regulatory standards with the documentation to demonstrate it.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">08</span><h4>Practice Operations Support</h4><p>Prior authorization, eligibility verification, scheduling coordination, and daily administrative workflow support — the operational depth that keeps practices running between billing cycles.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">09</span><h4>Practice Launch Support</h4><p>For partners who serve new practice clients — coordinating the full launch sequence: entity setup, NPI, CAQH, payer enrollment, billing system configuration, and workflow documentation before the first patient visit.</p></div>
+    <div class="partner-fit-card"><span class="partner-fit-card-num">10</span><h4>Client Onboarding Coordination</h4><p>Structured onboarding for every new partner referral — systems access, workflow mapping, team introduction, and initial reporting established in the first two to three weeks.</p></div></div>
+</div></section>
+
+<section class="partner-section partner-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Partnership delivery workflow</div><h2 class="section-title">From referral or sale to actively supported client. <em>Every handoff structured, every step accountable.</em></h2><p class="section-subtitle">The moment a healthcare client is referred or onboarded is when the partnership is most at risk. A structured delivery workflow ensures that the client's first operational experience matches the relationship that created it.</p></div>
+  <div class="workflow-dashboard fade-in">
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">01</div><div class="wf-node-label">Client Referred</div><div class="wf-node-sub">Partner intro</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">02</div><div class="wf-node-label">Intake Call</div><div class="wf-node-sub">Needs assessed</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">03</div><div class="wf-node-label">Onboarding</div><div class="wf-node-sub">Systems · SOPs</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--amber">04</div><div class="wf-node-label">Credentialing</div><div class="wf-node-sub">Started day one</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">05</div><div class="wf-node-label">Billing Live</div><div class="wf-node-sub">Claims submitting</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">06</div><div class="wf-node-label">AR Managed</div><div class="wf-node-sub">Ongoing follow-up</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">07</div><div class="wf-node-label">Partner Report</div><div class="wf-node-sub">Monthly KPIs</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--ink">08</div><div class="wf-node-label">Client Retained</div><div class="wf-node-sub">Relationship secured</div></div>
+  </div>
+</div></section>
+
+<section class="partner-section"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">How HBS supports your healthcare clients</div><h2 class="section-title">Behind your brand. Inside their workflows. <em>Delivering what the partnership promised.</em></h2><p class="section-subtitle">The most effective partnership arrangements are the ones the client does not have to think about — the operational support works, the results come, and the partner who made the introduction continues to look like the right call.</p></div>
+  <div class="process-timeline fade-in" style="max-width:780px">
+    <div class="process-step"><div class="process-step-num">01</div><div><h4>We structure the handoff with you before the first client</h4><p>Before onboarding your first referred client, we understand your partnership model — how you position the service, what your clients expect, what information you want reported back, and how you want the relationship managed. We build the delivery model around your business, not a generic template.</p></div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div><h4>We onboard each client with a defined timeline and deliverables</h4><p>New partner clients onboarded in two to three weeks — EHR access, billing workflow mapping, credentialing initiation, payer enrollment, and initial reporting established in a structured sequence so clients feel operational progress from the first interaction.</p></div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div><h4>We work inside the client's systems under your arrangement</h4><p>Clients' EHR, billing software, and payer portals — we work inside them so the operational work is embedded in the client's actual workflow, not running parallel to it through an external interface.</p></div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div><h4>We report to you on partner client performance regularly</h4><p>Monthly or quarterly performance reports on each partner client — billing metrics, credentialing status, AR aging, and operational KPIs — so you can maintain informed conversations with your clients and identify any account that needs attention before the client initiates that conversation.</p></div></div>
+    <div class="process-step"><div class="process-step-num">05</div><div><h4>We scale as your partner portfolio grows</h4><p>Each new referral onboarded into the same structured model — no degradation in quality for existing clients, no hiring delay for new ones. Your portfolio growth becomes operationally manageable rather than a delivery risk.</p></div></div></div>
+</div></section>
+
+<section class="partner-section partner-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The AI + human advantage</div><h2 class="section-title">Automation handles the scale. <em>Specialists handle the execution.</em></h2></div>
+  <div class="ai-split fade-in">
+    <div class="ai-col ai-col--machine"><div class="ai-col-label">AI-assisted partner support</div><div class="ai-items"><div class="ai-item"><div class="ai-item-dot"></div><p>Client billing queue monitoring and performance tracking</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Credentialing status tracking across all partner clients</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>AR aging alerts and follow-up scheduling per client</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Denial pattern categorization and root cause tracking</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Onboarding task checklist monitoring per new client</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Partner KPI report generation and delivery scheduling</p></div></div></div>
+    <div class="ai-col ai-col--human"><div class="ai-col-label">Human operations specialists</div><div class="ai-items"><div class="ai-item"><div class="ai-item-dot"></div><p>Client relationship management and communication</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Payer calls, denial appeals, and authorization escalations</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Credentialing applications and payer enrollment management</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Client onboarding coordination and first-30-day stabilization</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Partner reporting with operational commentary and recommendations</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Compliance-sensitive billing decisions and coding judgment</p></div></div></div>
+  </div>
+  <div class="pull-quote fade-in">"The partners who scale healthcare client portfolios successfully are not the ones who do the operational work themselves. They are the ones who found an operations partner they trust enough to refer clients to without worrying about what happens after the introduction."</div>
+</div></section>
+
+<section class="partner-section" id="results"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">What changes for your partnership</div><h2 class="section-title">Healthcare partnerships that deliver <em>what they promise — consistently, at scale.</em></h2></div>
+  <div class="outcome-grid fade-in">
+    <div class="outcome-card"><div class="outcome-card-num">◎</div><h4>Client retention improves</h4><p>Clients who receive strong operational support stay — and refer. Client retention is the clearest signal that the operational execution behind the partnership is working.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">⚡</div><h4>New clients onboarded on a defined schedule</h4><p>Structured onboarding means every new referral goes through the same reliable sequence — visible progress in the first two to three weeks rather than a slow start that damages confidence.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">$</div><h4>No internal healthcare operations team required</h4><p>Full billing, RCM, credentialing, payer enrollment, coding, and compliance support delivered without building an internal department — the operational capability exists without the payroll complexity.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">✓</div><h4>Partner reputation protected by execution quality</h4><p>Every client referral backed by operational delivery that reflects well on the partnership — your introduction is validated by results, not just by the relationship that created it.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">→</div><h4>Portfolio scales without proportional risk</h4><p>Growth in partner client volume adds capacity to a structured delivery model — not pressure on an already-strained team that produces quality degradation across all clients.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">↓</div><h4>Partner reporting without manual data compilation</h4><p>Regular performance reports delivered to you on client portfolio metrics — informed conversations with clients without requiring you to chase status information from the backend team.</p></div></div>
+</div></section>
+
+<section class="partner-section partner-section--ink-soft"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Why healthcare partnerships need execution capacity</div><h2 class="section-title">A healthcare partnership without operational depth <em>is a referral arrangement waiting to underdeliver.</em></h2><p class="section-subtitle">The difference between a healthcare marketplace that grows and one that churns is almost always operational execution quality — not demand generation. The partners who retain and expand their healthcare client portfolios are the ones whose operational delivery is strong enough to justify client loyalty.</p></div>
+  <div class="compare-wrap fade-in"><div class="compare-header"><span></span><span class="hbs-col">HBS Partnership</span><span>Without It</span></div>
+    <div class="compare-row"><span class="c-label">Post-sale client delivery</span><span class="c-hbs">Structured onboarding — 2–3 weeks</span><span class="c-other">Ad hoc — timeline uncertain</span></div>
+    <div class="compare-row"><span class="c-label">Operational coverage</span><span class="c-hbs">Full-spectrum: billing, cred, AR, coding</span><span class="c-other">Partial — gaps in specialist functions</span></div>
+    <div class="compare-row"><span class="c-label">Client retention risk</span><span class="c-hbs">Reduced through consistent execution</span><span class="c-other">High when delivery quality varies</span></div>
+    <div class="compare-row"><span class="c-label">Partner reporting</span><span class="c-hbs">Monthly KPIs delivered automatically</span><span class="c-other">Requires manual compilation</span></div>
+    <div class="compare-row"><span class="c-label">Scaling new clients</span><span class="c-hbs">Consistent model — same quality</span><span class="c-other">Quality degrades under volume</span></div>
+    <div class="compare-row"><span class="c-label">Internal headcount required</span><span class="c-hbs">None — HBS provides the team</span><span class="c-other">Hiring for each new capability</span></div></div>
+</div></section>
+
+<section class="cta-section" id="cta"><div class="cta-glow"></div><div class="cta-inner">
+  <div class="eyebrow eyebrow--light" style="justify-content:center">Start the partnership conversation</div>
+  <h2 class="cta-title">If you have healthcare clients who need operational support <em>and you need a backend team you can actually stand behind,</em></h2>
+  <p class="cta-text">We start with a partnership conversation — your client profile, your referral or white-label arrangement, and what operational delivery would look like behind your partnership. No commitment required to explore the model.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn btn-light btn-lg">Partner with HBS <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to our partnership team</a>
+  </div>
+  <div class="trust-line">HIPAA · BAA available · White-label & referral arrangements welcome · No long-term contract required</div>
+</div></section>
+
+<div class="related-strip"><div class="container"><div class="related-inner"><span class="related-label">Our services</span><a class="related-link" href="/medical-billing-rcm">Medical Billing & RCM</a><a class="related-link" href="/provider-credential">Credentialing</a><a class="related-link" href="/ar-management">AR Management</a><a class="related-link" href="/practice-launch">Practice Launch</a><a class="related-link" href="/operations-management">Operations Management</a><a class="related-link" href="/compliance-reporting">Compliance</a><a class="related-link" href="/analytics-reporting">Analytics & Reporting</a></div></div></div>
+<footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script></body></html>

@@ -1,0 +1,941 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Healthcare Payer Operations Support | Hired Billing Support</title>
+<meta name="description" content="Hired Billing Support provides scalable backend operations support for healthcare payers and health plans — claims queue management, authorization support, provider inquiry handling, enrollment processing, and operational throughput without proportional headcount increases."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>/* ================================================================
+   HBS OTHER ORGANIZATIONS — SHARED STYLESHEET
+   Who We Serve: Other Organizations (2 pages)
+   Healthcare Payers · Labs & Imaging Centers
+   Design system: HBS Redesign by Talha
+   Fraunces · Inter Tight · JetBrains Mono
+   ink / paper / signal + amber + danger
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --ink:         #0A1628;
+  --ink-soft:    #1B2942;
+  --ink-mute:    #475569;
+  --paper:       #FAF7F2;
+  --paper-warm:  #F2EDE3;
+  --paper-line:  #E8E2D5;
+  --white:       #FFFFFF;
+  --signal:      #00C896;
+  --signal-deep: #00876B;
+  --signal-pale: rgba(0,200,150,.08);
+  --amber:       #F59E0B;
+  --amber-deep:  #B45309;
+  --amber-pale:  rgba(245,158,11,.08);
+  --danger:      #D64545;
+  --danger-pale: rgba(214,69,69,.07);
+  --radius:      4px;
+  --radius-lg:   12px;
+  --max:         1280px;
+  --gutter:      clamp(20px,4vw,48px);
+  --serif:       'Fraunces','Times New Roman',serif;
+  --sans:        'Inter Tight',-apple-system,sans-serif;
+  --mono:        'JetBrains Mono',monospace;
+  --ease:        cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;font-size:16px;overflow-x:hidden}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── LAYOUT ── */
+.container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-mute);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:24px;height:1px;background:currentColor}
+.eyebrow--light{color:rgba(250,247,242,.5)}
+.eyebrow--light::before{background:rgba(250,247,242,.4)}
+
+/* Navigation */
+    nav.top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(250, 247, 242, 0.78);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+
+    nav.top.scrolled {
+      border-bottom-color: var(--paper-line);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background: var(--signal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s var(--ease);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--signal);
+      background: transparent;
+    }
+
+    .dropdown-toggle .chevron {
+      font-size: 9px;
+      transition: transform 0.3s var(--ease);
+      opacity: 0.6;
+      margin-left: 4px;
+    }
+
+    .nav-dropdown:hover .dropdown-toggle .chevron {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -20px;
+      background: var(--white);
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease), transform 0.3s var(--ease);
+      margin-top: 8px;
+      z-index: 1000;
+      min-width: 280px;
+      max-width: 100vw;
+    }
+
+    .dropdown-menu.dropdown-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      min-width: 500px;
+    }
+
+    .dropdown-menu.dropdown-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      min-width: 680px;
+    }
+
+    .dropdown-menu.dropdown-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      min-width: 900px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .column-header {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--ink-mute);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .column-header::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      margin-right: 8px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 12px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s var(--ease);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--paper-warm);
+      color: var(--ink);
+      padding-left: 16px;
+    }
+
+    .dropdown-menu a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: var(--signal);
+      border-radius: 2px;
+      transition: height 0.2s var(--ease);
+    }
+
+    .dropdown-menu a:hover::before {
+      height: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-dropdown {
+        display: inline-block;
+      }
+
+      .dropdown-toggle {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+
+      .dropdown-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        min-width: 100%;
+        border-radius: 0;
+        box-shadow: 0 8px 16px rgba(10, 22, 40, 0.1);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .dropdown-menu.dropdown-grid-2 {
+        grid-template-columns: 1fr;
+        min-width: 100%;
+        gap: 24px;
+      }
+
+      .dropdown-menu.dropdown-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+      }
+
+      .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 100%;
+        gap: 24px;
+      }
+
+      .dropdown-column {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-dropdown {
+        display: inline-block;
+      }
+
+      .dropdown-toggle {
+        font-size: 12px;
+        padding: 5px 8px;
+      }
+
+      .dropdown-menu {
+        left: -10px;
+        right: -10px;
+        padding: 16px;
+      }
+
+      .dropdown-menu.dropdown-grid-2,
+      .dropdown-menu.dropdown-grid-3,
+      .dropdown-menu.dropdown-grid-4 {
+        grid-template-columns: 1fr;
+        min-width: calc(100vw - 32px);
+      }
+
+      .column-header {
+        font-size: 10px;
+      }
+
+      .dropdown-menu a {
+        font-size: 13px;
+        padding: 8px 10px;
+      }
+    }
+
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--radius);font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:background .2s var(--ease),color .2s,transform .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn .arrow{transition:transform .2s;flex-shrink:0}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-primary:hover{background:var(--ink-soft)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--paper-line)}
+.btn-ghost:hover{background:var(--paper-warm);border-color:var(--ink-mute)}
+.btn-light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-light:hover{background:var(--paper-warm)}
+.btn-lg{padding:14px 28px;font-size:15px}
+
+/* ── WHO HERO ── */
+.who-hero{background:var(--paper);padding:140px 0 100px;position:relative;overflow:hidden}
+.who-hero-bg{position:absolute;inset:0;pointer-events:none}
+.who-hero-bg svg{width:100%;height:100%}
+.who-hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4}
+.who-hero-inner{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:1fr 440px;gap:64px;align-items:center}
+.who-hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--signal-deep);background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);padding:6px 14px;border-radius:100px;margin-bottom:24px}
+.who-hero-title{font-family:var(--serif);font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:400;letter-spacing:-.025em;line-height:1.02;color:var(--ink);margin-bottom:24px;font-variation-settings:"opsz" 144}
+.who-hero-title em{font-style:italic;font-weight:300;color:var(--ink-mute)}
+.who-hero-subtitle{font-size:17px;line-height:1.7;color:var(--ink-soft);margin-bottom:14px;max-width:560px}
+.who-hero-lede{font-size:15px;line-height:1.75;color:var(--ink-mute);max-width:540px;margin-bottom:40px}
+.who-hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── COMMAND PANEL CARD (hero right — Concept A) ── */
+.cp-card{background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 4px 32px rgba(10,22,40,.10),0 1px 4px rgba(10,22,40,.05)}
+.cp-header{background:var(--ink);padding:22px 24px 18px}
+.cp-header-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.38);margin-bottom:12px}
+.cp-main-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:6px}
+.cp-big{font-family:var(--serif);font-size:2.6rem;color:var(--signal);line-height:1;font-variation-settings:"opsz" 144}
+.cp-unit{font-size:11px;color:rgba(250,247,242,.45);padding-bottom:4px;margin-left:4px}
+.cp-trend{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--signal);background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.2);padding:3px 10px;border-radius:100px}
+.cp-trend-dot{width:5px;height:5px;border-radius:50%;background:var(--signal)}
+.cp-header-sub{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,.35);letter-spacing:.08em;margin-top:6px}
+.cp-body{background:#111f35;padding:16px 20px}
+.cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.cp-metric{padding:10px;border-bottom:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06)}
+.cp-metric:nth-child(2n){border-right:none}
+.cp-metric:nth-last-child(-n+2){border-bottom:none}
+.cp-m-label{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:rgba(250,247,242,.32);margin-bottom:5px}
+.cp-m-value{font-size:14px;font-weight:600;margin-bottom:5px}
+.cp-m-value.sig{color:var(--signal)}
+.cp-m-value.amb{color:var(--amber)}
+.cp-m-value.danger{color:var(--danger)}
+.cp-m-value.lite{color:rgba(250,247,242,.8)}
+.cp-spark{height:3px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden}
+.cp-spark-fill{height:100%;border-radius:2px}
+.spark-sig{background:var(--signal)}
+.spark-amb{background:var(--amber)}
+.spark-danger{background:var(--danger)}
+.spark-lite{background:rgba(250,247,242,.35)}
+.cp-queue{background:var(--white);padding:16px 20px}
+.cp-queue-title{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute);margin-bottom:10px}
+.cp-queue-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--paper-line)}
+.cp-queue-row:last-of-type{border-bottom:none}
+.cp-q-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cp-q-lbl{font-size:11px;color:var(--ink-soft);flex:1;line-height:1.3}
+.cp-q-badge{font-family:var(--mono);font-size:8px;letter-spacing:.08em;padding:2px 9px;border-radius:100px;white-space:nowrap}
+.badge-ok{background:rgba(0,200,150,.1);color:var(--signal-deep)}
+.badge-warn{background:rgba(245,158,11,.12);color:var(--amber-deep)}
+.badge-risk{background:rgba(214,69,69,.09);color:var(--danger)}
+.badge-idle{background:var(--paper-warm);color:var(--ink-mute)}
+.cp-footer{background:var(--ink);padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.cp-footer-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--signal)}
+.cp-footer-pulse{width:6px;height:6px;border-radius:50%;background:var(--signal)}
+.cp-footer-right{font-family:var(--mono);font-size:9px;color:rgba(250,247,242,.3);letter-spacing:.08em}
+
+/* ── REVEALS ── */
+.reveal{opacity:0;transform:translateY(20px)}
+.reveal-1{animation:rv .8s var(--ease) .10s forwards}
+.reveal-2{animation:rv .8s var(--ease) .22s forwards}
+.reveal-3{animation:rv .8s var(--ease) .36s forwards}
+.reveal-4{animation:rv .8s var(--ease) .50s forwards}
+@keyframes rv{to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.fade-in.in{opacity:1;transform:translateY(0)}
+
+/* ── WHO SECTION ── */
+.who-section{padding:100px 0;position:relative}
+.who-section--warm{background:var(--paper-warm)}
+.who-section--ink{background:var(--ink);color:var(--paper)}
+.who-section--ink-soft{background:var(--ink-soft);color:var(--paper)}
+.who-section--ink .eyebrow,.who-section--ink-soft .eyebrow{color:rgba(250,247,242,.5)}
+.who-section--ink .eyebrow::before,.who-section--ink-soft .eyebrow::before{background:rgba(250,247,242,.4)}
+.who-section--ink p,.who-section--ink-soft p{color:rgba(250,247,242,.65)}
+
+/* ── SECTION HEADER ── */
+.section-header{margin-bottom:64px}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,3.8vw,3rem);font-weight:400;letter-spacing:-.025em;line-height:1.06;margin-top:16px;max-width:780px;font-variation-settings:"opsz" 144}
+.section-title em{font-style:italic;font-weight:300;color:var(--ink-mute)}
+.section-subtitle{margin-top:18px;font-size:16px;line-height:1.75;color:var(--ink-mute);max-width:560px}
+.who-section--ink .section-title,.who-section--ink-soft .section-title{color:var(--paper)}
+.who-section--ink .section-title em,.who-section--ink-soft .section-title em{color:rgba(250,247,242,.5)}
+.who-section--ink .section-subtitle,.who-section--ink-soft .section-subtitle{color:rgba(250,247,242,.6)}
+
+/* ── MONOLOGUE ── */
+.monologue{max-width:780px;border-left:2px solid var(--paper-line);padding-left:32px}
+.monologue p{font-size:16px;line-height:1.85;color:var(--ink-soft);margin-bottom:20px}
+.monologue p:last-child{margin-bottom:0}
+.monologue .highlight{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);line-height:1.5}
+
+/* ── PAIN GRID ── */
+.pain-grid{display:flex;flex-direction:column;margin-top:48px}
+.pain-card{display:grid;grid-template-columns:48px 1fr;gap:0 24px;padding:28px 0;border-bottom:1px solid var(--paper-line);align-items:start}
+.pain-card:last-child{border-bottom:none}
+.pain-card-num{font-family:var(--serif);font-size:13px;color:var(--ink-mute);padding-top:3px}
+.pain-card h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.35}
+.pain-card p{font-size:14px;color:var(--ink-mute);line-height:1.72}
+
+/* ── SERVICE FIT GRID ── */
+.service-fit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--paper-line);border:1px solid var(--paper-line);border-radius:var(--radius-lg);overflow:hidden}
+.service-fit-card{background:var(--white);padding:28px;transition:background .2s}
+.service-fit-card:hover{background:var(--paper-warm)}
+.service-fit-card-num{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--signal-deep);margin-bottom:12px;display:block}
+.service-fit-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.service-fit-card p{font-size:13px;color:var(--ink-mute);line-height:1.65}
+
+/* ── PROCESS TIMELINE ── */
+.process-timeline{display:flex;flex-direction:column}
+.process-step{display:grid;grid-template-columns:48px 1fr;gap:0 24px;padding:28px 0;border-bottom:1px solid var(--paper-line);align-items:start}
+.process-step:last-child{border-bottom:none}
+.process-step-num{font-family:var(--mono);font-size:11px;color:var(--signal-deep);letter-spacing:.1em;padding-top:4px}
+.process-step h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.process-step p{font-size:14px;color:var(--ink-mute);line-height:1.72}
+.who-section--ink .process-step{border-color:rgba(250,247,242,.1)}
+.who-section--ink .process-step h4{color:var(--paper)}
+.who-section--ink .process-step p{color:rgba(250,247,242,.6)}
+.who-section--ink .process-step-num{color:var(--signal)}
+
+/* ── WORKFLOW NODE DASHBOARD ── */
+.workflow-dashboard{display:flex;align-items:flex-start;gap:0;margin-top:48px;position:relative;overflow-x:auto;padding-bottom:8px}
+.workflow-dashboard::before{content:'';position:absolute;top:18px;left:24px;right:24px;height:1px;background:var(--paper-line);z-index:0}
+.wf-node{display:flex;flex-direction:column;align-items:center;flex:1;min-width:100px;position:relative;z-index:1;padding:0 6px}
+.wf-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:500;margin-bottom:10px;border:1px solid var(--paper-line);flex-shrink:0;background:var(--white)}
+.wf-dot--signal{background:rgba(0,200,150,.1);color:var(--signal-deep);border-color:rgba(0,200,150,.25)}
+.wf-dot--amber{background:rgba(245,158,11,.1);color:var(--amber-deep);border-color:rgba(245,158,11,.25)}
+.wf-dot--ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.wf-node-label{font-size:11px;font-weight:600;color:var(--ink);text-align:center;line-height:1.3;margin-bottom:3px}
+.wf-node-sub{font-family:var(--mono);font-size:9px;color:var(--ink-mute);text-align:center;letter-spacing:.06em}
+
+/* ── AI + HUMAN ── */
+.ai-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--paper-line);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px}
+.ai-col{padding:36px}
+.ai-col--machine{background:var(--paper-warm)}
+.ai-col--human{background:var(--white)}
+.ai-col-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--paper-line)}
+.ai-col--machine .ai-col-label{color:var(--signal-deep)}
+.ai-col--human .ai-col-label{color:var(--ink-mute)}
+.ai-items{display:flex;flex-direction:column;gap:14px}
+.ai-item{display:flex;gap:12px;align-items:flex-start}
+.ai-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.ai-col--machine .ai-item-dot{background:var(--signal)}
+.ai-col--human .ai-item-dot{background:var(--ink)}
+.ai-item p{font-size:13px;color:var(--ink-mute);line-height:1.6}
+
+/* ── OUTCOME GRID ── */
+.outcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:48px}
+.outcome-card{padding:28px;background:var(--white);border:1px solid var(--paper-line);border-radius:var(--radius-lg)}
+.outcome-card-num{font-family:var(--serif);font-size:2.4rem;font-weight:400;color:var(--signal);line-height:1;margin-bottom:8px}
+.outcome-card h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.outcome-card p{font-size:13px;color:var(--ink-mute);line-height:1.65}
+
+/* ── COMPARE TABLE ── */
+.compare-wrap{background:var(--ink);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px}
+.compare-header{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 28px;background:rgba(255,255,255,.04)}
+.compare-header span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,247,242,.35)}
+.compare-header span.hbs-col{color:var(--signal)}
+.compare-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 28px;border-top:1px solid rgba(255,255,255,.05)}
+.compare-row span{font-size:13px}
+.c-label{color:rgba(250,247,242,.55)}
+.c-hbs{color:var(--signal);font-weight:500}
+.c-other{color:rgba(250,247,242,.3)}
+
+/* ── PULL QUOTE ── */
+.pull-quote{font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.45rem);font-style:italic;color:var(--ink);line-height:1.65;padding:28px 32px;border-left:3px solid var(--signal);background:var(--signal-pale);border-radius:0 var(--radius) var(--radius) 0;margin:40px 0;max-width:860px}
+
+/* ── CTA SECTION ── */
+.cta-section{background:var(--ink);padding:120px var(--gutter);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at center,rgba(0,200,150,.2),transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-title{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:400;letter-spacing:-.025em;line-height:1.06;color:var(--paper);margin:16px 0 24px;font-variation-settings:"opsz" 144}
+.cta-title em{font-style:italic;font-weight:300;color:rgba(250,247,242,.5)}
+.cta-text{font-size:16px;line-height:1.75;color:rgba(250,247,242,.6);margin-bottom:40px}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.trust-line{margin-top:28px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,242,.35)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(250,247,242,.6);padding:60px 0 32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;font-size:13px}
+.footer-inner a{color:rgba(250,247,242,.6)}
+.footer-inner a:hover{color:var(--signal)}
+.footer-legal{display:flex;gap:24px}
+
+/* ── RELATED STRIP ── */
+.related-strip{background:var(--paper-warm);border-top:1px solid var(--paper-line);padding:28px 0}
+.related-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.related-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.related-link{font-size:13px;color:var(--ink-soft);padding:5px 14px;border:1px solid var(--paper-line);border-radius:100px;background:var(--white);transition:border-color .2s,color .2s}
+.related-link:hover{border-color:var(--signal-deep);color:var(--signal-deep)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .who-hero-inner{grid-template-columns:1fr}
+  .who-hero-visual{display:none}
+  .two-col{grid-template-columns:1fr;gap:40px}
+  .ai-split{grid-template-columns:1fr}
+  .workflow-dashboard::before{display:none}
+}
+@media(max-width:720px){
+  .who-section{padding:64px 0}
+  .who-hero{padding:110px 0 72px}
+  .cta-section{padding:80px var(--gutter)}
+  .section-header{margin-bottom:40px}
+  .nav-links{display:none}
+  .compare-header,.compare-row{grid-template-columns:1.5fr 1fr 1fr;padding:12px 16px}
+  .service-fit-grid{grid-template-columns:1fr}
+  .wf-node{min-width:80px}
+}
+</style></head><body>
+ <nav class="top" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <img src="../../logo.png" alt="Hired Billing Support" style="height: 70px; width: auto;">
+      </a>
+
+
+      <!-- Hire Talent Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Hire Talent <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">CLINICAL ROLES</div>
+            <a href="../../Hire/medical.html">Medical — Assistants, Scribes, Reception</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">DENTAL ROLES</div>
+            <a href="../../Hire/dental.html">Dental — Assistants & Coordinators</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">Enterprise & BILLING</div>
+            <a href="../../Hire/enterprise.html">Enterprise & Billing Specialists</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">MSO / Payer Partners</div>
+            <a href="../../Hire/mso.html">MSO / Payer Partners</a>
+            <!-- <a href="#">Contact Hiring Team</a> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Solutions <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-4">
+          <div class="dropdown-column">
+            <div class="column-header">BILLING SERVICES</div>
+            <a href="../../Solutions/rcm-management.html">Revenue Cycle Management</a>
+            <a href="../../Solutions/medical-billing-rcm.html">Medical Billing & RCM</a>
+            <a href="../../Solutions/ar-management.html">AR Management</a>
+            <a href="../../Solutions/ar-denial-fixation.html">Denial Management & Fixation</a>
+            <a href="../../Solutions/old-aging-ar.html">Old & Aging AR Recovery</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">CODING & COMPLIANCE</div>
+            <a href="../../Solutions/medical-coding.html">Medical Coding</a>
+            <a href="../../Solutions/medical-auditing.html">Medical Auditing</a>
+            <a href="../../Solutions/compliance-reporting.html">Compliance & Reporting</a>
+            <a href="../../Solutions/quality-assurance.html">Quality Assurance</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">PRACTICE MANAGEMENT</div>
+            <a href="../../Solutions/provider-credential.html">Provider Credential</a>
+            <a href="../../Solutions/payer-insurer-enrollment.html">Payer & Insurer Enrollment</a>
+            <a href="../../Solutions/practice-launch.html">Practice Launch</a>
+            <a href="../../Solutions/operations-management.html">Operations Management</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">ADVANCED SOLUTIONS</div>
+            <a href="../../Solutions/marketing-patient-engagement.html">Marketing & Patient Engagement</a>
+            <a href="../../Solutions/virtual-healthcare-solutions.html">Virtual Healthcare Solutions</a>
+            <a href="../../Solutions/analytics-reporting.html">Analytics & Reporting</a>
+            <a href="../../Solutions/view-all-solutions.html">View All Solutions →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who We Serve Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Who We Serve <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-3">
+          <div class="dropdown-column">
+            <div class="column-header">Provider Organizations</div>
+            <a href="../start-ups.html">Startups Practices</a>
+            <a href="../small-medical-practices.html">Small Medical Practices</a>
+            <a href="../medium-large-medical-practices.html">Medium & Large Medical Groups</a>
+            <a href="../enterprise-medical-operation.html">Enterprise Medical Operation</a>
+            <a href="../fqhc.html">Federally Qualified Health Centers</a>
+            <a href="../member-centric-care.html">Member Centric Care</a>
+          </div>
+         <div class="dropdown-column">
+            <div class="column-header">Medical Specialties</div>
+            <a href="../Medical/psychiatry.html">Psychiatry</a>
+            <a href="../Medical/orthopedic.html">Orthopedic</a>
+            <a href="../Medical/cardiology.html">Cardiology</a>
+            <a href="../Medical/obgyn.html">Obgyn</a>
+              <a href="../Medical/endocrinology.html">Endocrinology</a>
+              <a href="../Medical/neurology.html">Neurology</a>
+
+    
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header"> Organizations & Partners</div>
+            <a href="./payers.html">Medical Payers</a>
+            <a href="./medical-order-transmission.html">Medical Order Transmission</a>
+            <a href="./hbs-marketing.html">Marketing Partners</a>
+            <a href="./developer-portal.html">Developer</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Resources <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">LEARN</div>
+            <a href="#">Blog & Insights</a>
+            <a href="#">Case Studies</a>
+            <a href="#">Healthcare Trends</a>
+            <a href="#">Webinars</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">SUPPORT</div>
+            <a href="#">Documentation</a>
+            <a href="#">FAQs</a>
+            <a href="#">Contact Support</a>
+            <a href="#">Schedule a Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Dropdown -->
+      <div class="nav-dropdown">
+        <button class="dropdown-toggle">Company <span class="chevron">▼</span></button>
+        <div class="dropdown-menu dropdown-grid-2">
+          <div class="dropdown-column">
+            <div class="column-header">ABOUT</div>
+            <a href="#">Our Story</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+          <div class="dropdown-column">
+            <div class="column-header">TRUST & SECURITY</div>
+            <a href="#">Security Overview</a>
+            <a href="#">HIPAA Compliance</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-cta">
+        <a href="#cta" class="btn btn-primary">Consultation
+          <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<section class="who-hero">
+  <div class="who-hero-bg"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#0A1628" stroke-width="0.5" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg><div class="who-hero-grain"></div></div>
+  <div class="who-hero-inner">
+    <div class="who-hero-content">
+      <div class="who-hero-badge reveal reveal-1">Who We Serve · Other Organizations · Healthcare Payers</div>
+      <h1 class="who-hero-title reveal reveal-2">Payer operations break down when the processing queue<br><em>grows faster than the team that manages it.</em></h1>
+      <p class="who-hero-subtitle reveal reveal-3">Claims that need review, authorizations that need follow-up, providers calling for status updates, enrollment documents requiring indexing, eligibility questions building up in the queue — payer backend operations do not fail dramatically. They slow down incrementally, and the cost compounds across every stakeholder who is waiting.</p>
+      <p class="who-hero-lede reveal reveal-3">Hired Billing Support acts as your backend processing engine — providing scalable operations support that adapts to your queue volumes, your internal systems, and your workflows — so your core team manages the decisions while we manage the volume.</p>
+      <div class="who-hero-actions reveal reveal-4">
+        <a href="#cta" class="btn btn-primary btn-lg">Scale payer backend operations <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="#pain" class="btn btn-ghost btn-lg">See the processing model</a>
+      </div>
+    </div>
+    <div class="who-hero-visual reveal reveal-4" style="animation-delay:.55s">
+      <div class="cp-card">
+    <div class="cp-header">
+      <div class="cp-header-label">— Payer Operations Center · Daily Queue</div>
+      <div class="cp-main-row">
+        <div style="display:flex;align-items:baseline;gap:2px">
+          <span class="cp-big">94.7%</span>
+          <span class="cp-unit">same-day processing rate</span>
+        </div>
+        <span class="cp-trend"><span class="cp-trend-dot"></span>↑ 3.2% vs last week</span>
+      </div>
+      <div class="cp-header-sub">Updated today · Operational Dashboard</div>
+    </div>
+    <div class="cp-body">
+      <div class="cp-grid">
+        <div class="cp-metric"><div class="cp-m-label">Auth Queue</div><div class="cp-m-value sig">312 items</div><div class="cp-spark"><div class="cp-spark-fill spark-sig" style="width:82%"></div></div></div>
+        <div class="cp-metric"><div class="cp-m-label">Avg Resolution</div><div class="cp-m-value sig">4.2 hrs</div><div class="cp-spark"><div class="cp-spark-fill spark-sig" style="width:78%"></div></div></div>
+        <div class="cp-metric"><div class="cp-m-label">Backlog Items</div><div class="cp-m-value amb">47 items</div><div class="cp-spark"><div class="cp-spark-fill spark-amb" style="width:35%"></div></div></div>
+        <div class="cp-metric"><div class="cp-m-label">Provider Inquiries</div><div class="cp-m-value lite">28 open</div><div class="cp-spark"><div class="cp-spark-fill spark-lite" style="width:45%"></div></div></div>
+      </div>
+    </div>
+    <div class="cp-queue">
+      <div class="cp-queue-title">Queue Priority View · Active</div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--signal)"></div><span class="cp-q-lbl">Claims review — standard processing</span><span class="cp-q-badge badge-ok">On track</span></div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--amber)"></div><span class="cp-q-lbl">Authorization exceptions — escalated</span><span class="cp-q-badge badge-warn">18 pending</span></div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--signal)"></div><span class="cp-q-lbl">Enrollment documentation — indexed</span><span class="cp-q-badge badge-ok">Current</span></div>
+      <div class="cp-queue-row"><div class="cp-q-dot" style="background:var(--danger)"></div><span class="cp-q-lbl">Provider data — aged items flagged</span><span class="cp-q-badge badge-risk">6 over SLA</span></div>
+    </div>
+    <div class="cp-footer">
+      <span class="cp-footer-pill"><span class="cp-footer-pulse"></span>6 items exceed SLA — priority escalation active</span>
+      <span class="cp-footer-right">Live · Secured</span>
+    </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="who-section" id="pain"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The payer operations reality</div><h2 class="section-title">The queue does not wait for your team to catch up. <em>It keeps growing while everything else also demands attention.</em></h2></div>
+  <div class="monologue fade-in"><p>A payer operations team manages simultaneous queues — authorizations to review, claims to adjudicate, providers waiting on status updates, enrollment applications requiring document review, eligibility requests, and member inquiries — all on overlapping timelines, across multiple systems and portals, with staff who are already at or near capacity.</p>
+<p>When volume increases — a new plan year, a regulatory change, a system migration, a sudden increase in out-of-network claims — the queue grows faster than the team. Work ages. SLAs slip. Providers begin calling for status updates because electronic status is unclear or delayed. Those calls generate more work. The backlog grows because the team is now managing the backlog and the incoming volume simultaneously.</p>
+<p class="highlight">"Healthcare operations break down when the backend queue grows faster than the team that manages it. The solution is not always more permanent staff — it is scalable processing capacity that increases when volume increases and adapts when volume changes."</p>
+<p>Most payer organizations add full-time staff when volume peaks — and then carry the overhead when volume normalizes. A scalable backend operations model solves the volume problem without creating a permanent payroll commitment that outlives the need.</p></div>
+</div></section>
+
+<section class="who-section who-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Where operations break down</div><h2 class="section-title">The specific gaps <em>behind the processing pressure.</em></h2></div>
+  <div class="pain-grid fade-in">
+    <div class="pain-card"><div class="pain-card-num">01</div><div><h4>Authorization queues build faster than they are cleared during peak periods</h4><p>Prior authorization volume does not stay constant. New plan year enrollments, seasonal utilization patterns, and regulatory changes create spikes that overwhelm the same team managing normal-volume processing. When queues exceed processing capacity, providers experience delays, patients experience access problems, and internal teams carry the resulting escalations.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">02</div><div><h4>Provider inquiries increase when status visibility is delayed or unclear</h4><p>When providers cannot get clear status on claims, authorizations, or enrollment applications through electronic channels, they call. Those calls require staff time to research, respond, and document. When backend processing is slow, provider inquiry volume increases in direct proportion — creating a second workload on top of the already-delayed processing queue.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">03</div><div><h4>Enrollment documentation requires indexing and review that falls behind during high-volume periods</h4><p>Enrollment applications arrive with supporting documentation that requires review, indexing, and routing before processing can begin. When this initial documentation work falls behind, the downstream enrollment workflow is delayed — providers cannot be enrolled on schedule, members cannot access coverage, and the enrollment team spends time managing exceptions instead of processing applications.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">04</div><div><h4>Manual processes create handoff gaps when volume increases</h4><p>Payer backend operations often rely on manual processes at specific workflow steps — document routing, status updating, exception flagging, provider communication. When volume increases, manual processes create handoff delays that accumulate across the workflow, producing the aging items and SLA violations that leadership sees in reports without always knowing where the specific gap occurred.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">05</div><div><h4>Leadership visibility into queue status and aging items is delayed or incomplete</h4><p>Operations leaders need current queue visibility — what is in backlog, what is approaching SLA deadlines, which team or process is the current bottleneck. When reporting is delayed or requires manual compilation, leadership manages to historical data rather than current status — making it difficult to direct resources proactively before SLA failures occur.</p></div></div>
+    <div class="pain-card"><div class="pain-card-num">06</div><div><h4>Scaling in-house teams adds permanent cost to solve temporary volume problems</h4><p>Hiring additional permanent staff to manage peak-period volume creates a payroll commitment that continues after the peak passes. Training, onboarding, benefits, and management overhead compound the cost. Scalable backend support that increases with volume and adjusts when volume changes is structurally better suited to a business where processing demand fluctuates.</p></div></div></div>
+</div></section>
+
+<section class="who-section who-section--ink" id="solution"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The solution</div><h2 class="section-title">A scalable backend processing engine <em>that keeps pace with your queue — not your headcount.</em></h2><p class="section-subtitle">Hired Billing Support provides backend operations support that adapts to your payer organization's volume, systems, and workflow structure — processing work, managing queues, supporting communication, and maintaining operational throughput so your internal team focuses on decisions, not volume.</p></div>
+  <div class="two-col fade-in">
+    <div class="process-timeline">
+      <div class="process-step"><div class="process-step-num">01</div><div><h4>Queue monitoring and backlog clearing</h4><p>Authorization queues, claims review queues, enrollment documentation queues, and provider inquiry queues monitored daily — backlog items identified, prioritized by SLA proximity, and processed systematically to prevent age accumulation.</p></div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div><h4>Authorization support queue management</h4><p>Authorization requests tracked, supporting documentation reviewed for completeness, missing information requested from providers, and queue status maintained so authorization decisions have the information they require without manual chasing.</p></div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div><h4>Provider inquiry handling and status communication</h4><p>Provider status inquiries researched and responded to through your established communication channels — reducing the inbound inquiry volume that arrives when electronic status is delayed and giving providers the information they need without burdening your clinical or operations staff.</p></div></div>
+    </div>
+    <div class="process-timeline">
+      <div class="process-step"><div class="process-step-num">04</div><div><h4>Enrollment documentation review and indexing</h4><p>Enrollment applications and supporting documentation reviewed for completeness, indexed, and routed into your enrollment workflow — so documentation gaps are identified at intake rather than discovered mid-process when they cause delays.</p></div></div>
+      <div class="process-step"><div class="process-step-num">05</div><div><h4>Provider data maintenance support</h4><p>Provider directory updates, network status changes, and provider data maintenance tasks processed in your systems — keeping provider data current without requiring your core team to manage routine maintenance tasks alongside higher-judgment operational work.</p></div></div>
+      <div class="process-step"><div class="process-step-num">06</div><div><h4>Operational reporting and queue visibility</h4><p>Regular queue status reports delivered to operations leadership — items in processing, items aging toward SLA thresholds, backlog trends, and throughput metrics so leadership sees current operational status, not historical summaries.</p></div></div>
+    </div></div>
+</div></section>
+
+<section class="who-section" id="services"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Services that fit healthcare payer operations</div><h2 class="section-title">Every backend processing function <em>a healthcare payer needs to manage at scale.</em></h2></div>
+  <div class="service-fit-grid fade-in">
+    <div class="service-fit-card"><span class="service-fit-card-num">01</span><h4>Authorization Queue Support</h4><p>Prior authorization requests processed, documentation reviewed for completeness, missing information requested from providers, and queue status maintained on a defined schedule.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">02</span><h4>Claims Processing Support</h4><p>Claims review queue support — documentation review, information requests, routing assistance, and claims status tracking so processing queues move without manual bottlenecks.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">03</span><h4>Provider Inquiry Handling</h4><p>Provider status inquiries on claims, authorizations, and enrollment researched and responded to through your communication protocols — reducing inbound inquiry burden on core operations staff.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">04</span><h4>Member Support Coordination</h4><p>Member benefit questions, eligibility confirmations, and coordination of benefits support managed through your member service workflows.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">05</span><h4>Enrollment Documentation Processing</h4><p>Enrollment application documentation reviewed for completeness, indexed, and routed — gaps identified at intake so downstream enrollment processing is not delayed by missing documents discovered mid-workflow.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">06</span><h4>Eligibility & Benefits Support</h4><p>Eligibility verification requests, benefits explanation support, and coordination of benefits clarification managed — keeping eligibility queues current and provider/member communication accurate.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">07</span><h4>Provider Data Maintenance</h4><p>Provider directory updates, network participation changes, and provider information maintenance processed in your systems — keeping provider data current without diverting your team from higher-value work.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">08</span><h4>Document Review & Indexing</h4><p>Supporting documentation reviewed, categorized, and indexed into your document management workflow — so processing queues have the information they need in the correct location and format.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">09</span><h4>Backlog Cleanup Support</h4><p>Targeted backlog clearing for authorization, enrollment, claims, and documentation queues — rapid throughput increase during peak periods or after workflow disruptions without permanent headcount additions.</p></div>
+    <div class="service-fit-card"><span class="service-fit-card-num">10</span><h4>Queue Monitoring & Operational Reporting</h4><p>Daily queue status monitoring with operational reports for leadership — current volume, SLA proximity, aging items, and throughput trends delivered on a defined schedule.</p></div></div>
+</div></section>
+
+<section class="who-section who-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Backend processing workflow</div><h2 class="section-title">From queue intake to processed item. <em>Every step tracked, every handoff clean.</em></h2><p class="section-subtitle">Payer backend operations require a processing model where every item has a current status, an assigned owner, and a timeline — so nothing ages silently while the team is managing other priorities.</p></div>
+  <div class="workflow-dashboard fade-in">
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">01</div><div class="wf-node-label">Item Received</div><div class="wf-node-sub">Queue entry</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">02</div><div class="wf-node-label">Doc Review</div><div class="wf-node-sub">Complete check</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--amber">03</div><div class="wf-node-label">Gap Follow-Up</div><div class="wf-node-sub">Missing info</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">04</div><div class="wf-node-label">Indexed & Routed</div><div class="wf-node-sub">Correct workflow</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--amber">05</div><div class="wf-node-label">SLA Monitor</div><div class="wf-node-sub">Aging alerts</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">06</div><div class="wf-node-label">Provider Comms</div><div class="wf-node-sub">Status updates</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--ink">07</div><div class="wf-node-label">Processed</div><div class="wf-node-sub">Decision ready</div></div>
+    <div class="wf-node"><div class="wf-dot wf-dot--signal">08</div><div class="wf-node-label">Reported</div><div class="wf-node-sub">Leadership view</div></div>
+  </div>
+</div></section>
+
+<section class="who-section"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">How HBS works with your payer operations team</div><h2 class="section-title">Inside your systems. Aligned with your protocols. <em>Not alongside them as an external vendor.</em></h2><p class="section-subtitle">Payer operations support only works when it operates inside the same systems, portals, and communication channels your team uses — not through a separate interface that creates its own coordination overhead.</p></div>
+  <div class="process-timeline fade-in" style="max-width:780px">
+    <div class="process-step"><div class="process-step-num">01</div><div><h4>We learn your systems, workflows, and SOPs before we process anything</h4><p>Before managing a single queue item, we understand how your payer organization operates — which systems hold which information, which protocols govern which exceptions, and which communication standards apply to each stakeholder. We adapt to your process, not the other way around.</p></div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div><h4>We access your portals and systems directly</h4><p>Your claims system, authorization portal, enrollment platform, document management system — we work inside your tools so every item processed produces a native system record rather than a separate output your team has to reconcile.</p></div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div><h4>We follow your communication standards with every provider and member contact</h4><p>Every provider inquiry response and member communication follows your organization's communication standards — your protocols, your tone, your templates — so external stakeholders interact with a consistent organizational voice, not a vendor voice.</p></div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div><h4>We report to operations leadership on a defined schedule</h4><p>Queue status, backlog volume, SLA performance, and throughput metrics delivered to leadership on a schedule that allows proactive resource direction — before SLA violations, not after.</p></div></div>
+    <div class="process-step"><div class="process-step-num">05</div><div><h4>We scale with your volume — up and down</h4><p>When volume increases — plan year, regulatory change, system migration — we scale processing capacity to match. When volume normalizes, the support adjusts. No permanent headcount commitment, no long onboarding cycle each time capacity needs to change.</p></div></div></div>
+</div></section>
+
+<section class="who-section who-section--warm"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">The AI + human advantage</div><h2 class="section-title">Automation handles the volume. <em>People handle the judgment.</em></h2></div>
+  <div class="ai-split fade-in">
+    <div class="ai-col ai-col--machine"><div class="ai-col-label">AI-assisted operations</div><div class="ai-items"><div class="ai-item"><div class="ai-item-dot"></div><p>Queue volume monitoring and SLA threshold alerts</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Documentation completeness checking at intake</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Item aging tracking and escalation trigger generation</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Provider inquiry status tracking and response routing</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Enrollment documentation gap detection and follow-up scheduling</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Operational throughput reporting and trend analysis</p></div></div></div>
+    <div class="ai-col ai-col--human"><div class="ai-col-label">Human operations specialists</div><div class="ai-items"><div class="ai-item"><div class="ai-item-dot"></div><p>Exception review and judgment-based processing decisions</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Provider communication requiring context and explanation</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Authorization documentation review with clinical context</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Enrollment exception handling and escalation management</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>SLA escalation coordination with internal operations teams</p></div>
+    <div class="ai-item"><div class="ai-item-dot"></div><p>Leadership reporting with operational commentary and recommendations</p></div></div></div>
+  </div>
+  <div class="pull-quote fade-in">"Scaling healthcare payer operations is not just about adding more people. It is about building a processing model where volume increases do not automatically mean SLA violations — where the capacity to process work adjusts as work arrives, with visibility that allows leadership to manage outcomes rather than just respond to them."</div>
+</div></section>
+
+<section class="who-section" id="results"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">What changes</div><h2 class="section-title">Payer operations that process at pace <em>with volume — not behind it.</em></h2></div>
+  <div class="outcome-grid fade-in">
+    <div class="outcome-card"><div class="outcome-card-num">◎</div><h4>Queue visibility before SLA violations</h4><p>Daily operational reporting gives leadership current queue status — items aging, items at risk, and throughput metrics — before SLA failures occur rather than after.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">↓</div><h4>Provider inquiry volume decreases</h4><p>When processing is timely and status communication is proactive, providers have fewer reasons to call for updates — reducing inbound inquiry volume that consumes operations staff time.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">⚡</div><h4>Peak-volume backlogs cleared without permanent hiring</h4><p>Processing capacity scales with volume spikes — backlogs addressed during plan year changes, regulatory shifts, and high-volume periods without adding permanent headcount.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">✓</div><h4>Documentation gaps caught at intake</h4><p>Enrollment and authorization documentation reviewed at intake — gaps identified before they stall downstream processing and create mid-workflow delays.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">$</div><h4>Scalable capacity without proportional payroll</h4><p>Backend processing capacity that increases when needed and adjusts when volume normalizes — no permanent hiring commitment that outlasts the operational need.</p></div>
+    <div class="outcome-card"><div class="outcome-card-num">→</div><h4>Internal team focused on decisions, not volume</h4><p>Your core operations team manages exceptions, decisions, and escalations — the processing volume is handled by HBS so your staff focuses on work that requires their specific expertise and authority.</p></div></div>
+</div></section>
+
+<section class="who-section who-section--ink-soft"><div class="container">
+  <div class="section-header fade-in"><div class="eyebrow">Why payer operations need scalable backend support</div><h2 class="section-title">Processing queues managed reactively <em>always produce SLA failures before they produce solutions.</em></h2><p class="section-subtitle">Reactive queue management — adding staff after backlogs develop, responding to provider inquiries after they increase, reporting on SLA failures after they occur — is structurally behind the problem. Proactive processing capacity is structurally ahead of it.</p></div>
+  <div class="compare-wrap fade-in"><div class="compare-header"><span></span><span class="hbs-col">With HBS</span><span>Without It</span></div>
+    <div class="compare-row"><span class="c-label">Queue visibility</span><span class="c-hbs">Daily reporting — proactive</span><span class="c-other">Reactive — after SLA failures</span></div>
+    <div class="compare-row"><span class="c-label">Peak volume response</span><span class="c-hbs">Scales without permanent hiring</span><span class="c-other">Requires new headcount cycle</span></div>
+    <div class="compare-row"><span class="c-label">Provider inquiry management</span><span class="c-hbs">Proactive status communication</span><span class="c-other">Reactive — after inbound volume increases</span></div>
+    <div class="compare-row"><span class="c-label">Documentation review at intake</span><span class="c-hbs">Gaps caught before processing</span><span class="c-other">Discovered mid-workflow</span></div>
+    <div class="compare-row"><span class="c-label">Operations cost structure</span><span class="c-hbs">Adjustable — no fixed overhead</span><span class="c-other">Fixed payroll regardless of volume</span></div>
+    <div class="compare-row"><span class="c-label">Internal team focus</span><span class="c-hbs">Decisions and exceptions</span><span class="c-other">Volume processing + decisions</span></div></div>
+</div></section>
+
+<section class="cta-section" id="cta"><div class="cta-glow"></div><div class="cta-inner">
+  <div class="eyebrow eyebrow--light" style="justify-content:center">Start with a payer operations review</div>
+  <h2 class="cta-title">If your queues are aging, your SLAs are slipping, or your team is managing volume <em>instead of managing outcomes — the processing model needs to change.</em></h2>
+  <p class="cta-text">We start with a review of your current payer operations — queue volumes, processing timelines, backlog status, and the specific functions where capacity is the constraint. No commitment required to see the picture.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn btn-light btn-lg">Scale payer backend operations <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="#" class="btn btn-ghost btn-lg" style="color:var(--paper);border-color:rgba(250,247,242,.25)">Talk to our payer operations team</a>
+  </div>
+  <div class="trust-line">HIPAA · BAA on every engagement · No long-term contract required</div>
+</div></section>
+
+<div class="related-strip"><div class="container"><div class="related-inner"><span class="related-label">Related services</span><a class="related-link" href="/operations-management">Operations Management</a><a class="related-link" href="/analytics-reporting">Analytics & Reporting</a><a class="related-link" href="/virtual-healthcare-solutions">Virtual Healthcare</a><a class="related-link" href="/enterprise-medical-operation">Enterprise Operations</a><a class="related-link" href="/member-centric-care">Member-Centric Care</a><a class="related-link" href="/compliance-reporting">Compliance & Reporting</a></div></div></div>
+<footer><div class="container footer-inner"><div>© 2026 Hired Billing Support · hiredbillingsupport.com</div><div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">HIPAA</a><a href="#">Contact</a></div></div></footer>
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>8)});
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script></body></html>
